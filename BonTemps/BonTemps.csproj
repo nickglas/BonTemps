@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Areas\ReserveerSysteem\Data\" />
     <Folder Include="Areas\ReserveerSysteem\Models\" />
+    <Folder Include="Areas\ReserveerSysteem\Views\Shared\" />
   </ItemGroup>
 
 </Project>
