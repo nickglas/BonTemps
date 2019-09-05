@@ -129,3 +129,9 @@ C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas
 C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewImports.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\ReserveerSysteem\Index.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\SysteemLayout.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Shared\_Layout.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Reservering\Create.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Reservering\Delete.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Reservering\Details.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Reservering\Edit.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\ReserveerSysteem\Views\Reservering\Index.g.cshtml.cs
