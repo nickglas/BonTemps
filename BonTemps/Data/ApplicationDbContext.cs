@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using BonTemps.Areas.Systeem.Models;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using BonTemps.Areas.ReserveerSysteem.Models;
 
 namespace BonTemps.Data
 {
@@ -17,6 +17,6 @@ namespace BonTemps.Data
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<Rol> Rol { get; set; }
         public DbSet<Klantgegevens> Klantgegevens { get; set; }
-        public DbSet<BonTemps.Areas.ReserveerSysteem.Models.Reservering> Reservering { get; set; }
+        public DbSet<Reservering> Reserveringen { get; set; }
     }
 }

@@ -12943,11 +12943,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nick\\Source\\Repos\\bontemps\\BonTemps\\BonTemps.csproj",
+      "projectUniqueName": "C:\\Users\\Nick\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
       "projectName": "BonTemps",
-      "projectPath": "C:\\Users\\Nick\\Source\\Repos\\bontemps\\BonTemps\\BonTemps.csproj",
+      "projectPath": "C:\\Users\\Nick\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
       "packagesPath": "C:\\Users\\Nick\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nick\\Source\\Repos\\bontemps\\BonTemps\\obj\\",
+      "outputPath": "C:\\Users\\Nick\\Source\\Repos\\bontemps2\\BonTemps\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -15,7 +15,7 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\ReserveerSysteem\Data\" />
+    <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 

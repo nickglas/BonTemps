@@ -5,28 +5,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BonTemps.Areas.ReserveerSysteem.Models;
+using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 
-namespace BonTemps.Areas.ReserveerSysteem.Controllers
+namespace BonTemps.Areas.Systeem.Controllers
 {
-    [Area("ReserveerSysteem")]
-    public class ReserveringController : Controller
+    [Area("Systeem")]
+    public class ReserveringenController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public ReserveringController(ApplicationDbContext context)
+        public ReserveringenController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: ReserveerSysteem/Reservering
+        // GET: Systeem/Reserveringen
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reservering.ToListAsync());
+            return View(await _context.Reserveringen.ToListAsync());
         }
 
-        // GET: ReserveerSysteem/Reservering/Details/5
+        // GET: Systeem/Reserveringen/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,8 +34,8 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
                 return NotFound();
             }
 
-            var reservering = await _context.Reservering
-                .FirstOrDefaultAsync(m => m.ReserveringId == id);
+            var reservering = await _context.Reserveringen
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (reservering == null)
             {
                 return NotFound();
@@ -44,18 +44,18 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
             return View(reservering);
         }
 
-        // GET: ReserveerSysteem/Reservering/Create
+        // GET: Systeem/Reserveringen/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ReserveerSysteem/Reservering/Create
+        // POST: Systeem/Reserveringen/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ReserveringId,Voornaam,Toevoeging,Achternaam,Telefoonnummer,MobielNummer,AantalPersonen,ReserveeringsDatum")] Reservering reservering)
+        public async Task<IActionResult> Create([Bind("Id,Naam")] Reservering reservering)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
             return View(reservering);
         }
 
-        // GET: ReserveerSysteem/Reservering/Edit/5
+        // GET: Systeem/Reserveringen/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,7 +74,7 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
                 return NotFound();
             }
 
-            var reservering = await _context.Reservering.FindAsync(id);
+            var reservering = await _context.Reserveringen.FindAsync(id);
             if (reservering == null)
             {
                 return NotFound();
@@ -82,14 +82,14 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
             return View(reservering);
         }
 
-        // POST: ReserveerSysteem/Reservering/Edit/5
+        // POST: Systeem/Reserveringen/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ReserveringId,Voornaam,Toevoeging,Achternaam,Telefoonnummer,MobielNummer,AantalPersonen,ReserveeringsDatum")] Reservering reservering)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam")] Reservering reservering)
         {
-            if (id != reservering.ReserveringId)
+            if (id != reservering.Id)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ReserveringExists(reservering.ReserveringId))
+                    if (!ReserveringExists(reservering.Id))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
             return View(reservering);
         }
 
-        // GET: ReserveerSysteem/Reservering/Delete/5
+        // GET: Systeem/Reserveringen/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -125,8 +125,8 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
                 return NotFound();
             }
 
-            var reservering = await _context.Reservering
-                .FirstOrDefaultAsync(m => m.ReserveringId == id);
+            var reservering = await _context.Reserveringen
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (reservering == null)
             {
                 return NotFound();
@@ -135,20 +135,20 @@ namespace BonTemps.Areas.ReserveerSysteem.Controllers
             return View(reservering);
         }
 
-        // POST: ReserveerSysteem/Reservering/Delete/5
+        // POST: Systeem/Reserveringen/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reservering = await _context.Reservering.FindAsync(id);
-            _context.Reservering.Remove(reservering);
+            var reservering = await _context.Reserveringen.FindAsync(id);
+            _context.Reserveringen.Remove(reservering);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ReserveringExists(int id)
         {
-            return _context.Reservering.Any(e => e.ReserveringId == id);
+            return _context.Reserveringen.Any(e => e.Id == id);
         }
     }
 }
