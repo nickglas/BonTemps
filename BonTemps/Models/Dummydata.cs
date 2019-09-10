@@ -46,7 +46,7 @@ namespace BonTemps.Models
 
 
             UpdateCategory(context);
-           
+            UpdateItems(context);
 
             if (await userManager.FindByNameAsync("nickglasss@hotmail.nl") == null)
             {
@@ -108,6 +108,42 @@ namespace BonTemps.Models
                 if (i == 0)
                 {
                     _context.Add(item);
+                }
+            }
+            _context.SaveChanges();
+        }
+        public static void UpdateItems(ApplicationDbContext _context)
+        {
+
+            Console.WriteLine("Updating Items");
+            List<Items> check = new List<Items>();
+            Items eten = new Items
+            {
+                Naam = "Spaghetti",
+                Beschrijving = "Spaghetti Bolognesse",
+                Category = _context.Categories.Where(x => x.Naam == "Eten").First()
+            };
+            check.Add(eten);
+            Items drinken = new Items
+            {
+                Naam = "Coca Cola",
+                Beschrijving = "Cola",
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First()
+            };
+            check.Add(drinken);
+            Items deserts = new Items
+            {
+                Naam = "Dame blanche",
+                Beschrijving = "ijs",
+                Category = _context.Categories.Where(x => x.Naam == "Deserts").First()
+            };
+            check.Add(deserts);
+            foreach (var item in check)
+            {
+                int i = _context.Items.Where(x => x.Naam == item.Naam).Count();
+                if (i == 0)
+                {
+                    _context.Items.Add(item);
                 }
             }
             _context.SaveChanges();
