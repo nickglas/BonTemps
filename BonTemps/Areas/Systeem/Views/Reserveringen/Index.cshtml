@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Reservering>
 
 
+
 <!DOCTYPE html>
 
 <html>
@@ -16,7 +17,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Naam)
+                @Html.DisplayNameFor(model => model.NaamReserveerder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuisTelefoonNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobielTelefoonNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AantalPersonen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReserveringAangemaakt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReserveringsDatum)
             </th>
             <th></th>
         </tr>
@@ -25,7 +44,25 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Naam)
+                @Html.DisplayFor(modelItem => item.NaamReserveerder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HuisTelefoonNummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobielTelefoonNummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AantalPersonen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReserveringAangemaakt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReserveringsDatum)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

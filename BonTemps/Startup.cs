@@ -104,7 +104,7 @@ namespace BonTemps
                       template: "{area:exists}/{controller=Reserveringen}/{action=Index}/{id?}"
                     );
                 });
-            Dummydata.Initialize(context, usermanager, rolemanager).Wait();
+                Dummydata.Initialize(context, usermanager, rolemanager).Wait();
                 //DummyData.UserTest(context, usermanager, rolemanager).Wait();
                 //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
                 //DummyData.LoadCategory(context, env).Wait();

@@ -1,5 +1,6 @@
 ﻿@model BonTemps.Areas.Systeem.Models.Reservering
 
+
 <!DOCTYPE html>
 
 <html>
@@ -14,10 +15,46 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naam)
+            @Html.DisplayNameFor(model => model.NaamReserveerder)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naam)
+            @Html.DisplayFor(model => model.NaamReserveerder)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HuisTelefoonNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HuisTelefoonNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MobielTelefoonNummer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MobielTelefoonNummer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AantalPersonen)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AantalPersonen)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReserveringAangemaakt)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReserveringAangemaakt)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.ReserveringsDatum)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ReserveringsDatum)
         </dd>
     </dl>
 </div>

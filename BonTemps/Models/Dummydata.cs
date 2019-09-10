@@ -1,4 +1,5 @@
-﻿using BonTemps.Data;
+﻿using BonTemps.Areas.Systeem.Models;
+using BonTemps.Data;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -43,8 +44,8 @@ namespace BonTemps.Models
                 await roleManager.CreateAsync(new Rol(role3, desc3, DateTime.Today));
             }
 
-           
 
+            UpdateCategory(context);
            
 
             if (await userManager.FindByNameAsync("nickglasss@hotmail.nl") == null)
@@ -77,6 +78,38 @@ namespace BonTemps.Models
 
             await context.SaveChangesAsync();
 
+        }
+
+        public static void UpdateCategory(ApplicationDbContext _context)
+        {
+            Console.WriteLine("Updating category");
+            List<Category> check = new List<Category>();
+            Category eten = new Category
+            {
+                Naam = "Eten",
+                Beschrijving = "Alles wat je kan eten"
+            };
+            check.Add(eten);
+            Category drinken = new Category
+            {
+                Naam = "Drinken",
+                Beschrijving = "Alles wat je kan drinken"
+            };
+            check.Add(drinken);
+            Category deserts = new Category
+            {
+                Naam = "Deserts",
+                Beschrijving = "Alles deserts"
+            };
+            check.Add(deserts);
+            foreach (var item in check)
+            {
+                if (_context.Categories.Contains(item) == false)
+                {
+                    _context.Categories.Add(item);
+                }
+            }
+            _context.SaveChanges();
         }
 
     }

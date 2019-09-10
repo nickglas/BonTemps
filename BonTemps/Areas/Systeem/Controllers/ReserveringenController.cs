@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 
-namespace BonTemps.Areas.Systeem.Controllers
+namespace BonTemps.Areas.Systeem.Models
 {
     [Area("Systeem")]
     public class ReserveringenController : Controller
@@ -55,8 +54,9 @@ namespace BonTemps.Areas.Systeem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam")] Reservering reservering)
+        public async Task<IActionResult> Create([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,ReserveringAangemaakt,ReserveringsDatum")] Reservering reservering)
         {
+            reservering.ReserveringAangemaakt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(reservering);
@@ -87,7 +87,7 @@ namespace BonTemps.Areas.Systeem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam")] Reservering reservering)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,ReserveringAangemaakt,ReserveringsDatum")] Reservering reservering)
         {
             if (id != reservering.Id)
             {
