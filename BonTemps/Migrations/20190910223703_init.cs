@@ -26,6 +26,20 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Naam = table.Column<string>(nullable: true),
+                    Beschrijving = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Klantgegevens",
                 columns: table => new
                 {
@@ -43,22 +57,36 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reservering",
+                name: "Menus",
                 columns: table => new
                 {
-                    ReserveringId = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Voornaam = table.Column<string>(nullable: true),
-                    Toevoeging = table.Column<string>(nullable: true),
-                    Achternaam = table.Column<string>(nullable: true),
-                    Telefoonnummer = table.Column<int>(nullable: false),
-                    MobielNummer = table.Column<int>(nullable: false),
-                    AantalPersonen = table.Column<int>(nullable: false),
-                    ReserveeringsDatum = table.Column<DateTime>(nullable: false)
+                    Menu_naam = table.Column<string>(nullable: true),
+                    Beschrijving = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Reservering", x => x.ReserveringId);
+                    table.PrimaryKey("PK_Menus", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Reserveringen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    NaamReserveerder = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    HuisTelefoonNummer = table.Column<string>(nullable: true),
+                    MobielTelefoonNummer = table.Column<string>(nullable: true),
+                    AantalPersonen = table.Column<int>(nullable: false),
+                    ReserveringAangemaakt = table.Column<DateTime>(nullable: false),
+                    ReserveringsDatum = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Reserveringen", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,6 +147,35 @@ namespace BonTemps.Migrations
                         name: "FK_AspNetUsers_AspNetRoles_RolId",
                         column: x => x.RolId,
                         principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Items",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Naam = table.Column<string>(nullable: true),
+                    Beschrijving = table.Column<string>(nullable: true),
+                    Prijs = table.Column<double>(nullable: false),
+                    CategoryId = table.Column<int>(nullable: true),
+                    MenuId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Items_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Items_Menus_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -256,6 +313,16 @@ namespace BonTemps.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_CategoryId",
+                table: "Items",
+                column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_MenuId",
+                table: "Items",
+                column: "MenuId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -276,10 +343,19 @@ namespace BonTemps.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Reservering");
+                name: "Items");
+
+            migrationBuilder.DropTable(
+                name: "Reserveringen");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Menus");
 
             migrationBuilder.DropTable(
                 name: "Klantgegevens");

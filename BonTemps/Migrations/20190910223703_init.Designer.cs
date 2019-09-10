@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190907195222_reserveringen_update")]
-    partial class reserveringen_update
+    [Migration("20190910223703_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,61 @@ namespace BonTemps.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<string>("Naam");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Items", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<int?>("CategoryId");
+
+                    b.Property<int?>("MenuId");
+
+                    b.Property<string>("Naam");
+
+                    b.Property<double>("Prijs");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<string>("Menu_naam");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menus");
+                });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Reservering", b =>
                 {
@@ -268,6 +323,17 @@ namespace BonTemps.Migrations
                     b.HasIndex("RolId");
 
                     b.HasDiscriminator().HasValue("Klant");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Items", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
+                        .WithMany("Items")
+                        .HasForeignKey("MenuId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

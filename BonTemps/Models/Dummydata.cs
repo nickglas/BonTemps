@@ -121,6 +121,7 @@ namespace BonTemps.Models
             {
                 Naam = "Spaghetti",
                 Beschrijving = "Spaghetti Bolognesse",
+                Prijs = 6.50f,
                 Category = _context.Categories.Where(x => x.Naam == "Eten").First()
             };
             check.Add(eten);
@@ -128,6 +129,7 @@ namespace BonTemps.Models
             {
                 Naam = "Coca Cola",
                 Beschrijving = "Cola",
+                Prijs = 2.50f,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First()
             };
             check.Add(drinken);
@@ -135,6 +137,7 @@ namespace BonTemps.Models
             {
                 Naam = "Dame blanche",
                 Beschrijving = "ijs",
+                Prijs = 3.25f,
                 Category = _context.Categories.Where(x => x.Naam == "Deserts").First()
             };
             check.Add(deserts);

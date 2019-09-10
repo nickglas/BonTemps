@@ -29,6 +29,8 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Naam");
 
+                    b.Property<double>("prijs");
+
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
@@ -47,6 +49,8 @@ namespace BonTemps.Migrations
                     b.Property<int?>("MenuId");
 
                     b.Property<string>("Naam");
+
+                    b.Property<float>("Prijs");
 
                     b.HasKey("Id");
 
