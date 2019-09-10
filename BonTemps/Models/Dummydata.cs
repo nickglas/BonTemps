@@ -104,9 +104,10 @@ namespace BonTemps.Models
             check.Add(deserts);
             foreach (var item in check)
             {
-                if (_context.Categories.Contains(item) == false)
+                int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
+                if (i == 0)
                 {
-                    _context.Categories.Add(item);
+                    _context.Add(item);
                 }
             }
             _context.SaveChanges();
