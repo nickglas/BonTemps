@@ -99,7 +99,7 @@ namespace BonTemps.Models
             Category deserts = new Category
             {
                 Naam = "Deserts",
-                Beschrijving = "Alles deserts"
+                Beschrijving = "Alle deserts"
             };
             check.Add(deserts);
             foreach (var item in check)

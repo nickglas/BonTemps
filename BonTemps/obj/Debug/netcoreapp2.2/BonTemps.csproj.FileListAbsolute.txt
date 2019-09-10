@@ -211,3 +211,7 @@ C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Reserveringen\Edit.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Reserveringen\Index.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_DatepickerPartial.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\ChefBoard\Index.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\_ViewImports.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\_ViewStart.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ChefLayout.g.cshtml.cs
