@@ -7,9 +7,9 @@ namespace BonTemps.Areas.Systeem.Models
 {
     public class Consumptie
     {
-        string Category_eten = "Eten";
-        string Category_Drinken = "Drinken";
-        string Category_Deserts = "Deserts";
+        public static int Category_eten = 1;
+        public static int Category_Drinken = 2;
+        public static int Category_Deserts = 3;
 
 
 

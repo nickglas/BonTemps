@@ -23,9 +23,9 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Consumpties.ToListAsync());
+            ViewBag.Categorie = _context.Categories.Where(x => x.Id == Consumptie.Category_eten).First().Naam;
+            return View(_context.Consumpties.Where(x => x.Category.Id == Consumptie.Category_eten).ToList());
         }
-
         // GET: Chef/Consumpties/Details/5
         public async Task<IActionResult> Details(int? id)
         {
