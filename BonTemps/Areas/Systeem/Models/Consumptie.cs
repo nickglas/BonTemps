@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BonTemps.Areas.Systeem.Models
 {
-    public class Items
+    public class Consumptie
     {
         public int Id { get; set; }
         public string Naam { get; set; }

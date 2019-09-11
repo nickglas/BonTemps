@@ -152,7 +152,7 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Items",
+                name: "Consumpties",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -165,15 +165,15 @@ namespace BonTemps.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.Id);
+                    table.PrimaryKey("PK_Consumpties", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Items_Categories_CategoryId",
+                        name: "FK_Consumpties_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Items_Menus_MenuId",
+                        name: "FK_Consumpties_Menus_MenuId",
                         column: x => x.MenuId,
                         principalTable: "Menus",
                         principalColumn: "Id",
@@ -315,13 +315,13 @@ namespace BonTemps.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_CategoryId",
-                table: "Items",
+                name: "IX_Consumpties_CategoryId",
+                table: "Consumpties",
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Items_MenuId",
-                table: "Items",
+                name: "IX_Consumpties_MenuId",
+                table: "Consumpties",
                 column: "MenuId");
         }
 
@@ -343,7 +343,7 @@ namespace BonTemps.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Items");
+                name: "Consumpties");
 
             migrationBuilder.DropTable(
                 name: "Reserveringen");

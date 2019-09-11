@@ -116,37 +116,37 @@ namespace BonTemps.Models
         {
 
             Console.WriteLine("Updating Items");
-            List<Items> check = new List<Items>();
-            Items eten = new Items
+            List<Consumptie> check = new List<Consumptie>();
+            Consumptie eten = new Consumptie
             {
                 Naam = "Spaghetti",
                 Beschrijving = "Spaghetti Bolognesse",
-                Prijs = 6.50f,
+                Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Eten").First()
             };
             check.Add(eten);
-            Items drinken = new Items
+            Consumptie drinken = new Consumptie
             {
                 Naam = "Coca Cola",
                 Beschrijving = "Cola",
-                Prijs = 2.50f,
+                Prijs = 2.50,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First()
             };
             check.Add(drinken);
-            Items deserts = new Items
+            Consumptie deserts = new Consumptie
             {
                 Naam = "Dame blanche",
                 Beschrijving = "ijs",
-                Prijs = 3.25f,
+                Prijs = 3.25,
                 Category = _context.Categories.Where(x => x.Naam == "Deserts").First()
             };
             check.Add(deserts);
             foreach (var item in check)
             {
-                int i = _context.Items.Where(x => x.Naam == item.Naam).Count();
+                int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                    _context.Items.Add(item);
+                    _context.Consumpties.Add(item);
                 }
             }
             _context.SaveChanges();

@@ -29,14 +29,12 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Naam");
 
-                    b.Property<double>("prijs");
-
                     b.HasKey("Id");
 
                     b.ToTable("Categories");
                 });
 
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Items", b =>
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -50,7 +48,7 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Naam");
 
-                    b.Property<float>("Prijs");
+                    b.Property<double>("Prijs");
 
                     b.HasKey("Id");
 
@@ -58,7 +56,7 @@ namespace BonTemps.Migrations
 
                     b.HasIndex("MenuId");
 
-                    b.ToTable("Items");
+                    b.ToTable("Consumpties");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Menu", b =>
@@ -325,7 +323,7 @@ namespace BonTemps.Migrations
                     b.HasDiscriminator().HasValue("Klant");
                 });
 
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Items", b =>
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
                         .WithMany()

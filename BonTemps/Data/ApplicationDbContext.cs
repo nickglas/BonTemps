@@ -21,7 +21,7 @@ namespace BonTemps.Data
         //Andere area
         public DbSet<Reservering> Reserveringen { get; set; }
         public DbSet<Menu> Menus { get; set; }
-        public DbSet<Items> Items { get; set; }
+        public DbSet<Consumptie> Consumpties { get; set; }
         public DbSet<Category> Categories { get; set; }
     }
 }
