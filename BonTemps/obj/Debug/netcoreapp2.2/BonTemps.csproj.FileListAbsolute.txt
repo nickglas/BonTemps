@@ -220,3 +220,8 @@ C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Categories\Details.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Categories\Edit.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Categories\Index.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Consumpties\Create.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Consumpties\Delete.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Consumpties\Details.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Consumpties\Edit.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Consumpties\Index.g.cshtml.cs
