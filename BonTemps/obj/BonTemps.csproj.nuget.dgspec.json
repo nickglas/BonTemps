@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj": {}
+    "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj": {
+    "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
+        "projectUniqueName": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj",
         "projectName": "BonTemps",
-        "projectPath": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
+        "projectPath": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\obj\\",
+        "outputPath": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -57,6 +57,10 @@
               "target": "Package",
               "version": "[2.2.0, )",
               "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.3, )"
             }
           },
           "imports": [
