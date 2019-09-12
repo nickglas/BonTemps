@@ -23,6 +23,8 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties
         public async Task<IActionResult> Index(string Id)
         {
+            List<Category> categories = _context.Categories.ToList();
+            ViewBag.categorien = categories;
             List < Consumptie > consumpties = new List<Consumptie>();
             string Categorie = Id;
             switch (Categorie)

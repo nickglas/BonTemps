@@ -1,13 +1,18 @@
 ﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Consumptie>
-
+@using BonTemps.Areas;
 @{
     ViewData["Title"] = "Index";
+
 }
 
 <h1>Categorie @ViewBag.Naam</h1>
-
+<a onchange="iets">
+    @Html.DropDownList("Id", new SelectList(ViewBag.categorien, "Id", "Naam"))
+</a>
 <p>
     <a asp-action="Create">Create New</a>
+</p>
+<p>
 </p>
 <table class="table">
     <thead>
@@ -25,23 +30,24 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschrijving)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prijs)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Beschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prijs)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
