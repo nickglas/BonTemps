@@ -21,19 +21,30 @@ namespace BonTemps.Areas.Chef.Controllers
         }
 
         // GET: Chef/Consumpties
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Id)
         {
             List < Consumptie > consumpties = new List<Consumptie>();
-            string Categorie = "Drinken";
+            string Categorie = Id;
             switch (Categorie)
             {
-                
+                case "Eten":
+                    consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_eten).ToListAsync();
+                    ViewBag.Naam = Categorie;
+                    return View(consumpties);
+                    break;
+                case "Deserts":
+                    consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_Deserts).ToListAsync();
+                    ViewBag.Naam = Categorie;
+                    return View(consumpties);
+                    break;
                 case "Drinken":
                     consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_Drinken).ToListAsync();
+                    ViewBag.Naam = Categorie;
                     return View(consumpties);
                     break;
                 default:
                     consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_eten).ToListAsync();
+                    ViewBag.Naam = "Eten";
                     return View(consumpties);
                     break;
             }
