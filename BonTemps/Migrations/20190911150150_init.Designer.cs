@@ -4,20 +4,102 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BonTemps.Data.Migrations
+namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190911150150_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<string>("Naam");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<int?>("CategoryId");
+
+                    b.Property<int?>("MenuId");
+
+                    b.Property<string>("Naam");
+
+                    b.Property<double>("Prijs");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CategoryId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("Consumpties");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Menu", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Beschrijving");
+
+                    b.Property<string>("Menu_naam");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Reservering", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AantalPersonen");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("HuisTelefoonNummer");
+
+                    b.Property<string>("MobielTelefoonNummer");
+
+                    b.Property<string>("NaamReserveerder");
+
+                    b.Property<DateTime>("ReserveringAangemaakt");
+
+                    b.Property<DateTime>("ReserveringsDatum");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reserveringen");
+                });
 
             modelBuilder.Entity("BonTemps.Models.Klantgegevens", b =>
                 {
@@ -241,6 +323,17 @@ namespace BonTemps.Data.Migrations
                     b.HasIndex("RolId");
 
                     b.HasDiscriminator().HasValue("Klant");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
+                        .WithMany("Items")
+                        .HasForeignKey("MenuId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

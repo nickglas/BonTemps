@@ -97,7 +97,21 @@ namespace BonTemps
                         name: "default",
                         template: "{controller=Home}/{action=Index}/{id?}");
                 });
-                Dummydata.Initialize(context, usermanager, rolemanager).Wait();
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                      name: "areas",
+                      template: "{area:exists}/{controller=Reserveringen}/{action=Index}/{id?}"
+                    );
+                });
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                      name: "areas",
+                      template: "{area:exists}/{controller=ChefBoard}/{action=Index}/{id?}"
+                    );
+                });
+            Dummydata.Initialize(context, usermanager, rolemanager).Wait();
                 //DummyData.UserTest(context, usermanager, rolemanager).Wait();
                 //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
                 //DummyData.LoadCategory(context, env).Wait();

@@ -1,4 +1,5 @@
-﻿using BonTemps.Data;
+﻿using BonTemps.Areas.Systeem.Models;
+using BonTemps.Data;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -43,9 +44,9 @@ namespace BonTemps.Models
                 await roleManager.CreateAsync(new Rol(role3, desc3, DateTime.Today));
             }
 
-           
 
-           
+            UpdateCategory(context);
+            UpdateItems(context);
 
             if (await userManager.FindByNameAsync("nickglasss@hotmail.nl") == null)
             {
@@ -77,6 +78,78 @@ namespace BonTemps.Models
 
             await context.SaveChangesAsync();
 
+        }
+
+        public static void UpdateCategory(ApplicationDbContext _context)
+        {
+            Console.WriteLine("Updating category");
+            List<Category> check = new List<Category>();
+            Category eten = new Category
+            {
+                Naam = "Eten",
+                Beschrijving = "Alles wat je kan eten"
+            };
+            check.Add(eten);
+            Category drinken = new Category
+            {
+                Naam = "Drinken",
+                Beschrijving = "Alles wat je kan drinken"
+            };
+            check.Add(drinken);
+            Category deserts = new Category
+            {
+                Naam = "Deserts",
+                Beschrijving = "Alle deserts"
+            };
+            check.Add(deserts);
+            foreach (var item in check)
+            {
+                int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
+                if (i == 0)
+                {
+                    _context.Add(item);
+                }
+            }
+            _context.SaveChanges();
+        }
+        public static void UpdateItems(ApplicationDbContext _context)
+        {
+
+            Console.WriteLine("Updating Items");
+            List<Consumptie> check = new List<Consumptie>();
+            Consumptie eten = new Consumptie
+            {
+                Naam = "Spaghetti",
+                Beschrijving = "Spaghetti Bolognesse",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Eten").First()
+            };
+            check.Add(eten);
+            Consumptie drinken = new Consumptie
+            {
+                Naam = "Coca Cola",
+                Beschrijving = "Cola",
+                Prijs = 2.50,
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First()
+            };
+            check.Add(drinken);
+            Consumptie deserts = new Consumptie
+            {
+                Naam = "Dame blanche",
+                Beschrijving = "ijs",
+                Prijs = 3.25,
+                Category = _context.Categories.Where(x => x.Naam == "Deserts").First()
+            };
+            check.Add(deserts);
+            foreach (var item in check)
+            {
+                int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
+                if (i == 0)
+                {
+                    _context.Consumpties.Add(item);
+                }
+            }
+            _context.SaveChanges();
         }
 
     }
