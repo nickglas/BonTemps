@@ -49,7 +49,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties/Create
         public IActionResult Create()
         {
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Name");
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
             return View();
         }
 
@@ -68,7 +68,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryNaam"] = new SelectList(_context.Categories, "Name", "Name");
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
             return View(consumptie);
         }
 
