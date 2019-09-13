@@ -18,5 +18,6 @@ namespace BonTemps.Areas.Systeem.Models
         public string Beschrijving { get; set; }
         public double Prijs { get; set; }
         public Category Category { get; set; }
+        public int CategoryId { get; set; }
     }
 }
