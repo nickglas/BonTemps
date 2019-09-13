@@ -60,8 +60,7 @@ namespace BonTemps.Areas.Chef.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
         {
-            Console.WriteLine("!!!!!!!!!!!!!!!!");
-            Console.WriteLine(consumptie.CategoryId);
+            
             if (ModelState.IsValid)
             {
                 _context.Add(consumptie);
