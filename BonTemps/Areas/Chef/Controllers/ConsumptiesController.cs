@@ -85,7 +85,7 @@ namespace BonTemps.Areas.Chef.Controllers
             {
                 return NotFound();
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
             return View(consumptie);
         }
 
