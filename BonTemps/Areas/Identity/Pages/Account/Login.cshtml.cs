@@ -89,7 +89,16 @@ namespace BonTemps.Areas.Identity.Pages.Account
 
                     switch (CurrentRole)
                     {
-                        case "Admin":
+                        case "Manager":
+                            return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                            break;
+                        case "Chef":
+                            return RedirectToAction("Index", "ChefBoard", new { area = "Chef" });
+                            break;
+                        case "Bediening":
+                            return RedirectToAction("Index", "Systeem");
+                            break;
+                        case "Klant":
                             break;
                         default:
                             break;

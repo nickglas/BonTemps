@@ -20,11 +20,10 @@ namespace BonTemps.Models
             String adminId2 = "";
             String adminId3 = "";
 
-            string role1 = "Admin";
-            string desc1 = "Administrator rol die alles kan aanpassen in het systeem.";
+           
 
             string role2 = "Manager";
-            string desc2 = "Managers van het bedrijf.";
+            string desc2 = "Managers/Admins van het bedrijf.";
 
             string role3 = "Chef";
             string desc3 = "Koks van het bedrijf.";
@@ -37,10 +36,7 @@ namespace BonTemps.Models
 
             string password = "P@$$w0rd";
 
-            if (await roleManager.FindByNameAsync(role1) == null)
-            {
-                await roleManager.CreateAsync(new Rol(role1, desc1, DateTime.Today));
-            }
+           
             if (await roleManager.FindByNameAsync(role2) == null)
             {
                 await roleManager.CreateAsync(new Rol(role2, desc2, DateTime.Today));
@@ -83,7 +79,7 @@ namespace BonTemps.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role1);
+                    await userManager.AddToRoleAsync(user, role3);
                 }
                 adminId1 = user.Id;
             }
