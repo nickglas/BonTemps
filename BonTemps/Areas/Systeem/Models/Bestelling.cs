@@ -18,7 +18,7 @@ namespace BonTemps.Areas.Systeem.Models
         public int TafelsId { get; set; }
 
         public DateTime Bestellingsdatum_Tijd { get; set; }
-        public bool Status { get; set; }
+        public bool Afgerond { get; set; }
 
 
     }
