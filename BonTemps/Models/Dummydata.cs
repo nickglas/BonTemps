@@ -79,7 +79,7 @@ namespace BonTemps.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role3);
+                    await userManager.AddToRoleAsync(user, role2);
                 }
                 adminId1 = user.Id;
             }
