@@ -18,6 +18,7 @@
     <Folder Include="Areas\Chef\Data\" />
     <Folder Include="Areas\Chef\Models\" />
     <Folder Include="Areas\Systeem\Data\" />
+    <Folder Include="Areas\Views\Shared\" />
     <Folder Include="Data\Migrations\" />
   </ItemGroup>
 
