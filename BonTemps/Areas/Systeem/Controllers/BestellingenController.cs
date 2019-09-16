@@ -23,7 +23,7 @@ namespace BonTemps.Areas.Systeem.Controllers
         // GET: Systeem/Bestellingen
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie).Include(b => b.Tafels);
+            var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie).Include(b => b.Tafels).Where(x => x.Afgerond == false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -51,7 +51,9 @@ namespace BonTemps.Areas.Systeem.Controllers
         public IActionResult Create()
         {
             ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
-            ViewData["TafelsId"] = new SelectList(_context.Tafels, "Id", "Id");
+            ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x=> x.Bezet == true), "Id", "Id");
+            ViewData["Consumptienaam"] = new SelectList(_context.Consumpties, "Id", "Naam");
+
             return View();
         }
 
@@ -164,6 +166,23 @@ namespace BonTemps.Areas.Systeem.Controllers
         private bool BestellingExists(int id)
         {
             return _context.Bestellingen.Any(e => e.Id == id);
+        }
+
+        public async Task<IActionResult> Afronden(int id)
+        {
+            Bestelling bestelling = _context.Bestellingen.Where(x => x.Id == id).FirstOrDefault();
+            bestelling.Afgerond = true;
+            _context.Bestellingen.Update(bestelling);
+            await _context.SaveChangesAsync();
+            return  RedirectToAction("Index");
+        }
+        
+        public async Task<IActionResult> AfgerondeBestellingen()
+        {
+            Console.WriteLine("!!!!!\n\n In de functie \n\n !!!!!");
+
+            var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie).Include(b => b.Tafels).Where(x => x.Afgerond == true);
+            return View(await applicationDbContext.ToListAsync());
         }
     }
 }

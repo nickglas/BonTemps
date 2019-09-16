@@ -295,3 +295,4 @@ C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\Details.g.cshtml.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\Edit.g.cshtml.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\Index.g.cshtml.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\AfgerondeBestellingen.g.cshtml.cs
