@@ -90,6 +90,20 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Tafels",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Zitplaatsen = table.Column<int>(nullable: false),
+                    Bezet = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tafels", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -160,7 +174,7 @@ namespace BonTemps.Migrations
                     Naam = table.Column<string>(nullable: true),
                     Beschrijving = table.Column<string>(nullable: true),
                     Prijs = table.Column<double>(nullable: false),
-                    CategoryId = table.Column<int>(nullable: true),
+                    CategoryId = table.Column<int>(nullable: false),
                     MenuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -171,7 +185,7 @@ namespace BonTemps.Migrations
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Consumpties_Menus_MenuId",
                         column: x => x.MenuId,
@@ -265,6 +279,34 @@ namespace BonTemps.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Bestellingen",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ConsumptieId = table.Column<int>(nullable: false),
+                    TafelsId = table.Column<int>(nullable: false),
+                    Bestellingsdatum_Tijd = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bestellingen", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Bestellingen_Consumpties_ConsumptieId",
+                        column: x => x.ConsumptieId,
+                        principalTable: "Consumpties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Bestellingen_Tafels_TafelsId",
+                        column: x => x.TafelsId,
+                        principalTable: "Tafels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -315,6 +357,16 @@ namespace BonTemps.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bestellingen_ConsumptieId",
+                table: "Bestellingen",
+                column: "ConsumptieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Bestellingen_TafelsId",
+                table: "Bestellingen",
+                column: "TafelsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Consumpties_CategoryId",
                 table: "Consumpties",
                 column: "CategoryId");
@@ -343,7 +395,7 @@ namespace BonTemps.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Consumpties");
+                name: "Bestellingen");
 
             migrationBuilder.DropTable(
                 name: "Reserveringen");
@@ -352,16 +404,22 @@ namespace BonTemps.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Categories");
+                name: "Consumpties");
 
             migrationBuilder.DropTable(
-                name: "Menus");
+                name: "Tafels");
 
             migrationBuilder.DropTable(
                 name: "Klantgegevens");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Menus");
         }
     }
 }

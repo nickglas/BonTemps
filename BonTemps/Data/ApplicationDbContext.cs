@@ -17,6 +17,8 @@ namespace BonTemps.Data
         public DbSet<Klant> Klanten { get; set; }
         public DbSet<Rol> Rol { get; set; }
         public DbSet<Klantgegevens> Klantgegevens { get; set; }
+        public DbSet<Tafels> Tafels { get; set; }
+        public DbSet<Bestelling> Bestellingen { get; set; }
 
         //Andere area
         public DbSet<Reservering> Reserveringen { get; set; }

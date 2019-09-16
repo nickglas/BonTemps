@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190912210842_test")]
-    partial class test
+    [Migration("20190916074100_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,29 @@ namespace BonTemps.Migrations
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Bestellingsdatum_Tijd");
+
+                    b.Property<int>("ConsumptieId");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<int>("TafelsId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConsumptieId");
+
+                    b.HasIndex("TafelsId");
+
+                    b.ToTable("Bestellingen");
+                });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
                 {
@@ -99,6 +122,21 @@ namespace BonTemps.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reserveringen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Tafels", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Bezet");
+
+                    b.Property<int>("Zitplaatsen");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tafels");
                 });
 
             modelBuilder.Entity("BonTemps.Models.Klantgegevens", b =>
@@ -323,6 +361,19 @@ namespace BonTemps.Migrations
                     b.HasIndex("RolId");
 
                     b.HasDiscriminator().HasValue("Klant");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
+                        .WithMany()
+                        .HasForeignKey("ConsumptieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "Tafels")
+                        .WithMany()
+                        .HasForeignKey("TafelsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
