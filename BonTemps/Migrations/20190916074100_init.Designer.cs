@@ -10,16 +10,39 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190911150150_init")]
+    [Migration("20190916074100_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Bestellingsdatum_Tijd");
+
+                    b.Property<int>("ConsumptieId");
+
+                    b.Property<bool>("Status");
+
+                    b.Property<int>("TafelsId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConsumptieId");
+
+                    b.HasIndex("TafelsId");
+
+                    b.ToTable("Bestellingen");
+                });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
                 {
@@ -44,7 +67,7 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Beschrijving");
 
-                    b.Property<int?>("CategoryId");
+                    b.Property<int>("CategoryId");
 
                     b.Property<int?>("MenuId");
 
@@ -99,6 +122,21 @@ namespace BonTemps.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reserveringen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Tafels", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("Bezet");
+
+                    b.Property<int>("Zitplaatsen");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tafels");
                 });
 
             modelBuilder.Entity("BonTemps.Models.Klantgegevens", b =>
@@ -325,11 +363,25 @@ namespace BonTemps.Migrations
                     b.HasDiscriminator().HasValue("Klant");
                 });
 
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
+                        .WithMany()
+                        .HasForeignKey("ConsumptieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "Tafels")
+                        .WithMany()
+                        .HasForeignKey("TafelsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId");
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
                         .WithMany("Items")
