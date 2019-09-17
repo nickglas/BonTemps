@@ -82,27 +82,27 @@ namespace BonTemps.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    var user = await _usermanager.FindByEmailAsync(Input.Email);
-                    var role = await _usermanager.GetRolesAsync(user);
+                    //var user = await _usermanager.FindByEmailAsync(Input.Email);
+                    //var role = await _usermanager.GetRolesAsync(user);
 
-                    string CurrentRole = role[0];
+                    //string CurrentRole = role[0];
 
-                    switch (CurrentRole)
-                    {
-                        case "Manager":
-                            return RedirectToAction("Index", "Manager", new { area = "Manager" });
-                            break;
-                        case "Chef":
-                            return RedirectToAction("Index", "ChefBoard", new { area = "Chef" });
-                            break;
-                        case "Bediening":
-                            return RedirectToAction("Index", "Systeem");
-                            break;
-                        case "Klant":
-                            break;
-                        default:
-                            break;
-                    }
+                    //switch (CurrentRole)
+                    //{
+                    //    case "Manager":
+                    //        return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                    //        break;
+                    //    case "Chef":
+                    //        return RedirectToAction("Index", "ChefBoard", new { area = "Chef" });
+                    //        break;
+                    //    case "Bediening":
+                    //        return RedirectToAction("Index", "Systeem");
+                    //        break;
+                    //    case "Klant":
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
 
                     return LocalRedirect(returnUrl);
                 }

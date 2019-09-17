@@ -1,0 +1,39 @@
+﻿html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    height: 100%;
+}
+
+.navbar-left {
+    position: absolute;
+    background-color: #212020;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 80%;
+    overflow: hidden;
+}
+
+.navbar-left a{
+}
+hr {
+    color:red;
+}
+
+.navbar-left a:hover{
+}
+a:hover {
+    font-size: 17px;
+    color: white!important;
+}
+.foto-bt {
+    max-width: 75%;
+    height: auto;   
+    margin-bottom: 4%;
+    margin-top: 4%;
+    margin-left: 4%;
+}
+
