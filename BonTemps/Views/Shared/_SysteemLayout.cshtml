@@ -45,8 +45,10 @@
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
             }
-
-            <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true|| User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+            }
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen</a>
