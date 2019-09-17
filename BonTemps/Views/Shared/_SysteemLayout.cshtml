@@ -18,6 +18,8 @@
                   integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
         </environment>
         <link rel="stylesheet" href="~/css/cms.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
         <style>
         </style>
     </head>
@@ -40,14 +42,15 @@
                 <p class="text-white-50">Welkom, @User.Identity.Name (Manager)</p>
 
             }
-            <p class="text-white-50"></p>
-            <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Index">Terug naar website</a>
+            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index">Terug naar website</a>
             @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
             }
-
-            <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true|| User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+            }
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen</a>
@@ -62,7 +65,7 @@
             }
 
         </ul>
-        <div class="container">
+        <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
                 @RenderBody()
