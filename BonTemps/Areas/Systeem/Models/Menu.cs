@@ -11,5 +11,6 @@ namespace BonTemps.Areas.Systeem.Models
         public string Menu_naam { get; set; }
         public string Beschrijving { get; set; }
         public List<Consumptie> Items { get; set; }
+        public int ConsumptieId { get; set; }
     }
 }

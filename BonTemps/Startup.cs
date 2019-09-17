@@ -111,6 +111,13 @@ namespace BonTemps
                       template: "{area:exists}/{controller=ChefBoard}/{action=Index}/{id?}"
                     );
                 });
+                app.UseMvc(routes =>
+                {
+                    routes.MapRoute(
+                      name: "areas",
+                      template: "{area:exists}/{controller=ManagerBoard}/{action=Index}/{id?}"
+                    );
+                });
             Dummydata.Initialize(context, usermanager, rolemanager).Wait();
                 //DummyData.UserTest(context, usermanager, rolemanager).Wait();
                 //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
