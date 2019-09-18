@@ -500,3 +500,4 @@ C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.Views.pdb
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.dll
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.pdb
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.csproj.CopyComplete
+C:\Users\Omar\Source\Repos\nickglas\BonTemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Contact\Index.g.cshtml.cs
