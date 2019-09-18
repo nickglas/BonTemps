@@ -17,8 +17,8 @@
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header>
+@*<body class="col-12">
+    <header class="col-3 headerclass">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BonTemps</a>
@@ -42,19 +42,49 @@
                 </div>
             </div>
         </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+    </header>*@
+<body>
+        <div class="navbar-left">
+           <div class="content-nav">
+               <ul class="nav-list">
+                   <li><a href="#">Home</a></li>
+                   <li><a href="#">Menu's</a></li>
+                   <li><a href="#">Reserveren</a></li>
+                   <li><a href="#">Contact</a></li>              
+               </ul>
+            </div>
+           <div class="row line-flag">
+               <div class="blue col-4">
+                    
+               </div>
+               <div class="white col-4">
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - BonTemps - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+               </div>
+               <div class="red col-4">
+
+               </div>
+           </div>
+           <div class="login-nav">
+               <ul>
+                   <li><a href="#"><partial name="_LoginPartial" /></a></li>
+               </ul>
+           </div>
         </div>
-    </footer>
+    <div class="row">
+
+        <div class="container">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+
+        @*<footer class="border-top footer text-muted">
+                <div class="container">
+                    &copy; 2019 - BonTemps - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                </div>
+            </footer>*@
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -77,5 +107,7 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)
+
+
 </body>
 </html>
