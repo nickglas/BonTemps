@@ -23,21 +23,10 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties
         public async Task<IActionResult> Index()
         {
-            List < Consumptie > consumpties = new List<Consumptie>();
-            string Categorie = "Drinken";
-            switch (Categorie)
-            {
-                
-                case "Drinken":
-                    consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_Drinken).ToListAsync();
-                    return View(consumpties);
-                    break;
-                default:
-                    consumpties = await _context.Consumpties.Where(x => x.Id == Consumptie.Category_eten).ToListAsync();
-                    return View(consumpties);
-                    break;
-            }
+            var applicationDbContext = _context.Consumpties.Include(c => c.Category);
+            return View(await applicationDbContext.ToListAsync());
         }
+
         // GET: Chef/Consumpties/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -47,6 +36,7 @@ namespace BonTemps.Areas.Chef.Controllers
             }
 
             var consumptie = await _context.Consumpties
+                .Include(c => c.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (consumptie == null)
             {
@@ -59,6 +49,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties/Create
         public IActionResult Create()
         {
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
             return View();
         }
 
@@ -67,14 +58,16 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
         {
+            
             if (ModelState.IsValid)
             {
                 _context.Add(consumptie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
             return View(consumptie);
         }
 
@@ -91,6 +84,7 @@ namespace BonTemps.Areas.Chef.Controllers
             {
                 return NotFound();
             }
+            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
             return View(consumptie);
         }
 
@@ -99,7 +93,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Beschrijving,Prijs")] Consumptie consumptie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
         {
             if (id != consumptie.Id)
             {
@@ -126,6 +120,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
             return View(consumptie);
         }
 
@@ -138,6 +133,7 @@ namespace BonTemps.Areas.Chef.Controllers
             }
 
             var consumptie = await _context.Consumpties
+                .Include(c => c.Category)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (consumptie == null)
             {

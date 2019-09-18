@@ -92,6 +92,20 @@ html {
   }
 }
 
+    html{
+    overflow: hidden;
+}
+
+body {
+    background-image: url("../Image/Background.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+
+.french{
+
+}
+
 .border-top {
   border-top: 1px solid #e5e5e5;
 }
@@ -99,6 +113,31 @@ html {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.title {
+    margin-left: 70px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-bottom: 2%;
+    width: 20%;
+    background-color: floralwhite;
+    text-align: center;
+    font-family: 'Merriweather, serif';
+    color: black;
+    /*#242424*/
+}
+
+.Contact {
+    font-size: 16px;
+    white-space: nowrap;
+    font-family: 'Merriweather, serif';
+    margin-left: 50px;
+    margin-top: 10px;
+    padding-bottom: 5%;
+    padding-left: 7%;
+    background-color: floralwhite;
+    width: 50%;
+    box-shadow: 14px 28px 18px -12px rgba(0,0,0,0.19);
+}
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }

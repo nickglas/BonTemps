@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using BonTemps.Models;
+using BonTemps.Data;
 
 namespace BonTemps.Areas.Identity.Pages.Account
 {
@@ -18,11 +19,15 @@ namespace BonTemps.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<Klant> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        private UserManager<Klant> _usermanager;
+        private ApplicationDbContext _context;
 
-        public LoginModel(SignInManager<Klant> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<Klant> signInManager, ILogger<LoginModel> logger, ApplicationDbContext context, UserManager<Klant> usermanager)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
+            _usermanager = usermanager;
         }
 
         [BindProperty]
@@ -77,7 +82,28 @@ namespace BonTemps.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: true);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    //var user = await _usermanager.FindByEmailAsync(Input.Email);
+                    //var role = await _usermanager.GetRolesAsync(user);
+
+                    //string CurrentRole = role[0];
+
+                    //switch (CurrentRole)
+                    //{
+                    //    case "Manager":
+                    //        return RedirectToAction("Index", "Manager", new { area = "Manager" });
+                    //        break;
+                    //    case "Chef":
+                    //        return RedirectToAction("Index", "ChefBoard", new { area = "Chef" });
+                    //        break;
+                    //    case "Bediening":
+                    //        return RedirectToAction("Index", "Systeem");
+                    //        break;
+                    //    case "Klant":
+                    //        break;
+                    //    default:
+                    //        break;
+                    //}
+
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)

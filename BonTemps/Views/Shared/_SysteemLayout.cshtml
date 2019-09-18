@@ -1,90 +1,106 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - BonTemps</title>
+﻿@if (User.IsInRole("Manager") == true || User.IsInRole("Chef") == true || User.IsInRole("Bediening") == true)
+{
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - BonTemps</title>
 
-    <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-    </environment>
-    <environment exclude="Development">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
-              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
-              crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
-    </environment>
-    <link rel="stylesheet" href="~/css/site.css" />
-</head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">BonTemps</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <div class="collapse navbar-collapse" id="navbarResponsive">
-                                <ul class="navbar-nav ml-auto">
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            Reserveringen 
-                                        </a>
-                                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                            <a class="nav-link text-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen Bekijken</a>
-                                            <a class="nav-link text-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Create">Reservering aanmaken</a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">ChefBoard</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
+        <environment include="Development">
+            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        </environment>
+        <environment exclude="Development">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+                  crossorigin="anonymous"
+                  integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+        </environment>
+        <link rel="stylesheet" href="~/css/cms.css" />
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2019 - BonTemps - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <ul class="navbar-left">
+            <img class="foto-bt" src="~/img/bontemps.png" />
+            @if (User.IsInRole("Chef") == true)
+            {
+                <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
+
+            }
+            @if (User.IsInRole("Bediening") == true)
+            {
+                <p class="text-white-50">Welkom, @User.Identity.Name (Bediening)</p>
+
+            }
+            @if (User.IsInRole("Manager") == true)
+            {
+                <p class="text-white-50">Welkom, @User.Identity.Name (Manager)</p>
+
+            }
+            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index">Terug naar website</a>
+            @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
+            }
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true|| User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+            }
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen</a>
+            }
+            @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index">Consumpties</a>
+            }
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
+            {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index">Tafels</a>
+            }
+
+        </ul>
+        <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
+            <partial name="_CookieConsentPartial" />
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
         </div>
-    </footer>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-        </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-        </script>
-    </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
-</body>
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+            </script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+            </script>
+        </environment>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+
+        @RenderSection("Scripts", required: false)
+    </body>
 </html>
+
+}
+else
+{
+    //Foutmelding geven 
+    IgnoreBody();
+}
+

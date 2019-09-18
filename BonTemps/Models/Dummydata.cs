@@ -20,21 +20,23 @@ namespace BonTemps.Models
             String adminId2 = "";
             String adminId3 = "";
 
-            string role1 = "Admin";
-            string desc1 = "This is the administrator role";
+           
 
-            string role2 = "Gebruiker";
-            string desc2 = "This is the members role";
+            string role2 = "Manager";
+            string desc2 = "Managers/Admins van het bedrijf.";
 
-            string role3 = "Author";
-            string desc3 = "This is the Author role";
+            string role3 = "Chef";
+            string desc3 = "Koks van het bedrijf.";
+
+            string role4 = "Bediening";
+            string desc4 = "Bediening van het bedrijf.";
+
+            string role5 = "Klant";
+            string desc5 = "Klanten.";
 
             string password = "P@$$w0rd";
 
-            if (await roleManager.FindByNameAsync(role1) == null)
-            {
-                await roleManager.CreateAsync(new Rol(role1, desc1, DateTime.Today));
-            }
+           
             if (await roleManager.FindByNameAsync(role2) == null)
             {
                 await roleManager.CreateAsync(new Rol(role2, desc2, DateTime.Today));
@@ -43,8 +45,14 @@ namespace BonTemps.Models
             {
                 await roleManager.CreateAsync(new Rol(role3, desc3, DateTime.Today));
             }
-
-
+            if (await roleManager.FindByNameAsync(role4) == null)
+            {
+                await roleManager.CreateAsync(new Rol(role4, desc4, DateTime.Today));
+            }
+            if (await roleManager.FindByNameAsync(role5) == null)
+            {
+                await roleManager.CreateAsync(new Rol(role5, desc5, DateTime.Today));
+            }
             UpdateCategory(context);
             UpdateItems(context);
 
@@ -71,7 +79,7 @@ namespace BonTemps.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role1);
+                    await userManager.AddToRoleAsync(user, role2);
                 }
                 adminId1 = user.Id;
             }

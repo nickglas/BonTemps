@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj": {}
+    "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj": {}
   },
   "projects": {
-    "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj": {
+    "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
         "projectName": "BonTemps",
-        "projectPath": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\BonTemps.csproj",
+        "projectPath": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\BonTemps.csproj",
         "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\User\\source\\repos\\bontemps2\\BonTemps\\obj\\",
+        "outputPath": "C:\\Users\\User\\Source\\Repos\\bontemps2\\BonTemps\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -64,10 +64,16 @@
             }
           },
           "imports": [
-            "net461"
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
           ],
           "assetTargetFallback": true,
-          "warn": true
+          "warn": true,
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100-rc1-014190\\RuntimeIdentifierGraph.json"
         }
       }
     }
