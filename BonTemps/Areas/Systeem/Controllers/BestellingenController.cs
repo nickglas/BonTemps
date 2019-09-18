@@ -172,6 +172,7 @@ namespace BonTemps.Areas.Systeem.Controllers
         {
             Bestelling bestelling = _context.Bestellingen.Where(x => x.Id == id).FirstOrDefault();
             bestelling.Afgerond = true;
+            bestelling.Bestellingsdatum_afgerond = DateTime.Now;
             _context.Bestellingen.Update(bestelling);
             await _context.SaveChangesAsync();
             return  RedirectToAction("Index");
