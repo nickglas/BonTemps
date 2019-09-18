@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190918071848_menu")]
+    partial class menu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,11 +77,15 @@ namespace BonTemps.Migrations
 
                     b.Property<double>("Prijs");
 
+                    b.Property<int?>("consumptieId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("Consumptie");
+
+                    b.HasIndex("consumptieId");
 
                     b.ToTable("Consumpties");
                 });
@@ -386,6 +392,10 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("Consumptie");
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "consumptie")
+                        .WithMany()
+                        .HasForeignKey("consumptieId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

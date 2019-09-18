@@ -20,13 +20,13 @@ namespace BonTemps.Areas.Chef.Controllers
             _context = context;
         }
 
-        // GET: Chef/Menus
+        // GET: Chef/Menu
         public async Task<IActionResult> Index()
         {
             return View(await _context.Menus.ToListAsync());
         }
 
-        // GET: Chef/Menus/Details/5
+        // GET: Chef/Menu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,18 +44,18 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(menu);
         }
 
-        // GET: Chef/Menus/Create
+        // GET: Chef/Menu/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Chef/Menus/Create
+        // POST: Chef/Menu/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Menu_naam,Beschrijving,ConsumptieId")] Menu menu)
+        public async Task<IActionResult> Create([Bind("Id,Menu_naam,Beschrijving")] Menu menu)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(menu);
         }
 
-        // GET: Chef/Menus/Edit/5
+        // GET: Chef/Menu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,12 +82,12 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(menu);
         }
 
-        // POST: Chef/Menus/Edit/5
+        // POST: Chef/Menu/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving,ConsumptieId")] Menu menu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
         {
             if (id != menu.Id)
             {
@@ -117,7 +117,7 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(menu);
         }
 
-        // GET: Chef/Menus/Delete/5
+        // GET: Chef/Menu/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,7 +135,7 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(menu);
         }
 
-        // POST: Chef/Menus/Delete/5
+        // POST: Chef/Menu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
