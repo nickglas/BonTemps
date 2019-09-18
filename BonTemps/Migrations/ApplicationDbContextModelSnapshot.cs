@@ -29,6 +29,8 @@ namespace BonTemps.Migrations
 
                     b.Property<DateTime>("Bestellingsdatum_Tijd");
 
+                    b.Property<DateTime>("Bestellingsdatum_afgerond");
+
                     b.Property<int>("ConsumptieId");
 
                     b.Property<int>("TafelsId");
@@ -67,7 +69,7 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("MenuId");
+                    b.Property<int?>("Consumptie");
 
                     b.Property<string>("Naam");
 
@@ -77,7 +79,7 @@ namespace BonTemps.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("MenuId");
+                    b.HasIndex("Consumptie");
 
                     b.ToTable("Consumpties");
                 });
@@ -382,8 +384,8 @@ namespace BonTemps.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
-                        .WithMany("Items")
-                        .HasForeignKey("MenuId");
+                        .WithMany("Consumpties")
+                        .HasForeignKey("Consumptie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,4 +1,5 @@
-﻿
+﻿@if (User.IsInRole("Manager") == true || User.IsInRole("Chef") == true || User.IsInRole("Bediening") == true)
+{
     <!DOCTYPE html>
     <html>
     <head>
@@ -95,4 +96,11 @@
         @RenderSection("Scripts", required: false)
     </body>
 </html>
+
+}
+else
+{
+    //Foutmelding geven 
+    IgnoreBody();
+}
 
