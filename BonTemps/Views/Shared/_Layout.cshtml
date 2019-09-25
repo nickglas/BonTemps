@@ -50,7 +50,11 @@
                    <li><a href="#">Home</a></li>
                    <li><a href="#">Menu's</a></li>
                    <li><a href="#">Reserveren</a></li>
-                   <li><a href="#">Contact</a></li>              
+                   <li><a href="#">Contact</a></li>
+                   @if (User.IsInRole("Manager")|| User.IsInRole("Chef") || User.IsInRole("Bediening"))
+                   {
+                       <li> <a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a> </li>
+                   }
                </ul>
             </div>
            <div class="row line-flag">
