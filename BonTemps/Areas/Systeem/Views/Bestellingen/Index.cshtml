@@ -4,51 +4,53 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1>Bestellingen</h1>
+<hr />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Consumptie toevoegen</a>
 </p>
-<table class="table">
+<br />
+<table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Consumptie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Tafels)
+                Tafel
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bestellingsdatum_Tijd)
+                Tijd van bestelling
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Afgerond)
             </th>
-            <th></th>
+            <th>Actie</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consumptie.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Tafels.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Afgerond)
-            </td>
-            <td>
-                <a asp-action="Afronden" asp-route-id="@item.Id">Bestelling afronden</a> |
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tafels.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Afgerond)
+                </td>
+                <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
+                    <a asp-action="Afronden" asp-route-id="@item.Id" class="btn btn-outline-primary">Afronden</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Bewerken</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-primary">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger">Verwijderen</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

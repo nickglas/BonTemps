@@ -1,9 +1,13 @@
-﻿{
+{
   "iisSettings": {
-    "windowsAuthentication": false, 
-    "anonymousAuthentication": true, 
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/BonTemps",
+      "sslPort": 0
+    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:53104",
+      "applicationUrl": "http://localhost:45433",
       "sslPort": 44377
     }
   },
@@ -16,12 +20,12 @@
       }
     },
     "BonTemps": {
-      "commandName": "Project",
+      "commandName": "IISExpress",
       "launchBrowser": true,
-      "applicationUrl": "https://localhost:5001;http://localhost:5000",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "https://localhost:445;http://localhost:446"
     }
   }
 }
