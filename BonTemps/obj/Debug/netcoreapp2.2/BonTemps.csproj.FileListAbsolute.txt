@@ -533,3 +533,12 @@ C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Details.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Edit.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Index.cshtml.g.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Create.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Delete.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Details.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Edit.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Index.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\ManagerBoard\Index.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\_ViewImports.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\_ViewStart.g.cshtml.cs
+C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Index.g.cshtml.cs
