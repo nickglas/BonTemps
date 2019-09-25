@@ -21,6 +21,10 @@ html {
     color: white;
     position: absolute;
     background-color: black;
+    background-image: url("../Image/BackGroundNav.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-attachment: fixed;
     top: 0;
     bottom: 0;
     left: 0;
