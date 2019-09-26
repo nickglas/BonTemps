@@ -65,6 +65,7 @@ namespace BonTemps.Models
                     UserName = "nickglass@hotmail.nl",
                     Email = "nickglass@hotmail.nl",
                     PhoneNumber = "6902341234",
+                    Rolnaam = "Klant",
                     Klantgegevens = new Klantgegevens
                     {
                         Voornaam = "Nick",
@@ -72,21 +73,45 @@ namespace BonTemps.Models
                         GeboorteDatum = DateTime.Now,
                         Geslacht = "Man",
                         TelefoonNummer = "0645473290",
+                        
                     },
                 };
 
                 var result = await userManager.CreateAsync(user);
+                
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role2);
                 }
-                adminId1 = user.Id;
             }
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            if (await userManager.FindByNameAsync("nickglas@hotmail.nl") == null)
+            {
+                var personeel = new Klant
+                {
+                    Email = "nickglas@hotmail.nl",
+                    UserName = "nickglas@hotmail.nl",
+                    Rolnaam = role2
+                };
+                var result = await userManager.CreateAsync(personeel);
 
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(personeel, password);
+                    await userManager.AddToRoleAsync(personeel, role2);
+                }
+                await context.SaveChangesAsync();
+            }
+            
         }
+
+
+
+
+
+
+
 
         public static void UpdateCategory(ApplicationDbContext _context)
         {

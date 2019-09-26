@@ -20,8 +20,8 @@ namespace BonTemps.Areas.Manager.Controllers
         }
         public IActionResult Index()
         {
-            var applicationDbContext = _context.Klanten.Include(c => c.Rol);
-            return View(applicationDbContext);
+            return View();
         }
+        
     }
 }
