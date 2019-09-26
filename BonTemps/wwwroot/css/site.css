@@ -18,6 +18,7 @@ html {
 }
 
 .navbar-left {
+    font-weight: 650;
     color: white;
     position: absolute;
     background-color: black;
@@ -28,7 +29,7 @@ html {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 80%;
+    right: 83%;
     overflow: hidden;
 }
 
@@ -50,7 +51,8 @@ li a {
 }
 
 li a:hover {
-    background-color: #111111;
+    color: red;
+    text-decoration: none;
 }
 
 .login-nav{
@@ -58,7 +60,7 @@ li a:hover {
 }
 
 .line-flag{
-    padding-top: 200px; 
+    padding-top: 98%; 
     height: 0.25rem;
 }
 
@@ -81,6 +83,7 @@ a.navbar-brand {
     white-space: normal;
     text-align: left;
     word-break: break-all;
+
 }
 
 
@@ -101,7 +104,7 @@ html {
 }
 
 body {
-    background-image: url("../Image/Background.jpg");
+    background-image: url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-repeat: no-repeat, repeat;
     background-size: cover;
 }
@@ -117,13 +120,17 @@ body {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.heading-primairy {
+    font-size: 2rem;
+}
+
 .title {
-    margin-left: 70px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    padding-bottom: 2%;
+    margin-top: 10%;
+    padding-bottom: .5%;
+    padding-top: .5%;
     width: 20%;
     background-color: floralwhite;
+    opacity: 0.9;   
     text-align: center;
     font-family: 'Merriweather, serif';
     color: black;
@@ -131,19 +138,36 @@ body {
 }
 
 .Contact {
+    float: left;
+    width: 30%;
+}
+
+.tel{
+    margin-top: 30%;
+}
+
+.openingstijden {
+    float: left;
+    width: 40%;
+}
+
+.openingstijden, .Contact {
+    height: 100px;
     font-size: 16px;
     white-space: nowrap;
     font-family: 'Merriweather, serif';
-    margin-left: 50px;
-    margin-top: 10px;
-    padding-bottom: 5%;
+    opacity: 0.9;
+    margin-top: 0.5%;
+    padding-top: 5%;
+    padding-bottom: 35%;
     padding-left: 7%;
     background-color: floralwhite;
-    width: 50%;
     box-shadow: 14px 28px 18px -12px rgba(0,0,0,0.19);
 }
+
+
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {
