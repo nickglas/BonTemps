@@ -25,5 +25,6 @@ namespace BonTemps.Data
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Consumptie> Consumpties { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Personeel> Personeel { get; set; }
     }
 }

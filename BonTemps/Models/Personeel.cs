@@ -7,18 +7,16 @@ using System.Threading.Tasks;
 
 namespace BonTemps.Models
 {
-    public class Klant : IdentityUser
+    public class Personeel : IdentityUser
     {
-        public Klant() : base()
+        public Personeel() : base()
         {
 
         }
 
         [ForeignKey("RolId")]
         public Rol Rol { get; set; }
-        public string Rolnaam { get; set; }
-        public Klantgegevens Klantgegevens { get; set; }
-
+        
         public DateTime Aanmaakdatum { get; set; }
     }
 }

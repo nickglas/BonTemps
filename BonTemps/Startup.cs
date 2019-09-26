@@ -42,15 +42,17 @@ namespace BonTemps
                 services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(
                         Configuration.GetConnectionString("DefaultConnection")));
-                services.AddIdentity<Klant, Rol>(
+                services.AddIdentity<Klant,Rol>(
                     options => options.Stores.MaxLengthForKeys = 128
                     )
                     .AddDefaultUI(UIFramework.Bootstrap4)
                     .AddDefaultTokenProviders()
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+            
 
-                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
                 // sessions 
                 services.AddSession(options =>
@@ -67,7 +69,7 @@ namespace BonTemps
            
 
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-            public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, RoleManager<Rol> rolemanager, UserManager<Klant> usermanager, IApplicationLifetime applicationLifetime)
+            public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, RoleManager<Rol> rolemanager, UserManager<Klant>usermanager, IApplicationLifetime applicationLifetime)
             {
                 app.UseSession();
                 if (env.IsDevelopment())
@@ -119,6 +121,7 @@ namespace BonTemps
                     );
                 });
             Dummydata.Initialize(context, usermanager, rolemanager).Wait();
+            
                 //DummyData.UserTest(context, usermanager, rolemanager).Wait();
                 //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
                 //DummyData.LoadCategory(context, env).Wait();

@@ -542,3 +542,6 @@ C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\_ViewImports.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\_ViewStart.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Index.g.cshtml.cs
+C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Index.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\Index.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Klanten\Index.cshtml.g.cs
