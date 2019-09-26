@@ -1,0 +1,46 @@
+﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Menu>
+<link href="~/css/Menu.css" rel="stylesheet" />
+@{
+    ViewData["Title"] = "Menu's";
+}
+
+<div class="menu-section">
+    <h1 class="primairy-heading">Menu</h1>
+    <div>
+
+    </div>
+</div>
+    
+        
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Menu_naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Beschrijving)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Menu_naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beschrijving)
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+    </table>
+
+

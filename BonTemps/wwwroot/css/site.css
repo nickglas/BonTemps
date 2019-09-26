@@ -1,16 +1,97 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+
+html {
+    min-height: 100%; 
+    position: relative;
 }
+
+.background{
+    margin-left : 20%;
+    background-size: cover;
+
+}
+
+.nav-list {
+    padding-top: 100%;
+}
+
+.navbar-left {
+    font-weight: 650;
+    color: white;
+    position: absolute;
+    background-color: black;
+    background-image: url("../Image/BackGroundNav.jpg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 83%;
+    overflow: hidden;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+li a {
+    width: 100%;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    font-size: 1.1rem; 
+    letter-spacing: 3px;
+}
+
+li a:hover {
+    color: red;
+    text-decoration: none;
+}
+
+.login-nav{
+    padding-top: 0px;
+}
+
+.line-flag{
+    padding-top: 98%; 
+    height: 0.25rem;
+}
+
+.blue{
+    background-color: blue;
+    height: 100%;
+}
+
+.white {
+    background-color: white;
+    height: 100%;
+}
+
+.red {
+    background-color: red;
+    height: 100%;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: left;
+    word-break: break-all;
+
+}
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 @media (min-width: 768px) {
   html {
@@ -23,7 +104,7 @@ html {
 }
 
 body {
-    background-image: url("../Image/Background.jpg");
+    background-image: url("https://images.pexels.com/photos/1565982/pexels-photo-1565982.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-repeat: no-repeat, repeat;
     background-size: cover;
 }
@@ -39,13 +120,17 @@ body {
   border-bottom: 1px solid #e5e5e5;
 }
 
+.heading-primairy {
+    font-size: 2rem;
+}
+
 .title {
-    margin-left: 70px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    padding-bottom: 2%;
+    margin-top: 10%;
+    padding-bottom: .5%;
+    padding-top: .5%;
     width: 20%;
     background-color: floralwhite;
+    opacity: 0.9;   
     text-align: center;
     font-family: 'Merriweather, serif';
     color: black;
@@ -53,19 +138,36 @@ body {
 }
 
 .Contact {
+    float: left;
+    width: 30%;
+}
+
+.tel{
+    margin-top: 30%;
+}
+
+.openingstijden {
+    float: left;
+    width: 40%;
+}
+
+.openingstijden, .Contact {
+    height: 100px;
     font-size: 16px;
     white-space: nowrap;
     font-family: 'Merriweather, serif';
-    margin-left: 50px;
-    margin-top: 10px;
-    padding-bottom: 5%;
+    opacity: 0.9;
+    margin-top: 0.5%;
+    padding-top: 5%;
+    padding-bottom: 35%;
     padding-left: 7%;
     background-color: floralwhite;
-    width: 50%;
     box-shadow: 14px 28px 18px -12px rgba(0,0,0,0.19);
 }
+
+
 .box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 
 button.accept-policy {

@@ -23,7 +23,10 @@ namespace BonTemps.Areas.Systeem.Controllers
         // GET: Systeem/Bestellingen
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie).Include(b => b.Tafels).Where(x => x.Afgerond == false);
+            var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie)
+                                                            .Include(a => a.Consumptie.Category)
+                                                            .Include(b => b.Tafels)
+                                                            .Where(x => x.Afgerond == false);
             return View(await applicationDbContext.ToListAsync());
         }
 
@@ -53,6 +56,7 @@ namespace BonTemps.Areas.Systeem.Controllers
             ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
             ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x=> x.Bezet == true), "Id", "Id");
             ViewData["Consumptienaam"] = new SelectList(_context.Consumpties, "Id", "Naam");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
 
             return View();
         }
