@@ -10,16 +10,63 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190916180803_afgerond")]
-    partial class afgerond
+    [Migration("20190930083505_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("BonTemps.Areas.Manager.Models.ContactInfo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Adres");
+
+                    b.Property<string>("DinsdagOpen");
+
+                    b.Property<string>("DinsdagSluit");
+
+                    b.Property<string>("DonderdagOpen");
+
+                    b.Property<string>("DonderdagSluit");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("MaandagOpen");
+
+                    b.Property<string>("MaandagSluit");
+
+                    b.Property<string>("Postcode");
+
+                    b.Property<string>("Telefoonnummer");
+
+                    b.Property<string>("VrijdagOpen");
+
+                    b.Property<string>("VrijdagSluit");
+
+                    b.Property<string>("WoensdagOpen");
+
+                    b.Property<string>("WoensdagSluit");
+
+                    b.Property<string>("ZaterdagOpen");
+
+                    b.Property<string>("ZaterdagSluit");
+
+                    b.Property<string>("ZondagOpen");
+
+                    b.Property<string>("ZondagSluit");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ContactInfo");
+                });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
                 {
@@ -71,7 +118,7 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("MenuId");
+                    b.Property<int?>("Consumptie");
 
                     b.Property<string>("Naam");
 
@@ -81,7 +128,7 @@ namespace BonTemps.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("MenuId");
+                    b.HasIndex("Consumptie");
 
                     b.ToTable("Consumpties");
                 });
@@ -93,8 +140,6 @@ namespace BonTemps.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Beschrijving");
-
-                    b.Property<int>("ConsumptieId");
 
                     b.Property<string>("Menu_naam");
 
@@ -360,11 +405,28 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("RolId");
 
+                    b.Property<string>("Rolnaam");
+
                     b.HasIndex("KlantGegevensId");
 
                     b.HasIndex("RolId");
 
                     b.HasDiscriminator().HasValue("Klant");
+                });
+
+            modelBuilder.Entity("BonTemps.Models.Personeel", b =>
+                {
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
+
+                    b.Property<DateTime>("Aanmaakdatum")
+                        .HasColumnName("Personeel_Aanmaakdatum");
+
+                    b.Property<string>("RolId")
+                        .HasColumnName("Personeel_RolId");
+
+                    b.HasIndex("RolId");
+
+                    b.HasDiscriminator().HasValue("Personeel");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
@@ -388,8 +450,8 @@ namespace BonTemps.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
-                        .WithMany("Items")
-                        .HasForeignKey("MenuId");
+                        .WithMany("Consumpties")
+                        .HasForeignKey("Consumptie");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -443,6 +505,13 @@ namespace BonTemps.Migrations
                         .WithMany()
                         .HasForeignKey("KlantGegevensId");
 
+                    b.HasOne("BonTemps.Models.Rol", "Rol")
+                        .WithMany()
+                        .HasForeignKey("RolId");
+                });
+
+            modelBuilder.Entity("BonTemps.Models.Personeel", b =>
+                {
                     b.HasOne("BonTemps.Models.Rol", "Rol")
                         .WithMany()
                         .HasForeignKey("RolId");
