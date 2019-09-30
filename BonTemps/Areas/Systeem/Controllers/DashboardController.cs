@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
-    [Authorize]
+    //[Authorize(Roles ="test")]
     [Area("Systeem")]
+   
     public class DashboardController : Controller
     {
         public IActionResult Index()

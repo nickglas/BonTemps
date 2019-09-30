@@ -5,6 +5,7 @@ using BonTemps.Areas.Systeem.Models;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using BonTemps.Areas.Manager.Models;
 
 namespace BonTemps.Data
 {
@@ -25,5 +26,7 @@ namespace BonTemps.Data
         public DbSet<Menu> Menus { get; set; }
         public DbSet<Consumptie> Consumpties { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Personeel> Personeel { get; set; }
+        public DbSet<BonTemps.Areas.Manager.Models.ContactInfo> ContactInfo { get; set; }
     }
 }

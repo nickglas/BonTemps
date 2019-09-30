@@ -1,4 +1,5 @@
-﻿using BonTemps.Areas.Systeem.Models;
+﻿using BonTemps.Areas.Manager.Models;
+using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -10,6 +11,20 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
+        public static string password = "P@$$w0rd";
+
+        public static string ManagerRol = "Manager";
+        public static string ManagerRolBeschrijving = "Managers/Admins van het bedrijf.";
+
+        public static string ChefRol = "Chef";
+        public static string ChefRolBeschrijving = "Koks van het bedrijf.";
+
+        public static string BedieningRol = "Bediening";
+        public static string BedieningRolBeschrijving = "Bediening van het bedrijf.";
+
+        public static string KlantRol = "Klant";
+        public static string KlantRolBeschrijving = "Klanten.";
+
         public static async Task Initialize(ApplicationDbContext context,
                              UserManager<Klant> userManager,
                              RoleManager<Rol> roleManager)
@@ -22,73 +37,157 @@ namespace BonTemps.Models
 
            
 
-            string role2 = "Manager";
-            string desc2 = "Managers/Admins van het bedrijf.";
+            
 
-            string role3 = "Chef";
-            string desc3 = "Koks van het bedrijf.";
-
-            string role4 = "Bediening";
-            string desc4 = "Bediening van het bedrijf.";
-
-            string role5 = "Klant";
-            string desc5 = "Klanten.";
-
-            string password = "P@$$w0rd";
 
            
-            if (await roleManager.FindByNameAsync(role2) == null)
+            if (await roleManager.FindByNameAsync(ManagerRol) == null)
             {
-                await roleManager.CreateAsync(new Rol(role2, desc2, DateTime.Today));
+                await roleManager.CreateAsync(new Rol(ManagerRol, ManagerRolBeschrijving, DateTime.Today));
             }
-            if (await roleManager.FindByNameAsync(role3) == null)
+            if (await roleManager.FindByNameAsync(ChefRol) == null)
             {
-                await roleManager.CreateAsync(new Rol(role3, desc3, DateTime.Today));
+                await roleManager.CreateAsync(new Rol(ChefRol, ChefRolBeschrijving, DateTime.Today));
             }
-            if (await roleManager.FindByNameAsync(role4) == null)
+            if (await roleManager.FindByNameAsync(BedieningRol) == null)
             {
-                await roleManager.CreateAsync(new Rol(role4, desc4, DateTime.Today));
+                await roleManager.CreateAsync(new Rol(BedieningRol, BedieningRolBeschrijving, DateTime.Today));
             }
-            if (await roleManager.FindByNameAsync(role5) == null)
+            if (await roleManager.FindByNameAsync(KlantRol) == null)
             {
-                await roleManager.CreateAsync(new Rol(role5, desc5, DateTime.Today));
+                await roleManager.CreateAsync(new Rol(KlantRol, KlantRolBeschrijving, DateTime.Today));
             }
-            UpdateCategory(context);
-            UpdateItems(context);
+            await UpdateCategory(context);
+            await UpdateItems(context);
+            await UpdateSystemAccounts(context, userManager);
+            await UpdateContactInfo(context);
+            
+            
+        }
 
-            if (await userManager.FindByNameAsync("nickglasss@hotmail.nl") == null)
+        public static async Task UpdateContactInfo(ApplicationDbContext _context) 
+        {
+            if (_context.ContactInfo.Count() == 0)
             {
+                ContactInfo info = new ContactInfo
+                {
+                    Adres = "Hoofdstraat 82",
+                    Postcode = "1931GL",
+                    Telefoonnummer = "5063209",
+                    Email = "Bontemps@gmail.com",
 
+                    //Datums en tijden
+                    MaandagOpen = "16:00",
+                    MaandagSluit = "23:00",
+                    DinsdagOpen = "16:00",
+                    DinsdagSluit = "23:00",
+                    WoensdagOpen = "16:00",
+                    WoensdagSluit = "23:00",
+                    DonderdagOpen = "16:00",
+                    DonderdagSluit = "23:00",
+                    VrijdagOpen = "16:00",
+                    VrijdagSluit = "23:00",
+                    ZaterdagOpen = "16:00",
+                    ZaterdagSluit = "23:00",
+                    ZondagOpen = "16:00",
+                    ZondagSluit = "23:00"
+                };
+                await _context.ContactInfo.AddAsync(info);
+                await _context.SaveChangesAsync();
+            }
+        }
+        
+        public static async Task UpdateSystemAccounts(ApplicationDbContext _context, UserManager<Klant> userManager)
+        {
+
+            if (await userManager.FindByNameAsync("manager@bontemps.nl") == null)
+            {
                 var user = new Klant
                 {
-                    //KlantId = context.Klanten.Count() + 1,
-                    UserName = "nickglass@hotmail.nl",
-                    Email = "nickglass@hotmail.nl",
-                    PhoneNumber = "6902341234",
+                    UserName = "manager@bontemps.nl",
+                    Email = "manager@bontemps.nl",
+                    PhoneNumber = "0645473290",
+                    Rolnaam = ManagerRol,
                     Klantgegevens = new Klantgegevens
                     {
                         Voornaam = "Nick",
-                        Achternaam = "Glass",
+                        Achternaam = "Glas",
                         GeboorteDatum = DateTime.Now,
                         Geslacht = "Man",
                         TelefoonNummer = "0645473290",
+
                     },
                 };
 
                 var result = await userManager.CreateAsync(user);
+
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role2);
+                    await userManager.AddToRoleAsync(user, ManagerRol);
                 }
-                adminId1 = user.Id;
+                await _context.SaveChangesAsync();
             }
 
-            await context.SaveChangesAsync();
 
+            if (await userManager.FindByNameAsync("chef@bontemps.nl") == null)
+            {
+                var personeel = new Klant
+                {
+                    Email = "chef@bontemps.nl",
+                    UserName = "chef@bontemps.nl",
+                    Rolnaam = ChefRol
+                };
+                var result = await userManager.CreateAsync(personeel);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(personeel, password);
+                    await userManager.AddToRoleAsync(personeel, ChefRol);
+                }
+                await _context.SaveChangesAsync();
+            }
+
+            if (await userManager.FindByNameAsync("bediening@bontemps.nl") == null)
+            {
+                var personeel = new Klant
+                {
+                    Email = "bediening@bontemps.nl",
+                    UserName = "bediening@bontemps.nl",
+                    Rolnaam = BedieningRol
+                };
+                var result = await userManager.CreateAsync(personeel);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(personeel, password);
+                    await userManager.AddToRoleAsync(personeel, ChefRol);
+                }
+                await _context.SaveChangesAsync();
+            }
+            if (await userManager.FindByNameAsync("klant@bontemps.nl") == null)
+            {
+                var personeel = new Klant
+                {
+                    Email = "klant@bontemps.nl",
+                    UserName = "klant@bontemps.nl",
+                    Rolnaam = KlantRol
+                };
+                var result = await userManager.CreateAsync(personeel);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(personeel, password);
+                    await userManager.AddToRoleAsync(personeel, ChefRol);
+                }
+                await _context.SaveChangesAsync();
+            }
         }
 
-        public static void UpdateCategory(ApplicationDbContext _context)
+
+
+
+        public static async Task UpdateCategory(ApplicationDbContext _context)
         {
             Console.WriteLine("Updating category");
             List<Category> check = new List<Category>();
@@ -115,12 +214,12 @@ namespace BonTemps.Models
                 int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                    _context.Add(item);
+                   await _context.AddAsync(item);
                 }
             }
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
-        public static void UpdateItems(ApplicationDbContext _context)
+        public static async Task UpdateItems(ApplicationDbContext _context)
         {
 
             Console.WriteLine("Updating Items");
@@ -154,10 +253,10 @@ namespace BonTemps.Models
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                    _context.Consumpties.Add(item);
+                     _context.Consumpties.Add(item);
                 }
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }

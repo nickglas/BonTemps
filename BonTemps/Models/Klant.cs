@@ -16,7 +16,7 @@ namespace BonTemps.Models
 
         [ForeignKey("RolId")]
         public Rol Rol { get; set; }
-
+        public string Rolnaam { get; set; }
         public Klantgegevens Klantgegevens { get; set; }
 
         public DateTime Aanmaakdatum { get; set; }

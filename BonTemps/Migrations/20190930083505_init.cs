@@ -40,6 +40,36 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ContactInfo",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Adres = table.Column<string>(nullable: true),
+                    Postcode = table.Column<string>(nullable: true),
+                    Telefoonnummer = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    MaandagOpen = table.Column<string>(nullable: true),
+                    MaandagSluit = table.Column<string>(nullable: true),
+                    DinsdagOpen = table.Column<string>(nullable: true),
+                    DinsdagSluit = table.Column<string>(nullable: true),
+                    WoensdagOpen = table.Column<string>(nullable: true),
+                    WoensdagSluit = table.Column<string>(nullable: true),
+                    DonderdagOpen = table.Column<string>(nullable: true),
+                    DonderdagSluit = table.Column<string>(nullable: true),
+                    VrijdagOpen = table.Column<string>(nullable: true),
+                    VrijdagSluit = table.Column<string>(nullable: true),
+                    ZaterdagOpen = table.Column<string>(nullable: true),
+                    ZaterdagSluit = table.Column<string>(nullable: true),
+                    ZondagOpen = table.Column<string>(nullable: true),
+                    ZondagSluit = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ContactInfo", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Klantgegevens",
                 columns: table => new
                 {
@@ -145,8 +175,11 @@ namespace BonTemps.Migrations
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
                     RolId = table.Column<string>(nullable: true),
+                    Rolnaam = table.Column<string>(nullable: true),
                     KlantGegevensId = table.Column<int>(nullable: true),
-                    Aanmaakdatum = table.Column<DateTime>(nullable: true)
+                    Aanmaakdatum = table.Column<DateTime>(nullable: true),
+                    Personeel_RolId = table.Column<string>(nullable: true),
+                    Personeel_Aanmaakdatum = table.Column<DateTime>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -163,6 +196,12 @@ namespace BonTemps.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_AspNetRoles_Personeel_RolId",
+                        column: x => x.Personeel_RolId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -175,7 +214,7 @@ namespace BonTemps.Migrations
                     Beschrijving = table.Column<string>(nullable: true),
                     Prijs = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    MenuId = table.Column<int>(nullable: true)
+                    Consumptie = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -187,8 +226,8 @@ namespace BonTemps.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Consumpties_Menus_MenuId",
-                        column: x => x.MenuId,
+                        name: "FK_Consumpties_Menus_Consumptie",
+                        column: x => x.Consumptie,
                         principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -288,7 +327,8 @@ namespace BonTemps.Migrations
                     ConsumptieId = table.Column<int>(nullable: false),
                     TafelsId = table.Column<int>(nullable: false),
                     Bestellingsdatum_Tijd = table.Column<DateTime>(nullable: false),
-                    Status = table.Column<bool>(nullable: false)
+                    Bestellingsdatum_afgerond = table.Column<DateTime>(nullable: false),
+                    Afgerond = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -345,6 +385,11 @@ namespace BonTemps.Migrations
                 column: "RolId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Personeel_RolId",
+                table: "AspNetUsers",
+                column: "Personeel_RolId");
+
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
@@ -372,9 +417,9 @@ namespace BonTemps.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Consumpties_MenuId",
+                name: "IX_Consumpties_Consumptie",
                 table: "Consumpties",
-                column: "MenuId");
+                column: "Consumptie");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -396,6 +441,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bestellingen");
+
+            migrationBuilder.DropTable(
+                name: "ContactInfo");
 
             migrationBuilder.DropTable(
                 name: "Reserveringen");

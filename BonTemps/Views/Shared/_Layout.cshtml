@@ -16,6 +16,7 @@
               integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link href="~/css/Menu.css" rel="stylesheet" />
 </head>
 @*<body class="col-12">
     <header class="col-3 headerclass">
@@ -47,10 +48,16 @@
         <div class="navbar-left">
            <div class="content-nav">
                <ul class="nav-list">
-                   <li><a href="#">Home</a></li>
-                   <li><a href="#">Menu's</a></li>
-                   <li><a href="#">Reserveren</a></li>
-                   <li><a href="#">Contact</a></li>              
+                   <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                   <li><a asp-controller="Menu" asp-action="Index">Menu's</a></li>
+                   <li><a asp-controller="Reserveren" asp-action="Index">Reserveren</a></li>
+                   <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
+
+                   @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
+                   {
+                       <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
+                   }
+
                </ul>
             </div>
            <div class="row line-flag">

@@ -18,10 +18,8 @@
     <Folder Include="Areas\Chef\Data\" />
     <Folder Include="Areas\Chef\Models\" />
     <Folder Include="Areas\Manager\Data\" />
-    <Folder Include="Areas\Manager\Models\" />
     <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Data\Migrations\" />
-    <Folder Include="wwwroot\Image\" />
   </ItemGroup>
 
 </Project>

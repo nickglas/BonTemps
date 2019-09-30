@@ -1,26 +1,68 @@
-﻿@{
+﻿@model IEnumerable<BonTemps.Areas.Manager.Models.ContactInfo>
+@{
     ViewData["Title"] = "Contact Page";
 }
 
+
+@foreach (var item in Model)
+{
+
 <div class="scrollbar">
-    <h1 class="title"><b>Contact</b></h1>
+    <div class="contact-page">
+        <div class="title-balk">
+            <h1 class="title heading-primairy"><b>Contact</b></h1>
+        </div>
+        <div class="Contact">
+            <h1 class="heading-primairy">Adres</h1>
+            <p>
+                @Html.DisplayFor(modelItem => item.Adres)
+            </p>
+            <p>
+                @Html.DisplayFor(modelItem => item.Postcode)
+            </p>
 
-    <div class="Contact">
-        <h1>Adres</h1>
-        <p>Lorem Ipsum 554</p>
-        <p>5546 LK, Alkmaar</p>
+            <h1 class="heading-primairy tel">Telefoon en Email</h1>
+            <p>
+                <b>Telefoon : </b> @Html.DisplayFor(modelItem => item.Telefoonnummer)
+            </p>
+            <p>
+                <b>Email : </b>    @Html.DisplayFor(modelItem => item.Email)
+            </p>
 
-        <h1>Telefoon en Email</h1>
-        <p><b>Telefoon /</b> 072-50984535</p>
-        <p><b>Email /</b> TempEmail@gmail.com</p>
 
-        <h1>Openingstijden</h1>
-        <p><b>Maandag /</b> 16:00-23:00</p>
-        <p><b>Dinsdag /</b> 16:00-23:00</p>
-        <p><b>Woensdag /</b> 16:00-23:00</p>
-        <p><b>Donderdag /</b> 16:00-23:00</p>
-        <p><b>Vrijdag /</b> 16:00-23:00</p>
-        <p><b>Zaterdag /</b> 16:00-23:00</p>
-        <p><b>Zondag /</b> 16:00-23:00</p>
+        </div>
+        <div class="openingstijden">
+            <h1 class="heading-primairy">Openingstijden</h1>
+
+            <p>
+                <b>Maandag : </b>@Html.DisplayFor(modelItem => item.MaandagOpen) - @Html.DisplayFor(modelItem => item.MaandagSluit)
+            </p>
+
+            <p>
+                <b>Dinsdag : </b>@Html.DisplayFor(modelItem => item.DinsdagOpen) - @Html.DisplayFor(modelItem => item.DinsdagSluit)
+            </p>
+
+            <p>
+                <b>Woensdag : </b>@Html.DisplayFor(modelItem => item.WoensdagOpen) - @Html.DisplayFor(modelItem => item.WoensdagSluit)
+            </p>
+
+            <p>
+                <b>Donderdag : </b>@Html.DisplayFor(modelItem => item.DonderdagOpen) - @Html.DisplayFor(modelItem => item.DonderdagSluit)
+            </p>
+
+            <p>
+                <b>Vrijdag : </b>@Html.DisplayFor(modelItem => item.VrijdagOpen) - @Html.DisplayFor(modelItem => item.VrijdagSluit)
+            </p>
+
+            <p>
+                <b>Zaterdag : </b>@Html.DisplayFor(modelItem => item.ZaterdagOpen) - @Html.DisplayFor(modelItem => item.ZaterdagSluit)
+            </p>
+            <p>
+                <b>Zondag : </b>@Html.DisplayFor(modelItem => item.ZondagOpen) - @Html.DisplayFor(modelItem => item.ZondagSluit)
+            </p>
+        </div>
     </div>
 </div>
+        }
+
+    
