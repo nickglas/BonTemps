@@ -57,15 +57,15 @@ namespace BonTemps.Models
             {
                 await roleManager.CreateAsync(new Rol(KlantRol, KlantRolBeschrijving, DateTime.Today));
             }
-            UpdateCategory(context);
-            UpdateItems(context);
+            await UpdateCategory(context);
+            await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
-            UpdateContactInfo(context);
+            await UpdateContactInfo(context);
             
             
         }
 
-        public static async void UpdateContactInfo(ApplicationDbContext _context) 
+        public static async Task UpdateContactInfo(ApplicationDbContext _context) 
         {
             if (_context.ContactInfo.Count() == 0)
             {
@@ -187,7 +187,7 @@ namespace BonTemps.Models
 
 
 
-        public static void UpdateCategory(ApplicationDbContext _context)
+        public static async Task UpdateCategory(ApplicationDbContext _context)
         {
             Console.WriteLine("Updating category");
             List<Category> check = new List<Category>();
@@ -214,12 +214,12 @@ namespace BonTemps.Models
                 int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                    _context.Add(item);
+                   await _context.AddAsync(item);
                 }
             }
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
-        public static void UpdateItems(ApplicationDbContext _context)
+        public static async Task UpdateItems(ApplicationDbContext _context)
         {
 
             Console.WriteLine("Updating Items");
@@ -253,10 +253,10 @@ namespace BonTemps.Models
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                    _context.Consumpties.Add(item);
+                     _context.Consumpties.Add(item);
                 }
             }
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
     }
