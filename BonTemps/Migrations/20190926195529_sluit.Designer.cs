@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190926195529_sluit")]
+    partial class sluit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,39 +29,39 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Adres");
 
-                    b.Property<string>("DinsdagOpen");
+                    b.Property<double>("DinsdagOpen");
 
-                    b.Property<string>("DinsdagSluit");
+                    b.Property<double>("DinsdagSluit");
 
-                    b.Property<string>("DonderdagOpen");
+                    b.Property<double>("DonderdagOpen");
 
-                    b.Property<string>("DonderdagSluit");
+                    b.Property<double>("DonderdagSluit");
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("MaandagOpen");
+                    b.Property<double>("MaandagOpen");
 
-                    b.Property<string>("MaandagSluit");
+                    b.Property<double>("MaandagSluit");
 
                     b.Property<string>("Postcode");
 
                     b.Property<string>("Telefoonnummer");
 
-                    b.Property<string>("VrijdagOpen");
+                    b.Property<double>("VrijdagOpen");
 
-                    b.Property<string>("VrijdagSluit");
+                    b.Property<double>("VrijdagSluit");
 
-                    b.Property<string>("WoensdagOpen");
+                    b.Property<double>("WoensdagOpen");
 
-                    b.Property<string>("WoensdagSluit");
+                    b.Property<double>("WoensdagSluit");
 
-                    b.Property<string>("ZaterdagOpen");
+                    b.Property<double>("ZaterdagOpen");
 
-                    b.Property<string>("ZaterdagSluit");
+                    b.Property<double>("ZaterdagSluit");
 
-                    b.Property<string>("ZondagOpen");
+                    b.Property<double>("ZondagOpen");
 
-                    b.Property<string>("ZondagSluit");
+                    b.Property<double>("ZondagSluit");
 
                     b.HasKey("Id");
 
