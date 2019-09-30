@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -89,6 +89,27 @@ namespace BonTemps.Migrations
                     b.HasIndex("TafelsId");
 
                     b.ToTable("Bestellingen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.BestellingArchief", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Archiveerdatum");
+
+                    b.Property<DateTime>("Bestellingsdatum_Tijd");
+
+                    b.Property<DateTime>("Bestellingsdatum_afgerond");
+
+                    b.Property<string>("Consumptie");
+
+                    b.Property<int>("TafelsId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BestellingArchief");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>

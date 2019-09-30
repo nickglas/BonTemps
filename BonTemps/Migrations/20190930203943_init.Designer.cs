@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190930083505_init")]
+    [Migration("20190930203943_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -93,6 +93,27 @@ namespace BonTemps.Migrations
                     b.ToTable("Bestellingen");
                 });
 
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.BestellingArchief", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Archiveerdatum");
+
+                    b.Property<DateTime>("Bestellingsdatum_Tijd");
+
+                    b.Property<DateTime>("Bestellingsdatum_afgerond");
+
+                    b.Property<string>("Consumptie");
+
+                    b.Property<int>("TafelsId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BestellingArchief");
+                });
+
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -158,11 +179,15 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("Goedkeuring");
+
                     b.Property<string>("HuisTelefoonNummer");
 
                     b.Property<string>("MobielTelefoonNummer");
 
                     b.Property<string>("NaamReserveerder");
+
+                    b.Property<string>("Opmerking");
 
                     b.Property<DateTime>("ReserveringAangemaakt");
 

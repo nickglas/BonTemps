@@ -9,15 +9,12 @@ namespace BonTemps.Areas.Systeem.Models
     {
         public int Id { get; set; }
 
-        //Consumptie FK
-        public Consumptie Consumptie { get; set; }
-        public int ConsumptieId { get; set; }
+        public string Consumptie { get; set; }
 
-        //Tafel
-        public Tafels Tafels { get; set; }
         public int TafelsId { get; set; }
 
         public DateTime Bestellingsdatum_Tijd { get; set; }
         public DateTime Bestellingsdatum_afgerond { get; set; }
+        public DateTime Archiveerdatum { get; set; }
     }
 }
