@@ -20,12 +20,12 @@
       }
     },
     "BonTemps": {
-      "commandName": "IISExpress",
+      "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:445;http://localhost:446"
+      "applicationUrl": "https://localhost:44545;http://localhost:44645"
     }
   }
 }

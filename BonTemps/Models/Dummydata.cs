@@ -1,4 +1,5 @@
-﻿using BonTemps.Areas.Systeem.Models;
+﻿using BonTemps.Areas.Manager.Models;
+using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -65,6 +66,7 @@ namespace BonTemps.Models
                     UserName = "nickglass@hotmail.nl",
                     Email = "nickglass@hotmail.nl",
                     PhoneNumber = "6902341234",
+                    Rolnaam = "Klant",
                     Klantgegevens = new Klantgegevens
                     {
                         Voornaam = "Nick",
@@ -72,21 +74,72 @@ namespace BonTemps.Models
                         GeboorteDatum = DateTime.Now,
                         Geslacht = "Man",
                         TelefoonNummer = "0645473290",
+                        
                     },
                 };
 
                 var result = await userManager.CreateAsync(user);
+                
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, role2);
                 }
-                adminId1 = user.Id;
             }
 
-            await context.SaveChangesAsync();
+                await context.SaveChangesAsync();
+            if (await userManager.FindByNameAsync("nickglas@hotmail.nl") == null)
+            {
+                var personeel = new Klant
+                {
+                    Email = "nickglas@hotmail.nl",
+                    UserName = "nickglas@hotmail.nl",
+                    Rolnaam = role2
+                };
+                var result = await userManager.CreateAsync(personeel);
 
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(personeel, password);
+                    await userManager.AddToRoleAsync(personeel, role2);
+                }
+                await context.SaveChangesAsync();
+            }
+            if (context.ContactInfo.Count() == 0)
+            {
+                ContactInfo info = new ContactInfo
+                {
+                    Adres = "Hoofdstraat",
+                    Postcode = "1931GL",
+                    Telefoonnummer = "5063209",
+                    Email = "Bontemps@gmail.com",
+
+                    //Datums en tijden
+                    MaandagOpen = "16:00",
+                    MaandagSluit = "23:00",
+                    DinsdagOpen = "16:00",
+                    DinsdagSluit = "23:00",
+                    WoensdagOpen = "16:00",
+                    WoensdagSluit = "23:00",
+                    DonderdagOpen = "16:00",
+                    DonderdagSluit = "23:00",
+                    VrijdagOpen = "16:00",
+                    VrijdagSluit = "23:00",
+                    ZaterdagOpen = "16:00",
+                    ZaterdagSluit = "23:00",
+                    ZondagOpen = "16:00",
+                    ZondagSluit = "23:00"
+                };
+                await context.ContactInfo.AddAsync(info);
+                await context.SaveChangesAsync();
+            }
         }
+
+
+
+
+
+
+
 
         public static void UpdateCategory(ApplicationDbContext _context)
         {
