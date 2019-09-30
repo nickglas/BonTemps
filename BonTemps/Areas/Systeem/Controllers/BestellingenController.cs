@@ -50,6 +50,13 @@ namespace BonTemps.Areas.Systeem.Controllers
             return View(bestelling);
         }
 
+        public async Task<IActionResult> Archiveren(int? Id)
+        {
+            Reservering res = await _context.Reserveringen.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+            return View("AfgerondeBestellingen");
+        }
+
         // GET: Systeem/Bestellingen/Create
         public IActionResult Create()
         {
