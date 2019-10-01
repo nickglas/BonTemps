@@ -50,6 +50,42 @@ namespace BonTemps.Areas.Systeem.Controllers
             return View(bestelling);
         }
 
+        public async Task<IActionResult> Archiveren(int? Id)
+        {
+
+            Console.WriteLine("\n!!Iets van text!!\n");
+            Bestelling res = await _context.Bestellingen.Where(x => x.Id == Id).FirstOrDefaultAsync();
+            BestellingArchief archief = new BestellingArchief
+            {
+                TafelsId = res.TafelsId,
+                Bestellingsdatum_afgerond = res.Bestellingsdatum_afgerond,
+                Bestellingsdatum_Tijd = res.Bestellingsdatum_Tijd,
+                Consumptie = _context.Consumpties.Where(x=>x.Id == res.Id).FirstOrDefault().Naam,
+                Archiveerdatum = DateTime.Now
+            };
+
+            await _context.BestellingArchief.AddAsync(archief);
+            await _context.SaveChangesAsync();
+            _context.Bestellingen.Remove(res);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("AfgerondeBestellingen");
+        }
+
+        public async Task<IActionResult> DeleteArchief_All()
+        {
+            List<BestellingArchief> archief = await _context.BestellingArchief.ToListAsync();
+            _context.BestellingArchief.RemoveRange(archief);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Archief");
+        }
+
+
+        public async Task<IActionResult> Archief()
+        {
+            return View(await _context.BestellingArchief.ToListAsync());
+        }
+
         // GET: Systeem/Bestellingen/Create
         public IActionResult Create()
         {
@@ -184,8 +220,6 @@ namespace BonTemps.Areas.Systeem.Controllers
         
         public async Task<IActionResult> AfgerondeBestellingen()
         {
-            Console.WriteLine("!!!!!\n\n In de functie \n\n !!!!!");
-
             var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie).Include(b => b.Tafels).Where(x => x.Afgerond == true);
             return View(await applicationDbContext.ToListAsync());
         }

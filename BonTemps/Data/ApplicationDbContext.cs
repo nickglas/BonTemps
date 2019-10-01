@@ -28,5 +28,6 @@ namespace BonTemps.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Personeel> Personeel { get; set; }
         public DbSet<BonTemps.Areas.Manager.Models.ContactInfo> ContactInfo { get; set; }
+        public DbSet<BestellingArchief> BestellingArchief { get; set; }
     }
 }

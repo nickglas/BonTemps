@@ -1,0 +1,52 @@
+﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.BestellingArchief>
+
+@{
+    ViewData["Title"] = "Archief";
+}
+
+<h1>Archief</h1>
+<a asp-action="DeleteArchief_All" class="btn btn-primary btn-danger">Alle gearchiveerde Items verwijderen</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Consumptie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TafelsId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bestellingsdatum_Tijd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bestellingsdatum_afgerond)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Archiveerdatum)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consumptie)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TafelsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Archiveerdatum)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

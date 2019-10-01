@@ -1,6 +1,44 @@
 ﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 for details on configuring this project to bundle and minify static web assets. */
 
+.login-content{
+    background-color: black;
+    height: 100px;
+    width: 100px;
+}
+
+.login-div {
+    margin: 0;
+    margin-top: 12.5%;
+    margin-left: 25%;
+    padding-top: 2.5rem;
+    padding-bottom: 5rem;
+    background-color: floralwhite;
+    opacity: 0.9;
+    width: 55%;
+    border-radius: 2.5%;
+}
+
+.margin-btm{
+    margin-bottom: 2.5rem;
+}
+
+.btn-login{
+    float: right;
+    width: 125px;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lines {
+    margin: 0;
+    margin-left: 25%;
+    background-color: floralwhite;
+    opacity: 0.9;
+}
 
 html {
     min-height: 100%; 

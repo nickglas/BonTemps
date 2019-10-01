@@ -47,13 +47,32 @@
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
             }
-            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true|| User.IsInRole("Manager") == true)
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bestellingen
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link text-black-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+                        <a class="nav-link text-black-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="afgerondebestellingen">Afgeronde bestellingen</a>
+                        <a class="nav-link text-black-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
+
+                    </div>
+                </div>
+                <br />
             }
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
             {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen</a>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Reserveringen
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link text-black-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen bekijken</a>
+                        <a class="nav-link text-black-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende reserveringen</a>
+                    </div>
+                </div>
             }
             @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {

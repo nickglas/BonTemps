@@ -91,6 +91,27 @@ namespace BonTemps.Migrations
                     b.ToTable("Bestellingen");
                 });
 
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.BestellingArchief", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Archiveerdatum");
+
+                    b.Property<DateTime>("Bestellingsdatum_Tijd");
+
+                    b.Property<DateTime>("Bestellingsdatum_afgerond");
+
+                    b.Property<string>("Consumptie");
+
+                    b.Property<int>("TafelsId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BestellingArchief");
+                });
+
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -156,11 +177,15 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<bool>("Goedkeuring");
+
                     b.Property<string>("HuisTelefoonNummer");
 
                     b.Property<string>("MobielTelefoonNummer");
 
                     b.Property<string>("NaamReserveerder");
+
+                    b.Property<string>("Opmerking");
 
                     b.Property<DateTime>("ReserveringAangemaakt");
 

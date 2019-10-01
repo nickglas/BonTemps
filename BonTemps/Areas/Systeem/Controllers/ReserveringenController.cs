@@ -22,9 +22,36 @@ namespace BonTemps.Areas.Systeem.Models
         // GET: Systeem/Reserveringen
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Reserveringen.ToListAsync());
+            return View(await _context.Reserveringen.Where(x=>x.Goedkeuring==true).ToListAsync());
         }
 
+        public async Task<IActionResult> Inkomendereserveringen()
+        {
+            if (_context.Reserveringen.Where(x=> x.Goedkeuring==false).Count() == 0 )
+            {
+                Reservering res = new Reservering
+                {
+                    Email = "test.nl",
+                    NaamReserveerder = "Nick",
+                    AantalPersonen = 5,
+                    Goedkeuring = false,
+                    ReserveringsDatum = DateTime.Now,
+                    Opmerking = "Tafel bij het raam"
+                };
+                await _context.Reserveringen.AddAsync(res);
+            }
+            await _context.SaveChangesAsync();
+            return View(await _context.Reserveringen.Where(x=>x.Goedkeuring==false).ToListAsync());
+        }
+
+        public async Task <IActionResult>ReserveringGoedkeuren(int? id)
+        {
+            Reservering reservering = await _context.Reserveringen.Where(x => x.Id == id).FirstOrDefaultAsync();
+            reservering.Goedkeuring = true;
+            _context.Reserveringen.Update(reservering);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Inkomendereserveringen");
+        }
         // GET: Systeem/Reserveringen/Details/5
         public async Task<IActionResult> Details(int? id)
         {
