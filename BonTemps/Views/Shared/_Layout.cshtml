@@ -52,18 +52,10 @@
                    <li><a asp-controller="Menu" asp-action="Index">Menu's</a></li>
                    <li><a asp-controller="Reserveren" asp-action="Index">Reserveren</a></li>
                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
-                   <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
-
 
                    @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
                    {
                        <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
-                   }
-
-
-                   @if (User.IsInRole("Manager") || User.IsInRole("Chef"))
-                   {
-                       <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
                    }
 
                </ul>

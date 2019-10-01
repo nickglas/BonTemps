@@ -10,9 +10,9 @@
 </head>
 <body>
 
-<h1>Categorie aanmaken</h1>
+<h4>Category</h4>
 <hr />
-<div class="table">
+<div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,14 +27,14 @@
                 <span asp-validation-for="Beschrijving" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="button-save" />
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a class="create" asp-action="Index">Terug naar menu overzicht</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 </body>
