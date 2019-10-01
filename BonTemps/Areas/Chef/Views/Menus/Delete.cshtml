@@ -1,0 +1,33 @@
+﻿@model BonTemps.Areas.Systeem.Models.Menu
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Menu Verwijderen</h1>
+
+<div class="table">
+    <h4>Menu</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Menu_naam)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Menu_naam)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Beschrijving)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Beschrijving)
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="button-save" />
+    </form>
+</div>
+<a class="create" asp-action="Index">Terug naar menu overzicht</a>
+

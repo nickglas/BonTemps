@@ -9,27 +9,29 @@
 </head>
 <body>
 
-<div>
-    <h4>Category</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naam)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naam)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Beschrijving)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Beschrijving)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+    <h1>Category</h1>
+
+
+    <div class="table">
+       
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Naam)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Naam)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Beschrijving)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Beschrijving)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a class="create" asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+        <a class="create" asp-action="Index">Terug naar categorie overzicht</a>
+    </div>
 </body>
 </html>

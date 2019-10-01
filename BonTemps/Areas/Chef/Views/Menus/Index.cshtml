@@ -1,21 +1,18 @@
-﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Category>
+﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Menu>
 
-<h1>Categorie Overzicht</h1>
+@{
+    ViewData["Title"] = "Index";
+}
 
-<!DOCTYPE html>
+<div class="ChefBackground">
+    <h1>Menu Overzicht</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
 
     <table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Naam)
+                    @Html.DisplayNameFor(model => model.Menu_naam)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Beschrijving)
@@ -28,7 +25,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Naam)
+                        @Html.DisplayFor(modelItem => item.Menu_naam)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Beschrijving)
@@ -46,5 +43,5 @@
         <a class="create" asp-action="Create">Create New</a>
         <a class="create" asp-controller="ChefBoard" asp-action="Index">Terug naar Dashboard</a>
     </p>
-</body>
-</html>
+
+</div>
