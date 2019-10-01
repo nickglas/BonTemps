@@ -46,19 +46,33 @@ namespace BonTemps.Areas.Manager.Controllers
             return View();
         }
 
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            Klant klant =  _context.Klanten.Where(x => x.Id == Id).FirstOrDefault();
+            _context.Klanten.Remove(klant);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+
         // POST: Personeel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task Create([Bind("Id,Email,PasswordHash,Rolnaam")] Klant klant)
+        public async Task<IActionResult> Create([Bind("Id,Email,PasswordHash,Rolnaam")] Klant klant)
         {
             klant.Aanmaakdatum = DateTime.Now;
             klant.UserName = klant.Email;
+
+            Console.WriteLine("eerste Rol : " + klant.Rolnaam);
+
+
+            string rol = _context.Roles.Where(x => x.Id == klant.Rolnaam).FirstOrDefault().Name;
 
             Console.WriteLine("\n!!! PERSONEEL !!!\n");
             Console.WriteLine("Username : " + klant.UserName);
             Console.WriteLine("Email : " + klant.Email);
             Console.WriteLine("Wachtwoord : " + klant.PasswordHash);
-            Console.WriteLine("Rol : " + klant.Rolnaam);
+            Console.WriteLine("einde Rol : " + klant.Rol);
             string pass = klant.PasswordHash;
             klant.PasswordHash = null;
             if (ModelState.IsValid)
@@ -68,13 +82,14 @@ namespace BonTemps.Areas.Manager.Controllers
 
                 if (result.Succeeded)
                 {
+                    
                     await _userManager.AddPasswordAsync(klant, pass);
-                    await _userManager.AddToRoleAsync(klant, klant.Rolnaam);
+                    await _userManager.AddToRoleAsync(klant, rol);
                 }
                 await _context.SaveChangesAsync();
             }
 
-            RedirectToAction("Index");
+           return RedirectToAction("Index");
 
 
 
