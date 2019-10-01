@@ -4,41 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Menu Overzicht</h1>
+<div class="ChefBackground">
+    <h1>Menu Overzicht</h1>
 
 
-<table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Menu_naam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beschrijving)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+    <table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Menu_naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Beschrijving)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Menu_naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Beschrijving)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
-<p>
-    <a class="create" asp-action="Create">Create New</a>
-    <a class="create" asp-controller="ChefBoard" asp-action="Index">Terug naar Dashboard</a>
-</p>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Menu_naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Beschrijving)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a class="create" asp-action="Create">Create New</a>
+        <a class="create" asp-controller="ChefBoard" asp-action="Index">Terug naar Dashboard</a>
+    </p>
+
+</div>
