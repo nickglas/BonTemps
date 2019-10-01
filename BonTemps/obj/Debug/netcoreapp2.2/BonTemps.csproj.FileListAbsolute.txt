@@ -561,3 +561,4 @@ C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Reserveringen\Inkomendereserveringen.cshtml.g.cs
 C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Reserveringen\inkomendereserveringen.g.cshtml.cs
 C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\Archief.g.cshtml.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Bestellingen\Archief.cshtml.g.cs

@@ -82,7 +82,31 @@
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index">Tafels</a>
             }
+            @if (User.IsInRole("Manager") == true)
+            {
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Klanten en Personeel
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link text-black-50" asp-area="Manager" asp-controller="Klanten" asp-action="Index">Klanten overzicht</a>
+                        <a class="nav-link text-black-50" asp-area="Manager" asp-controller="Personeel" asp-action="Index">Personeel overzicht</a>
+                    </div>
+                </div>
+            <br/>
 
+            }
+            @if (User.IsInRole("Manager") == true)
+            {
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Overige
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link text-black-50" asp-area="Manager" asp-controller="Contact" asp-action="Index">Contact info</a>
+                    </div>
+                </div>
+            }
         </ul>
         <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
             <partial name="_CookieConsentPartial" />
