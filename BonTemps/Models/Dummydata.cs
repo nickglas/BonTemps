@@ -11,7 +11,7 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
-        private protected static string password = "P@$$w0rd";
+        private static string password = "P@$$w0rd";
 
         public static string ManagerRol = "Manager";
         public static string ManagerRolBeschrijving = "Managers/Admins van het bedrijf.";
