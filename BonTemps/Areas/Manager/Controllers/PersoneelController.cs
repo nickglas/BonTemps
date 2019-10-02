@@ -17,7 +17,7 @@ namespace BonTemps.Areas.Manager.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Klant> _userManager;
-
+        public string user = "";
         public PersoneelController(ApplicationDbContext context, UserManager<Klant> userManager) 
         {
             _context = context;
@@ -54,6 +54,30 @@ namespace BonTemps.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> PersoneelGegevens(string id)
+        {
+            ViewBag.user = id;
+            return View();
+        }
+
+        public async Task<IActionResult> LinkGegevens(string id, [Bind("Id,Voornaam,Achternaam,GeboorteDatum,Geslacht,TelefoonNummer")] Klantgegevens gegevens)
+        {
+            
+            Console.WriteLine("\n\n EMAAAILLLLL : " + id + "\n\n");
+            Klant klant = _context.Klanten.Where(x => x.UserName == id).FirstOrDefault();
+            klant.Klantgegevens = new Klantgegevens
+            {
+                Voornaam = gegevens.Voornaam,
+                Achternaam = gegevens.Achternaam,
+                GeboorteDatum = gegevens.GeboorteDatum,
+                Geslacht = gegevens.Geslacht,
+                TelefoonNummer = gegevens.TelefoonNummer
+            };
+            _context.Update(klant);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
 
         // POST: Personeel/Create
         [HttpPost]
@@ -72,7 +96,8 @@ namespace BonTemps.Areas.Manager.Controllers
             Console.WriteLine("Username : " + klant.UserName);
             Console.WriteLine("Email : " + klant.Email);
             Console.WriteLine("Wachtwoord : " + klant.PasswordHash);
-            Console.WriteLine("einde Rol : " + klant.Rol);
+            Console.WriteLine("einde Rol : " + rol);
+            klant.Rolnaam = rol;
             string pass = klant.PasswordHash;
             klant.PasswordHash = null;
             if (ModelState.IsValid)
@@ -89,7 +114,7 @@ namespace BonTemps.Areas.Manager.Controllers
                 await _context.SaveChangesAsync();
             }
 
-           return RedirectToAction("Index");
+            return RedirectToAction("PersoneelGegevens", new { id = klant.UserName });
 
 
 

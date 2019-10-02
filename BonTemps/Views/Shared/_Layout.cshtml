@@ -1,6 +1,9 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
+    <script src="https://kit.fontawesome.com/f6c25fae24.js" crossorigin="anonymous"></script>
+
+
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - BonTemps</title>
@@ -13,7 +16,7 @@
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
               crossorigin="anonymous"
-              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE="/>
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="~/css/Menu.css" rel="stylesheet" />
@@ -52,8 +55,6 @@
                    <li><a asp-controller="Menu" asp-action="Index">Menu's</a></li>
                    <li><a asp-controller="Reserveren" asp-action="Index">Reserveren</a></li>
                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
-                   <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
-
 
                    @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
                    {
