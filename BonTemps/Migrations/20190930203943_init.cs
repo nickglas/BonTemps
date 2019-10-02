@@ -26,6 +26,23 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BestellingArchief",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Consumptie = table.Column<string>(nullable: true),
+                    TafelsId = table.Column<int>(nullable: false),
+                    Bestellingsdatum_Tijd = table.Column<DateTime>(nullable: false),
+                    Bestellingsdatum_afgerond = table.Column<DateTime>(nullable: false),
+                    Archiveerdatum = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BestellingArchief", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Categories",
                 columns: table => new
                 {
@@ -111,6 +128,8 @@ namespace BonTemps.Migrations
                     HuisTelefoonNummer = table.Column<string>(nullable: true),
                     MobielTelefoonNummer = table.Column<string>(nullable: true),
                     AantalPersonen = table.Column<int>(nullable: false),
+                    Goedkeuring = table.Column<bool>(nullable: false),
+                    Opmerking = table.Column<string>(nullable: true),
                     ReserveringAangemaakt = table.Column<DateTime>(nullable: false),
                     ReserveringsDatum = table.Column<DateTime>(nullable: false)
                 },
@@ -438,6 +457,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "BestellingArchief");
 
             migrationBuilder.DropTable(
                 name: "Bestellingen");

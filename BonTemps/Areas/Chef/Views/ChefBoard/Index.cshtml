@@ -1,14 +1,9 @@
-﻿
+﻿@{
+    ViewData["Title"] = "Chef Home";
+}
 
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>ChefBoard</title>
-</head>
-<body>
-    chef troep
-</body>
-</html>
+    <li><a asp-area="Chef" class="ChefDash" asp-controller="Categories" asp-action="Index"><Image class="icons" src="../Image/Icons/Categories.jpg" />Categories</a></li>
+    <li><a asp-area="Chef" class="ChefDash" asp-controller="Consumpties" asp-action="Index"><Image class="icons" src="../Image/Icons/Consumpties.jpg" />Consumpties</a></li>
+    <li><a asp-area="Chef" class="ChefDash" asp-controller="Menus" asp-action="Index"><Image class="icons" src="../Image/Icons/Menu.jpg" />Menu's</a></li>
+    <li><a asp-area="Chef" class="ChefDash" asp-controller="ChefBoard" asp-action="Index"><Image class="icons" src="../Image/Icons/Home.jpg" />DashBoard</a></li>

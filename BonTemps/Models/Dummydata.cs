@@ -30,17 +30,6 @@ namespace BonTemps.Models
                              RoleManager<Rol> roleManager)
         {
             context.Database.EnsureCreated();
-
-            String adminId1 = "";
-            String adminId2 = "";
-            String adminId3 = "";
-
-           
-
-            
-
-
-           
             if (await roleManager.FindByNameAsync(ManagerRol) == null)
             {
                 await roleManager.CreateAsync(new Rol(ManagerRol, ManagerRolBeschrijving, DateTime.Today));
