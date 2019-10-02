@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using BonTemps.Models;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
@@ -70,6 +71,8 @@ namespace BonTemps.Areas.Chef.Controllers
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
             return View(consumptie);
         }
+
+
 
         // GET: Chef/Consumpties/Edit/5
         public async Task<IActionResult> Edit(int? id)

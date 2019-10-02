@@ -72,6 +72,13 @@ namespace BonTemps.Areas.Systeem.Controllers
             return RedirectToAction("AfgerondeBestellingen");
         }
 
+        public async Task<IActionResult> DeleteArchief_Single(int? Id)
+        {
+            BestellingArchief arch = await _context.BestellingArchief.Where(x => x.Id == Id).SingleOrDefaultAsync();
+            _context.BestellingArchief.Remove(arch);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Archief");
+        }
         public async Task<IActionResult> DeleteArchief_All()
         {
             List<BestellingArchief> archief = await _context.BestellingArchief.ToListAsync();
