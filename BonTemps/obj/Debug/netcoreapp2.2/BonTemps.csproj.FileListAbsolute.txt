@@ -523,11 +523,6 @@ C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\View
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
-C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Create.cshtml.g.cs
-C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Delete.cshtml.g.cs
-C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Details.cshtml.g.cs
-C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Edit.cshtml.g.cs
-C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Index.cshtml.g.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Create.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Delete.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menu\Details.g.cshtml.cs
@@ -563,3 +558,9 @@ C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Edit.g.cshtml.cs
 C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Index.g.cshtml.cs
 C:\Users\Nick\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\PersoneelAanmelden.g.cshtml.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Create.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Delete.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Details.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Edit.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Index.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\PersoneelAanmelden.cshtml.g.cs
