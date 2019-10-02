@@ -17,7 +17,7 @@ namespace BonTemps.Areas.Manager.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Klant> _userManager;
-
+        public string user = "";
         public PersoneelController(ApplicationDbContext context, UserManager<Klant> userManager) 
         {
             _context = context;
@@ -61,7 +61,7 @@ namespace BonTemps.Areas.Manager.Controllers
 
         public async Task LinkGegevens()
         {
-            string userid = ViewBag.userid;
+            string userid = user;
             //Klant user =  _context.Klanten.Where(x => x.Email == userid).FirstOrDefault();
             Console.WriteLine("\n\n EMAAAILLLLL : " + userid + "\n\n");
         }
@@ -102,8 +102,7 @@ namespace BonTemps.Areas.Manager.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            ViewBag.userid = klant.Email;
-
+            user = klant.UserName;
            return RedirectToAction("PersoneelGegevens");
 
 
