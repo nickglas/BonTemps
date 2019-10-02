@@ -564,3 +564,4 @@ C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Edit.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Menus\Index.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\PersoneelAanmelden.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\PersoneelGegevens.cshtml.g.cs

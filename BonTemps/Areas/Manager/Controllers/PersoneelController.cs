@@ -54,6 +54,18 @@ namespace BonTemps.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> PersoneelGegevens()
+        {
+            return View();
+        }
+
+        public async Task LinkGegevens()
+        {
+            string userid = ViewBag.userid;
+            //Klant user =  _context.Klanten.Where(x => x.Email == userid).FirstOrDefault();
+            Console.WriteLine("\n\n EMAAAILLLLL : " + userid + "\n\n");
+        }
+
 
         // POST: Personeel/Create
         [HttpPost]
@@ -72,7 +84,8 @@ namespace BonTemps.Areas.Manager.Controllers
             Console.WriteLine("Username : " + klant.UserName);
             Console.WriteLine("Email : " + klant.Email);
             Console.WriteLine("Wachtwoord : " + klant.PasswordHash);
-            Console.WriteLine("einde Rol : " + klant.Rol);
+            Console.WriteLine("einde Rol : " + rol);
+            klant.Rolnaam = rol;
             string pass = klant.PasswordHash;
             klant.PasswordHash = null;
             if (ModelState.IsValid)
@@ -89,7 +102,9 @@ namespace BonTemps.Areas.Manager.Controllers
                 await _context.SaveChangesAsync();
             }
 
-           return RedirectToAction("Index");
+            ViewBag.userid = klant.Email;
+
+           return RedirectToAction("PersoneelGegevens");
 
 
 
