@@ -4,13 +4,12 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Personeel</h1>
-<hr />
+<h1>Index</h1>
+
 <p>
-    <a asp-action="Create" class="btn btn-primary">Gebruiker toevoegen</a>
+    <a class="btn btn-warning" asp-action="PersoneelAanmelden">Nieuw personeels lid aanmelden</a>
 </p>
-<br />
-<table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
+<table class="table">
     <thead>
         <tr>
             <th>
@@ -19,6 +18,9 @@
 
             <th>
                 Telefoonnummer
+            </th>
+            <th>
+                Rol
             </th>
             <th></th>
         </tr>
@@ -33,11 +35,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.PhoneNumber)
             </td>
-
-            <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger">Verwijderen</a>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Bewerken</a>
-                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rolnaam)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="DeleteUser" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
         }

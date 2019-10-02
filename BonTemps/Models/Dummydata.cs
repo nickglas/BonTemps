@@ -11,7 +11,7 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
-        public static string password = "P@$$w0rd";
+        private protected static string password = "P@$$w0rd";
 
         public static string ManagerRol = "Manager";
         public static string ManagerRolBeschrijving = "Managers/Admins van het bedrijf.";
@@ -89,7 +89,6 @@ namespace BonTemps.Models
         
         public static async Task UpdateSystemAccounts(ApplicationDbContext _context, UserManager<Klant> userManager)
         {
-
             if (await userManager.FindByNameAsync("manager@bontemps.nl") == null)
             {
                 var user = new Klant
@@ -180,7 +179,7 @@ namespace BonTemps.Models
         public static async Task UpdateCategory(ApplicationDbContext _context)
         {
             Console.WriteLine("Updating category");
-            if (password != "P@$$w0rd"){Environment.Exit(0);}
+
             List<Category> check = new List<Category>();
             Category eten = new Category
             {
