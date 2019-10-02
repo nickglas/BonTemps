@@ -14,6 +14,8 @@ namespace BonTemps.Areas.Systeem.Models
         public string HuisTelefoonNummer { get; set; }
         public string MobielTelefoonNummer { get; set; }
         public int AantalPersonen { get; set; }
+        public bool Goedkeuring { get; set; }
+        public string Opmerking { get; set; }
         public DateTime ReserveringAangemaakt { get; set; }
 
        [Required]

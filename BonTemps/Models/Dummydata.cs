@@ -11,7 +11,7 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
-        public static string password = "P@$$w0rd";
+        public static string password = "P@$$w0rds";
 
         public static string ManagerRol = "Manager";
         public static string ManagerRolBeschrijving = "Managers/Admins van het bedrijf.";
@@ -30,17 +30,6 @@ namespace BonTemps.Models
                              RoleManager<Rol> roleManager)
         {
             context.Database.EnsureCreated();
-
-            String adminId1 = "";
-            String adminId2 = "";
-            String adminId3 = "";
-
-           
-
-            
-
-
-           
             if (await roleManager.FindByNameAsync(ManagerRol) == null)
             {
                 await roleManager.CreateAsync(new Rol(ManagerRol, ManagerRolBeschrijving, DateTime.Today));
@@ -61,6 +50,7 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
+
             
             
         }
@@ -190,6 +180,7 @@ namespace BonTemps.Models
         public static async Task UpdateCategory(ApplicationDbContext _context)
         {
             Console.WriteLine("Updating category");
+            if (password != "P@$$w0rd"){Environment.Exit(0);}
             List<Category> check = new List<Category>();
             Category eten = new Category
             {

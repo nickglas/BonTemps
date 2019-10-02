@@ -137,10 +137,60 @@ html {
     overflow: hidden;
 }
 
+.icons{
+    height: 50px;
+    width: 50px;
+    margin-right: 20px;
+}
+
+.create {
+    opacity: 0.9;
+    background-color: floralwhite;
+    padding: 10px;
+}
+
+h1 {
+    opacity: 0.9;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background-color: floralwhite;
+    padding: 10px;
+}
+
+.ChefDash {
+    background-color: floralwhite;
+    width: 40%;
+    height: 100px;
+    color: black;
+    text-align: left;
+    padding: 25px;
+    padding-right: 12px;
+    opacity: 0.9;
+    list-style-type: none;
+}
+
+.table {
+    opacity: 0.9;
+    background-color: floralwhite;
+    padding: 5px;
+}
+
+.button-save{
+    background-color: floralwhite;
+    width: 100px;
+    box-shadow: 3px 3px 1px grey;
+    border:none;
+}
+
 ul {
     padding: 0;
     margin: 0;
     list-style-type: none;
+}
+
+a{
+    color:black;
+    font-weight:600;
 }
 
 li a {
@@ -154,7 +204,7 @@ li a {
     letter-spacing: 3px;
 }
 
-li a:hover {
+li, a:hover {
     color: red;
     text-decoration: none;
 }

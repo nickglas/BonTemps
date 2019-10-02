@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BonTemps.Areas.Manager.Controllers
 {
@@ -14,10 +16,12 @@ namespace BonTemps.Areas.Manager.Controllers
     public class PersoneelController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<Klant> _userManager;
 
-        public PersoneelController(ApplicationDbContext context) 
+        public PersoneelController(ApplicationDbContext context, UserManager<Klant> userManager) 
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Personeel
@@ -27,6 +31,8 @@ namespace BonTemps.Areas.Manager.Controllers
             return View(personeel);
         }
 
+
+
         // GET: Personeel/Details/5
         public ActionResult Details(int id)
         {
@@ -34,27 +40,61 @@ namespace BonTemps.Areas.Manager.Controllers
         }
 
         // GET: Personeel/Create
-        public ActionResult Create()
+        public ActionResult PersoneelAanmelden()
         {
+            ViewData["CategoryName"] = new SelectList(_context.Roles, "Id", "Name");
             return View();
         }
+
+        public async Task<IActionResult> DeleteUser(string Id)
+        {
+            Klant klant =  _context.Klanten.Where(x => x.Id == Id).FirstOrDefault();
+            _context.Klanten.Remove(klant);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
 
         // POST: Personeel/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create([Bind("Id,Email,PasswordHash,Rolnaam")] Klant klant)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            klant.Aanmaakdatum = DateTime.Now;
+            klant.UserName = klant.Email;
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            Console.WriteLine("eerste Rol : " + klant.Rolnaam);
+
+
+            string rol = _context.Roles.Where(x => x.Id == klant.Rolnaam).FirstOrDefault().Name;
+
+            Console.WriteLine("\n!!! PERSONEEL !!!\n");
+            Console.WriteLine("Username : " + klant.UserName);
+            Console.WriteLine("Email : " + klant.Email);
+            Console.WriteLine("Wachtwoord : " + klant.PasswordHash);
+            Console.WriteLine("einde Rol : " + klant.Rol);
+            string pass = klant.PasswordHash;
+            klant.PasswordHash = null;
+            if (ModelState.IsValid)
             {
-                return View();
+
+                var result = await _userManager.CreateAsync(klant);
+
+                if (result.Succeeded)
+                {
+                    
+                    await _userManager.AddPasswordAsync(klant, pass);
+                    await _userManager.AddToRoleAsync(klant, rol);
+                }
+                await _context.SaveChangesAsync();
             }
+
+           return RedirectToAction("Index");
+
+
+
         }
+    
 
         // GET: Personeel/Edit/5
         public ActionResult Edit(int id)
