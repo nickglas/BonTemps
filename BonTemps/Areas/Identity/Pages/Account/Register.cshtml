@@ -4,14 +4,45 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="row text-center">
+    <i class="fas fa-user-circle  iconregister"></i>
+</div>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="row registerdiv">
+    <div class="col-md-4 register-content">
         <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Voornaam"></label>
+                <input asp-for="Input.Voornaam" class="form-control" />
+                <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Achternaam"></label>
+                <input asp-for="Input.Achternaam" class="form-control" />
+                <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.GeboorteDatum"></label>
+                <input asp-for="Input.GeboorteDatum" class="form-control" />
+                <span asp-validation-for="Input.GeboorteDatum" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Geslacht"></label>
+                <input asp-for="Input.Geslacht" class="form-control" />
+                <span asp-validation-for="Input.Geslacht" class="text-danger"></span>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-4 register-content">
+        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.TelefoonNummer"></label>
+                <input asp-for="Input.TelefoonNummer" class="form-control" />
+                <span asp-validation-for="Input.TelefoonNummer" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Input.Email"></label>
                 <input asp-for="Input.Email" class="form-control" />
@@ -27,9 +58,10 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary" style="float: right;">Registreren</button>
         </form>
     </div>
+
 </div>
 
 @section Scripts {

@@ -41,6 +41,19 @@ namespace BonTemps.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            public int KlantGegevensId { get; set; }
+            [Required]
+            public string Voornaam { get; set; }
+            [Required]
+            public string Achternaam { get; set; }
+            [Required]
+            public DateTime GeboorteDatum { get; set; }
+            [Required]
+            public string Geslacht { get; set; }
+            [Required]
+            public string TelefoonNummer { get; set; }
+            
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
