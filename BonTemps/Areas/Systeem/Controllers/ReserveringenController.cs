@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Data;
+using BonTemps.Models;
 
 namespace BonTemps.Areas.Systeem.Models
 {
