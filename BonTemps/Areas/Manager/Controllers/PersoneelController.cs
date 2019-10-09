@@ -54,16 +54,28 @@ namespace BonTemps.Areas.Manager.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> PersoneelGegevens()
+        public async Task<IActionResult> PersoneelGegevens(string id)
         {
+            ViewBag.user = id;
             return View();
         }
 
-        public async Task LinkGegevens()
+        public async Task<IActionResult> LinkGegevens(string id, [Bind("Id,Voornaam,Achternaam,GeboorteDatum,Geslacht,TelefoonNummer")] Klantgegevens gegevens)
         {
-            string userid = user;
-            //Klant user =  _context.Klanten.Where(x => x.Email == userid).FirstOrDefault();
-            Console.WriteLine("\n\n EMAAAILLLLL : " + userid + "\n\n");
+            
+            Console.WriteLine("\n\n EMAAAILLLLL : " + id + "\n\n");
+            Klant klant = _context.Klanten.Where(x => x.UserName == id).FirstOrDefault();
+            klant.Klantgegevens = new Klantgegevens
+            {
+                Voornaam = gegevens.Voornaam,
+                Achternaam = gegevens.Achternaam,
+                GeboorteDatum = gegevens.GeboorteDatum,
+                Geslacht = gegevens.Geslacht,
+                TelefoonNummer = gegevens.TelefoonNummer
+            };
+            _context.Update(klant);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
 
@@ -102,8 +114,7 @@ namespace BonTemps.Areas.Manager.Controllers
                 await _context.SaveChangesAsync();
             }
 
-            user = klant.UserName;
-           return RedirectToAction("PersoneelGegevens");
+            return RedirectToAction("PersoneelGegevens", new { id = klant.UserName });
 
 
 

@@ -6,8 +6,16 @@
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Reserveren\**" />
+    <Content Remove="Views\Reserveren\**" />
+    <EmbeddedResource Remove="Views\Reserveren\**" />
+    <None Remove="Views\Reserveren\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="3.0.0" />
