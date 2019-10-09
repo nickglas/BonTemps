@@ -217,6 +217,13 @@ namespace BonTemps.Models
             };
             check.Add(Spaget);
 
+            Menu Drinken = new Menu
+            {
+                Menu_naam = "Drinken",
+                Beschrijving = "Alles wat je kan drinken",
+            };
+            check.Add(Drinken);
+
             foreach (var item in check)
             {
                 int i = _context.Menus.Where(x => x.Menu_naam == item.Menu_naam).Count();
@@ -225,8 +232,6 @@ namespace BonTemps.Models
                     await _context.AddAsync(item);
                 }
             }
-            await _context.SaveChangesAsync();
-
             await _context.SaveChangesAsync();
         }
 
@@ -283,7 +288,7 @@ namespace BonTemps.Models
                 Beschrijving = "Cola",
                 Prijs = 2.50,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
+                Menu = _context.Menus.Where(x => x.Menu_naam == "Drinken").First()
             };
             check.Add(drinken);
             Consumptie deserts = new Consumptie
