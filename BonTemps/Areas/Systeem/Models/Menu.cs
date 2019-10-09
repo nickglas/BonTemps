@@ -14,7 +14,6 @@ namespace BonTemps.Areas.Systeem.Models
         public string Menu_naam { get; set; }
         public string Beschrijving { get; set; }
 
-        [ForeignKey("Consumptie")]
         public virtual ICollection<Consumptie> Consumpties { get; set; }
     }
 }

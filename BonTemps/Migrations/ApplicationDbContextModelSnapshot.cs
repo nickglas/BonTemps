@@ -139,6 +139,8 @@ namespace BonTemps.Migrations
 
                     b.Property<int?>("Consumptie");
 
+                    b.Property<int>("MenuId");
+
                     b.Property<string>("Naam");
 
                     b.Property<double>("Prijs");
@@ -472,7 +474,7 @@ namespace BonTemps.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("Consumptie");
                 });

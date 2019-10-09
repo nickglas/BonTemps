@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BonTemps.Data;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace BonTemps.Areas.Systeem.Controllers
@@ -21,6 +22,14 @@ namespace BonTemps.Areas.Systeem.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.Menus.ToListAsync());
+        }
+
+        public async Task<IActionResult> Detail(int? id)
+        {
+            var menu = await _context.Menus
+             .Include(c => c.Consumpties)
+             .FirstOrDefaultAsync(m => m.Id == id);
+            return View(menu);
         }
     }
 }

@@ -51,6 +51,7 @@ namespace BonTemps.Areas.Chef.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
+            ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View();
         }
 
@@ -59,7 +60,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId")] Consumptie consumptie)
         {
             
             if (ModelState.IsValid)
@@ -69,6 +70,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
+            ViewData["MenuId"] = new SelectList(_context.Set<Menu>(), "Id", "Id", consumptie.MenuId);
             return View(consumptie);
         }
 
@@ -88,6 +90,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
             ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
+            ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View(consumptie);
         }
 
@@ -96,7 +99,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId")] Consumptie consumptie)
         {
             if (id != consumptie.Id)
             {
@@ -124,6 +127,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptie.MenuId);
             return View(consumptie);
         }
 

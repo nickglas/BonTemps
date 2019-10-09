@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190930203943_init")]
-    partial class init
+    [Migration("20191002170258_ConsumptieMenu")]
+    partial class ConsumptieMenu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -140,6 +140,8 @@ namespace BonTemps.Migrations
                     b.Property<int>("CategoryId");
 
                     b.Property<int?>("Consumptie");
+
+                    b.Property<int>("MenuId");
 
                     b.Property<string>("Naam");
 
@@ -474,7 +476,7 @@ namespace BonTemps.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("Consumptie");
                 });

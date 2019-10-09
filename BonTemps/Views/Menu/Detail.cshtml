@@ -1,0 +1,49 @@
+﻿@model BonTemps.Areas.Systeem.Models.Menu
+@{
+    ViewData["Title"] = "Menu's";
+}
+
+<div class="menudiv">
+   <image src="../Image/Menu/MenuFront.jpg"></image>
+    <h1>Menu</h1>
+
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Menu_naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Beschrijving)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Consumpties)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    @Html.DisplayFor(model => model.Menu_naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(model => model.Beschrijving)
+                </td>
+                <td>
+                    @foreach (var c in Model.Consumpties)
+                    {
+
+                        @c.Naam
+
+
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
