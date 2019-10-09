@@ -1,70 +1,111 @@
 ﻿@model BonTemps.Models.Reservering
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Aanmaken";
 }
 
-<h1>Create</h1>
+@if (User.Identity.Name != null) { 
+    <div class="reserveren-1">
+        <h1 class="heading-primairy title-res">Reservering</h1>
+        <div class="row form-res">
+            <div class="col-md-8 create-res-1">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="AantalPersonen" class="control-label"></label>
+                        <input asp-for="AantalPersonen" class="form-control" />
+                        <span asp-validation-for="AantalPersonen" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Opmerking" class="control-label"></label>
+                        <input asp-for="Opmerking" class="form-control" />
+                        <span asp-validation-for="Opmerking" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="HuisTelefoonNummer" class="control-label"></label>
+                        <input asp-for="HuisTelefoonNummer" class="form-control" />
+                        <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="MobielTelefoonNummer" class="control-label"></label>
+                        <input asp-for="MobielTelefoonNummer" class="form-control" />
+                        <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ReserveringsDatum" class="control-label"></label>
+                        <input asp-for="ReserveringsDatum" class="form-control" />
+                        <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
+                    </div>
+                    <div class="form-group" style="float: right;">
+                        <input type="submit" value="Reservering aanmaken" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
-<h4>Reservering</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="NaamReserveerder" class="control-label"></label>
-                <input asp-for="NaamReserveerder" class="form-control" />
-                <span asp-validation-for="NaamReserveerder" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HuisTelefoonNummer" class="control-label"></label>
-                <input asp-for="HuisTelefoonNummer" class="form-control" />
-                <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="MobielTelefoonNummer" class="control-label"></label>
-                <input asp-for="MobielTelefoonNummer" class="form-control" />
-                <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AantalPersonen" class="control-label"></label>
-                <input asp-for="AantalPersonen" class="form-control" />
-                <span asp-validation-for="AantalPersonen" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Goedkeuring" /> @Html.DisplayNameFor(model => model.Goedkeuring)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Opmerking" class="control-label"></label>
-                <input asp-for="Opmerking" class="form-control" />
-                <span asp-validation-for="Opmerking" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReserveringsDatum" class="control-label"></label>
-                <input asp-for="ReserveringsDatum" class="form-control" />
-                <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReserveringAangemaakt" class="control-label"></label>
-                <input asp-for="ReserveringAangemaakt" class="form-control" />
-                <span asp-validation-for="ReserveringAangemaakt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+}
+else
+{
+<div class="reserveren-2">
+    <h1 class="heading-primairy title-res">Reservering</h1>
+    <div class="row form-res">
+        <div class="col-md-4 create-res-2">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="NaamReserveerder" class="control-label"></label>
+                    <input asp-for="NaamReserveerder" class="form-control" />
+                    <span asp-validation-for="NaamReserveerder" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="HuisTelefoonNummer" class="control-label"></label>
+                    <input asp-for="HuisTelefoonNummer" class="form-control" />
+                    <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MobielTelefoonNummer" class="control-label"></label>
+                    <input asp-for="MobielTelefoonNummer" class="form-control" />
+                    <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4 create-res-2">
+            <form asp-action="Create">
+                <div class="form-group">
+                    <label asp-for="AantalPersonen" class="control-label"></label>
+                    <input asp-for="AantalPersonen" class="form-control" />
+                    <span asp-validation-for="AantalPersonen" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Opmerking" class="control-label"></label>
+                    <input asp-for="Opmerking" class="form-control" />
+                    <span asp-validation-for="Opmerking" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ReserveringsDatum" class="control-label"></label>
+                    <input asp-for="ReserveringsDatum" class="form-control" />
+                    <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="color: red;">
+                    <p>
+                        * Let op! U kunt uw reserveering niet zien als u geen account heeft. <a asp-area="Identity" asp-page="/Account/Login" style="color:blue; text-decoration: underline; ">Inloggen</a>
+                    </p>
+                </div>
+                <div class="form-group" style="float: right;">
+                    <input type="submit" value="Reservering aanmaken" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
+}
 
