@@ -7,16 +7,20 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Controllers
 {
     public class ReserveringController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private IHttpContextAccessor _accessor;
 
-        public ReserveringController(ApplicationDbContext context)
+        public ReserveringController(ApplicationDbContext context, IHttpContextAccessor accessor)
         {
             _context = context;
+            _accessor = accessor;
         }
 
         // GET: Reservering
@@ -46,6 +50,15 @@ namespace BonTemps.Controllers
         // GET: Reservering/Create
         public IActionResult Create()
         {
+            string ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            Console.WriteLine(ip);
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Reservering()
+        {
+
             return View();
         }
 
@@ -56,12 +69,14 @@ namespace BonTemps.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,Goedkeuring,Opmerking,ReserveringsDatum,ReserveringAangemaakt")] Reservering reservering)
         {
-
+            reservering.Goedkeuring = false;
+            reservering.ReserveringAangemaakt = DateTime.Now;
             if (ModelState.IsValid)
             {
-                _context.Add(reservering);
+                _context.Reserveringen.Add(reservering);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home" +
+                    "");
             }
             return View(reservering);
         }

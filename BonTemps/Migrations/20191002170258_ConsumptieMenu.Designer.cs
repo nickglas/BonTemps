@@ -4,18 +4,20 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191002170258_ConsumptieMenu")]
+    partial class ConsumptieMenu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -74,8 +76,6 @@ namespace BonTemps.Migrations
 
                     b.Property<bool>("Afgerond");
 
-                    b.Property<int?>("Bestelling");
-
                     b.Property<DateTime>("Bestellingsdatum_Tijd");
 
                     b.Property<DateTime>("Bestellingsdatum_afgerond");
@@ -85,8 +85,6 @@ namespace BonTemps.Migrations
                     b.Property<int>("TafelsId");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("Bestelling");
 
                     b.HasIndex("ConsumptieId");
 
@@ -158,21 +156,6 @@ namespace BonTemps.Migrations
                     b.ToTable("Consumpties");
                 });
 
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Gebruiker", b =>
-                {
-                    b.Property<int>("GebruikerId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Gebruiker");
-
-                    b.HasKey("GebruikerId");
-
-                    b.HasIndex("Gebruiker");
-
-                    b.ToTable("Gebruiker");
-                });
-
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Menu", b =>
                 {
                     b.Property<int>("Id")
@@ -181,15 +164,40 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Beschrijving");
 
-                    b.Property<int?>("Menu");
-
                     b.Property<string>("Menu_naam");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("Menu");
-
                     b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Reservering", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AantalPersonen");
+
+                    b.Property<string>("Email");
+
+                    b.Property<bool>("Goedkeuring");
+
+                    b.Property<string>("HuisTelefoonNummer");
+
+                    b.Property<string>("MobielTelefoonNummer");
+
+                    b.Property<string>("NaamReserveerder");
+
+                    b.Property<string>("Opmerking");
+
+                    b.Property<DateTime>("ReserveringAangemaakt");
+
+                    b.Property<DateTime>("ReserveringsDatum");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Reserveringen");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Tafels", b =>
@@ -226,38 +234,6 @@ namespace BonTemps.Migrations
                     b.HasKey("KlantGegevensId");
 
                     b.ToTable("Klantgegevens");
-                });
-
-            modelBuilder.Entity("BonTemps.Models.Reservering", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AantalPersonen");
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<bool>("Goedkeuring");
-
-                    b.Property<string>("HuisTelefoonNummer");
-
-                    b.Property<string>("MobielTelefoonNummer")
-                        .IsRequired();
-
-                    b.Property<string>("NaamReserveerder")
-                        .IsRequired();
-
-                    b.Property<string>("Opmerking");
-
-                    b.Property<DateTime>("ReserveringAangemaakt");
-
-                    b.Property<DateTime>("ReserveringsDatum");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Reserveringen");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -482,10 +458,6 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
                 {
-                    b.HasOne("BonTemps.Models.Reservering")
-                        .WithMany("Bestellingen")
-                        .HasForeignKey("Bestelling");
-
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
                         .WithMany()
                         .HasForeignKey("ConsumptieId")
@@ -507,20 +479,6 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("Consumptie");
-                });
-
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Gebruiker", b =>
-                {
-                    b.HasOne("BonTemps.Models.Reservering")
-                        .WithMany("Gebruiker")
-                        .HasForeignKey("Gebruiker");
-                });
-
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Menu", b =>
-                {
-                    b.HasOne("BonTemps.Models.Reservering")
-                        .WithMany("Menu")
-                        .HasForeignKey("Menu");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

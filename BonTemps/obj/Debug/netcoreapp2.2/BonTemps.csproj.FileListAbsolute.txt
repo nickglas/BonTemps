@@ -689,9 +689,4 @@ C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.R
 C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.Views.pdb
 C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.csproj.CopyComplete
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.cshtml.g.cs
-C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Delete.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.cshtml.g.cs
-C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Edit.cshtml.g.cs
-C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Index.cshtml.g.cs
-C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.g.cshtml.cs
-C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs

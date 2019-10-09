@@ -7,12 +7,15 @@
 <h1>Bestellingen</h1>
 <hr />
 <p>
-    <a asp-action="Create" class="btn btn-primary">Consumptie toevoegen</a>
+    <a asp-action="Create" class="btn btn-primary">Bestelling toevoegen</a>
 </p>
 <br />
 <table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
+            <th>
+                Categorie
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Consumptie)
             </th>
@@ -22,9 +25,6 @@
             <th>
                 Tijd van bestelling
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Afgerond)
-            </th>
             <th>Actie</th>
         </tr>
     </thead>
@@ -33,6 +33,10 @@
         {
             <tr>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Consumptie.Category.Naam)
+
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.Consumptie.Naam)
                 </td>
                 <td style="width:8%;text-align:center;">
@@ -40,9 +44,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
-                </td>
-                <td style="width:8%;text-align:center;">
-                    @Html.DisplayFor(modelItem => item.Afgerond)
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
                     <a asp-action="Afronden" asp-route-id="@item.Id" class="btn btn-danger">Afronden</a>
