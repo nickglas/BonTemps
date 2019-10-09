@@ -208,12 +208,25 @@ namespace BonTemps.Models
 
         public static async Task UpdateMenu(ApplicationDbContext _context)
         {
+            List<Menu> check = new List<Menu>();
+
             Menu Spaget = new Menu
             {
-                Menu_naam = "Menu Spaget",
+                Menu_naam = "Spaget",
                 Beschrijving = "Menu met Spaget",
             };
-            _context.Menus.Add(Spaget);
+            check.Add(Spaget);
+
+            foreach (var item in check)
+            {
+                int i = _context.Menus.Where(x => x.Menu_naam == item.Menu_naam).Count();
+                if (i == 0)
+                {
+                    await _context.AddAsync(item);
+                }
+            }
+            await _context.SaveChangesAsync();
+
             await _context.SaveChangesAsync();
         }
 

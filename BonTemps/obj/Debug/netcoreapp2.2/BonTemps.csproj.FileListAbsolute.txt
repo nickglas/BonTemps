@@ -704,3 +704,5 @@ C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Detail.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.g.cshtml.cs
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Detail.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Reservering.cshtml.g.cs
