@@ -141,8 +141,6 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("Consumptie");
-
                     b.Property<int>("MenuId");
 
                     b.Property<string>("Naam");
@@ -153,7 +151,7 @@ namespace BonTemps.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Consumptie");
+                    b.HasIndex("MenuId");
 
                     b.ToTable("Consumpties");
                 });
@@ -506,7 +504,8 @@ namespace BonTemps.Migrations
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
-                        .HasForeignKey("Consumptie");
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Gebruiker", b =>

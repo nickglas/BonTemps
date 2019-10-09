@@ -7,6 +7,13 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 100px;
 }
 
+.foto-bt {
+    max-width: 75%;
+    margin-bottom: 0%;
+    margin-top: 25%;
+    margin-left: 11%;
+}
+
 .color{
     background-color: black;
 }
@@ -22,6 +29,7 @@ for details on configuring this project to bundle and minify static web assets. 
     color: floralwhite;
     font-size: 5rem;
 }
+
 
 .login-div {
     border: 3px solid black; 
@@ -83,10 +91,6 @@ for details on configuring this project to bundle and minify static web assets. 
     opacity: 0.9;
     width: 55%;
     border-radius: 10px;
-}
-
-.menudiv {
-
 }
 
 .margin-btm {
@@ -218,7 +222,7 @@ li, a:hover {
 }
 
 .line-flag{
-    padding-top: 100%;  t
+    padding-top: 65%; 
     height: 0.25rem;
 }
 
@@ -244,42 +248,7 @@ a.navbar-brand {
 
 }
 
-.title-res {
-    border-radius: 5px 5px 0px 0px;
-    border-bottom: 1px solid #a7a1a1;
-    padding-left: 17%;
-    background-color: #ffeecb;
-}
 
-.reserveren-1 {
-    margin-top: 7rem;
-    background-color: floralwhite;
-    opacity: 0.9;
-    border-radius: 5px;
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
-.reserveren-2 {
-    margin-top: 7rem;
-    background-color: floralwhite;
-    opacity: 0.9;
-    border-radius: 5px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.create-res-1 {
-    padding-bottom: 5vh;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.create-res-2{
-    padding-bottom: 5vh;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 /* Sticky footer styles
 -------------------------------------------------- */

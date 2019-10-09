@@ -97,8 +97,8 @@ namespace BonTemps.Areas.Systeem.Models
                "<p>Hierbij willen we u graag informeren dat uw reservering (<b>" + reservering.ReserveringsDatum + "</b> )is goedgekeurd.<br/>" +
                "Aangezien u de keuze heeft gemaakt om te reserveren met uw account, Krijgt u een link waar u uw reservering kunt bekijken.<br/>" +
                "Voor vragen kunt u ons bellen of een email sturen.</br>" +
-               "<br/> <br/>"+
-               "Link naar uw reservering : "+ "" +
+               "<br/>"+
+               "Link naar uw reservering : "+ "https://localhost:44545/reservering/Reservering <br/><br/>" +
                "Met vriendelijke groet,<br/><br/>" +
                "BonTemps" +
                "</p>"
