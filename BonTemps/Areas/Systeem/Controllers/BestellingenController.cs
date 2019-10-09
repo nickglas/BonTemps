@@ -19,7 +19,6 @@ namespace BonTemps.Areas.Systeem.Controllers
         {
             _context = context;
         }
-
         // GET: Systeem/Bestellingen
         public async Task<IActionResult> Index()
         {
@@ -105,9 +104,6 @@ namespace BonTemps.Areas.Systeem.Controllers
             ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
             ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x=> x.Bezet == true), "Id", "Id");
             ViewData["Consumpties"] = new SelectList(_context.Consumpties, "Id", "Naam");
-            ViewData["ConsumptieEten"] = new SelectList(_context.Consumpties.Where(x=> x.CategoryId == 1), "Id", "Naam");
-            ViewData["ConsumptieDrinken"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 2), "Id", "Naam");
-            ViewData["ConsumptieDesserts"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 3), "Id", "Naam");
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
             return View();
         }
