@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Data;
 using BonTemps.Models;
+using MailKit;
+using MimeKit;
+using MailKit.Net.Smtp;
 
 namespace BonTemps.Areas.Systeem.Models
 {
@@ -37,7 +40,9 @@ namespace BonTemps.Areas.Systeem.Models
                     AantalPersonen = 5,
                     Goedkeuring = false,
                     ReserveringsDatum = DateTime.Now,
-                    Opmerking = "Tafel bij het raam"
+                    Opmerking = "Tafel bij het raam",
+                    HuisTelefoonNummer = "123",
+                    MobielTelefoonNummer = "123"
                 };
                 await _context.Reserveringen.AddAsync(res);
             }
@@ -51,7 +56,30 @@ namespace BonTemps.Areas.Systeem.Models
             reservering.Goedkeuring = true;
             _context.Reserveringen.Update(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Inkomendereserveringen");
+
+            //Mail versturen
+            var message = new MimeMessage();
+
+            message.From.Add(new MailboxAddress("nick","nickglas@hotmail.nl"));
+
+            message.To.Add(new MailboxAddress("Test","nickglas@hotmail.nl"));
+
+            message.Subject = "Test Subject";
+
+            message.Body = new TextPart("Plain")
+            {
+                Text = "Nieuwe email service"
+            };
+
+            using (var client = new SmtpClient())
+            {
+                client.Connect("smtp.gmail.com",587,false);
+                client.Authenticate("bontemps538@gmail.com","P@$$w0rd123");
+                client.Send(message);
+                client.Disconnect(true);
+            }
+
+                return RedirectToAction("Inkomendereserveringen");
         }
         // GET: Systeem/Reserveringen/Details/5
         public async Task<IActionResult> Details(int? id)
