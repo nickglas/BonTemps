@@ -693,3 +693,5 @@ C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\View
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Edit.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Index.cshtml.g.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs

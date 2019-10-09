@@ -118,7 +118,7 @@ html {
 }
 
 .nav-list {
-    padding-top: 100%;
+    padding-top: 70%;
 }
 
 .navbar-left {
@@ -214,7 +214,7 @@ li, a:hover {
 }
 
 .line-flag{
-    padding-top: 98%; 
+    padding-top: 100%;  t
     height: 0.25rem;
 }
 
@@ -240,7 +240,42 @@ a.navbar-brand {
 
 }
 
+.title-res {
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #a7a1a1;
+    padding-left: 17%;
+    background-color: #ffeecb;
+}
 
+.reserveren-1 {
+    margin-top: 7rem;
+    background-color: floralwhite;
+    opacity: 0.9;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.reserveren-2 {
+    margin-top: 7rem;
+    background-color: floralwhite;
+    opacity: 0.9;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-res-1 {
+    padding-bottom: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-res-2{
+    padding-bottom: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 /* Sticky footer styles
 -------------------------------------------------- */

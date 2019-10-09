@@ -53,7 +53,7 @@
                <ul class="nav-list">
                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                    <li><a asp-controller="Menu" asp-action="Index">Menu's</a></li>
-                   <li><a asp-controller="Reserveren" asp-action="Index">Reserveren</a></li>
+                   <li><a asp-controller="Reservering" asp-action="Create">Reserveren</a></li>
                    <li><a asp-controller="Contact" asp-action="Index">Contact</a></li>
 
                    @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
