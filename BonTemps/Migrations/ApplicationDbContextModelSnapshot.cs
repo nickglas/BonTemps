@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -141,7 +141,7 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int?>("Consumptie");
+                    b.Property<int>("MenuId");
 
                     b.Property<string>("Naam");
 
@@ -151,7 +151,7 @@ namespace BonTemps.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("Consumptie");
+                    b.HasIndex("MenuId");
 
                     b.ToTable("Consumpties");
                 });
@@ -502,9 +502,10 @@ namespace BonTemps.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
-                        .HasForeignKey("Consumptie");
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Gebruiker", b =>

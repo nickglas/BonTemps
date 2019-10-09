@@ -56,10 +56,11 @@ namespace BonTemps.Controllers
         }
 
         [Authorize]
-        public IActionResult Reservering()
+        public async Task<IActionResult> Reservering()
         {
-
-            return View();
+            Console.WriteLine("Username : " + User.Identity.Name);
+            List<Reservering> reserveringen = await _context.Reserveringen.Where(x => x.Email == User.Identity.Name).ToListAsync();
+            return View(reserveringen);
         }
 
         // POST: Reservering/Create

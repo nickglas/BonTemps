@@ -20,6 +20,8 @@ namespace BonTemps.Areas.Chef.Controllers
             _context = context;
         }
 
+        public IList<Menu> Menu { get; set; }
+
         // GET: Chef/Menu
         public async Task<IActionResult> Index()
         {
@@ -29,12 +31,8 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
             var menu = await _context.Menus
+                .Include( c => c.Consumpties)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
             {

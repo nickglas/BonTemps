@@ -46,24 +46,16 @@
             @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
                 <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
-            }
-            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
-            {
-                <div class="btn-group dropright">
-                    <button class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bestellingen
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="afgerondebestellingen">Afgeronde bestellingen</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index">Consumpties</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Menus" asp-action="Index">Menu's</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Categories" asp-action="Index">Categories</a>
 
-                    </div>
-                </div>
-                <br />
             }
+
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
             {
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index">Tafels</a>
+
                 <div class="btn-group dropright">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reserveringen
@@ -74,13 +66,21 @@
                     </div>
                 </div>
             }
-            @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
+
+            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index">Consumpties</a>
-            }
-            @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
-            {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index">Tafels</a>
+                <div class="btn-group dropright">
+                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Bestellingen
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
+                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="afgerondebestellingen">Afgeronde bestellingen</a>
+                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
+
+                    </div>
+                </div>
+                <br />
             }
             @if (User.IsInRole("Manager") == true)
             {
@@ -94,21 +94,10 @@
                     </div>
                 </div>
                 <br />
+                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index">Contact info</a>
 
-            }
-            @if (User.IsInRole("Manager") == true)
-            {
-                <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Overige
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="nav-link btn btn-dark" asp-area="Manager" asp-controller="Contact" asp-action="Index">Contact info</a>
-                    </div>
-                </div>
             }
         </ul>
-
         <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">

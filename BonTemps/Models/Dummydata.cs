@@ -29,6 +29,7 @@ namespace BonTemps.Models
                              UserManager<Klant> userManager,
                              RoleManager<Rol> roleManager)
         {
+            await UpdateMenu(context);
             context.Database.EnsureCreated();
             if (await roleManager.FindByNameAsync(ManagerRol) == null)
             {
@@ -46,6 +47,8 @@ namespace BonTemps.Models
             {
                 await roleManager.CreateAsync(new Rol(KlantRol, KlantRolBeschrijving, DateTime.Today));
             }
+
+            await UpdateMenu(context);
             await UpdateCategory(context);
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
@@ -118,6 +121,34 @@ namespace BonTemps.Models
                 await _context.SaveChangesAsync();
             }
 
+            if (await userManager.FindByNameAsync("nickglas@hotmail.nl") == null)
+            {
+                var user = new Klant
+                {
+                    UserName = "nickglas@hotmail.nl",
+                    Email = "nickglas@hotmail.nl",
+                    PhoneNumber = "0645473290",
+                    Rolnaam = ManagerRol,
+                    Klantgegevens = new Klantgegevens
+                    {
+                        Voornaam = "Nick",
+                        Achternaam = "Glas",
+                        GeboorteDatum = DateTime.Now,
+                        Geslacht = "Man",
+                        TelefoonNummer = "0645473290",
+
+                    },
+                };
+
+                var result = await userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(user, password);
+                    await userManager.AddToRoleAsync(user, ManagerRol);
+                }
+                await _context.SaveChangesAsync();
+            }
 
             if (await userManager.FindByNameAsync("chef@bontemps.nl") == null)
             {
@@ -175,6 +206,16 @@ namespace BonTemps.Models
 
 
 
+        public static async Task UpdateMenu(ApplicationDbContext _context)
+        {
+            Menu Spaget = new Menu
+            {
+                Menu_naam = "Menu Spaget",
+                Beschrijving = "Menu met Spaget",
+            };
+            _context.Menus.Add(Spaget);
+            await _context.SaveChangesAsync();
+        }
 
         public static async Task UpdateCategory(ApplicationDbContext _context)
         {
@@ -219,7 +260,8 @@ namespace BonTemps.Models
                 Naam = "Spaghetti",
                 Beschrijving = "Spaghetti Bolognesse",
                 Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Eten").First()
+                Category = _context.Categories.Where(x => x.Naam == "Eten").First(),
+                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
             };
             check.Add(eten);
             Consumptie drinken = new Consumptie
@@ -227,7 +269,8 @@ namespace BonTemps.Models
                 Naam = "Coca Cola",
                 Beschrijving = "Cola",
                 Prijs = 2.50,
-                Category = _context.Categories.Where(x => x.Naam == "Drinken").First()
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
+                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
             };
             check.Add(drinken);
             Consumptie deserts = new Consumptie
@@ -235,7 +278,8 @@ namespace BonTemps.Models
                 Naam = "Dame blanche",
                 Beschrijving = "ijs",
                 Prijs = 3.25,
-                Category = _context.Categories.Where(x => x.Naam == "Deserts").First()
+                Category = _context.Categories.Where(x => x.Naam == "Deserts").First(),
+                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
             };
             check.Add(deserts);
             foreach (var item in check)
@@ -248,6 +292,7 @@ namespace BonTemps.Models
             }
             await _context.SaveChangesAsync();
         }
+
 
     }
 }
