@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191008101155_iets")]
+    partial class iets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,8 +144,6 @@ namespace BonTemps.Migrations
                     b.Property<int>("CategoryId");
 
                     b.Property<int?>("Consumptie");
-
-                    b.Property<int>("MenuId");
 
                     b.Property<string>("Naam");
 
@@ -504,7 +504,7 @@ namespace BonTemps.Migrations
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("Consumptie");
                 });
