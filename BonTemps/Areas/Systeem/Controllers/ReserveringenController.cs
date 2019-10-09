@@ -35,7 +35,7 @@ namespace BonTemps.Areas.Systeem.Models
             {
                 Reservering res = new Reservering
                 {
-                    Email = "test.nl",
+                    Email = "nickglas@hotmail.nl",
                     NaamReserveerder = "Nick",
                     AantalPersonen = 5,
                     Goedkeuring = false,
@@ -60,16 +60,53 @@ namespace BonTemps.Areas.Systeem.Models
             //Mail versturen
             var message = new MimeMessage();
 
-            message.From.Add(new MailboxAddress("nick","nickglas@hotmail.nl"));
+            message.From.Add(new MailboxAddress("BonTemps","bontemps@gmail.com"));
 
-            message.To.Add(new MailboxAddress("Test","nickglas@hotmail.nl"));
+            string email = reservering.Email;
+            string Onderwerp = "Goedkeuring reservering Bontemps.";
 
-            message.Subject = "Test Subject";
+            message.To.Add(new MailboxAddress(email,email));
 
-            message.Body = new TextPart("Plain")
+            message.Subject = Onderwerp;
+            int klant =  _context.Klanten.Where(x => x.Email == reservering.Email).Count();
+            Console.WriteLine("GEBRUKER IN DATABASE : " + klant);
+            if (klant == 0)
             {
-                Text = "Nieuwe email service"
-            };
+                message.Body = new TextPart("HTML")
+                {
+                    Text =
+               "<h1>Goedkeuring reservering</h1>" +
+               "Beste Klant,"+
+               "<p>Hierbij willen we u graag informeren dat uw reservering (<b>" + reservering.ReserveringsDatum + "</b> )is goedgekeurd.<br/>" +
+               "Aangezien u de keuze heeft gemaakt om te reserveren zonder account, is dit de laatste mail die u krijgt.<br/>" +
+               "Voor vragen kunt u ons bellen of een email sturen.</br>" +
+               "<br/>" +
+               "Met vriendelijke groet,<br/><br/>" +
+               "BonTemps"+
+               "</p>"
+
+                };
+            }
+            else
+            {
+                message.Body = new TextPart("HTML")
+                {
+                    Text =
+               "<h1>Goedkeuring reservering</h1>" +
+               "Beste Klant," +
+               "<p>Hierbij willen we u graag informeren dat uw reservering (<b>" + reservering.ReserveringsDatum + "</b> )is goedgekeurd.<br/>" +
+               "Aangezien u de keuze heeft gemaakt om te reserveren met uw account, Krijgt u een link waar u uw reservering kunt bekijken.<br/>" +
+               "Voor vragen kunt u ons bellen of een email sturen.</br>" +
+               "<br/> <br/>"+
+               "Link naar uw reservering : "+ "" +
+               "Met vriendelijke groet,<br/><br/>" +
+               "BonTemps" +
+               "</p>"
+                };
+            }
+
+
+            
 
             using (var client = new SmtpClient())
             {

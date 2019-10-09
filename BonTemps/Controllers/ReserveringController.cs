@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Controllers
 {
@@ -51,6 +52,13 @@ namespace BonTemps.Controllers
         {
             string ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
             Console.WriteLine(ip);
+            return View();
+        }
+
+        [Authorize]
+        public IActionResult Reservering()
+        {
+
             return View();
         }
 
