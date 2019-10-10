@@ -17,7 +17,7 @@ namespace BonTemps.Areas.Systeem.Models
     public class ReserveringenController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        Sys sys = new Sys();
         public ReserveringenController(ApplicationDbContext context)
         {
             _context = context;
@@ -57,64 +57,7 @@ namespace BonTemps.Areas.Systeem.Models
             _context.Reserveringen.Update(reservering);
             await _context.SaveChangesAsync();
 
-            //Mail versturen
-            var message = new MimeMessage();
-
-            message.From.Add(new MailboxAddress("BonTemps","bontemps@gmail.com"));
-
-            string email = reservering.Email;
-            string Onderwerp = "Goedkeuring reservering Bontemps.";
-
-            message.To.Add(new MailboxAddress(email,email));
-
-            message.Subject = Onderwerp;
-            int klant =  _context.Klanten.Where(x => x.Email == reservering.Email).Count();
-            Console.WriteLine("GEBRUKER IN DATABASE : " + klant);
-            if (klant == 0)
-            {
-                message.Body = new TextPart("HTML")
-                {
-                    Text =
-               "<h1>Goedkeuring reservering</h1>" +
-               "Beste Klant,"+
-               "<p>Hierbij willen we u graag informeren dat uw reservering (<b>" + reservering.ReserveringsDatum + "</b> )is goedgekeurd.<br/>" +
-               "Aangezien u de keuze heeft gemaakt om te reserveren zonder account, is dit de laatste mail die u krijgt.<br/>" +
-               "Voor vragen kunt u ons bellen of een email sturen.</br>" +
-               "<br/>" +
-               "Met vriendelijke groet,<br/><br/>" +
-               "BonTemps"+
-               "</p>"
-
-                };
-            }
-            else
-            {
-                message.Body = new TextPart("HTML")
-                {
-                    Text =
-               "<h1>Goedkeuring reservering</h1>" +
-               "Beste Klant," +
-               "<p>Hierbij willen we u graag informeren dat uw reservering (<b>" + reservering.ReserveringsDatum + "</b> )is goedgekeurd.<br/>" +
-               "Aangezien u de keuze heeft gemaakt om te reserveren met uw account, Krijgt u een link waar u uw reservering kunt bekijken.<br/>" +
-               "Voor vragen kunt u ons bellen of een email sturen.</br>" +
-               "<br/>"+
-               "Link naar uw reservering : "+ "https://localhost:44545/reservering/Reservering <br/><br/>" +
-               "Met vriendelijke groet,<br/><br/>" +
-               "BonTemps" +
-               "</p>"
-                };
-            }
-
-
-            
-
-            using (var client = new SmtpClient())
-            {
-                client.Connect("smtp.gmail.com",587,false);
-                client.Authenticate("bontemps538@gmail.com","P@$$w0rd123");
-                client.Send(message);
-                client.Disconnect(true);
-            }
+            sys.SendConfirmationMail(_context,reservering,true);
 
                 return RedirectToAction("Inkomendereserveringen");
         }
