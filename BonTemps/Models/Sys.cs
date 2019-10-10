@@ -53,7 +53,8 @@ namespace BonTemps.Models
             }
             else
             {
-                Format = "TEXT";
+                //Geen format aangegeven
+                Format = "";
             }
         }
 
