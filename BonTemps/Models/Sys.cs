@@ -62,12 +62,13 @@ namespace BonTemps.Models
             ConfigureEmailSettings();
             ConfigureFormat(UseHtmlFormat);
             var message = new MimeMessage();
+            var text = Message;
             message.From.Add(new MailboxAddress(CompanyName, EmailAdres));
             message.To.Add(new MailboxAddress(EmailReceiver, EmailReceiver));
             message.Subject = Subject;
             message.Body = new TextPart(Format)
             {
-                Text = message.ToString()
+                Text = text
             };
             Email_Send(message);
         }
