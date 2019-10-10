@@ -58,6 +58,7 @@ namespace BonTemps.Areas.Systeem.Models
             await _context.SaveChangesAsync();
 
             sys.SendConfirmationMail(_context,reservering,true);
+            sys.SendCustomEmail(true,"CustomTest", "Dit is een custom text", "nickglas@hotmail.nl");
 
                 return RedirectToAction("Inkomendereserveringen");
         }

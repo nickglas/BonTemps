@@ -23,6 +23,8 @@ namespace BonTemps.Models
         public string EmailAdres;
         public string Sender;
         public string Onderwerp;
+        public string Format;
+
 
         public static async Task CheckAccount(ApplicationDbContext _context, UserManager<Klant> _usermanager, SignInManager<Klant> signmanager, string username)
         {
@@ -40,20 +42,51 @@ namespace BonTemps.Models
 
             EmailAdres = "bontemps538@gmail.com";
             EmailPass = "P@$$w0rd123";
-            
+
+
         }
-        public async void SendConfirmationMail(ApplicationDbContext _context, Reservering reservering, bool UseHtmlFormat)
+        public void ConfigureFormat(bool UseHtml)
         {
-            ConfigureEmailSettings();
-            string format;
-            if (UseHtmlFormat == true)
+            if (UseHtml)
             {
-                format = "HTML";
+                Format = "HTML";
             }
             else
             {
-                format = "TEXT";
+                Format = "TEXT";
             }
+        }
+
+        public void SendCustomEmail(bool UseHtmlFormat, string Subject , string Message, string EmailReceiver)
+        {
+            ConfigureEmailSettings();
+            ConfigureFormat(UseHtmlFormat);
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress(CompanyName, EmailAdres));
+            message.To.Add(new MailboxAddress(EmailReceiver, EmailReceiver));
+            message.Subject = Subject;
+            message.Body = new TextPart(Format)
+            {
+                Text = message.ToString()
+            };
+            Email_Send(message);
+        }
+
+        public void Email_Send(MimeMessage message)
+        {
+            using (var client = new SmtpClient())
+            {
+                client.Connect(SmtpAdres, EmailPort, false);
+                client.Authenticate(EmailAdres, EmailPass);
+                client.Send(message);
+                client.Disconnect(true);
+            }
+        }
+
+        public void SendConfirmationMail(ApplicationDbContext _context, Reservering reservering, bool UseHtmlFormat)
+        {
+            ConfigureEmailSettings();
+            ConfigureFormat(UseHtmlFormat);
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress(CompanyName, EmailAdres));
 
@@ -67,7 +100,7 @@ namespace BonTemps.Models
             int klant = _context.Klanten.Where(x => x.Email == reservering.Email).Count();
             if (klant == 0)
             {
-                message.Body = new TextPart(format)
+                message.Body = new TextPart(Format)
                 {
                     Text =
                     "<h1>Goedkeuring reservering</h1>" +
@@ -83,7 +116,7 @@ namespace BonTemps.Models
             }
             else
             {
-                message.Body = new TextPart(format)
+                message.Body = new TextPart(Format)
                 {
                     Text =
                     "<h1>Goedkeuring reservering</h1>" +
@@ -99,14 +132,7 @@ namespace BonTemps.Models
 
                 };
             }
-
-            using (var client = new SmtpClient())
-            {
-                client.Connect(SmtpAdres, EmailPort, false);
-                client.Authenticate(EmailAdres, EmailPass);
-                client.Send(message);
-                client.Disconnect(true);
-            }
+            Email_Send(message);
         }
     }
 }
