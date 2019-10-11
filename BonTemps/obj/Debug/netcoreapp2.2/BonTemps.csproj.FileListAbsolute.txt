@@ -834,3 +834,8 @@ C:\Users\Nick\Source\Repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\BonTem
 C:\Users\Nick\Source\Repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.dll
 C:\Users\Nick\Source\Repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.pdb
 C:\Users\Nick\Source\Repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.csproj.CopyComplete
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Create.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Delete.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Details.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Edit.cshtml.g.cs
+C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Index.cshtml.g.cs
