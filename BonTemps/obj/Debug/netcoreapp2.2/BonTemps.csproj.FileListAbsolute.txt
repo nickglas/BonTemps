@@ -706,3 +706,7 @@ C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Cr
 C:\Bon Temp\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Detail.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Reservering.cshtml.g.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Detail.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Reservering.g.cshtml.cs
