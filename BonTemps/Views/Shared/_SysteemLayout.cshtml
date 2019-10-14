@@ -60,7 +60,7 @@
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Reserveringen
                     </button>
-                    <div class="dropdown-menu">
+                    <div style="z-index:4"; class="dropdown-menu">
                         <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen bekijken</a>
                         <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende reserveringen</a>
                     </div>
@@ -94,17 +94,17 @@
 
                     </div>
                 </div>
-                <br />
+                <br >
                 <div class="btn-group dropright">
                     <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Overig
                     </button>
-                    <div class="dropdown-menu background='black'">
+                    <div style="z-index:3;" class="dropdown-menu background='black'">
                         <a class="nav-link btn btn-dark" asp-area="Manager" asp-controller="Contact" asp-action="Index">Contact info</a>
-                        <a class="nav-link btn btn-danger" asp-area="" asp-controller="" asp-action="">Email sturen</a>                    
+                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Email" asp-action="Index">Email sturen</a>                    
                     </div>
                 </div>
-                <br />
+                <br >
 
             }
         </ul>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191014091408_consumptieallergen")]
-    partial class consumptieallergen
+    [Migration("20191014111308_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -171,6 +171,44 @@ namespace BonTemps.Migrations
                     b.HasIndex("MenuId");
 
                     b.ToTable("Consumpties");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AllergenenId");
+
+                    b.Property<int>("ConsumptieId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AllergenenId");
+
+                    b.HasIndex("ConsumptieId");
+
+                    b.ToTable("ConsumptieAllergenen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Email", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Onderwerp");
+
+                    b.Property<string>("Ontvanger");
+
+                    b.Property<string>("Text");
+
+                    b.Property<DateTime>("VerzendDatum");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Email");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Gebruiker", b =>
@@ -522,6 +560,19 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
                         .WithMany("Consumpties")
                         .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
+                        .WithMany()
+                        .HasForeignKey("AllergenenId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
+                        .WithMany()
+                        .HasForeignKey("ConsumptieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

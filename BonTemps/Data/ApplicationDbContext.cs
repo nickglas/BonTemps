@@ -30,5 +30,9 @@ namespace BonTemps.Data
         public DbSet<BonTemps.Areas.Manager.Models.ContactInfo> ContactInfo { get; set; }
         public DbSet<BestellingArchief> BestellingArchief { get; set; }
         public DbSet<BonTemps.Areas.Systeem.Models.Email> Email { get; set; }
+        public DbSet<BonTemps.Areas.Systeem.Models.Allergenen> Allergenen { get; set; }
+        public DbSet<BonTemps.Areas.Systeem.Models.ConsumptieAllergenen> ConsumptieAllergenen { get; set; }
+
+
     }
 }
