@@ -52,7 +52,6 @@ namespace BonTemps.Areas.Systeem.Controllers
         public async Task<IActionResult> Archiveren(int? Id)
         {
 
-            Console.WriteLine("\n!!Iets van text!!\n");
             Bestelling res = await _context.Bestellingen.Where(x => x.Id == Id).FirstOrDefaultAsync();
             BestellingArchief archief = new BestellingArchief
             {

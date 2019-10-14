@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191011121859_email")]
+    partial class email
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,21 +66,6 @@ namespace BonTemps.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactInfo");
-                });
-
-            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Allergenen", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AllergenenIcoon");
-
-                    b.Property<string>("Beschrijving");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Allergenen");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
