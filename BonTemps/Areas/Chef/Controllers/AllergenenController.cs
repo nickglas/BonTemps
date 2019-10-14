@@ -7,17 +7,23 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
     [Area("Chef")]
     public class AllergenenController : Controller
     {
+        private static string ImgName;
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public AllergenenController(ApplicationDbContext context)
+        public AllergenenController(ApplicationDbContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         // GET: Chef/Allergenen
@@ -44,7 +50,7 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(allergenen);
         }
 
-        // GET: Chef/Allergenen/Create
+          // GET: Chef/Allergenen/Create
         public IActionResult Create()
         {
             return View();
@@ -55,8 +61,10 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen)
+        public async Task<IActionResult> Create([Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen, IFormFile file)
         {
+            UploadFile(file, _env);
+            allergenen.AllergenenIcoon = ImgName;
             if (ModelState.IsValid)
             {
                 _context.Add(allergenen);
@@ -64,6 +72,25 @@ namespace BonTemps.Areas.Chef.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(allergenen);
+        }
+
+        private void UploadFile(IFormFile file, IHostingEnvironment env)
+        {
+
+            Random random = new Random();
+            string RandomString(int length)
+            {
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+                return new string(Enumerable.Repeat(chars, length)
+                  .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            var fileName = RandomString(15) + ".png";
+            ImgName = fileName;
+            var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
         }
 
         // GET: Chef/Allergenen/Edit/5
