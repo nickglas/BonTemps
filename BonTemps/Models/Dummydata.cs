@@ -53,9 +53,11 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
+            await UpdateAllergenen(context);
 
-            
-            
+
+
+
         }
 
         public static async Task UpdateContactInfo(ApplicationDbContext _context) 
@@ -310,7 +312,43 @@ namespace BonTemps.Models
             }
             await _context.SaveChangesAsync();
         }
+        public static async Task UpdateAllergenen(ApplicationDbContext _context)
+        {
+            List<Allergenen> allergenen = _context.Allergenen.ToList();
+            List<Allergenen> check = new List<Allergenen>();
 
+            Allergenen allergeen1 = new Allergenen
+            {
+                AllergenenIcoon = "",
+                Beschrijving = "Bevat sporen van pinda's"
+            };
+            check.Add(allergeen1);
+            Allergenen allergeen2 = new Allergenen
+            {
+                AllergenenIcoon = "",
+                Beschrijving = "Bevat sporen van lactose"
+            };
+            check.Add(allergeen2);
+            Allergenen allergeen3 = new Allergenen
+            {
+                AllergenenIcoon = "",
+                Beschrijving = "Bevat sporen van vis schaal en schelpdieren"
+            };
+            check.Add(allergeen3);
+
+
+            foreach (var item in check)
+            {
+                int i = _context.Allergenen.Where(x => x.Beschrijving == item.Beschrijving).Count();
+                if (i == 0)
+                {
+                    _context.Allergenen.Add(item);
+                }
+            }
+            await _context.SaveChangesAsync();
+
+
+        }
 
     }
 }
