@@ -839,3 +839,12 @@ C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Area
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Details.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Edit.cshtml.g.cs
 C:\Users\User\Source\Repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Index.cshtml.g.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Create.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Delete.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Details.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Edit.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Index.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Menu\Detail.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Create.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Details.g.cshtml.cs
+C:\Users\Marco\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Reservering\Reservering.g.cshtml.cs

@@ -14,6 +14,10 @@ for details on configuring this project to bundle and minify static web assets. 
     margin-left: 11%;
 }
 
+.homepage{
+    margin-left: 17%;
+}
+
 .color{
     background-color: black;
 }
@@ -241,6 +245,50 @@ li, a:hover {
     height: 100%;
 }
 
+.title-res-1 {
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #a7a1a1;
+    padding-left: 17%;
+    background-color: #ffeecb;
+}
+
+.title-res-2 {
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #a7a1a1;
+    padding-left: 8%;
+    background-color: #ffeecb;
+}
+
+.reserveren-1 {
+    margin-top: 7rem;
+    background-color: floralwhite;
+    opacity: 0.9;
+    border-radius: 5px;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.reserveren-2 {
+    margin-top: 15%;
+    background-color: floralwhite;
+    opacity: 0.9;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-res-1 {
+    padding-bottom: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-res-2 {
+    padding-bottom: 5vh;
+    margin-left: auto;
+    margin-right: auto;
+}   
+
 a.navbar-brand {
     white-space: normal;
     text-align: left;
@@ -334,7 +382,7 @@ button.accept-policy {
   line-height: inherit;
 }
 
-/* Sticky footer styles
+/* Sticky footer styles 
 -------------------------------------------------- */
 html {
   position: relative;
