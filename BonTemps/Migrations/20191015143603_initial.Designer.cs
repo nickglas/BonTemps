@@ -4,18 +4,20 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191015143603_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -564,12 +566,12 @@ namespace BonTemps.Migrations
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
-                        .WithMany("ConsAller")
+                        .WithMany()
                         .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
-                        .WithMany("ConsAller")
+                        .WithMany()
                         .HasForeignKey("ConsumptieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
