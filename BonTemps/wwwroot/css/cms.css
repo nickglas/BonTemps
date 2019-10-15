@@ -23,7 +23,13 @@ body {
 .navbar-left a{
 }
 hr {
-    color:red;
+    color:red!important;
+}
+
+[class^="fa"] {
+    color: orange;
+    width: 25px;
+    fill: #fff;
 }
 
 .navbar-left a:hover{
