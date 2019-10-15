@@ -221,12 +221,10 @@ li, a:hover {
     text-decoration: none;
 }
 
-.login-nav{
-    padding-top: 0px;
-}
-
 .line-flag{
-    padding-top: 65%; 
+    position: fixed;
+    bottom: 5rem;
+    width: 17.85%; 
     height: 0.25rem;
 }
 
@@ -243,6 +241,12 @@ li, a:hover {
 .red {
     background-color: red;
     height: 100%;
+}
+
+.login-nav{
+    position: fixed;
+    bottom: 2rem;
+    margin-left: 5%;
 }
 
 .title-res-1 {
