@@ -1016,3 +1016,13 @@ C:\Users\Omar\Source\Repos\BonTemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.Vi
 C:\Users\Omar\Source\Repos\BonTemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.dll
 C:\Users\Omar\Source\Repos\BonTemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.pdb
 C:\Users\Omar\Source\Repos\BonTemps\BonTemps\obj\Debug\netcoreapp2.2\BonTemps.csproj.CopyComplete
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Allergenen\Create.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Allergenen\Delete.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Allergenen\Details.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Allergenen\Edit.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Chef\Views\Allergenen\Index.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Create.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Delete.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Details.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Edit.g.cshtml.cs
+C:\Users\Nick\source\repos\bontemps_last\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Email\Index.g.cshtml.cs
