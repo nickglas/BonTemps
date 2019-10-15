@@ -9,26 +9,26 @@ using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using BonTemps.Models;
 
-namespace BonTemps.Areas.Chef.Controllers
+namespace BonTemps.Areas.Systeem.Controllers
 {
-    [Area("Chef")]
-    public class ConsumptiesController : Controller
+    [Area("Systeem")]
+    public class EmailController : Controller
     {
         private readonly ApplicationDbContext _context;
+        Sys sys = new Sys();
 
-        public ConsumptiesController(ApplicationDbContext context)
+        public EmailController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: Chef/Consumpties
+        // GET: Systeem/Email
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Consumpties.Include(c => c.Category);
-            return View(await applicationDbContext.ToListAsync());
+            return View(await _context.Email.ToListAsync());
         }
 
-        // GET: Chef/Consumpties/Details/5
+        // GET: Systeem/Email/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -36,49 +36,41 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
 
-            var consumptie = await _context.Consumpties
-                .Include(c => c.Category)
+            var email = await _context.Email
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (consumptie == null)
+            if (email == null)
             {
                 return NotFound();
             }
 
-            return View(consumptie);
+            return View(email);
         }
 
-        // GET: Chef/Consumpties/Create
+        // GET: Systeem/Email/Create
         public IActionResult Create()
         {
-            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
-            //ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
-            ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View();
         }
 
-        // POST: Chef/Consumpties/Create
+        // POST: Systeem/Email/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId,AllergenenId")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Ontvanger,Onderwerp,Text,VerzendDatum")] Email email)
         {
-            
+            email.VerzendDatum = DateTime.Now;
             if (ModelState.IsValid)
             {
-                _context.Add(consumptie);
+                _context.Add(email);
                 await _context.SaveChangesAsync();
+                sys.SendCustomEmail(true, email.Onderwerp, email.Text, email.Ontvanger);
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["AllergenenId"] = new SelectList(_context.Set<Allergenen>(), "Id", "Id", consumptie.Allergenen);
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Set<Menu>(), "Id", "Id", consumptie.MenuId);
-            return View(consumptie);
+            return View(email);
         }
 
-
-
-        // GET: Chef/Consumpties/Edit/5
+        // GET: Systeem/Email/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,24 +78,22 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
 
-            var consumptie = await _context.Consumpties.FindAsync(id);
-            if (consumptie == null)
+            var email = await _context.Email.FindAsync(id);
+            if (email == null)
             {
                 return NotFound();
             }
-            ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
-            ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
-            return View(consumptie);
+            return View(email);
         }
 
-        // POST: Chef/Consumpties/Edit/5
+        // POST: Systeem/Email/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId")] Consumptie consumptie)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Ontvanger,Onderwerp,Text,VerzendDatum")] Email email)
         {
-            if (id != consumptie.Id)
+            if (id != email.Id)
             {
                 return NotFound();
             }
@@ -112,12 +102,12 @@ namespace BonTemps.Areas.Chef.Controllers
             {
                 try
                 {
-                    _context.Update(consumptie);
+                    _context.Update(email);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ConsumptieExists(consumptie.Id))
+                    if (!EmailExists(email.Id))
                     {
                         return NotFound();
                     }
@@ -128,12 +118,10 @@ namespace BonTemps.Areas.Chef.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptie.MenuId);
-            return View(consumptie);
+            return View(email);
         }
 
-        // GET: Chef/Consumpties/Delete/5
+        // GET: Systeem/Email/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,31 +129,30 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
 
-            var consumptie = await _context.Consumpties
-                .Include(c => c.Category)
+            var email = await _context.Email
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (consumptie == null)
+            if (email == null)
             {
                 return NotFound();
             }
 
-            return View(consumptie);
+            return View(email);
         }
 
-        // POST: Chef/Consumpties/Delete/5
+        // POST: Systeem/Email/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var consumptie = await _context.Consumpties.FindAsync(id);
-            _context.Consumpties.Remove(consumptie);
+            var email = await _context.Email.FindAsync(id);
+            _context.Email.Remove(email);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ConsumptieExists(int id)
+        private bool EmailExists(int id)
         {
-            return _context.Consumpties.Any(e => e.Id == id);
+            return _context.Email.Any(e => e.Id == id);
         }
     }
 }

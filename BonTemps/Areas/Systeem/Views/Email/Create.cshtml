@@ -1,0 +1,49 @@
+﻿@model BonTemps.Areas.Systeem.Models.Email
+
+@{
+    ViewData["Title"] = "Create";
+}
+<script src="https://cdn.tiny.cloud/1/d214d59wwck9jdffvjm5uanems5fcl78mpsgyq0l7qswmz8y/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector: '#plugindiv',
+        //plugins: 'emoticons',
+        //toolbar: 'emoticons',
+        width: 600,
+        height: 600
+    });
+</script>
+<h1>Create</h1>
+
+<h4>Email</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Ontvanger" class="control-label"></label>
+                <input asp-for="Ontvanger" class="form-control" />
+                <span asp-validation-for="Ontvanger" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Onderwerp" class="control-label"></label>
+                <input asp-for="Onderwerp" class="form-control" />
+                <span asp-validation-for="Onderwerp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Text" class="control-label">Inhoud</label>
+                <input asp-for="Text" id="plugindiv"/>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
