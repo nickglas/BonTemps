@@ -20,6 +20,7 @@
         <link rel="stylesheet" href="~/css/cms.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+        <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
         <style>
         </style>
     </head>
@@ -42,69 +43,60 @@
                 <p class="text-white-50">Welkom, @User.Identity.Name (Manager)</p>
 
             }
-            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index">Terug naar website</a>
+            <hr />
+            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Terug naar website</a>
             @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Home" asp-action="Index">Menu's</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index">Consumpties</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Menus" asp-action="Index">Menu's</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Categories" asp-action="Index">Categories</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index"><i class="fas fa-hamburger"></i> Consumpties</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Allergenen" asp-action="Index"><i class="fas fa-allergies"></i> Allergenen</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Menus" asp-action="Index"><i class="fas fa-utensils"></i> Menu's</a>
+                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Categories" asp-action="Index"><i class="fas fa-layer-group"></i> Categories</a>
 
             }
 
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
             {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index">Tafels</a>
-
-                <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reserveringen
-                    </button>
-                    <div style="z-index:4"; class="dropdown-menu">
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen bekijken</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende reserveringen</a>
-                    </div>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index"><i class="fas fa-chair"></i> Tafels</a>
+                <hr />
+                <button class="dropdown-btn">
+                    <i class="fa fa-caret-down"></i> Reserveringen
+                </button>
+                <div class="dropdown-container">
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen Bekijken</a>
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende Reserveringen</a>
                 </div>
+
             }
 
             @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
-                <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Bestellingen
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="afgerondebestellingen">Afgeronde bestellingen</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
 
-                    </div>
+                <button class="dropdown-btn">
+                    <i class="fa fa-caret-down"></i> Bestellingen
+                </button>
+                <div class="dropdown-container">
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen Bekijken</a>
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Create">Bestellingen Toevoegen</a>
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="AfgerondeBestellingen">Afgeronde Bestellingen</a>
+                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
+
                 </div>
-                <br />
             }
             @if (User.IsInRole("Manager") == true)
             {
-                <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Klanten en Personeel
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="nav-link btn btn-dark" asp-area="Manager" asp-controller="Klanten" asp-action="Index">Klanten overzicht</a>
-                        <a class="nav-link btn btn-dark" asp-area="Manager" asp-controller="Personeel" asp-action="Index">Personeel overzicht</a>
 
-                    </div>
+                <button class="dropdown-btn">
+                    <i class="fa fa-caret-down"></i> Klanten en Personeel
+                </button>
+                <div class="dropdown-container">
+                    <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Klanten" asp-action="Index">Klantenoverzicht</a>
+                    <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Personeel" asp-action="Index">Personeeloverzicht</a>
+
                 </div>
-                <br >
-                <div class="btn-group dropright">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Overig
-                    </button>
-                    <div style="z-index:3;" class="dropdown-menu background='black'">
-                        <a class="nav-link btn btn-dark" asp-area="Manager" asp-controller="Contact" asp-action="Index">Contact info</a>
-                        <a class="nav-link btn btn-dark" asp-area="Systeem" asp-controller="Email" asp-action="Index">Email sturen</a>                    
-                    </div>
-                </div>
-                <br >
+                <hr />
+                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-address-book"></i> Contact</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>
+
 
             }
         </ul>
@@ -136,6 +128,23 @@
         </environment>
         <script src="~/js/site.js" asp-append-version="true"></script>
 
+        @* Dropdown script, credits naar w3schools *@
+        <script>
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
+
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
+        </script>
         @RenderSection("Scripts", required: false)
     </body>
 </html>
