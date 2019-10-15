@@ -8,29 +8,20 @@
 
 <div class="table">
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Naam)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Naam)
+        <dd class="col-sm-10">
+            <p style="font-size:24px;">@Html.DisplayFor(model => model.Naam)</p>
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Beschrijving)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Beschrijving)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Prijs)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Prijs)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Category)
-        </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Category.Naam)
+        </dd>
+        <dd>
+            @*@Html.DisplayFor(model => model.Allergenen)*@
         </dd>
     </dl>
 </div>

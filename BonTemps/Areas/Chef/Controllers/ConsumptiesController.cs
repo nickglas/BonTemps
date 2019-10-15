@@ -51,6 +51,7 @@ namespace BonTemps.Areas.Chef.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
+            //ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
             ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View();
         }
@@ -60,7 +61,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId,AllergenenId")] Consumptie consumptie)
         {
             
             if (ModelState.IsValid)
@@ -69,6 +70,7 @@ namespace BonTemps.Areas.Chef.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            //ViewData["AllergenenId"] = new SelectList(_context.Set<Allergenen>(), "Id", "Id", consumptie.Allergenen);
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
             ViewData["MenuId"] = new SelectList(_context.Set<Menu>(), "Id", "Id", consumptie.MenuId);
             return View(consumptie);

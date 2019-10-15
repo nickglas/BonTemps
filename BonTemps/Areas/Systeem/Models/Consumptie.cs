@@ -10,9 +10,7 @@ namespace BonTemps.Areas.Systeem.Models
         public static int Category_eten = 1;
         public static int Category_Drinken = 2;
         public static int Category_Deserts = 3;
-
-
-
+               
         public int Id { get; set; }
         public string Naam { get; set; }
         public string Beschrijving { get; set; }
