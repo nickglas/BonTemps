@@ -13,8 +13,11 @@ body {
     top: 0;
     bottom: 0;
     left: 0;
-    right: 75%;
-    overflow: hidden;
+    right: 80%;
+    overflow: scroll;
+}
+::-webkit-scrollbar {
+    display: none;
 }
 
 .navbar-left a{
