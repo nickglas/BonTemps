@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class init : Migration
+    public partial class ALL : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -433,14 +433,13 @@ namespace BonTemps.Migrations
                 name: "ConsumptieAllergenen",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ConsumptieId = table.Column<int>(nullable: false),
-                    AllergenenId = table.Column<int>(nullable: false)
+                    AllergenenId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ConsumptieAllergenen", x => x.Id);
+                    table.PrimaryKey("PK_ConsumptieAllergenen", x => new { x.ConsumptieId, x.AllergenenId });
                     table.ForeignKey(
                         name: "FK_ConsumptieAllergenen_Allergenen_AllergenenId",
                         column: x => x.AllergenenId,
@@ -448,8 +447,8 @@ namespace BonTemps.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConsumptieAllergenen_Consumpties_ConsumptieId",
-                        column: x => x.ConsumptieId,
+                        name: "FK_ConsumptieAllergenen_Consumpties_AllergenenId",
+                        column: x => x.AllergenenId,
                         principalTable: "Consumpties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -528,11 +527,6 @@ namespace BonTemps.Migrations
                 name: "IX_ConsumptieAllergenen_AllergenenId",
                 table: "ConsumptieAllergenen",
                 column: "AllergenenId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ConsumptieAllergenen_ConsumptieId",
-                table: "ConsumptieAllergenen",
-                column: "ConsumptieId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Consumpties_CategoryId",

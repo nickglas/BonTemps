@@ -48,9 +48,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Naam)
             </td>
-            <th>
-            </th>
-
+            <td>
+                @foreach (var ca in item.ConsAller)
+                {
+                <span>@ca.Allergenen.Beschrijving</span>
+                }
+            </td>
             <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
                 <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
