@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -173,19 +173,15 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ConsumptieId");
 
                     b.Property<int>("AllergenenId");
 
-                    b.Property<int>("ConsumptieId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConsumptieId", "AllergenenId");
 
                     b.HasIndex("AllergenenId");
-
-                    b.HasIndex("ConsumptieId");
 
                     b.ToTable("ConsumptieAllergenen");
                 });
@@ -570,7 +566,7 @@ namespace BonTemps.Migrations
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
                         .WithMany("ConsAller")
-                        .HasForeignKey("ConsumptieId")
+                        .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

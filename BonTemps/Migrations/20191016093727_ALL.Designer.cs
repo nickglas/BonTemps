@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191015143603_initial")]
-    partial class initial
+    [Migration("20191016093727_ALL")]
+    partial class ALL
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -175,19 +175,15 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<int>("ConsumptieId");
 
                     b.Property<int>("AllergenenId");
 
-                    b.Property<int>("ConsumptieId");
+                    b.Property<int>("Id");
 
-                    b.HasKey("Id");
+                    b.HasKey("ConsumptieId", "AllergenenId");
 
                     b.HasIndex("AllergenenId");
-
-                    b.HasIndex("ConsumptieId");
 
                     b.ToTable("ConsumptieAllergenen");
                 });
@@ -566,13 +562,13 @@ namespace BonTemps.Migrations
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
-                        .WithMany()
+                        .WithMany("ConsAller")
                         .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
-                        .WithMany()
-                        .HasForeignKey("ConsumptieId")
+                        .WithMany("ConsAller")
+                        .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
