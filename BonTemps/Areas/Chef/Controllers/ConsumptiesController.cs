@@ -24,21 +24,6 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties
         public async Task<IActionResult> Index()
         {
-            //var allergenen = _context.Allergenen.ToList();
-            //var consumptieallergenen = _context.ConsumptieAllergenen.ToList();
-
-
-            //var query = from consumptie in consumpties
-            //            join allergeen in consumptieallergenen on consumptie equals allergeen.Consumptie
-            //            select new { ConsumptieNaam = consumptie.Naam, ConsumptieAllergeen = allergeen.Allergenen };
-
-            //Console.WriteLine("JOIN QUERY TEST 12345 ");
-            //foreach (var test in query)
-            //{
-            //    Console.WriteLine("12345 de consumptie is " + test.ConsumptieNaam + " en de allergeen is " + test.ConsumptieAllergeen);
-            //}
-
-
             var consumpties = _context.Consumpties.Include(c => c.Category).Include( a => a.ConsAller).ThenInclude( a => a.Allergenen);
             return View(await consumpties.ToListAsync());
         }
