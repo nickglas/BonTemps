@@ -9,9 +9,11 @@ for details on configuring this project to bundle and minify static web assets. 
 
 .foto-bt {
     max-width: 75%;
-    margin-bottom: 0%;
-    margin-top: 25%;
-    margin-left: 11%;
+    height: auto;
+    margin-bottom: 4%;
+    margin-top: 15%;
+    margin-left: 15%;
+    text-align: center;
 }
 
 .homepage{
