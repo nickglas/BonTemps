@@ -1,12 +1,14 @@
-﻿html {
+﻿body {
+    background-color: #333030;
+}
+
+html {
     min-height: 100%;
     position: relative;
 }
-
 body {
     height: 100%;
 }
-
 .navbar-left {
     position: absolute;
     background-color: #212020;
@@ -19,20 +21,13 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
-
-.navbar-left a{
-}
 hr {
     color:red!important;
 }
-
 [class^="fa"] {
     color: orange;
     width: 25px;
     fill: #fff;
-}
-
-.navbar-left a:hover{
 }
 a:hover, .dropdown-btn:hover {
     font-size: 17px;
@@ -69,12 +64,48 @@ a:hover, .dropdown-btn:hover {
     margin-left: 1rem;
     text-decoration: none;
 }
-/*hide dropdown items tot er geklikt wordt*/
 .dropdown-container {
     display: none;
 }
-
 .active {
     color: white;
     font-weight: bold;
 }
+
+
+.contact-edit-btn, .openingstijden-edit-btn, .email-edit-btn {
+    background-color: #212020;
+    height: 30vh;
+    margin: 25px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-btn-contact {
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+}
+
+.text-btn-tijden{
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 60px;
+}
+
+.text-btn-email {
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 100px;
+}
+
+.edit-icon{
+    font-size: 5rem;
+    margin-top: 10%;
+    margin-left: 35%;
+
+}
+

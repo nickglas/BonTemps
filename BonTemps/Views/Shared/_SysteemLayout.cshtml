@@ -27,7 +27,7 @@
     <body>
 
         <ul class="navbar-left">
-            <img class="foto-bt" src="~/img/bontemps.png" />
+            <a asp-area="" asp-controller="Home" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
             @if (User.IsInRole("Chef") == true)
             {
                 <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
@@ -94,11 +94,13 @@
 
                 </div>
                 <hr />
-                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-address-book"></i> Contact</a>
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>
-
-
+                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-home"></i> Bedrijfsopties</a>
+                @*<a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>*@
             }
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="dropdown-btn" st
+                        yle="margin-top:5%;"><i class="fas fa-power-off"></i> Uitloggen</button>
+            </form> 
         </ul>
         <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
             <partial name="_CookieConsentPartial" />

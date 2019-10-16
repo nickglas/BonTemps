@@ -49,45 +49,46 @@
         </nav>
     </header>*@
 <body>
-        <div class="navbar-left">
-           <div class="content-nav">
-               <ul class="nav-list">
-                   <li><a asp-controller="Home" asp-action="Index" class="a-nav">Home</a></li>
-                   <li><a asp-controller="Menu" asp-action="Index" class="a-nav">Menu's</a></li>
-                   <li><a asp-controller="Reservering" asp-action="Create" class="a-nav">Reserveren</a></li>
-                   <li><a asp-controller="Contact" asp-action="Index" class="a-nav">Contact</a></li>
+    <div class="navbar-left">
+        <a asp-area="" asp-controller="Home" asp-action="Index"><img class="foto-bt" src="~/img/bontemps.png" /></a>
+        <div class="content-nav">
+            <ul class="nav-list">
+                <li><a asp-controller="Home" asp-action="Index" class="a-nav">Home</a></li>
+                <li><a asp-controller="Menu" asp-action="Index" class="a-nav">Menu's</a></li>
+                <li><a asp-controller="Reservering" asp-action="Create" class="a-nav">Reserveren</a></li>
+                <li><a asp-controller="Contact" asp-action="Index" class="a-nav">Contact</a></li>
 
 
-                   @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
-                   {
-                       <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
-                   }
+                @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
+                {
+                    <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
+                }
 
 
-                   @if (User.IsInRole("Manager") || User.IsInRole("Chef"))
-                   {
-                       <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
-                   }
+                @if (User.IsInRole("Manager") || User.IsInRole("Chef"))
+                {
+                    <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
+                }
 
-               </ul>
-            </div>
-           <div class="row line-flag">
-               <div class="blue col-4">
-                    
-               </div>
-               <div class="white col-4">
-
-               </div>
-               <div class="red col-4">
-
-               </div>
-           </div>
-           <div class="login-nav">
-               <ul>
-                   <li><a href="#"><partial name="_LoginPartial" /></a></li>
-               </ul>
-           </div>
+            </ul>
         </div>
+        <div class="row line-flag">
+            <div class="blue col-4">
+
+            </div>
+            <div class="white col-4">
+
+            </div>
+            <div class="red col-4">
+
+            </div>
+        </div>
+        <div class="login-nav">
+            <ul>
+                <li><a href="#"><partial name="_LoginPartial" /></a></li>
+            </ul>
+        </div>
+    </div>
     <div class="row">
 
         <div class="container">
