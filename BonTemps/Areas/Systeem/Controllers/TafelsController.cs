@@ -44,6 +44,34 @@ namespace BonTemps.Areas.Systeem.Controllers
             return View(tafels);
         }
 
+        public async Task<IActionResult> Afrekenen(int id)
+        {
+            double TotaalPrijs = 0;
+            Tafels tafel = await _context.Tafels.Where(x => x.Id == id).FirstOrDefaultAsync();
+            List<Bestelling> bestellingen = await _context.Bestellingen.Where(x => x.TafelsId == id && x.Afgerond == true).ToListAsync();
+            foreach (var item in bestellingen)
+            {
+                TotaalPrijs += _context.Consumpties.Where(x => x.Id == item.ConsumptieId).FirstOrDefault().Prijs;
+                BestellingArchief archief = new BestellingArchief
+                {
+                    TafelsId = item.TafelsId,
+                    Consumptie = item.Consumptie.Naam,
+                    Archiveerdatum = DateTime.Now,
+                    Bestellingsdatum_afgerond = item.Bestellingsdatum_afgerond,
+                    Bestellingsdatum_Tijd = item.Bestellingsdatum_Tijd,
+                };
+                await _context.BestellingArchief.AddAsync(archief);
+                Console.WriteLine(item.Consumptie.Naam);
+            }
+            _context.RemoveRange(bestellingen);
+            tafel.Bezet = false;
+            _context.Tafels.Update(tafel);
+            await _context.SaveChangesAsync();
+
+            Console.WriteLine(TotaalPrijs);
+            return RedirectToAction("Index");
+        }
+
         // GET: Systeem/Tafels/Create
         public IActionResult Create()
         {

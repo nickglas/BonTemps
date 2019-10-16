@@ -25,7 +25,10 @@ namespace BonTemps.Areas.Chef.Controllers
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Consumpties.Include(c => c.Category);
-            return View(await applicationDbContext.ToListAsync());
+
+            var test = _context.Consumpties.Include(c => c.ConsAller).Include(x => x.Category);
+
+            return View(test);
         }
 
         // GET: Chef/Consumpties/Details/5
@@ -37,7 +40,7 @@ namespace BonTemps.Areas.Chef.Controllers
             }
 
             var consumptie = await _context.Consumpties
-                .Include(c => c.Category)
+                .Include(c => c.Category).Include(x => x.ConsAller)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (consumptie == null)
             {
