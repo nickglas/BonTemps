@@ -58,7 +58,7 @@ namespace BonTemps.Areas.Systeem.Controllers
                 TafelsId = res.TafelsId,
                 Bestellingsdatum_afgerond = res.Bestellingsdatum_afgerond,
                 Bestellingsdatum_Tijd = res.Bestellingsdatum_Tijd,
-                Consumptie = _context.Consumpties.Where(x=>x.Id == res.Id).FirstOrDefault().Naam,
+                Consumptie = _context.Consumpties.Where(x => x.Id == res.Id).FirstOrDefault().Naam,
                 Archiveerdatum = DateTime.Now
             };
 
@@ -101,7 +101,7 @@ namespace BonTemps.Areas.Systeem.Controllers
         {
 
             ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
-            ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x=> x.Bezet == true), "Id", "Id");
+            ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x => x.Bezet == true), "Id", "Id");
             ViewData["Consumpties"] = new SelectList(_context.Consumpties, "Id", "Naam");
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
             return View();
