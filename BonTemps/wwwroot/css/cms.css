@@ -1,4 +1,8 @@
-﻿html {
+﻿body {
+    background-color: #333030;
+}
+
+html {
     min-height: 100%;
     position: relative;
 }
@@ -67,3 +71,41 @@ a:hover, .dropdown-btn:hover {
     color: white;
     font-weight: bold;
 }
+
+
+.contact-edit-btn, .openingstijden-edit-btn, .email-edit-btn {
+    background-color: #212020;
+    height: 30vh;
+    margin: 25px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-btn-contact {
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+}
+
+.text-btn-tijden{
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 60px;
+}
+
+.text-btn-email {
+    align-content: center;
+    position: absolute;
+    bottom: 0px;
+    left: 100px;
+}
+
+.edit-icon{
+    font-size: 5rem;
+    margin-top: 10%;
+    margin-left: 35%;
+
+}
+
