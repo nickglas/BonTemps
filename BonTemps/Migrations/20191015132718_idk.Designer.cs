@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191015132718_idk")]
+    partial class idk
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -76,7 +78,11 @@ namespace BonTemps.Migrations
 
                     b.Property<string>("Beschrijving");
 
+                    b.Property<int?>("ConsumptieId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ConsumptieId");
 
                     b.ToTable("Allergenen");
                 });
@@ -531,6 +537,13 @@ namespace BonTemps.Migrations
                     b.HasDiscriminator().HasValue("Personeel");
                 });
 
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Allergenen", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie")
+                        .WithMany("allergenen")
+                        .HasForeignKey("ConsumptieId");
+                });
+
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Bestelling", b =>
                 {
                     b.HasOne("BonTemps.Models.Reservering")
@@ -564,12 +577,12 @@ namespace BonTemps.Migrations
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
-                        .WithMany("ConsAller")
+                        .WithMany()
                         .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
-                        .WithMany("ConsAller")
+                        .WithMany()
                         .HasForeignKey("ConsumptieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

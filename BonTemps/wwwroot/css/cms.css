@@ -2,11 +2,9 @@
     min-height: 100%;
     position: relative;
 }
-
 body {
     height: 100%;
 }
-
 .navbar-left {
     position: absolute;
     background-color: #212020;
@@ -19,14 +17,13 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
-
-.navbar-left a{
-}
 hr {
-    color:red;
+    color:red!important;
 }
-
-.navbar-left a:hover{
+[class^="fa"] {
+    color: orange;
+    width: 25px;
+    fill: #fff;
 }
 a:hover, .dropdown-btn:hover {
     font-size: 17px;
@@ -63,11 +60,9 @@ a:hover, .dropdown-btn:hover {
     margin-left: 1rem;
     text-decoration: none;
 }
-/*hide dropdown items tot er geklikt wordt*/
 .dropdown-container {
     display: none;
 }
-
 .active {
     color: white;
     font-weight: bold;
