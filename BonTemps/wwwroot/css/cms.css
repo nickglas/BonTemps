@@ -21,6 +21,12 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+.scroller{
+    display: none;
+}
+html {
+    overflow: -moz-scrollbars-none;
+}
 hr {
     color:red!important;
 }
