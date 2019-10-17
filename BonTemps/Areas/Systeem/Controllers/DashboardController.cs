@@ -36,9 +36,9 @@ namespace BonTemps.Areas.Systeem.Controllers
             Dashboard dash = new Dashboard();
             if (User.IsInRole("Manager"))
             {
-                dash.users = _context.Klanten.ToList();
+                dash.users = _context.Klanten.Where(x=>x.Rol.Name=="Klant").ToList();
                 dash.Reserveringen = _context.Reserveringen.Where(x => x.ReserveringsDatum == DateTime.Today).ToList();
-
+                dash.Tafels = _context.Tafels.Where(x => x.Bezet == false).ToList();
                 //Omzet berekenen door afgeronden bestellingen en archief
                 double Omzet = 0.0;
                 List<Bestelling> bestellingen = _context.Bestellingen.Where(x => x.Afgerond == true).ToList();

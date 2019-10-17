@@ -10,6 +10,7 @@ namespace BonTemps.Areas.Systeem.Models
     {
         public List<Klant> users;
         public List<Reservering> Reserveringen;
+        public List<Tafels> Tafels;
         public double Omzet { get; set; }
     }
 }
