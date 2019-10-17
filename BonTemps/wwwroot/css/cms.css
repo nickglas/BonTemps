@@ -12,6 +12,7 @@ body {
 .navbar-left {
     position: absolute;
     background-color: #212020;
+    margin: 0;
     top: 0;
     bottom: 0;
     left: 0;
@@ -29,7 +30,7 @@ hr {
     width: 25px;
     fill: #fff;
 }
-a:hover, .dropdown-btn:hover {
+.navbar-left a:hover, .dropdown-btn:hover {
     font-size: 17px;
     color: white!important;
 }
