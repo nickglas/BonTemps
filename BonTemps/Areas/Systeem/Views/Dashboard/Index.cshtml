@@ -1,5 +1,34 @@
-﻿@{
+﻿@model BonTemps.Areas.Systeem.Models.Dashboard
+@{
     ViewData["Title"] = "Systeem Home";
 }
 
-Test Systeem
+@if (User.IsInRole("Manager"))
+{
+<div class="row">
+    <a class="col-md-5 contact-edit-btn" href="#">
+        <div class="">
+            <i class="fas fa-users edit-icon"></i>
+            <p class="text-btn-contact">aantal geregistreede user : @Model.users.Count</p>
+        </div>
+    </a>
+    <a class="col-md-5 openingstijden-edit-btn">
+        <div class="">
+            <i class="fas fa-calendar edit-icon"></i>
+            <p class="text-btn-tijden">Geplande reserveringen : @Model.Reserveringen.Count</p>
+        </div>
+    </a>
+    <a class="col-md-5 openingstijden-edit-btn">
+        <div class="">
+            <i class="fas fa-euro-sign edit-icon"></i>
+            <p class="text-btn-tijden">Verwachte omzet : @Model.Omzet</p>
+        </div>
+    </a>
+    <a class="col-md-5 openingstijden-edit-btn">
+        <div class="">
+            <i class="fas fa-chair edit-icon"></i>           
+            <p class="text-btn-tijden">Beschikbare tafels : @Model.Tafels.Count</p>
+        </div>
+    </a>
+</div>
+}

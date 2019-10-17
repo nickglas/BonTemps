@@ -44,7 +44,6 @@
 
             }
             <hr />
-            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Terug naar website</a>
             @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
             {
                 <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index"><i class="fas fa-hamburger"></i> Consumpties</a>
@@ -97,10 +96,16 @@
                 <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-home"></i> Bedrijfsopties</a>
                 @*<a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>*@
             }
+            <hr />
+
+            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Terug naar website</a>
+
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                 <button type="submit" class="dropdown-btn" st
-                        yle="margin-top:5%;"><i class="fas fa-power-off"></i> Uitloggen</button>
-            </form> 
+                        yle="margin-top:5%;">
+                    <i class="fas fa-power-off"></i> Uitloggen
+                </button>
+            </form>
         </ul>
         <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
             <partial name="_CookieConsentPartial" />
