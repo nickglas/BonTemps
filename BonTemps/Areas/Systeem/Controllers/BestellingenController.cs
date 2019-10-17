@@ -53,14 +53,25 @@ namespace BonTemps.Areas.Systeem.Controllers
         {
 
             Bestelling res = await _context.Bestellingen.Where(x => x.Id == Id).FirstOrDefaultAsync();
+
+            Consumptie y = await _context.Consumpties.Where(x => x.Id == res.ConsumptieId).FirstOrDefaultAsync();
+
+
             BestellingArchief archief = new BestellingArchief
             {
                 TafelsId = res.TafelsId,
                 Bestellingsdatum_afgerond = res.Bestellingsdatum_afgerond,
                 Bestellingsdatum_Tijd = res.Bestellingsdatum_Tijd,
-                Consumptie = _context.Consumpties.Where(x => x.Id == res.Id).FirstOrDefault().Naam,
+                Consumptie = y.Naam,
                 Archiveerdatum = DateTime.Now
             };
+
+            //BestellingArchief bes = new BestellingArchief();
+            //bes.TafelsId = res.TafelsId;
+            //bes.Bestellingsdatum_afgerond = res.Bestellingsdatum_afgerond;
+            //bes.Bestellingsdatum_Tijd = res.Bestellingsdatum_Tijd;
+            //bes.Consumptie = y.Naam;
+            //bes.Archiveerdatum = DateTime.Now;
 
             await _context.BestellingArchief.AddAsync(archief);
             await _context.SaveChangesAsync();
