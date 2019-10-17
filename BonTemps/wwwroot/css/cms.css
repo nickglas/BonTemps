@@ -36,11 +36,17 @@ h1{
 .scroller{
     display: none;
 }
-html {
-    overflow: -moz-scrollbars-none;
+th{
+    color: orange;
+}
+tr{
+    color: orange;
 }
 hr {
     color:red!important;
+}
+label{
+    color: orange;
 }
 [class^="fa"] {
     color: orange;

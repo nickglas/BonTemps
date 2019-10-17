@@ -27,7 +27,7 @@
     <body>
 
         <ul class="navbar-left">
-            <a asp-area="" asp-controller="Home" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
+            <a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
             @if (User.IsInRole("Chef") == true)
             {
                 <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
