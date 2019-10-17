@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BonTemps.Models
 {
@@ -24,7 +25,6 @@ namespace BonTemps.Models
         public string Sender;
         public string Onderwerp;
         public string Format;
-
 
         public static async Task CheckAccount(ApplicationDbContext _context, UserManager<Klant> _usermanager, SignInManager<Klant> signmanager, string username)
         {
@@ -135,6 +135,11 @@ namespace BonTemps.Models
                 };
             }
             Email_Send(message);
+        }
+        public static async Task RestartSystem(IApplicationLifetime _lifetime)
+        {
+            _lifetime.StopApplication();
+            return;
         }
     }
 }

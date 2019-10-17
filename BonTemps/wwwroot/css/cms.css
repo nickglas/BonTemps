@@ -9,10 +9,21 @@ html {
 body {
     height: 100%;
 }
+
+.color-hr{
+    position: absolute;
+    margin-top: -6px;
+    background-color: orange;
+    width: 100%;
+    
+}
+h1{
+    color: orange;
+}
 .navbar-left {
     position: absolute;
     background-color: #212020;
-    margin: 0;
+    margin-bottom: 0;
     top: 0;
     bottom: 0;
     left: 0;
@@ -22,6 +33,12 @@ body {
 ::-webkit-scrollbar {
     display: none;
 }
+.scroller{
+    display: none;
+}
+html {
+    overflow: -moz-scrollbars-none;
+}
 hr {
     color:red!important;
 }
@@ -30,7 +47,7 @@ hr {
     width: 25px;
     fill: #fff;
 }
-.navbar-left a:hover, .dropdown-btn:hover {
+a:hover, .dropdown-btn:hover {
     font-size: 17px;
     color: white!important;
 }
