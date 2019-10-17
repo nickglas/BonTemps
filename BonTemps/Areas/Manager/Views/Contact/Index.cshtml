@@ -5,37 +5,36 @@
 }
 
 
-@foreach(var item in Model){
 <div class="row">
-    <a class="col-md-5 contact-edit-btn" href="#">
+    <a class="col-md-5 edit-btn" href="#">
         <div class="">
-            <i class="fas fa-address-book edit-icon"></i>
+            <i class="fas fa-address-book"></i>
             <p class="text-btn-contact">Restaurant informatie aanpassen</p>
         </div>
     </a>
-    <a class="col-md-5 openingstijden-edit-btn" asp-action="Edit" asp-route-id="@item.Id">
+    <a class="col-md-5 edit-btn" asp-action="Edit" asp-route-id="1">
         <div class="">
-            <i class="far fa-clock edit-icon"></i>
+            <i class="far fa-clock"></i>
             <p class="text-btn-tijden">Openingstijden aanpassen</p>
         </div>
     </a>
 </div>
 <div class="row">
-    <a class="col-md-5 email-edit-btn" asp-controller="Email" asp-action="index" asp-area="Systeem">
+    <a class="col-md-5 edit-btn" asp-controller="Email" asp-action="index" asp-area="Systeem">
         <div class="">
-            <i class="far fa-envelope-open edit-icon"></i>
+            <i class="fas
+               fa-envelope-open"></i>
             <p class="text-btn-email">Mail overzicht</p>
         </div>
     </a>
-    <a class="col-md-5 openingstijden-edit-btn" asp-action="Shutdown" asp-controller="ManagerBoard" asp-area="Manager">
+    <a class="col-md-5 edit-btn" asp-action="Shutdown" asp-controller="ManagerBoard" asp-area="Manager">
         <div class="">
-            <i class="fas fa-sign-out-alt edit-icon"></i>            
+            <i class="fas fa-power-off"></i>
             <p class="text-btn-email">Systeem Afsluiten</p>
         </div>
     </a>
 </div>
 
-}
 
 
 

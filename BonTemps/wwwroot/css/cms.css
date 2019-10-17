@@ -9,14 +9,12 @@ html {
 body {
     height: 100%;
 }
-
-.color-hr{
+/*.color-hr{
     position: absolute;
     margin-top: -6px;
     background-color: orange;
     width: 100%;
-    
-}
+}*/
 h1{
     color: orange;
 }
@@ -47,7 +45,7 @@ hr {
     width: 25px;
     fill: #fff;
 }
-a:hover, .dropdown-btn:hover {
+.navbar-left a:hover, .dropdown-btn:hover {
     font-size: 17px;
     color: white!important;
 }
@@ -90,40 +88,52 @@ a:hover, .dropdown-btn:hover {
     font-weight: bold;
 }
 
-
-.contact-edit-btn, .openingstijden-edit-btn, .email-edit-btn {
-    background-color: #212020;
-    height: 30vh;
-    margin: 25px;
-    border-radius: 4px;
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
 .text-btn-contact {
     align-content: center;
     position: absolute;
     bottom: 0px;
     left: 40px;
 }
-
 .text-btn-tijden{
     align-content: center;
     position: absolute;
     bottom: 0px;
     left: 60px;
 }
-
 .text-btn-email {
     align-content: center;
     position: absolute;
     bottom: 0px;
-    left: 100px;
+    text-align: center;
+}
+.navbar-left {
+    -webkit-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
 }
 
-.edit-icon{
-    font-size: 5rem;
-    margin-top: 10%;
-    margin-left: 35%;
-
+.row [class^="fa"] {
+    font-size: 80px;
+    margin-right: 16%;
+    margin-top: 20%;
 }
 
+.edit-btn {
+    background-color: #212020;
+    height: 30vh;
+    margin: 25px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5) !important;
+    -webkit-box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    -moz-box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    text-align: center;
+}
+.fa-sign-out-alt {
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    margin: 0;
+}
