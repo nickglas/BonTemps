@@ -3,53 +3,81 @@
 @{
     ViewData["Title"] = "Archief";
 }
-
-<h1>Archief</h1>
-<a asp-action="DeleteArchief_All" class="btn btn-primary btn-danger">Alle gearchiveerde Items verwijderen</a>
-
-<table class="table">
+@*@if(Model.Count == null)
+{
+<p>model is leeg</p>
+} else
+{
+    <p>model is vol</p>
+}*@
+<h1 class="titel">Archief</h1>
+<table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Consumptie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TafelsId)
+                Tafelnummer
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bestellingsdatum_Tijd)
+                Tijd van Bestelling
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Bestellingsdatum_afgerond)
+                Bestelling afgerond om
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Archiveerdatum)
             </th>
-            <th></th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consumptie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TafelsId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Archiveerdatum)
-            </td>
-            <td>
-                <a asp-action="DeleteArchief_Single" class="btn btn-danger" asp-route-Id="@item.Id">Verwijder item</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="FirstTD">
+                    @Html.DisplayFor(modelItem => item.Consumptie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TafelsId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Archiveerdatum)
+                </td>
+                <td>
+                    <a asp-action="DeleteArchief_Single" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<button type="button" class="btn nogbetalen" data-toggle="modal" data-target="#afrekenenFalse">
+    Alle gearchiveerde bestellingen verwijderen
+</button>
+
+<div class="modal fade" id="afrekenenFalse" tabindex="-1" role="dialog" aria-labelledby="afrekenenFalseTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="text-align: center;">
+            <span style="margin-top:1%;font-size:35px;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>
+            <h3>U staat op het punt alle <br /> gearchiveerde bestellingen te verwijderen</h3>
+            <div class="modal-body">
+               Het kan zijn dat u hier per ongeluk op geklikt heeft, weet u zeker dat u <b>ALLE</b> gearchiveerde bestellingen wilt verwijderen?
+            </div>
+            <div class="modal-footer">
+                <a asp-action="DeleteArchief_All" class="btn delete"><i class="fas fa-trash-alt delete"></i><i class="fas fa-check delete"></i></a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i style="color:#ddd!important;" class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

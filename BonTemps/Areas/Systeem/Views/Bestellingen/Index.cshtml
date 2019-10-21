@@ -4,13 +4,8 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Bestellingen</h1>
-<hr />
-<p>
-    <a asp-action="Create" class="btn btn-primary">Bestelling toevoegen</a>
-</p>
-<br />
-<table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
+<h1 class="titel">Bestellingen</h1>
+<table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
@@ -25,14 +20,14 @@
             <th>
                 Tijd van bestelling
             </th>
-            <th>Actie</th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr>
-                <td>
+                <td class="FirstTD">
                     @Html.DisplayFor(modelItem => item.Consumptie.Category.Naam)
 
                 </td>
@@ -46,11 +41,13 @@
                     @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
-                    <a asp-action="Afronden" asp-route-id="@item.Id" class="btn btn-danger">Afronden</a>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary">Bewerken</a>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-primary">Details</a>
+                    <a asp-action="Afronden" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-clipboard betalen"></i><i class="fas fa-check betalen"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+<a asp-action="Create" class="btn darkblue"><i class="fas fa-clipboard create"></i><i class="fas fa-plus create"></i></a>
