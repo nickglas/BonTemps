@@ -1,22 +1,16 @@
 ﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Consumptie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Consumpties";
 }
-<head>
-    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
-
-    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
-</head>
-
 
 <h1>Consumpties overzicht</h1>
 <hr />
-<table id="jquerytable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
+<table id="table" style="color:blue!important;" class="table table-bordered table-striped table-hover">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Naam)
+                n
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Beschrijving)
