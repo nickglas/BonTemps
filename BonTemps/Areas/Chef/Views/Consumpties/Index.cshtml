@@ -4,13 +4,13 @@
     ViewData["Title"] = "Consumpties";
 }
 
-<h1>Consumpties overzicht</h1>
-<hr />
-<table id="table" style="color:blue!important;" class="table table-bordered table-striped table-hover">
+<h1 class="titel">Consumpties</h1>
+<table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
-                n
+                @Html.DisplayNameFor(model => model.Naam)
+
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Beschrijving)
@@ -22,42 +22,38 @@
                 @Html.DisplayNameFor(model => model.Category)
             </th>
             <th>Allergeen</th>
-
-            <th>Actie</th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beschrijving)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prijs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Naam)
-            </td>
-            <td>
-                @foreach (var ca in item.ConsAller)
-                {
-                <span>@ca.Allergenen.Beschrijving</span>
-                }
-            </td>
-            <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
-                <a asp-action="Edit" asp-route-id="@item.Id">Bewerken</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Verwijderen</a>
-            </td>
-        </tr>
+            <tr>
+                <td class="FirstTD">
+                    @Html.DisplayFor(modelItem => item.Naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Beschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prijs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.Naam)
+                </td>
+                <td>
+                    @foreach (var ca in item.ConsAller)
+                    {
+                        <span>@ca.Allergenen.Beschrijving</span>
+                    }
+                </td>
+                <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
-<p>
-    <a class="create" asp-action="Create">Create New</a>
-    <a class="create" asp-controller="ChefBoard" asp-action="Index">Terug naar Dashboard</a>
-</p>
+<a asp-action="Create" class="btn darkblue"><i class="fas fa-hamburger create"></i><i class="fas fa-plus create"></i></a>
