@@ -8,15 +8,6 @@ html {
 body {
     height: 100%;
 }
-/*.color-hr{
-    position: absolute;
-    margin-top: -6px;
-    background-color: orange;
-    width: 100%;
-}*/
-h1{
-    color: orange;
-}
 .navbar-left {
     position: absolute;
     background-color: #212020;
@@ -32,12 +23,6 @@ h1{
 }
 .scroller{
     display: none;
-}
-th{
-    color: orange;
-}
-tr{
-    color: orange;
 }
 hr {
     color:red!important;
@@ -138,6 +123,8 @@ label{
     transform: scale(-1, 1);
     margin: 0;
 }
+
+
 /*------- alle css wat betreft tables begint hier -------*/
 #cmstable {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
@@ -174,13 +161,20 @@ label{
 .titel {
     font-weight: normal;
     color: #c3c4c8;
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     font-size: 3rem;
 }
- .edit, .details, .create {
+ .edit, .details, .create, .betalen, .nogbetalen {
     color: #ddd!important;
 }
+.betalen {
+    background-color: #008f30;
+}
+.nogbetalen {
+    background-color: #8f001a;
+}
 .delete {
+    background-color: #f67400;
     color: #212020 !important;
 }
 .darkblue {
