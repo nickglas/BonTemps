@@ -27,10 +27,30 @@
   <ItemGroup>
     <Folder Include="Areas\Chef\Data\" />
     <Folder Include="Areas\Chef\Models\" />
-    <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Data\Migrations\" />
     <Folder Include="wwwroot\img\uploads\" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <None Include="Areas\Manager\Views\Contact\Create.cshtml" />
+    <None Include="Areas\Manager\Views\Contact\Delete.cshtml" />
+    <None Include="Areas\Manager\Views\Contact\Details.cshtml" />
+    <None Include="Areas\Manager\Views\Contact\Edit.cshtml" />
+    <None Include="Areas\Manager\Views\Contact\Index.cshtml" />
+    <None Include="Areas\Manager\Views\Klanten\Index.cshtml" />
+    <None Include="Areas\Manager\Views\ManagerBoard\Index.cshtml" />
+    <None Include="Areas\Manager\Views\Personeel\Index.cshtml" />
+    <None Include="Areas\Manager\Views\Personeel\PersoneelAanmelden.cshtml" />
+    <None Include="Areas\Manager\Views\Personeel\PersoneelGegevens.cshtml" />
+    <None Include="Areas\Manager\Views\Rollen\Create.cshtml" />
+    <None Include="Areas\Manager\Views\Rollen\Delete.cshtml" />
+    <None Include="Areas\Manager\Views\Rollen\Details.cshtml" />
+    <None Include="Areas\Manager\Views\Rollen\Edit.cshtml" />
+    <None Include="Areas\Manager\Views\Rollen\Index.cshtml" />
+    <None Include="Areas\Manager\Views\_ViewImports.cshtml" />
+    <None Include="Areas\Manager\Views\_ViewStart.cshtml" />
   </ItemGroup>
 
 </Project>
