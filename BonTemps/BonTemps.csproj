@@ -16,11 +16,13 @@
 
 
   <ItemGroup>
+    <PackageReference Include="iTextSharp" Version="5.5.13.1" />
     <PackageReference Include="MailKit" Version="2.3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
+    <PackageReference Include="PdfSharp" Version="1.51.5185-beta" />
   </ItemGroup>
 
 

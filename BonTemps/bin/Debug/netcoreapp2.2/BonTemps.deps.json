@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "8a2b0885926145be7a8ad5864492fe55a9fe9b00"
+    "signature": "fe965a4fce9ff1d06bc12d5eed4d1f811e39ee44"
   },
   "compilationOptions": {
     "defines": [
@@ -29,13 +29,26 @@
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.NETCore.App": "2.2.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Contracts": "3.0.0",
-          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.4"
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.2.4",
+          "PDFsharp": "1.51.5185-beta",
+          "iTextSharp": "5.5.13.1"
         },
         "runtime": {
           "BonTemps.dll": {}
         },
         "compile": {
           "BonTemps.dll": {}
+        }
+      },
+      "iTextSharp/5.5.13.1": {
+        "runtime": {
+          "lib/itextsharp.dll": {
+            "assemblyVersion": "5.5.13.1",
+            "fileVersion": "5.5.13.1"
+          }
+        },
+        "compile": {
+          "lib/itextsharp.dll": {}
         }
       },
       "MailKit/2.3.1.6": {
@@ -247,6 +260,30 @@
         },
         "compile": {
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
+        }
+      },
+      "PDFsharp/1.51.5185-beta": {
+        "runtime": {
+          "lib/net20/PdfSharp.Charting.dll": {
+            "assemblyVersion": "1.51.5185.0",
+            "fileVersion": "1.51.5185.0"
+          },
+          "lib/net20/PdfSharp.dll": {
+            "assemblyVersion": "1.51.5185.0",
+            "fileVersion": "1.51.5185.0"
+          }
+        },
+        "resources": {
+          "lib/net20/de/PdfSharp.Charting.resources.dll": {
+            "locale": "de"
+          },
+          "lib/net20/de/PdfSharp.resources.dll": {
+            "locale": "de"
+          }
+        },
+        "compile": {
+          "lib/net20/PdfSharp.Charting.dll": {},
+          "lib/net20/PdfSharp.dll": {}
         }
       },
       "Portable.BouncyCastle/1.8.5": {
@@ -3745,6 +3782,13 @@
       "serviceable": false,
       "sha512": ""
     },
+    "iTextSharp/5.5.13.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xqzsYEYW/nMDjCtAXM5cl9fWil/Ju3HEGbsmoTKtltJc3M/9HNJzg++bCIOHm5uZITvRmZJWMO+S2u1yNG0gQg==",
+      "path": "itextsharp/5.5.13.1",
+      "hashPath": "itextsharp.5.5.13.1.nupkg.sha512"
+    },
     "MailKit/2.3.1.6": {
       "type": "package",
       "serviceable": true,
@@ -3842,6 +3886,13 @@
       "sha512": "sha512-qbXaB76XYUVLocLBs8Z9TS/ERGK2wm797feO+0JEPFvT7o7MRadOR77mqaSD4J1k8G+DlZQyq+MlkCuxrkr3ag==",
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
+    },
+    "PDFsharp/1.51.5185-beta": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-7C81iAdD/X2JaVGlq49lswkPKnKrbvmgDFCz/DGaCBrvIydHWJxlFK696uhNLmjUOV8Bed6K/+Xy2V8cJp7Wiw==",
+      "path": "pdfsharp/1.51.5185-beta",
+      "hashPath": "pdfsharp.1.51.5185-beta.nupkg.sha512"
     },
     "Portable.BouncyCastle/1.8.5": {
       "type": "package",

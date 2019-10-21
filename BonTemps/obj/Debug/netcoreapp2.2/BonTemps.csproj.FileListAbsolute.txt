@@ -1105,3 +1105,4 @@ C:\Users\Nick\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas
 C:\Users\Nick\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Rollen\Edit.g.cshtml.cs
 C:\Users\Nick\source\repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Rollen\Index.g.cshtml.cs
 C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\Rolwijzigen.g.cshtml.cs
+C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Tafels\Afrekenen.g.cshtml.cs

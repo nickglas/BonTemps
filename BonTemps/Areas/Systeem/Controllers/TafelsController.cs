@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System.Diagnostics;
+using System.IO;
+using Microsoft.Extensions.Hosting;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
@@ -14,10 +19,12 @@ namespace BonTemps.Areas.Systeem.Controllers
     public class TafelsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public TafelsController(ApplicationDbContext context)
+        public TafelsController(ApplicationDbContext context, IHostingEnvironment environment)
         {
             _context = context;
+            _env = environment;
         }
 
         // GET: Systeem/Tafels
@@ -46,9 +53,12 @@ namespace BonTemps.Areas.Systeem.Controllers
 
         public async Task<IActionResult> Afrekenen(int id)
         {
+            //Infotmatie ophalen
             double TotaalPrijs = 0;
             Tafels tafel = await _context.Tafels.Where(x => x.Id == id).FirstOrDefaultAsync();
             List<Bestelling> bestellingen = await _context.Bestellingen.Where(x => x.TafelsId == id && x.Afgerond == true).ToListAsync();
+            
+            //Bestellingen naar het archief plaatsen en totaalprijs berekenen
             foreach (var item in bestellingen)
             {
                 TotaalPrijs += _context.Consumpties.Where(x => x.Id == item.ConsumptieId).FirstOrDefault().Prijs;
@@ -62,21 +72,36 @@ namespace BonTemps.Areas.Systeem.Controllers
                 };
                 await _context.BestellingArchief.AddAsync(archief);
                 Console.WriteLine(item.Consumptie.Naam);
+
             }
+
+            //Database updaten
             _context.RemoveRange(bestellingen);
             tafel.Bezet = false;
             _context.Tafels.Update(tafel);
             await _context.SaveChangesAsync();
 
-            Console.WriteLine(TotaalPrijs);
-            return RedirectToAction("Index");
+
+            ViewBag.totaal = TotaalPrijs;
+            ViewBag.TafelId = tafel.Id;
+
+            Console.WriteLine("TAFEL ID : " + tafel.Id);
+
+            return View(bestellingen);
+        }
+        public async Task<IActionResult> Printbon(int Id)
+        {
+            //Console.WriteLine("TAFEL ID : " + Id);
+            //Console.WriteLine("Folder : " + _env.ContentRootPath);
+            FileStream fs = new FileStream(_env.ContentRootPath+"//PDF//"+"Bon"+"_Tafel_"+Id+".PDF" , FileMode.Create);
+            return RedirectToAction("Index", "Tafels");
         }
 
-        // GET: Systeem/Tafels/Create
-        public IActionResult Create()
-        {
+            // GET: Systeem/Tafels/Create
+            public IActionResult Create()
+            {
             return View();
-        }
+            }   
 
         // POST: Systeem/Tafels/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
