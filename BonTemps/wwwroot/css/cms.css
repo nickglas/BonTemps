@@ -33,7 +33,7 @@ h1{
 .scroller{
     display: none;
 }
-th{
+/*th{
     color: orange;
 }
 tr{
@@ -44,7 +44,7 @@ hr {
 }
 label{
     color: orange;
-}
+}*/
 [class^="fa"] {
     color: orange;
     width: 25px;
