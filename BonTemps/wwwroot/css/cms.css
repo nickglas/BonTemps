@@ -1,24 +1,12 @@
 ﻿body {
     background-color: #333030;
 }
-
 html {
     min-height: 100%;
     position: relative;
 }
 body {
     height: 100%;
-}
-
-.color-hr{
-    position: absolute;
-    margin-top: -6px;
-    background-color: orange;
-    width: 100%;
-    
-}
-h1{
-    color: orange;
 }
 .navbar-left {
     position: absolute;
@@ -36,12 +24,6 @@ h1{
 .scroller{
     display: none;
 }
-th{
-    color: orange;
-}
-tr{
-    color: orange;
-}
 hr {
     color:red!important;
 }
@@ -53,7 +35,7 @@ label{
     width: 25px;
     fill: #fff;
 }
-a:hover, .dropdown-btn:hover {
+.navbar-left a:hover, .dropdown-btn:hover {
     font-size: 17px;
     color: white!important;
 }
@@ -64,7 +46,6 @@ a:hover, .dropdown-btn:hover {
     margin-top: 4%;
     margin-left: 4%;
 }
-
 .dropdown-btn {
     color: rgba(255, 255, 255, 0.5) !important;
     display: block;
@@ -95,41 +76,108 @@ a:hover, .dropdown-btn:hover {
     color: white;
     font-weight: bold;
 }
-
-
-.contact-edit-btn, .openingstijden-edit-btn, .email-edit-btn {
-    background-color: #212020;
-    height: 30vh;
-    margin: 25px;
-    border-radius: 4px;
-    color: rgba(255, 255, 255, 0.5) !important;
-}
-
 .text-btn-contact {
     align-content: center;
     position: absolute;
     bottom: 0px;
     left: 40px;
 }
-
 .text-btn-tijden{
     align-content: center;
     position: absolute;
     bottom: 0px;
     left: 60px;
 }
-
 .text-btn-email {
     align-content: center;
     position: absolute;
     bottom: 0px;
-    left: 100px;
+    text-align: center;
+}
+.navbar-left {
+    -webkit-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+}
+.row [class^="fa"] {
+    font-size: 80px;
+    margin-right: 16%;
+    margin-top: 20%;
+}
+.edit-btn {
+    background-color: #212020;
+    height: 30vh;
+    margin: 25px;
+    border-radius: 4px;
+    color: rgba(255, 255, 255, 0.5) !important;
+    -webkit-box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    -moz-box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    box-shadow: inset 2px 42px 107px -37px rgba(0,0,0,0.41);
+    text-align: center;
+}
+.fa-sign-out-alt {
+    -moz-transform: scale(-1, 1);
+    -webkit-transform: scale(-1, 1);
+    -o-transform: scale(-1, 1);
+    -ms-transform: scale(-1, 1);
+    transform: scale(-1, 1);
+    margin: 0;
 }
 
-.edit-icon{
-    font-size: 5rem;
-    margin-top: 10%;
-    margin-left: 35%;
 
+/*------- alle css wat betreft tables begint hier -------*/
+#cmstable {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
 }
-
+#cmstable td, #cmstable th {
+    border: 2px solid #333030;
+    padding: 8px;
+}
+#cmstable th {
+    /*background-color: #474c56;*/
+    background-color: #333030;
+    padding: 12px 0px 30px 0px;
+    color: #c3c4c8;
+}
+#cmstable tr:nth-child(even) {
+    background-color: #2c2d32;
+}
+#cmstable tr {
+    background-color: #43464d;
+}
+#cmstable tr:hover {
+    background-color: #5a5c60;
+    cursor: pointer;
+}
+#cmstable td {
+    color: #9291a1;
+}
+#cmstable .FirstTD {
+    color: orange;
+}
+.titel {
+    font-weight: normal;
+    color: #c3c4c8;
+    margin-bottom: 5%;
+    font-size: 3rem;
+}
+ .edit, .details, .create, .betalen, .nogbetalen {
+    color: #ddd!important;
+}
+.betalen {
+    background-color: #008f30;
+}
+.nogbetalen {
+    background-color: #8f001a;
+}
+.delete {
+    background-color: #f67400;
+    color: #212020 !important;
+}
+.darkblue {
+    background-color: #324160;
+}
+    /*------- alle css wat betreft tables eindigt hier -------*/

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Bestelling>
+
+@{
+    ViewData["Title"] = "Afrekenen";
+    int Tafel = ViewBag.TafelId;
+}
+
+<h1>Afrekenen</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Consumptie.Naam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Consumptie.Prijs)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<h1>Totaal prijs : €@ViewBag.totaal</h1>
+<h1>TAFEL prijs : @Tafel</h1>
+
+<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>

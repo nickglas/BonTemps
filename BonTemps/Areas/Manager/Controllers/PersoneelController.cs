@@ -31,6 +31,27 @@ namespace BonTemps.Areas.Manager.Controllers
             return View(personeel);
         }
 
+        //Rollen aanpassen
+        public IActionResult Rolwijzigen(string Id)
+        {
+            Klant klant = _context.Klanten.Where(x => x.Id == Id).FirstOrDefault();
+            ViewData["Rollen"] = new SelectList(_context.Rol, "Id", "Name");
+            return View(klant);
+        }
+
+        public async Task<IActionResult> UpdateUserRole([Bind("Id,Email,PasswordHash,Rolnaam")] Klant klant)
+        {
+            //Console.WriteLine("DE HUIDIGE KLANT : " + klant.Email);
+            Klant updateuser = _context.Klanten.Where(x => x.Email == klant.Email).FirstOrDefault();
+            Rol rol = _context.Rol.Where(x => x.Id == klant.Rolnaam).FirstOrDefault();
+
+            updateuser.Rol = rol;
+            updateuser.Rolnaam = rol.Name;
+
+            _context.Update(updateuser);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index","Personeel");
+        }
 
 
         // GET: Personeel/Details/5

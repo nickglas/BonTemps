@@ -14,6 +14,7 @@ using BonTemps.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BonTemps.Models;
+using System.IO;
 
 namespace BonTemps
 {
@@ -38,8 +39,7 @@ namespace BonTemps
                     options.CheckConsentNeeded = context => true;
                     options.MinimumSameSitePolicy = SameSiteMode.None;
                 });
-
-                services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                     options.UseSqlServer(
                         Configuration.GetConnectionString("DefaultConnection")));
                 services.AddIdentity<Klant,Rol>(
