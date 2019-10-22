@@ -1254,3 +1254,4 @@ C:\Users\Nick\Source\Repos\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Manager\Views\Personeel\Rolwijzigen.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Areas\Systeem\Views\Tafels\Afrekenen.cshtml.g.cs
 C:\Users\User\source\repos\bontemps2\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Popup.cshtml.g.cs
+C:\Users\Omar\source\repos\bontemps2110\bontemps\BonTemps\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Popup.g.cshtml.cs
