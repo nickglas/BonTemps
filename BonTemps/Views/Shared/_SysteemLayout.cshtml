@@ -17,7 +17,7 @@
                   crossorigin="anonymous"
                   integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
         </environment>
-        <link rel="stylesheet" href="~/css/light.css"/>
+        <link rel="stylesheet" href="~/css/cms.css"/>
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
         <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
@@ -27,7 +27,6 @@
     <body>
         <ul class="navbar-left">
             <a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
-             <button onclick="swapStyleSheet('cms.css')">Light style sheet</button>
             @if (User.IsInRole("Chef") == true)
             {
                 <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
