@@ -3,13 +3,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+<h1 class="titel">Personeel overzicht</h1>
 
-<h1>Index</h1>
-
-<p>
-    <a class="btn btn-warning" asp-action="PersoneelAanmelden">Nieuw personeels lid aanmelden</a>
-</p>
-<table class="table">
+<table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
@@ -22,29 +18,54 @@
             <th>
                 Rol
             </th>
-            <th></th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rolnaam)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="DeleteUser" asp-route-id="@item.Id">Delete</a>
-                <a asp-action="Rolwijzigen" asp-route-id="@item.Id">Rol wijzigen</a>
-            </td>
-        </tr>
+            <tr>
+                <td class="FirstTD">
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rolnaam)
+                </td>
+                <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
+                    @*<button type="button" asp-route-id="@item.Id" class="btn delete" data-toggle="modal" data-target="#afrekenenFalse">
+                         <i class="fas fa-trash-alt delete"></i>
+                    </button>*@
+                    <a asp-action="DeleteUser" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="PersoneelGegevens" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
+                    <a asp-action="Rolwijzigen" asp-route-id="@item.Id" class="btn darkred">
+                        <i class="fas fa-user-shield edit"></i>
+                        <i class="fas fa-user-edit edit"></i>
+                    </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+<a asp-action="PersoneelAanmelden" class="btn darkblue"><i class="fas fa-user-shield create"></i><i class="fas fa-plus create"></i></a>
+
+
+@*<div class="modal fade" id="afrekenenFalse" tabindex="-1" role="dialog" aria-labelledby="afrekenenFalseTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="text-align: center;">
+            <span style="margin-top:1%;font-size:35px;">
+                <i class="fas fa-exclamation-triangle"></i>
+            </span>
+            <h3>U staat op het punt alle <br /> gearchiveerde bestellingen te verwijderen</h3>
+            <div class="modal-body">
+                Het kan zijn dat u hier per ongeluk op geklikt heeft, weet u zeker dat u <b>ALLE</b> gearchiveerde bestellingen wilt verwijderen?
+            </div>
+            <div class="modal-footer">
+                <a asp-action="DeleteUser" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i style="color:#ddd!important;" class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </div>
+</div>*@

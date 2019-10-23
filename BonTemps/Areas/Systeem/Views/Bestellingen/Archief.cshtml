@@ -3,13 +3,7 @@
 @{
     ViewData["Title"] = "Archief";
 }
-@if(Model.Count() == 0)
-{
-<p>model is leeg</p>
-} else
-{
-    <p>model is vol</p>
-}
+
 <h1 class="titel">Archief</h1>
 <table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
@@ -59,10 +53,16 @@
     </tbody>
 </table>
 
+@if (Model.Count() == 0)
+{
+}   
+else
+{
+    <button type="button" class="btn nogbetalen" data-toggle="modal" data-target="#afrekenenFalse">
+        Alle gearchiveerde bestellingen verwijderen
+    </button>}
 
-<button type="button" class="btn nogbetalen" data-toggle="modal" data-target="#afrekenenFalse">
-    Alle gearchiveerde bestellingen verwijderen
-</button>
+
 
 <div class="modal fade" id="afrekenenFalse" tabindex="-1" role="dialog" aria-labelledby="afrekenenFalseTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -72,7 +72,7 @@
             </span>
             <h3>U staat op het punt alle <br /> gearchiveerde bestellingen te verwijderen</h3>
             <div class="modal-body">
-               Het kan zijn dat u hier per ongeluk op geklikt heeft, weet u zeker dat u <b>ALLE</b> gearchiveerde bestellingen wilt verwijderen?
+                Het kan zijn dat u hier per ongeluk op geklikt heeft, weet u zeker dat u <b>ALLE</b> gearchiveerde bestellingen wilt verwijderen?
             </div>
             <div class="modal-footer">
                 <a asp-action="DeleteArchief_All" class="btn delete"><i class="fas fa-trash-alt delete"></i><i class="fas fa-check delete"></i></a>

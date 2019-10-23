@@ -4,52 +4,40 @@
     ViewData["Title"] = "inkomendereserveringen";
 }
 
-<h1>inkomende reserveringen</h1>
-
-<table class="table">
+<h1 class="titel">Inkomende reserveringen</h1>
+<table id="cmstable" class="table table-bordered table-striped table-hover" style="overflow:auto;">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NaamReserveerder)
+             Naam
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                E-Mail
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HuisTelefoonNummer)
+                Aantal Personen
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.MobielTelefoonNummer)
+                Verzoek ingediend op
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.AantalPersonen)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReserveringAangemaakt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReserveringsDatum)
+                Datum Reservering
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Opmerking)
             </th>
-            <th></th>
+            <th>Acties</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
-            <td>
+            <td class="FirstTD">
                 @Html.DisplayFor(modelItem => item.NaamReserveerder)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HuisTelefoonNummer)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MobielTelefoonNummer)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AantalPersonen)
@@ -63,13 +51,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Opmerking)
             </td>
-            <td>
-                <a asp-action="ReserveringGoedkeuren" asp-route-id="@item.Id">Goedkeuren</a>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td style="text-align:center;table-layout:fixed;display:table-cell;width:30%;min-width:30%;">
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
+                <a asp-action="ReserveringGoedkeuren" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-check create"></i></a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
