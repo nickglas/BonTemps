@@ -12,6 +12,8 @@ namespace BonTemps.Areas.Systeem.Models
         //Consumptie FK
         public Consumptie Consumptie  { get; set; }
         public int ConsumptieId { get; set; }
+        public int Aantal { get; set; }
+
 
         //Tafel
         public Tafels Tafels { get; set; }

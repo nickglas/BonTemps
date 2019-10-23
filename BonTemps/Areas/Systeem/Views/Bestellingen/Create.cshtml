@@ -8,34 +8,39 @@
 <div id="createform">
     <h3 class="titel createform">Bestelling plaatsen</h3>
     <hr />
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group" id="categorieId">
-                <label asp-for="Consumptie.CategoryId" class="control-label">Categorie</label>
-                <select asp-for="Consumptie.CategoryId" class="form-control" id="categorieid" onclick="GetSelectedValue()">
-                    <option value="0" selected>Kies uw categorie</option>
-                    <option value="1">Eten</option>
-                    <option value="2">Drinken</option>
-                    <option value="3">Dessert</option>
-                </select>
-            </div>
-            <div class="form-group" id="eten" style="visibility:visible">
-                <label asp-for="ConsumptieId" id="label" class="control-label">Consumptie</label>
-                <select asp-for="ConsumptieId" class="form-control" id="consumpties"><option value="">Kies eerst een categorie</option></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="TafelsId" class="control-label">Tafel</label>
-                <select asp-for="TafelsId" class="form-control" asp-items="ViewBag.TafelsId"></select>
-            </div>
-            <div class="form-group">
-                <button asp-action="Index" class="btn darkred CrudCancel">
-                    Annuleren  <i class="fas fa-times white"></i>
-                </button>
-                <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
-                    Bestellen  <i class="fas fa-plus white"></i>
-                </button>
-            </div>
-        </form>
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" id="categorieId">
+            <label asp-for="Consumptie.CategoryId" class="control-label">Categorie</label>
+            <select asp-for="Consumptie.CategoryId" class="form-control" id="categorieid" onclick="GetSelectedValue()">
+                <option value="0" selected>Kies uw categorie</option>
+                <option value="1">Eten</option>
+                <option value="2">Drinken</option>
+                <option value="3">Dessert</option>
+            </select>
+        </div>
+        <div class="form-group" id="eten" style="visibility:visible">
+            <label asp-for="ConsumptieId" id="label" class="control-label">Consumptie</label>
+            <select asp-for="ConsumptieId" class="form-control" id="consumpties"><option value="">Kies eerst een categorie</option></select>
+        </div>
+        <div class="form-group" id="Amount" style="visibility:visible">
+            <label asp-for="Aantal" id="label" class="control-label">Aantal</label>
+            <input asp-for="Aantal" value="1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="TafelsId" class="control-label">Tafel</label>
+            <select asp-for="TafelsId" class="form-control" asp-items="ViewBag.TafelsId"></select>
+        </div>
+
+        <div class="form-group">
+            <button asp-action="Index" class="btn darkred CrudCancel">
+                Annuleren  <i class="fas fa-times white"></i>
+            </button>
+            <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
+                Bestellen  <i class="fas fa-plus white"></i>
+            </button>
+        </div>
+    </form>
     </div>
 
 @*<div>
