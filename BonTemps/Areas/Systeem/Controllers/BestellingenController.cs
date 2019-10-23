@@ -124,7 +124,7 @@ namespace BonTemps.Areas.Systeem.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Amount,ConsumptieId,TafelsId,Bestellingsdatum_Tijd,Afgerond")] Bestelling bestelling)
+        public async Task<IActionResult> Create([Bind("Id,Aantal,ConsumptieId,TafelsId,Bestellingsdatum_Tijd,Afgerond")] Bestelling bestelling)
         {
             List<Category> categoryList = _context.Categories.ToList();
             bestelling.Bestellingsdatum_Tijd = DateTime.Now;

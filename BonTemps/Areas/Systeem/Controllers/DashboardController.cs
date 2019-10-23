@@ -44,8 +44,12 @@ namespace BonTemps.Areas.Systeem.Controllers
                 List<Bestelling> bestellingen = _context.Bestellingen.Where(x => x.Afgerond == true).ToList();
                 List<BestellingArchief> archief = _context.BestellingArchief.ToList();
 
+                Console.WriteLine("\n\nItem count in bestelling afgerond : " + bestellingen.Count);
+                Console.WriteLine("\n\nItem count in archief  : " + archief.Count);
+
                 foreach (var item in bestellingen)
                 {
+                    Console.WriteLine("!! \n\nItems in bestelling : " + item.Aantal);
                     Consumptie cons = _context.Consumpties.Where(x => x.Id == item.ConsumptieId).First();
 
                     Omzet += cons.Prijs * item.Aantal;
