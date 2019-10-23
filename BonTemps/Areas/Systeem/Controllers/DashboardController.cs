@@ -46,11 +46,13 @@ namespace BonTemps.Areas.Systeem.Controllers
 
                 foreach (var item in bestellingen)
                 {
-                    Omzet += _context.Consumpties.Where(x => x.Id == item.ConsumptieId).First().Prijs;
+                    Consumptie cons = _context.Consumpties.Where(x => x.Id == item.ConsumptieId).First();
+
+                    Omzet += cons.Prijs * item.Aantal;
                 }
                 foreach (var item in archief)
                 {
-                    Omzet += _context.Consumpties.Where(x => x.Naam == item.Consumptie).First().Prijs;
+                    Omzet += _context.Consumpties.Where(x => x.Naam == item.Consumptie).First().Prijs * item.Aantal;
                 }
                 dash.Omzet = Omzet;
             }

@@ -60,6 +60,7 @@ namespace BonTemps.Areas.Systeem.Controllers
             BestellingArchief archief = new BestellingArchief
             {
                 TafelsId = res.TafelsId,
+                Aantal = res.Aantal,
                 Bestellingsdatum_afgerond = res.Bestellingsdatum_afgerond,
                 Bestellingsdatum_Tijd = res.Bestellingsdatum_Tijd,
                 Consumptie = y.Naam,

@@ -12,38 +12,40 @@
                 @Html.DisplayNameFor(model => model.Consumptie)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Tafels)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Bestellingsdatum_afgerond)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Afgerond)
-            </th>
+
             <th>Acties</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="FirstTD" >
-                    @Html.DisplayFor(modelItem => item.Consumptie.Naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Tafels.Id)
-                </td>
-                <td>
-                    Bestelling afgerond om
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Afgerond)
-                </td>
-                <td>
-                    @*<a asp-action="Archiveren" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-archive betalen"></i><i class="fas fa-plus betalen"></i></a>*@
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
-                </td>
-            </tr>
+        <tr>
+            <td class="FirstTD">
+                @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Aantal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tafels.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
+            </td>
+>
+            <td>
+                @*<a asp-action="Archiveren" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-archive betalen"></i><i class="fas fa-plus betalen"></i></a>*@
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

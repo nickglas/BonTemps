@@ -12,7 +12,7 @@ namespace BonTemps.Areas.Systeem.Models
         public string Consumptie { get; set; }
 
         public int TafelsId { get; set; }
-
+        public int Aantal { get; set; }
         public DateTime Bestellingsdatum_Tijd { get; set; }
         public DateTime Bestellingsdatum_afgerond { get; set; }
         public DateTime Archiveerdatum { get; set; }

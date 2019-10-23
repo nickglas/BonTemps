@@ -12,6 +12,9 @@
                 @Html.DisplayNameFor(model => model.Consumptie)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Aantal)
+            </th>
+            <th>
                 Tafelnummer
             </th>
             <th>
@@ -29,26 +32,29 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td class="FirstTD">
-                    @Html.DisplayFor(modelItem => item.Consumptie)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TafelsId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Archiveerdatum)
-                </td>
-                <td>
-                    <a asp-action="DeleteArchief_Single" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
-                </td>
-            </tr>
+        <tr>
+            <td class="FirstTD">
+                @Html.DisplayFor(modelItem => item.Consumptie)
+            </td>
+            <td class="FirstTD">
+                @Html.DisplayFor(modelItem => item.Aantal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TafelsId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bestellingsdatum_Tijd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bestellingsdatum_afgerond)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Archiveerdatum)
+            </td>
+            <td>
+                <a asp-action="DeleteArchief_Single" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
