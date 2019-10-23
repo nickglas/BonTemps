@@ -40,7 +40,7 @@
                     @Html.DisplayFor(modelItem => item.Afgerond)
                 </td>
                 <td>
-                    <a asp-action="Archiveren" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-archive betalen"></i><i class="fas fa-plus betalen"></i></a>
+                    @*<a asp-action="Archiveren" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-archive betalen"></i><i class="fas fa-plus betalen"></i></a>*@
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
                 </td>
             </tr>
