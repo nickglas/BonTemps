@@ -13,7 +13,7 @@ namespace BonTemps.Models
         {
 
         }
-
+        public string KlantNaam { get; set; }
         [ForeignKey("RolId")]
         public Rol Rol { get; set; }
         public string Rolnaam { get; set; }
