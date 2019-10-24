@@ -35,18 +35,18 @@
                     @Html.DisplayFor(modelItem => item.Bezet)
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
                 </td>
                 <td>
                     @if (item.Bezet == true)
                     {
-                        <a asp-action="Afrekenen" asp-route-id="@item.Id" class="btn betalen"><i class="fas fa-money-bill-alt betalen"></i><i class="fas fa-check betalen"></i></a>
+                        <a asp-action="Afrekenen" asp-route-id="@item.Id" class="btn betalenbtn"><i class="fas fa-money-bill-alt betalen"></i><i class="fas fa-check betalen"></i></a>
                     }
                     else
                     {
-                        <button type="button" class="btn nogbetalen" data-toggle="modal" data-target="#afrekenenFalse">
+                        <button type="button" class="btn nogbetalenbtn" data-toggle="modal" data-target="#afrekenenFalse">
                             <i class="fas fa-money-bill-alt nogbetalen"></i><i class="fas fa-times nogbetalen"></i>
                         </button>
                         //modal

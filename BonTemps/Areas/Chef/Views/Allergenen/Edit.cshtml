@@ -4,33 +4,29 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>Allergenen</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="AllergenenIcoon" class="control-label"></label>
-                <input asp-for="AllergenenIcoon" class="form-control" />
-                <span asp-validation-for="AllergenenIcoon" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+<div id="createform">
+    <h3 class="titel createform">Allergeen #<span>@Html.DisplayFor(model => model.Id)</span> bewerken </h3>
+    <hr />
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Beschrijving" class="control-label"></label>
+            <input asp-for="Beschrijving" class="form-control" />
+            <span asp-validation-for="Beschrijving" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AllergenenIcoon" class="control-label"><i class="fa fa-file-image-o"></i> Foto</label>
+            <br />
+            <input type="file" name="file" asp-for="AllergenenIcoon" required />
+            <span asp-validation-for="AllergenenIcoon" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <button asp-action="Index" class="btn darkred CrudCancel">
+                Annuleren  <i class="fas fa-times white"></i>
+            </button>
+            <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
+                Bewerken  <i class="fas fa-plus white"></i>
+            </button>
+        </div>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

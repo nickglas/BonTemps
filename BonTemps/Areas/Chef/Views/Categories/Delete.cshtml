@@ -9,30 +9,37 @@
     <title>Delete</title>
 </head>
 <body>
-    <h1>Categorie aanmaken</h1>
-    <div class="table">
-
+    <h1 class="titel">Weet u zeker dat u deze bestelling wilt verwijderen?</h1>
+    <div style="margin-top:2%;" id="createform">
+        <h3 class="titel createform">Details</h3>
+        <hr />
         <dl class="row">
-            <dt class="col-sm-2">
+            <dt class="col-sm-6">
                 @Html.DisplayNameFor(model => model.Naam)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Naam)
             </dd>
-            <dt class="col-sm-2">
+            <dt class="col-sm-6">
                 @Html.DisplayNameFor(model => model.Beschrijving)
             </dt>
-            <dd class="col-sm-10">
+            <dd class="col-sm-6">
                 @Html.DisplayFor(model => model.Beschrijving)
             </dd>
         </dl>
 
-        <form asp-action="Delete">
-            <input type="hidden" asp-for="Id" />
-            <input type="submit" value="Delete" class="button-save" />
-
+        <form asp-action="Delete" style="text-align: center;margin-left:25%;">
+            <div class="form-group">
+                <button asp-action="Delete" asp-for="Id" class="btn darkred CrudCancel">
+                    Verwijderen  <i class="fas fa-times white"></i>
+                </button>
+            </div>
         </form>
     </div>
-    <a class="create" asp-action="Index">Terug naar categorie overzicht</a>
+
+    <a asp-action="Index" class="btn darkblue CrudCreate" style="float:left;margin-left:25%;margin-top:5%;">
+        <i class="fas fa-chevron-left edit"></i>   Terug
+    </a>
+
 </body>
 </html>
