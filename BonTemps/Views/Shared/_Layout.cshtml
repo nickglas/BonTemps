@@ -22,7 +22,6 @@
     <link href="~/css/Menu.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
 </head>
-
 <body>
     <div class="navbar-left">
         <a asp-area="" asp-controller="Home" asp-action="Index"><img class="foto-bt" src="~/img/bontemps.png" /></a>
@@ -33,22 +32,14 @@
                 <li><a asp-controller="Reservering" asp-action="Create" class="a-nav">Reserveren</a></li>
                 @if (User.IsInRole("Klant"))
                 {
-                    <li><a asp-controller="Reservering" asp-action="Index" class="a-nav">Reserveringen</a></li>
+                    <li><a asp-controller="Reservering" asp-action="Reservering" class="a-nav">Reserveringen</a></li>
                 }
                 <li><a asp-controller="Contact" asp-action="Index" class="a-nav">Contact</a></li>
 
 
-                @if (User.IsInRole("Manager") || User.IsInRole("Chef") || User.IsInRole("Bediening"))
-                {
+                @if (User.IsInRole("Manager") ||  User.IsInRole("Chef") || User.IsInRole("Bediening"))
+                    {
                     <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
-                }
-
-
-
-
-                @if (User.IsInRole("Manager") || User.IsInRole("Chef"))
-                {
-                    <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
                 }
 
             </ul>
@@ -71,7 +62,6 @@
         </div>
     </div>
     <div class="row">
-
         <div class="container">
             <partial name="_CookieConsentPartial" />
             <main role="main" class="pb-3">
