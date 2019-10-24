@@ -123,6 +123,35 @@ namespace BonTemps.Models
                 await _context.SaveChangesAsync();
             }
 
+            if (await userManager.FindByNameAsync("klant@bontemps.nl") == null)
+            {
+                var user = new Klant
+                {
+                    UserName = "klant@bontemps.nl",
+                    Email = "klant@bontemps.nl",
+                    PhoneNumber = "0645473290",
+                    Rolnaam = KlantRol,
+                    Klantgegevens = new Klantgegevens
+                    {
+                        Voornaam = "klant",
+                        Achternaam = "achternaam",
+                        GeboorteDatum = DateTime.Now,
+                        Geslacht = "Man",
+                        TelefoonNummer = "0645473290",
+
+                    },
+                };
+
+                var result = await userManager.CreateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddPasswordAsync(user, password);
+                    await userManager.AddToRoleAsync(user, KlantRol);
+                }
+                await _context.SaveChangesAsync();
+            }
+
             if (await userManager.FindByNameAsync("nickglas@hotmail.nl") == null)
             {
                 var user = new Klant
