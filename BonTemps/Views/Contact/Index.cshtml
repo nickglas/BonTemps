@@ -23,7 +23,7 @@
                     <b>Telefoon: </b> @Html.DisplayFor(modelItem => item.Telefoonnummer)
                 </p>
                 <p>
-                    <b>E-mail: </b> Bontemps538@gmail.com
+                    <b>E-mail: </b> @Html.DisplayFor(modelItem => item.Email)
                 </p>
                 <p>
             </div>
@@ -67,70 +67,5 @@
             </div>
         </div>
     </div>
-    @*<div class="scrollbar">
-            <div class="contact-page">
-                <div class="title-balk">
-                    <h1 class="title heading-primairy"><b>Contact</b></h1>
-                </div>
-                <div class="Contact">
-                    <h1 class="heading-primairy">Adres</h1>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Adres)
-                    </p>
-                    <p>
-                        @Html.DisplayFor(modelItem => item.Postcode)
-                    </p>
-
-                    <h1 class="heading-primairy tel">Telefoon en Email</h1>
-                    <p>
-                        <b>Telefoon : </b> @Html.DisplayFor(modelItem => item.Telefoonnummer)
-                    </p>
-                    <p>
-
-                        <b>Email : </b>    @Html.DisplayFor(modelItem => item.Email)
-                    </p>
-
-                </div>
-                <div class="openingstijden">
-                    <h1 class="heading-primairy">Openingstijden</h1>
-
-                    <p>
-                        <b>Maandag : </b>
-                    </p>
-
-                    <p>
-                        <b>Dinsdag : </b>
-                    </p>
-
-                    <p>
-                        <b>Woensdag : </b>
-                    </p>
-
-                    <p>
-                        <b>Donderdag : </b>
-                    </p>
-
-                    <p>
-                        <b>Vrijdag : </b>
-                    </p>
-
-                    <p>
-                        <b>Zaterdag : </b>
-                    </p>
-                    <p>
-                        <b>Zondag : </b>
-                    </p>
-                </div>
-                <div class="tijden">
-                    <p>@Html.DisplayFor(modelItem => item.MaandagOpen) - @Html.DisplayFor(modelItem => item.MaandagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.DinsdagOpen) - @Html.DisplayFor(modelItem => item.DinsdagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.WoensdagOpen) - @Html.DisplayFor(modelItem => item.WoensdagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.DonderdagOpen) - @Html.DisplayFor(modelItem => item.DonderdagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.VrijdagOpen) - @Html.DisplayFor(modelItem => item.VrijdagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.ZaterdagOpen) - @Html.DisplayFor(modelItem => item.ZaterdagSluit)</p>
-                    <p>@Html.DisplayFor(modelItem => item.ZondagOpen) - @Html.DisplayFor(modelItem => item.ZondagSluit)</p>
-                </div>
-            </div>
-        </div>*@
 }
 

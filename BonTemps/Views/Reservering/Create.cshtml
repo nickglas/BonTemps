@@ -37,7 +37,9 @@
                         <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
                     </div>
                     <div class="form-group" style="float: right;">
-                        <input type="submit" value="Reservering aanmaken" class="btn btn-primary" />
+                        <a asp-controller="Reservering" asp-action="Reservering" class="a-nav">
+                            <input type="submit" value="Reservering aanmaken" class="btn btn-primary" />
+                        </a>
                     </div>
                 </form>
             </div>

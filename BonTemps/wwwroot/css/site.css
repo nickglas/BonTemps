@@ -306,6 +306,24 @@ a.navbar-brand {
 
 }
 
+.table-res{
+    border-top-style: none;   
+}
+
+.reservering-overzicht {
+    background-color: floralwhite;
+    margin-top: 10vh;
+    padding-bottom: 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+.title-resoverzicht {
+    border-radius: 5px 5px 0px 0px;
+    border-bottom: 1px solid #a7a1a1;
+    background-color: #ffeecb;
+}
+
+
 
 
 /* Sticky footer styles

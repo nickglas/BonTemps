@@ -58,7 +58,6 @@ namespace BonTemps.Controllers
         [Authorize]
         public async Task<IActionResult> Reservering()
         {
-            Console.WriteLine("Username : " + User.Identity.Name);
             List<Reservering> reserveringen = await _context.Reserveringen.Where(x => x.Email == User.Identity.Name).ToListAsync();
             return View(reserveringen);
         }
@@ -70,16 +69,21 @@ namespace BonTemps.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,Goedkeuring,Opmerking,ReserveringsDatum,ReserveringAangemaakt")] Reservering reservering)
         {
+            if (reservering.Email == null)
+            {
+                reservering.Email = User.Identity.Name;
+            }
+            if (reservering.NaamReserveerder == null)
+            {
+                reservering.NaamReserveerder = _context.Klanten.Where(x => x.UserName == User.Identity.Name).Include(x => x.Klantgegevens).FirstOrDefault().Klantgegevens.Achternaam;
+            }
+
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
-            if (ModelState.IsValid)
-            {
-                _context.Reserveringen.Add(reservering);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index", "Home" +
-                    "");
-            }
-            return View(reservering);
+           
+            _context.Reserveringen.Add(reservering);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Reservering");
         }
 
         // GET: Reservering/Edit/5
