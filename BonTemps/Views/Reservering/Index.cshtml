@@ -1,0 +1,65 @@
+﻿@model IEnumerable<BonTemps.Models.Reservering>
+@{
+    ViewData["Title"] = "Reserveringen";
+}
+
+<h1>Overzicht gemaakte reserveringen</h1>
+
+
+<table class="table table-res">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NaamReserveerder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HuisTelefoonNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobielTelefoonNummer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AantalPersonen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opmerking)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReserveringsDatum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReserveringAangemaakt)
+            </th>
+        </tr>
+    </thead>
+    @foreach (var item in Model)
+    {
+                    <p>
+                        @Html.DisplayFor(modelItem => item.NaamReserveerder)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.HuisTelefoonNummer)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.MobielTelefoonNummer)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.AantalPersonen)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.Opmerking)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.ReserveringsDatum)
+                    </p>
+                    <p>
+                        @Html.DisplayFor(modelItem => item.ReserveringAangemaakt)
+                    </p>
+}
+ </table>
