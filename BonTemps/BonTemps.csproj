@@ -39,7 +39,6 @@
     <None Include="Areas\Manager\Views\Contact\Create.cshtml" />
     <None Include="Areas\Manager\Views\Contact\Delete.cshtml" />
     <None Include="Areas\Manager\Views\Contact\Details.cshtml" />
-    <None Include="Areas\Manager\Views\Contact\Edit.cshtml" />
     <None Include="Areas\Manager\Views\Contact\Index.cshtml" />
     <None Include="Areas\Manager\Views\Klanten\Index.cshtml" />
     <None Include="Areas\Manager\Views\ManagerBoard\Index.cshtml" />

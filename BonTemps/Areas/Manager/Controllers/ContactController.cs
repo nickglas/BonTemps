@@ -67,19 +67,16 @@ namespace BonTemps.Areas.Manager.Controllers
         }
 
         // GET: Manager/Contact/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> OpeningsTijden()
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            ContactInfo contact = await _context.ContactInfo.FirstOrDefaultAsync();
+            return View(contact);
+        }
 
-            var contactInfo = await _context.ContactInfo.FindAsync(id);
-            if (contactInfo == null)
-            {
-                return NotFound();
-            }
-            return View(contactInfo);
+        public async Task<IActionResult> Informatie()
+        {
+            ContactInfo contact = await _context.ContactInfo.FirstOrDefaultAsync();
+            return View(contact);
         }
 
         // POST: Manager/Contact/Edit/5
