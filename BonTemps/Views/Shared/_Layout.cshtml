@@ -64,12 +64,6 @@
                     <li><a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index">Systeem</a></li>
                 }
 
-
-                @if (User.IsInRole("Manager") || User.IsInRole("Chef"))
-                {
-                    <li><a asp-area="Chef" asp-controller="ChefBoard" asp-action="Index">Chef</a></li>
-                }
-
             </ul>
         </div>
         <div class="row line-flag">
