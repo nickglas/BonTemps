@@ -53,6 +53,7 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
+            await UpdateConsumptieMenu(context);
             await UpdateAllergenen(context);
 
 
@@ -60,7 +61,7 @@ namespace BonTemps.Models
 
         }
 
-        public static async Task UpdateContactInfo(ApplicationDbContext _context) 
+        public static async Task UpdateContactInfo(ApplicationDbContext _context)
         {
             if (_context.ContactInfo.Count() == 0)
             {
@@ -91,7 +92,7 @@ namespace BonTemps.Models
                 await _context.SaveChangesAsync();
             }
         }
-        
+
         public static async Task UpdateSystemAccounts(ApplicationDbContext _context, UserManager<Klant> userManager)
         {
             if (await userManager.FindByNameAsync("manager@bontemps.nl") == null)
@@ -119,35 +120,6 @@ namespace BonTemps.Models
                 {
                     await userManager.AddPasswordAsync(user, password);
                     await userManager.AddToRoleAsync(user, ManagerRol);
-                }
-                await _context.SaveChangesAsync();
-            }
-
-            if (await userManager.FindByNameAsync("klant@bontemps.nl") == null)
-            {
-                var user = new Klant
-                {
-                    UserName = "klant@bontemps.nl",
-                    Email = "klant@bontemps.nl",
-                    PhoneNumber = "0645473290",
-                    Rolnaam = KlantRol,
-                    Klantgegevens = new Klantgegevens
-                    {
-                        Voornaam = "klant",
-                        Achternaam = "achternaam",
-                        GeboorteDatum = DateTime.Now,
-                        Geslacht = "Man",
-                        TelefoonNummer = "0645473290",
-
-                    },
-                };
-
-                var result = await userManager.CreateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, KlantRol);
                 }
                 await _context.SaveChangesAsync();
             }
@@ -248,13 +220,6 @@ namespace BonTemps.Models
             };
             check.Add(Spaget);
 
-            Menu Drinken = new Menu
-            {
-                Menu_naam = "Drinken",
-                Beschrijving = "Alles wat je kan drinken",
-            };
-            check.Add(Drinken);
-
             foreach (var item in check)
             {
                 int i = _context.Menus.Where(x => x.Menu_naam == item.Menu_naam).Count();
@@ -271,78 +236,133 @@ namespace BonTemps.Models
             Console.WriteLine("Updating category");
 
             List<Category> check = new List<Category>();
-            Category eten = new Category
+            Category voorgerecht = new Category
             {
-                Naam = "Eten",
+                Naam = "Voorgerecht",
                 Beschrijving = "Alles wat je kan eten"
             };
-            check.Add(eten);
+            check.Add(voorgerecht);
             Category drinken = new Category
             {
                 Naam = "Drinken",
                 Beschrijving = "Alles wat je kan drinken"
             };
             check.Add(drinken);
-            Category deserts = new Category
+            Category nagerecht = new Category
             {
-                Naam = "Deserts",
+                Naam = "Nagerecht",
                 Beschrijving = "Alle deserts"
             };
-            check.Add(deserts);
+            check.Add(nagerecht);
+            Category hoofdgerecht = new Category
+            {
+                Naam = "Hoofdgerecht",
+                Beschrijving = "Alle deserts"
+            };
+            check.Add(hoofdgerecht);
             foreach (var item in check)
             {
                 int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                   await _context.AddAsync(item);
+                    await _context.AddAsync(item);
                 }
             }
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
         public static async Task UpdateItems(ApplicationDbContext _context)
         {
 
             Console.WriteLine("Updating Items");
             List<Consumptie> check = new List<Consumptie>();
-            Consumptie eten = new Consumptie
+            Consumptie hoofdgerecht = new Consumptie
             {
                 Naam = "Spaghetti",
                 Beschrijving = "Spaghetti Bolognesse",
                 Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Eten").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
             };
-            check.Add(eten);
+            check.Add(hoofdgerecht);
+            Consumptie voorgerecht = new Consumptie
+            {
+                Naam = "Tomatten soep",
+                Beschrijving = "soep gemaakt van tomatten",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
+            check.Add(voorgerecht);
             Consumptie drinken = new Consumptie
             {
                 Naam = "Coca Cola",
                 Beschrijving = "Cola",
                 Prijs = 2.50,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Drinken").First()
             };
             check.Add(drinken);
-            Consumptie deserts = new Consumptie
+            Consumptie nagerecht = new Consumptie
             {
                 Naam = "Dame blanche",
                 Beschrijving = "ijs",
                 Prijs = 3.25,
-                Category = _context.Categories.Where(x => x.Naam == "Deserts").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
             };
-            check.Add(deserts);
+            check.Add(nagerecht);
             foreach (var item in check)
             {
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                     _context.Consumpties.Add(item);
+                    _context.Consumpties.Add(item);
                 }
             }
             await _context.SaveChangesAsync();
         }
+        
+        public static async Task UpdateConsumptieMenu(ApplicationDbContext _context)
+        {
+            Console.WriteLine("Updating ConsumptieMenu");
+            List<ConsumptieMenu> consumptiemenu = _context.ConsumptieMenu.ToList();
+            List<ConsumptieMenu> check = new List<ConsumptieMenu>();
+
+            ConsumptieMenu consumptiemenu1 = new ConsumptieMenu
+            {
+                MenuId = 1,
+                ConsumptieId = 1
+            };
+            check.Add(consumptiemenu1);
+            ConsumptieMenu consumptiemenu2 = new ConsumptieMenu
+            {
+                MenuId = 1,
+                ConsumptieId = 2
+            };
+            check.Add(consumptiemenu2);
+            ConsumptieMenu consumptiemenu3 = new ConsumptieMenu
+            {
+                MenuId = 1,
+                ConsumptieId = 3
+            };
+            check.Add(consumptiemenu3);
+            ConsumptieMenu consumptiemenu4 = new ConsumptieMenu
+            {
+                MenuId = 1,
+                ConsumptieId = 4
+            };
+            check.Add(consumptiemenu4);
+
+            foreach (var item in check)
+            {
+                int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
+                if (i == 0)
+                {
+                    _context.ConsumptieMenu.Add(item);
+                }
+            }
+            await _context.SaveChangesAsync();
+        }
+        
         public static async Task UpdateAllergenen(ApplicationDbContext _context)
         {
+            Console.WriteLine("Updating Allergenen");
             List<Allergenen> allergenen = _context.Allergenen.ToList();
             List<Allergenen> check = new List<Allergenen>();
 
