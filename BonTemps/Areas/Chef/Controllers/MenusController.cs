@@ -44,6 +44,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Create
         public IActionResult Create()
         {
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
             return View();
         }
 
@@ -52,14 +53,16 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Menu_naam,Beschrijving")] Menu menu)
+        public async Task<IActionResult> Create([Bind("Id,Menu_naam,Beschrijving,ConsumptieId")] Menu menu, ConsumptieMenu consumptieMenu)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(menu);
+                _context.Add(consumptieMenu);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
             return View(menu);
         }
 
