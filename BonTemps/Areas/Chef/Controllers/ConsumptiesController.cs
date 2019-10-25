@@ -51,7 +51,7 @@ namespace BonTemps.Areas.Chef.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
-            //ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
+            ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
             ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View();
         }
@@ -61,16 +61,28 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId,AllergenenId")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,ConsAller")] Consumptie consumptie)
         {
-            
+            Console.WriteLine("\n\n\n!!! IETS !!! " + consumptie.ConsAller);
+            Console.WriteLine("ITEMS IN DIE LIJST : " +consumptie.ConsAller.Count);
+            //Id krijgen van de consumptie
+            int id = consumptie.Id;
+            //Id krijgen van het allergeen
+            //int allergeenId = _context.Allergenen.Where(x => x.Beschrijving == consumptie.ConsAller.).FirstOrDefault().Id;
+
+
+
+            Console.WriteLine("ID van Cons : " + id);
+            //Console.WriteLine("ID van Aller : " + allergeenId);
+
+
             if (ModelState.IsValid)
             {
                 _context.Add(consumptie);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["AllergenenId"] = new SelectList(_context.Set<Allergenen>(), "Id", "Id", consumptie.Allergenen);
+            ViewData["ConsAller"] = new SelectList(_context.Set<ConsumptieAllergenen>(), "Id", "Id", consumptie.ConsAller);
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
             return View(consumptie);
         }
