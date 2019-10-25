@@ -310,7 +310,6 @@ namespace BonTemps.Models
                 Beschrijving = "Spaghetti Bolognesse",
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Eten").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
             };
             check.Add(eten);
             Consumptie drinken = new Consumptie
@@ -319,7 +318,6 @@ namespace BonTemps.Models
                 Beschrijving = "Cola",
                 Prijs = 2.50,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Drinken").First()
             };
             check.Add(drinken);
             Consumptie deserts = new Consumptie
@@ -328,7 +326,6 @@ namespace BonTemps.Models
                 Beschrijving = "ijs",
                 Prijs = 3.25,
                 Category = _context.Categories.Where(x => x.Naam == "Deserts").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
             };
             check.Add(deserts);
             foreach (var item in check)

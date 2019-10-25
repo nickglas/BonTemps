@@ -61,9 +61,10 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId")] Consumptie consumptie)
+        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,ConsAller")] Consumptie consumptie)
         {
-
+            Console.WriteLine("\n\n\n!!! IETS !!! " + consumptie.ConsAller);
+            Console.WriteLine("ITEMS IN DIE LIJST : " +consumptie.ConsAller.Count);
             //Id krijgen van de consumptie
             int id = consumptie.Id;
             //Id krijgen van het allergeen
@@ -83,7 +84,6 @@ namespace BonTemps.Areas.Chef.Controllers
             }
             ViewData["ConsAller"] = new SelectList(_context.Set<ConsumptieAllergenen>(), "Id", "Id", consumptie.ConsAller);
             ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Set<Menu>(), "Id", "Id", consumptie.MenuId);
             return View(consumptie);
         }
 
@@ -140,7 +140,6 @@ namespace BonTemps.Areas.Chef.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptie.MenuId);
             return View(consumptie);
         }
 
