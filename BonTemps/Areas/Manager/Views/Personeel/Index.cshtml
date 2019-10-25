@@ -35,10 +35,10 @@
                     @Html.DisplayFor(modelItem => item.Rolnaam)
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
-                    @*<button type="button" asp-route-id="@item.Id" class="btn delete" data-toggle="modal" data-target="#afrekenenFalse">
+                    @*<button type="button" asp-route-id="@item.Id" class="btn deletebtn" data-toggle="modal" data-target="#afrekenenFalse">
                          <i class="fas fa-trash-alt delete"></i>
                     </button>*@
-                    <a asp-action="DeleteUser" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="DeleteUser" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>
                     <a asp-action="PersoneelGegevens" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
                     <a asp-action="Rolwijzigen" asp-route-id="@item.Id" class="btn darkred">
                         <i class="fas fa-user-shield edit"></i>

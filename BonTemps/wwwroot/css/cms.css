@@ -163,19 +163,34 @@ hr {
  .edit, .details, .create, .betalen, .nogbetalen {
     color: #ddd!important;
 }
-.betalen {
+.betalenbtn {
     background-color: #008f30;
 }
-.nogbetalen {
+.betalenbtn:hover {
+    background-color: #23de62;
+}
+.nogbetalenbtn {
     background-color: #8f001a;
 }
+.nogbetalenbtn:hover {
+    background-color: #ed2448;
+}
 .delete {
+    color: #212020 !important;
+}
+.deletebtn {
     background-color: #f67400;
+}
+.deletebtn:hover {
+    background-color: #ff9e47;
     color: #212020 !important;
 }
 .darkblue {
     background-color: #324160;
     color: #ddd!important;
+}
+.darkblue:hover {
+    background-color: #5670a6;
 }
     /*------- alle css wat betreft tables eindigt hier -------*/
 
@@ -198,15 +213,29 @@ hr {
     -moz-box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
     box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
 }
-
-#createform label {
-    color: #9291a1;
-
+#tijdform {
+    border-radius: 1%;
+    padding: 2rem;
+    padding-bottom: 4rem;
+    margin-top: 15%;
+    margin-left: 15%;
+    width: 75%;
+    align-content: center;
+    background-color: #2c2d32;
+    -webkit-box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
+    -moz-box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
+    box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
 }
-#createform select, #createform input {
+#createform dt, dd {
+    color: #9291a1;
+}
+#tijdform label, #createform label {
+    color: #9291a1;
+}
+#tijdform select, #tijdform input, #createform select, #createform input {
     background-color: #43464d;
     color: #9291a1;
-    border:none;
+    border: none;
     border-radius: 0;
 }
 .CrudCancel { 
@@ -219,9 +248,14 @@ hr {
     background-color: #8f001a;
     color: #ddd!important;
 }
+.darkred:hover {
+    background-color: #ed2448;
+}
 .switch-container {
     margin-bottom: 2rem;
 }
+
+
 /*switch input van w3 schools*/
 /*-----*/
 .switch {
