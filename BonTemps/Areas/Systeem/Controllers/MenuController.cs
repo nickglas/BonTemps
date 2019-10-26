@@ -44,6 +44,7 @@ namespace BonTemps.Areas.Systeem.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Menu = Menu.Menu_naam;
             return View(Menu);
         }
     }

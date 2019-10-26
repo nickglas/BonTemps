@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191025163358_test")]
-    partial class test
+    [Migration("20191025194450_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -190,6 +190,21 @@ namespace BonTemps.Migrations
                     b.HasIndex("AllergenenId");
 
                     b.ToTable("ConsumptieAllergenen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieMenu", b =>
+                {
+                    b.Property<int>("ConsumptieId");
+
+                    b.Property<int>("MenuId");
+
+                    b.Property<int>("Id");
+
+                    b.HasKey("ConsumptieId", "MenuId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("ConsumptieMenu");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Email", b =>
@@ -574,6 +589,19 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
                         .WithMany("ConsAller")
                         .HasForeignKey("AllergenenId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieMenu", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
+                        .WithMany("ConsumptieMenu")
+                        .HasForeignKey("ConsumptieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
+                        .WithMany("ConsumptieMenu")
+                        .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
