@@ -32,6 +32,7 @@ namespace BonTemps.Areas.Chef.Controllers
         public async Task<IActionResult> Details(int? id)
         {
             var menu = await _context.Menus
+                .Include(c => c.Consumpties)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
             {

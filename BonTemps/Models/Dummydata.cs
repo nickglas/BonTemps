@@ -219,7 +219,18 @@ namespace BonTemps.Models
                 Beschrijving = "Menu met Spaget",
             };
             check.Add(Spaget);
-
+            Menu Ratatouille = new Menu
+            {
+                Menu_naam = "Ratatouille",
+                Beschrijving = "Menu met Ratatouille",
+            };
+            check.Add(Ratatouille);
+            Menu flamkuchen = new Menu
+            {
+                Menu_naam = "Elsässer Flammkuchen",
+                Beschrijving = "Menu met Elsässer Flammkuchen",
+            };
+            check.Add(flamkuchen);
             foreach (var item in check)
             {
                 int i = _context.Menus.Where(x => x.Menu_naam == item.Menu_naam).Count();
@@ -290,7 +301,6 @@ namespace BonTemps.Models
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
             };
-            check.Add(voorgerecht);
             Consumptie drinken = new Consumptie
             {
                 Naam = "Coca Cola",
@@ -307,6 +317,38 @@ namespace BonTemps.Models
                 Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
             };
             check.Add(nagerecht);
+            Consumptie franseuiensoep = new Consumptie
+            {
+                Naam = "franse uiensoep",
+                Beschrijving = "soep gemaakt van franse uien",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
+            check.Add(franseuiensoep);
+            Consumptie ratatouille = new Consumptie
+            {
+                Naam = "Ratatouille",
+                Beschrijving = "Menu met Ratatouille",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
+            };
+            check.Add(ratatouille);
+            Consumptie moelleux = new Consumptie
+            {
+                Naam = "Moelleux au chocolat",
+                Beschrijving = "soort van chocoladen taart brownie ding",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
+            };
+            check.Add(moelleux);
+            Consumptie icetea = new Consumptie
+            {
+                Naam = "Ice Tea",
+                Beschrijving = "Ice Tea",
+                Prijs = 3.50,
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
+            };
+            check.Add(icetea);
             foreach (var item in check)
             {
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
@@ -348,7 +390,30 @@ namespace BonTemps.Models
                 ConsumptieId = 4
             };
             check.Add(consumptiemenu4);
-
+            ConsumptieMenu consumptiemenu5 = new ConsumptieMenu
+            {
+                MenuId = 2,
+                ConsumptieId = 5
+            };
+            check.Add(consumptiemenu5);
+            ConsumptieMenu consumptiemenu6 = new ConsumptieMenu
+            {
+                MenuId = 2,
+                ConsumptieId = 6
+            };
+            check.Add(consumptiemenu6);
+            ConsumptieMenu consumptiemenu7 = new ConsumptieMenu
+            {
+                MenuId = 2,
+                ConsumptieId = 7
+            };
+            check.Add(consumptiemenu7);
+            ConsumptieMenu consumptiemenu8 = new ConsumptieMenu
+            {
+                MenuId = 2,
+                ConsumptieId = 8
+            };
+            check.Add(consumptiemenu8);
             foreach (var item in check)
             {
                 int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
