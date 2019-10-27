@@ -45,7 +45,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Create
         public IActionResult Create()
         {
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam");
             return View();
         }
 
@@ -54,16 +54,52 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Menu_naam,Beschrijving,ConsumptieId")] Menu menu, ConsumptieMenu consumptieMenu)
+        public async Task<IActionResult> Create(int[] ConsumptieId,[Bind("Id,Menu_naam,Beschrijving,ConsumptieMenu")] Menu menu)
         {
+            List<ConsumptieMenu> UpdateList = new List<ConsumptieMenu>();
+            foreach (var item in ConsumptieId)
+            {
+                ConsumptieMenu cons = new ConsumptieMenu();
+                cons.ConsumptieId = item;
+                cons.MenuId = menu.Id;
+                UpdateList.Add(cons);
+            }
+
+            menu.ConsumptieMenu = UpdateList;
+
+            //List<ConsumptieMenu> list = new List<ConsumptieMenu>();
+
+            //ConsumptieMenu iets = new ConsumptieMenu();
+            //iets.ConsumptieId = 2;
+            //iets.MenuId = menu.Id;
+            //list.Add(iets);
+
+            //ConsumptieMenu test = new ConsumptieMenu();
+            //test.ConsumptieId = 1;
+            //test.MenuId = menu.Id;
+            //list.Add(test);
+
+            //ConsumptieMenu iets2 = new ConsumptieMenu();
+            //iets.ConsumptieId = 2;
+            //iets.MenuId = 1;
+            //list.Add(iets2);
+
+            //ConsumptieMenu iets3 = new ConsumptieMenu();
+            //iets.ConsumptieId = 3;
+            //iets.MenuId = 1;
+            //list.Add(iets3);
+
+            //menu.ConsumptieMenu = list;
             if (ModelState.IsValid)
             {
-                _context.Add(consumptieMenu);
+                _context.Add(menu);
+                Console.WriteLine("MENU ID : " + menu.Id);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
+            //ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
+            //ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
             return View(menu);
         }
 

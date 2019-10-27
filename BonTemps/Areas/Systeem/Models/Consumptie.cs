@@ -20,7 +20,8 @@ namespace BonTemps.Areas.Systeem.Models
         public Category Category { get; set; }
         public int CategoryId { get; set; }
 
-        public ICollection<ConsumptieAllergenen> ConsAller { get; set; }
+        public ICollection<ConsumptieAllergenen> ConsumptieAllergenen { get; set; }
+
         public ICollection<ConsumptieMenu> ConsumptieMenu { get; set; }
     }
 }
