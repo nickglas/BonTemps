@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191025194450_init")]
-    partial class init
+    [Migration("20191027143004_testset")]
+    partial class testset
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -158,6 +158,8 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AllergenenId");
+
                     b.Property<string>("Beschrijving");
 
                     b.Property<int>("CategoryId");
@@ -169,6 +171,8 @@ namespace BonTemps.Migrations
                     b.Property<double>("Prijs");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AllergenenId");
 
                     b.HasIndex("CategoryId");
 
@@ -183,8 +187,6 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("AllergenenId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("ConsumptieId", "AllergenenId");
 
                     b.HasIndex("AllergenenId");
@@ -197,8 +199,6 @@ namespace BonTemps.Migrations
                     b.Property<int>("ConsumptieId");
 
                     b.Property<int>("MenuId");
-
-                    b.Property<int>("Id");
 
                     b.HasKey("ConsumptieId", "MenuId");
 
@@ -569,6 +569,10 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen")
+                        .WithMany("Consumpties")
+                        .HasForeignKey("AllergenenId");
+
                     b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -582,13 +586,13 @@ namespace BonTemps.Migrations
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
-                        .WithMany("ConsAller")
+                        .WithMany("ConsumptieAllergenen")
                         .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
-                        .WithMany("ConsAller")
-                        .HasForeignKey("AllergenenId")
+                        .WithMany("ConsumptieAllergenen")
+                        .HasForeignKey("ConsumptieId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

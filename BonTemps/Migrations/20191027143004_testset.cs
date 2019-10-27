@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class init : Migration
+    public partial class testset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -376,11 +376,18 @@ namespace BonTemps.Migrations
                     Beschrijving = table.Column<string>(nullable: true),
                     Prijs = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
+                    AllergenenId = table.Column<int>(nullable: true),
                     MenuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Consumpties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Consumpties_Allergenen_AllergenenId",
+                        column: x => x.AllergenenId,
+                        principalTable: "Allergenen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Consumpties_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -437,8 +444,7 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     ConsumptieId = table.Column<int>(nullable: false),
-                    AllergenenId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    AllergenenId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -450,8 +456,8 @@ namespace BonTemps.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConsumptieAllergenen_Consumpties_AllergenenId",
-                        column: x => x.AllergenenId,
+                        name: "FK_ConsumptieAllergenen_Consumpties_ConsumptieId",
+                        column: x => x.ConsumptieId,
                         principalTable: "Consumpties",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -462,8 +468,7 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     MenuId = table.Column<int>(nullable: false),
-                    ConsumptieId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    ConsumptieId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -562,6 +567,11 @@ namespace BonTemps.Migrations
                 column: "MenuId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Consumpties_AllergenenId",
+                table: "Consumpties",
+                column: "AllergenenId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Consumpties_CategoryId",
                 table: "Consumpties",
                 column: "CategoryId");
@@ -627,9 +637,6 @@ namespace BonTemps.Migrations
                 name: "Tafels");
 
             migrationBuilder.DropTable(
-                name: "Allergenen");
-
-            migrationBuilder.DropTable(
                 name: "Consumpties");
 
             migrationBuilder.DropTable(
@@ -637,6 +644,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Allergenen");
 
             migrationBuilder.DropTable(
                 name: "Categories");

@@ -9,8 +9,6 @@ namespace BonTemps.Areas.Systeem.Models
 {
     public class Menu
     {
-       
-
         public int Id { get; set; }
         [Display(Name = "Menu naam")]
         public string Menu_naam { get; set; }

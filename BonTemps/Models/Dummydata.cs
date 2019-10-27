@@ -53,9 +53,15 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
+           
+            //ERROR
+            //await KoppelAllergeen(context);
+
             await UpdateConsumptieMenu(context);
+
             await UpdateAllergenen(context);
 
+            await KoppelMenu(context);
 
 
 
@@ -372,57 +378,101 @@ namespace BonTemps.Models
                 ConsumptieId = 1
             };
             check.Add(consumptiemenu1);
-            ConsumptieMenu consumptiemenu2 = new ConsumptieMenu
-            {
-                MenuId = 1,
-                ConsumptieId = 2
-            };
-            check.Add(consumptiemenu2);
-            ConsumptieMenu consumptiemenu3 = new ConsumptieMenu
-            {
-                MenuId = 1,
-                ConsumptieId = 3
-            };
-            check.Add(consumptiemenu3);
-            ConsumptieMenu consumptiemenu4 = new ConsumptieMenu
-            {
-                MenuId = 1,
-                ConsumptieId = 4
-            };
-            check.Add(consumptiemenu4);
-            ConsumptieMenu consumptiemenu5 = new ConsumptieMenu
-            {
-                MenuId = 2,
-                ConsumptieId = 5
-            };
-            check.Add(consumptiemenu5);
-            ConsumptieMenu consumptiemenu6 = new ConsumptieMenu
-            {
-                MenuId = 2,
-                ConsumptieId = 6
-            };
-            check.Add(consumptiemenu6);
-            ConsumptieMenu consumptiemenu7 = new ConsumptieMenu
-            {
-                MenuId = 2,
-                ConsumptieId = 7
-            };
-            check.Add(consumptiemenu7);
-            ConsumptieMenu consumptiemenu8 = new ConsumptieMenu
-            {
-                MenuId = 2,
-                ConsumptieId = 8
-            };
-            check.Add(consumptiemenu8);
+
+            //ConsumptieMenu consumptiemenu2 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 2
+            //};
+            //check.Add(consumptiemenu2);
+
+            ConsumptieMenu a = new ConsumptieMenu();
+            a.MenuId = 1;
+            a.ConsumptieId = 2;
+            check.Add(a);
+
+            //ConsumptieMenu consumptiemenu3 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 3
+            //};
+            //check.Add(consumptiemenu3);
+
+            ConsumptieMenu b = new ConsumptieMenu();
+            b.MenuId = 1;
+            b.ConsumptieId = 3;
+            check.Add(b);
+
+            //ConsumptieMenu consumptiemenu4 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 4
+            //};
+            //check.Add(consumptiemenu4);
+
+            ConsumptieMenu c = new ConsumptieMenu();
+            c.MenuId = 1;
+            c.ConsumptieId = 4;
+            check.Add(c);
+
+
+            //ConsumptieMenu consumptiemenu5 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 5
+            //};
+            //check.Add(consumptiemenu5);
+
+            ConsumptieMenu d = new ConsumptieMenu();
+            d.MenuId = 2;
+            d.ConsumptieId = 5;
+            check.Add(d);
+
+            //ConsumptieMenu consumptiemenu6 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 6
+            //};
+            //check.Add(consumptiemenu6);
+
+            ConsumptieMenu e = new ConsumptieMenu();
+            e.MenuId = 2;
+            e.ConsumptieId = 6;
+            check.Add(e);
+
+            //ConsumptieMenu consumptiemenu7 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 7
+            //};
+            //check.Add(consumptiemenu7);
+
+            ConsumptieMenu f = new ConsumptieMenu();
+            f.MenuId = 2;
+            f.ConsumptieId = 7;
+            check.Add(f);
+
+            ////ConsumptieMenu consumptiemenu8 = new ConsumptieMenu
+            ////{
+            ////    MenuId = 2,
+            ////    ConsumptieId = 8
+            ////};
+            ////check.Add(consumptiemenu8);
+
+            ConsumptieMenu g = new ConsumptieMenu();
+            g.MenuId = 2;
+            g.ConsumptieId = 7;
+            check.Add(g);
+
             foreach (var item in check)
             {
                 int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
                 if (i == 0)
                 {
                     _context.ConsumptieMenu.Add(item);
+                    await _context.SaveChangesAsync();
                 }
             }
-            await _context.SaveChangesAsync();
         }
         
         public static async Task UpdateAllergenen(ApplicationDbContext _context)
@@ -462,6 +512,48 @@ namespace BonTemps.Models
             await _context.SaveChangesAsync();
 
 
+        }
+        public static async Task KoppelAllergeen(ApplicationDbContext _context)
+        {
+            List<ConsumptieAllergenen> test = new List<ConsumptieAllergenen>();
+            ConsumptieAllergenen aller = new ConsumptieAllergenen();
+            aller.AllergenenId = 1;
+            aller.ConsumptieId = 1;
+            //aller.Allergenen = _context.Allergenen.FirstOrDefault();
+            //aller.Consumptie = _context.Consumpties.FirstOrDefault();
+            test.Add(aller);
+
+            Consumptie cons = new Consumptie();
+            cons.Naam = "tes";
+            cons.ConsumptieAllergenen = test;
+            cons.Beschrijving = "tes";
+            cons.Prijs = 1.1;
+            cons.CategoryId = 1;
+
+            _context.AddRange(cons);
+            _context.SaveChanges();
+        }
+
+        public static async Task KoppelMenu(ApplicationDbContext _context)
+        {
+            List<ConsumptieMenu> test = new List<ConsumptieMenu>();
+            ConsumptieMenu menu = new ConsumptieMenu();
+            menu.ConsumptieId = 2;
+            menu.MenuId = 2;
+            //aller.Allergenen = _context.Allergenen.FirstOrDefault();
+            //aller.Consumptie = _context.Consumpties.FirstOrDefault();
+            test.Add(menu);
+
+            Consumptie consumptie = new Consumptie();
+            consumptie.ConsumptieMenu = test;
+            consumptie.CategoryId = 1;
+            consumptie.Beschrijving = "tset";
+            consumptie.Naam = "test";
+            consumptie.Prijs = 1.5;
+            
+
+            _context.Consumpties.Add(consumptie);
+            await _context.SaveChangesAsync();
         }
 
     }

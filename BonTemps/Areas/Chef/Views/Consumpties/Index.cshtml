@@ -42,7 +42,7 @@
                     @Html.DisplayFor(modelItem => item.Category.Naam)
                 </td>
                 <td>
-                    @foreach (var ca in item.ConsAller)
+                    @foreach (var ca in item.ConsumptieAllergenen)
                     {
                         <span>@ca.Allergenen.Beschrijving</span>
                     }
