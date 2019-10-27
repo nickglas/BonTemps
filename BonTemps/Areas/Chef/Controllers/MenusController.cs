@@ -25,7 +25,9 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Menus.ToListAsync());
+            var menus = _context.Menus
+                        .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie);
+            return View(await menus.ToListAsync());
         }
 
         // GET: Chef/Menu/Details/5
@@ -45,7 +47,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Create
         public IActionResult Create()
         {
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam");
             return View();
         }
 
@@ -62,8 +64,8 @@ namespace BonTemps.Areas.Chef.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam", consumptieMenu.ConsumptieId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Menu_naam", consumptieMenu.MenuId);
             return View(menu);
         }
 
@@ -75,12 +77,14 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus.FindAsync(id);
-            if (menu == null)
+            var menus = _context.Menus
+            .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie);
+            if (menus == null)
             {
                 return NotFound();
             }
-            return View(menu);
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam");
+            return View(await menus.ToListAsync());
         }
 
         // POST: Chef/Menu/Edit/5
@@ -88,7 +92,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving,ConsumptieId")] Menu menu,ConsumptieMenu consumptieMenu)
         {
             if (id != menu.Id)
             {
@@ -115,6 +119,8 @@ namespace BonTemps.Areas.Chef.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam", consumptieMenu.ConsumptieId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Menu_naam", consumptieMenu.MenuId);
             return View(menu);
         }
 
