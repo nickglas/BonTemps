@@ -1,11 +1,33 @@
 ﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Bestelling>
 
 @{
-    ViewData["Title"] = "Afrekenen";
-    int Tafel = ViewBag.TafelId;
+    Layout = null;
 }
 
-<h1>Afrekenen</h1>
+@{
+    ViewData["Title"] = "Afrekenen";
+    int Tafel = 1 /*ViewBag.TafelId*/;
+}
+
+<head>
+    <link href="~/css/Menu.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
+    <link href="~/css/Bon.css" rel="stylesheet" />
+
+</head>
+
+<div class="bon-content">
+    <h1 class="heading-primairy title-bon">Bon temps</h1>
+    <h4 class="bedrijfs-info">
+        Hoofdstraat 82 <br>
+        1931GL<br>
+        5063209<br>
+        Bontemps@gmail.com
+    </h4>
+</div>
+
+<h1 class="tafel-nummer">Tafel nummer : #@Tafel</h1>
+
 
 <table class="table">
     <thead>
@@ -15,6 +37,9 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Consumptie.Prijs)
+            </th>
+            <th>
+                Aantal
             </th>
             <th></th>
         </tr>
@@ -29,11 +54,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Aantal)
+                </td>
             </tr>
         }
     </tbody>
 </table>
-<h1>Totaal prijs : €@ViewBag.totaal</h1>
-<h1>TAFEL prijs : @Tafel</h1>
+<h1 class="tot-prijs">Totaal prijs : €@ViewBag.totaal</h1>
 
-<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>
+@*<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>*@
