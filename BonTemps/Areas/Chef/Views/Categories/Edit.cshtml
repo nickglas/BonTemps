@@ -10,13 +10,11 @@
 </head>
 <body>
 
-<h1>Edit Category</h1>
-<hr />
-<div class="table">
-    <div class="col-md-4">
+    <div id="createform">
+        <h3 class="titel createform">Categorie aanmaken</h3>
+        <hr />
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
             <div class="form-group">
                 <label asp-for="Naam" class="control-label"></label>
                 <input asp-for="Naam" class="form-control" />
@@ -28,15 +26,15 @@
                 <span asp-validation-for="Beschrijving" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="button-save" />
+                <button asp-action="Index" class="btn darkred CrudCancel">
+                    Annuleren  <i class="fas fa-times white"></i>
+                </button>
+                <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
+                    Opslaan  <i class="fas fa-plus white"></i>
+                </button>
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a class="create" asp-action="Index">Terug naar categorie overzicht</a>
-</div>
 
 </body>
 </html>

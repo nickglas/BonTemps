@@ -3,38 +3,24 @@
     ViewData["Title"] = "Menu's";
 }
 
-<div class="menudiv">
 
-    <h1>Menu</h1>
-
+    <h2>Menus</h2>
 
 
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Menu_naam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Beschrijving)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-controller="Menu" asp-action="Detail" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Menu_naam)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Beschrijving)
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+
+
+
+    <div class="container">
+
+        @foreach (var item in Model)
+        {
+            <h3>
+                <span><a asp-controller="Menu" asp-action="Detail" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Menu_naam)</a></span>
+
+            </h3>
+            <p>@Html.DisplayFor(modelItem => item.Beschrijving)</p>
+
+        }
+    </div>
 

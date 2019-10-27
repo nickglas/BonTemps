@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -156,17 +156,21 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AllergenenId");
+
                     b.Property<string>("Beschrijving");
 
                     b.Property<int>("CategoryId");
 
-                    b.Property<int>("MenuId");
+                    b.Property<int?>("MenuId");
 
                     b.Property<string>("Naam");
 
                     b.Property<double>("Prijs");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AllergenenId");
 
                     b.HasIndex("CategoryId");
 
@@ -181,13 +185,24 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("AllergenenId");
 
-                    b.Property<int>("Id");
-
                     b.HasKey("ConsumptieId", "AllergenenId");
 
                     b.HasIndex("AllergenenId");
 
                     b.ToTable("ConsumptieAllergenen");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieMenu", b =>
+                {
+                    b.Property<int>("ConsumptieId");
+
+                    b.Property<int>("MenuId");
+
+                    b.HasKey("ConsumptieId", "MenuId");
+
+                    b.HasIndex("MenuId");
+
+                    b.ToTable("ConsumptieMenu");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Email", b =>
@@ -552,27 +567,43 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen")
+                        .WithMany("Consumpties")
+                        .HasForeignKey("AllergenenId");
+
                     b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu")
                         .WithMany("Consumpties")
-                        .HasForeignKey("MenuId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("MenuId");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieAllergenen", b =>
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen", "Allergenen")
-                        .WithMany("ConsAller")
+                        .WithMany("ConsumptieAllergenen")
                         .HasForeignKey("AllergenenId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
-                        .WithMany("ConsAller")
-                        .HasForeignKey("AllergenenId")
+                        .WithMany("ConsumptieAllergenen")
+                        .HasForeignKey("ConsumptieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ConsumptieMenu", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Consumptie", "Consumptie")
+                        .WithMany("ConsumptieMenu")
+                        .HasForeignKey("ConsumptieId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
+                        .WithMany("ConsumptieMenu")
+                        .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

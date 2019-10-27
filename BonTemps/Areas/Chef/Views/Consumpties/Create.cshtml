@@ -1,4 +1,4 @@
-﻿@model BonTemps.Areas.Systeem.Models.Consumptie
+﻿@model BonTemps.Areas.Systeem.Models.ConsumptieAllergenen
 
 @{
     ViewData["Title"] = "Create";
@@ -12,31 +12,30 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Naam" class="control-label"></label>
-                <input asp-for="Naam" class="form-control" />
-                <span asp-validation-for="Naam" class="text-danger"></span>
+                <label asp-for="Consumptie.Naam" class="control-label"></label>
+                <input asp-for="Consumptie.Naam" class="form-control" />
+                <span asp-validation-for="Consumptie.Naam" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                <label asp-for="Consumptie.Beschrijving" class="control-label"></label>
+                <input asp-for="Consumptie.Beschrijving" class="form-control" />
+                <span asp-validation-for="Consumptie.Beschrijving" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Prijs" class="control-label"></label>
-                <input asp-for="Prijs" class="form-control" />
-                <span asp-validation-for="Prijs" class="text-danger"></span>
+                <label asp-for="Consumptie.Prijs" class="control-label"></label>
+                <input asp-for="Consumptie.Prijs" class="form-control" />
+                <span asp-validation-for="Consumptie.Prijs" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CategoryId" class="control-label"></label>
-                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.CategoryName"></select>
-            </div>
-            @*<div class="form-group">
-                <label asp-for="AllergenenId" class="control-label"></label>
-                <select asp-for="Al*@lergenenId" class="form-control" asp-items="ViewBag.Allergenen"></select>
+                <label asp-for="Consumptie.CategoryId" class="control-label"></label>
+                <select asp-for="Consumptie.CategoryId" class="form-control" asp-items="ViewBag.CategoryName"></select>
             </div>
             <div class="form-group">
-                <label asp-for="MenuId" class="control-label"></label>
-                <select asp-for="MenuId" class="form-control" asp-items="ViewBag.Menu_naam"></select>
+                @*<label asp-for="ConsAller" class="control-label"></label>
+                    <select asp-for="ConsAller" class="form-control" asp-items="ViewBag.Allergenen"></select>*@
+                @Html.ListBox("Allergenen", (MultiSelectList)ViewBag.Allergenen, new { size = 8 })
+
+
             </div>
 
             <div class="form-group">
@@ -53,3 +52,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

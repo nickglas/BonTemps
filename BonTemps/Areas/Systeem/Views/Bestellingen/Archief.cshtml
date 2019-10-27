@@ -36,7 +36,7 @@
             <td class="FirstTD">
                 @Html.DisplayFor(modelItem => item.Consumptie)
             </td>
-            <td class="FirstTD">
+            <td>
                 @Html.DisplayFor(modelItem => item.Aantal)
             </td>
             <td>
@@ -52,7 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Archiveerdatum)
             </td>
             <td>
-                <a asp-action="DeleteArchief_Single" asp-route-id="@item.Id" class="btn delete"><i class="fas fa-trash-alt delete"></i></a>
+                <a asp-action="DeleteArchief_Single" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>
             </td>
         </tr>
         }
@@ -64,8 +64,10 @@
 }   
 else
 {
-    <button type="button" class="btn nogbetalen" data-toggle="modal" data-target="#afrekenenFalse">
-        Alle gearchiveerde bestellingen verwijderen
+    <button type="button" class="btn nogbetalenbtn" data-toggle="modal" data-target="#afrekenenFalse">
+        <span style="color:#ddd!important;">
+            Alle gearchiveerde bestellingen verwijderen
+        </span>   
     </button>
 }
 
@@ -80,7 +82,7 @@ else
                 Het kan zijn dat u hier per ongeluk op geklikt heeft, weet u zeker dat u <b>ALLE</b> gearchiveerde bestellingen wilt verwijderen?
             </div>
             <div class="modal-footer">
-                <a asp-action="DeleteArchief_All" class="btn delete"><i class="fas fa-trash-alt delete"></i><i class="fas fa-check delete"></i></a>
+                <a asp-action="DeleteArchief_All" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i><i class="fas fa-check delete"></i></a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i style="color:#ddd!important;" class="fas fa-times"></i></button>
             </div>
         </div>

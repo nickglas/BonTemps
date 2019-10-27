@@ -21,15 +21,31 @@ namespace BonTemps.Areas.Systeem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Menus.ToListAsync());
+            var menus = _context.Menus
+            .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie);
+            return View(await menus.ToListAsync());
         }
 
         public async Task<IActionResult> Detail(int? id)
         {
-            var menu = await _context.Menus
-             .Include(c => c.Consumpties)
-             .FirstOrDefaultAsync(m => m.Id == id);
-            return View(menu);
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            foreach (var filter in _context.ConsumptieMenu)
+            {
+
+            }
+            var Menu = await _context.Menus
+                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (Menu == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Menu = Menu.Menu_naam;
+            return View(Menu);
         }
     }
 }

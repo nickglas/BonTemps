@@ -1,49 +1,51 @@
 ﻿@model BonTemps.Areas.Systeem.Models.Menu
 @{
     ViewData["Title"] = "Menu's";
+    int Category_Voorgerecht = 1;
+    int Category_Hoofdgerecht = 2;
+    int Category_Nagerecht = 3;
+    int Category_Drinken = 4;
 }
+<Image class="MenuIcon" src="../../Image/Icons/Burger.jpg" />
+<Image class="MenuIconRight" src="../../Image/Icons/Drink.jpg" />
+<h2>  Menu @Html.DisplayFor(model => model.Menu_naam)</h2>
 
-<div class="menudiv">
-   <image src="../Image/Menu/MenuFront.jpg"></image>
-    <h1>Menu</h1>
+<div class="container">
 
+    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Voorgerecht))
+    {
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+        </h3>
+        <p>@item.Consumptie.Beschrijving</p>
+    }
+    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
+    {
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+        </h3>
+        <p>@item.Consumptie.Beschrijving</p>
+    }
+    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Nagerecht))
+    {
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+        </h3>
+        <p>@item.Consumptie.Beschrijving</p>
+    }
+    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
+    {
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+        </h3>
+        <p>@item.Consumptie.Beschrijving</p>
+    }
 
-
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Menu_naam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Beschrijving)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Consumpties)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    @Html.DisplayFor(model => model.Menu_naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(model => model.Beschrijving)
-                </td>
-                <td>
-                    @foreach (var c in Model.Consumpties)
-                    {
-
-                        @c.Naam
-
-
-                    }
-                </td>
-            </tr>
-        </tbody>
-    </table>
 </div>
+<Image class="MenuIcon" src="../../Image/Icons/Eat.jpg" />
+<Image class="MenuIconRight" src="../../Image/Icons/Soup.jpg" />
 

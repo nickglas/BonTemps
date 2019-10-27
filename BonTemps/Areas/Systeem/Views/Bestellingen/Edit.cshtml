@@ -4,43 +4,40 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<div id="createform">
+    <h3 class="titel createform">Bestelling bewerken</h3>
+    <hr />
+    <form asp-action="Edit">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group" id="categorieId">
+            <label asp-for="Consumptie.CategoryId" class="control-label">Categorie</label>
+            <select asp-for="Consumptie.CategoryId" class="form-control" id="categorieid" onclick="GetSelectedValue()">
+                <option value="0" selected>Kies uw categorie</option>
+                <option value="1">Eten</option>
+                <option value="2">Drinken</option>
+                <option value="3">Dessert</option>
+            </select>
+        </div>
+        <div class="form-group" id="eten" style="visibility:visible">
+            <label asp-for="ConsumptieId" id="label" class="control-label">Consumptie</label>
+            <select asp-for="ConsumptieId" class="form-control" id="consumpties"><option value="">Kies eerst een categorie</option></select>
+        </div>
+        <div class="form-group" id="Amount" style="visibility:visible">
+            <label asp-for="Aantal" id="label" class="control-label">Aantal</label>
+            <input asp-for="Aantal" value="1" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label asp-for="TafelsId" class="control-label">Tafel</label>
+            <select asp-for="TafelsId" class="form-control" asp-items="ViewBag.TafelsId"></select>
+        </div>
 
-<h4>Bestelling</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ConsumptieId" class="control-label"></label>
-                <select asp-for="ConsumptieId" class="form-control" asp-items="ViewBag.ConsumptieId"></select>
-                <span asp-validation-for="ConsumptieId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="TafelsId" class="control-label"></label>
-                <select asp-for="TafelsId" class="form-control" asp-items="ViewBag.TafelsId"></select>
-                <span asp-validation-for="TafelsId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bestellingsdatum_Tijd" class="control-label"></label>
-                <input asp-for="Bestellingsdatum_Tijd" class="form-control" />
-                <span asp-validation-for="Bestellingsdatum_Tijd" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Afgerond" /> @Html.DisplayNameFor(model => model.Afgerond)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <button asp-action="Index" class="btn darkred CrudCancel">
+                Annuleren  <i class="fas fa-times white"></i>
+            </button>
+            <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
+                Bewerken  <i class="fas fa-plus white"></i>
+            </button>
+        </div>
+    </form>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-

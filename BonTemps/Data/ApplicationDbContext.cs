@@ -17,16 +17,33 @@ namespace BonTemps.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            // Menu en consumptie koppel
+            builder.Entity<ConsumptieMenu>()
+                .HasKey(bc => new { bc.ConsumptieId, bc.MenuId });
+            builder.Entity<ConsumptieMenu>()
+                .HasOne(bc => bc.Consumptie)
+                .WithMany(b => b.ConsumptieMenu)
+                .HasForeignKey(bc => bc.ConsumptieId);
+            builder.Entity<ConsumptieMenu>()
+                .HasOne(bc => bc.Menu)
+                .WithMany(c => c.ConsumptieMenu)
+                .HasForeignKey(bc => bc.MenuId);
+
+            //consumptie en allergenen koppel
             builder.Entity<ConsumptieAllergenen>()
                 .HasKey(ca => new { ca.ConsumptieId, ca.AllergenenId });
             builder.Entity<ConsumptieAllergenen>()
                 .HasOne(ca => ca.Consumptie)
-                .WithMany(a => a.ConsAller)
-                .HasForeignKey(ca => ca.AllergenenId);
+                .WithMany(a => a.ConsumptieAllergenen)
+                .HasForeignKey(ca => ca.ConsumptieId);
             builder.Entity<ConsumptieAllergenen>()
                 .HasOne(ca => ca.Allergenen)
-                .WithMany(c => c.ConsAller)
+                .WithMany(c => c.ConsumptieAllergenen)
                 .HasForeignKey(ca => ca.AllergenenId);
+
+
+
+
             base.OnModelCreating(builder);
         }
 
@@ -47,6 +64,7 @@ namespace BonTemps.Data
         public DbSet<BonTemps.Areas.Systeem.Models.Email> Email { get; set; }
         public DbSet<BonTemps.Areas.Systeem.Models.Allergenen> Allergenen { get; set; }
         public DbSet<BonTemps.Areas.Systeem.Models.ConsumptieAllergenen> ConsumptieAllergenen { get; set; }
+        public DbSet<BonTemps.Areas.Systeem.Models.ConsumptieMenu> ConsumptieMenu { get; set; }
 
 
 

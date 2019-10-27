@@ -15,5 +15,6 @@ namespace BonTemps.Areas.Systeem.Models
         public string Beschrijving { get; set; }
 
         public virtual ICollection<Consumptie> Consumpties { get; set; }
+        public ICollection<ConsumptieMenu> ConsumptieMenu { get; set; }
     }
 }

@@ -24,7 +24,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Consumpties
         public async Task<IActionResult> Index()
         { 
-            var consumpties = _context.Consumpties.Include(c => c.Category).Include(a => a.ConsAller).ThenInclude(a => a.Allergenen);
+            var consumpties = _context.Consumpties.Include(c => c.Category).Include(a => a.ConsumptieAllergenen).ThenInclude(a => a.Allergenen);
             return View(await consumpties.ToListAsync());
         }
 
@@ -37,7 +37,7 @@ namespace BonTemps.Areas.Chef.Controllers
             }
 
             var consumptie = await _context.Consumpties
-                .Include(c => c.Category).Include(x => x.ConsAller)
+                .Include(c => c.Category).Include(x => x.ConsumptieAllergenen)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (consumptie == null)
             {
@@ -51,31 +51,122 @@ namespace BonTemps.Areas.Chef.Controllers
         public IActionResult Create()
         {
             ViewData["CategoryName"] = new SelectList(_context.Categories, "Id", "Naam");
-            //ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
-            ViewData["Menu_naam"] = new SelectList(_context.Menus, "Id", "Menu_naam");
+            ViewData["Allergenen"] = new SelectList(_context.Allergenen, "Id", "Beschrijving");
             return View();
         }
 
         // POST: Chef/Consumpties/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create(int[]Allergenen, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId,ConsAller")] Consumptie consumptie)
+        //{
+
+
+        //    List<ConsumptieAllergenen> UpdateList = new List<ConsumptieAllergenen>();
+        //    foreach (var item in Allergenen)
+        //    {
+        //        ConsumptieAllergenen cons = new ConsumptieAllergenen();
+        //        cons.AllergenenId = item;
+        //        cons.ConsumptieId = consumptie.Id;
+        //        Console.WriteLine("ALLERGEEN : " + cons.AllergenenId);
+        //        UpdateList.Add(cons);
+        //    }
+        //    consumptie.ConsumptieAllergenen = UpdateList;
+
+        //    //    [HttpPost]
+        //    //[ValidateAntiForgeryToken]
+        //    //public async Task<IActionResult> Create(int[] ConsumptieId, [Bind("Id,Menu_naam,Beschrijving,ConsumptieMenu")] Menu menu)
+        //    //{
+        //    //    Console.WriteLine("MENU ID : " + menu.Id);
+        //    //    List<ConsumptieMenu> UpdateList = new List<ConsumptieMenu>();
+        //    //    foreach (var item in ConsumptieId)
+        //    //    {
+        //    //        ConsumptieMenu cons = new ConsumptieMenu();
+        //    //        cons.ConsumptieId = item;
+        //    //        cons.MenuId = menu.Id;
+        //    //        UpdateList.Add(cons);
+        //    //    }
+
+        //    //    menu.ConsumptieMenu = UpdateList;
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(consumptie);
+        //        Console.WriteLine("MENU ID : " + consumptie.Id);
+
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    //List<ConsumptieAllergenen> consall = new List<ConsumptieAllergenen>();
+        //    //ConsumptieAllergenen test = new ConsumptieAllergenen();
+        //    //test.Allergenen = _context.Allergenen.FirstOrDefault();
+        //    //test.AllergenenId = test.Allergenen.Id;
+        //    //test.Consumptie = _context.Consumpties.FirstOrDefault();
+        //    //test.ConsumptieId = test.Consumptie.Id;
+
+        //    //consall.Add(test);
+
+        //    //consumptie.ConsAller = consall;
+
+        //    //Console.WriteLine("\n\n HALLO ? ");
+        //    //Console.WriteLine("\n\n Item : " + consumptie.ConsAller.Count + "\n\n");
+        //    //ViewData["ConsAller"] = new SelectList(_context.Set<ConsumptieAllergenen>(), "Id", "Id", consumptie.ConsAller);
+        //    //ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
+        //    return View(consumptie);
+        //}
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Naam,Beschrijving,Prijs,CategoryId,MenuId,AllergenenId")] Consumptie consumptie)
+        public async Task<IActionResult> Create(int[] Allergenen, [Bind("Id,Menu_naam,Beschrijving,ConsumptieMenu")] Consumptie consumptie)
         {
-            
+            List<ConsumptieAllergenen> UpdateList = new List<ConsumptieAllergenen>();
+            foreach (var item in Allergenen)
+            {
+                ConsumptieAllergenen cons = new ConsumptieAllergenen();
+                cons.ConsumptieId = item;
+                cons.AllergenenId = consumptie.Id;
+                UpdateList.Add(cons);
+            }
+
+            consumptie.ConsumptieAllergenen = UpdateList;
+
+            //List<ConsumptieMenu> list = new List<ConsumptieMenu>();
+
+            //ConsumptieMenu iets = new ConsumptieMenu();
+            //iets.ConsumptieId = 2;
+            //iets.MenuId = menu.Id;
+            //list.Add(iets);
+
+            //ConsumptieMenu test = new ConsumptieMenu();
+            //test.ConsumptieId = 1;
+            //test.MenuId = menu.Id;
+            //list.Add(test);
+
+            //ConsumptieMenu iets2 = new ConsumptieMenu();
+            //iets.ConsumptieId = 2;
+            //iets.MenuId = 1;
+            //list.Add(iets2);
+
+            //ConsumptieMenu iets3 = new ConsumptieMenu();
+            //iets.ConsumptieId = 3;
+            //iets.MenuId = 1;
+            //list.Add(iets3);
+
+            //menu.ConsumptieMenu = list;
             if (ModelState.IsValid)
             {
                 _context.Add(consumptie);
+                Console.WriteLine("MENU ID : " + consumptie.Id);
+
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            //ViewData["AllergenenId"] = new SelectList(_context.Set<Allergenen>(), "Id", "Id", consumptie.Allergenen);
-            ViewData["CategoryId"] = new SelectList(_context.Set<Category>(), "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Set<Menu>(), "Id", "Id", consumptie.MenuId);
+            //ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
+            //ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
             return View(consumptie);
         }
-
 
 
         // GET: Chef/Consumpties/Edit/5
@@ -129,7 +220,6 @@ namespace BonTemps.Areas.Chef.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Id", consumptie.CategoryId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptie.MenuId);
             return View(consumptie);
         }
 

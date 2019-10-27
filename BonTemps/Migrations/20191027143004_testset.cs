@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class init : Migration
+    public partial class testset : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,6 +47,7 @@ namespace BonTemps.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Consumptie = table.Column<string>(nullable: true),
                     TafelsId = table.Column<int>(nullable: false),
+                    Aantal = table.Column<int>(nullable: false),
                     Bestellingsdatum_Tijd = table.Column<DateTime>(nullable: false),
                     Bestellingsdatum_afgerond = table.Column<DateTime>(nullable: false),
                     Archiveerdatum = table.Column<DateTime>(nullable: false)
@@ -209,6 +210,7 @@ namespace BonTemps.Migrations
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
                     Discriminator = table.Column<string>(nullable: false),
+                    KlantNaam = table.Column<string>(nullable: true),
                     RolId = table.Column<string>(nullable: true),
                     Rolnaam = table.Column<string>(nullable: true),
                     KlantGegevensId = table.Column<int>(nullable: true),
@@ -374,11 +376,18 @@ namespace BonTemps.Migrations
                     Beschrijving = table.Column<string>(nullable: true),
                     Prijs = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
-                    MenuId = table.Column<int>(nullable: false)
+                    AllergenenId = table.Column<int>(nullable: true),
+                    MenuId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Consumpties", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Consumpties_Allergenen_AllergenenId",
+                        column: x => x.AllergenenId,
+                        principalTable: "Allergenen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Consumpties_Categories_CategoryId",
                         column: x => x.CategoryId,
@@ -390,7 +399,7 @@ namespace BonTemps.Migrations
                         column: x => x.MenuId,
                         principalTable: "Menus",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -400,6 +409,7 @@ namespace BonTemps.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ConsumptieId = table.Column<int>(nullable: false),
+                    Aantal = table.Column<int>(nullable: false),
                     TafelsId = table.Column<int>(nullable: false),
                     Bestellingsdatum_Tijd = table.Column<DateTime>(nullable: false),
                     Bestellingsdatum_afgerond = table.Column<DateTime>(nullable: false),
@@ -434,8 +444,7 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     ConsumptieId = table.Column<int>(nullable: false),
-                    AllergenenId = table.Column<int>(nullable: false),
-                    Id = table.Column<int>(nullable: false)
+                    AllergenenId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -447,9 +456,33 @@ namespace BonTemps.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ConsumptieAllergenen_Consumpties_AllergenenId",
-                        column: x => x.AllergenenId,
+                        name: "FK_ConsumptieAllergenen_Consumpties_ConsumptieId",
+                        column: x => x.ConsumptieId,
                         principalTable: "Consumpties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ConsumptieMenu",
+                columns: table => new
+                {
+                    MenuId = table.Column<int>(nullable: false),
+                    ConsumptieId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ConsumptieMenu", x => new { x.ConsumptieId, x.MenuId });
+                    table.ForeignKey(
+                        name: "FK_ConsumptieMenu_Consumpties_ConsumptieId",
+                        column: x => x.ConsumptieId,
+                        principalTable: "Consumpties",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ConsumptieMenu_Menus_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menus",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -529,6 +562,16 @@ namespace BonTemps.Migrations
                 column: "AllergenenId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ConsumptieMenu_MenuId",
+                table: "ConsumptieMenu",
+                column: "MenuId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consumpties_AllergenenId",
+                table: "Consumpties",
+                column: "AllergenenId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Consumpties_CategoryId",
                 table: "Consumpties",
                 column: "CategoryId");
@@ -576,6 +619,9 @@ namespace BonTemps.Migrations
                 name: "ConsumptieAllergenen");
 
             migrationBuilder.DropTable(
+                name: "ConsumptieMenu");
+
+            migrationBuilder.DropTable(
                 name: "ContactInfo");
 
             migrationBuilder.DropTable(
@@ -591,9 +637,6 @@ namespace BonTemps.Migrations
                 name: "Tafels");
 
             migrationBuilder.DropTable(
-                name: "Allergenen");
-
-            migrationBuilder.DropTable(
                 name: "Consumpties");
 
             migrationBuilder.DropTable(
@@ -601,6 +644,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Allergenen");
 
             migrationBuilder.DropTable(
                 name: "Categories");

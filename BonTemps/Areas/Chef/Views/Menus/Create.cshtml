@@ -1,4 +1,4 @@
-﻿@model BonTemps.Areas.Systeem.Models.Menu
+﻿@model BonTemps.Areas.Systeem.Models.ConsumptieMenu
 
 @{
     ViewData["Title"] = "Create";
@@ -11,14 +11,19 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="Menu_naam" class="control-label"></label>
-                <input asp-for="Menu_naam" class="form-control" />
-                <span asp-validation-for="Menu_naam" class="text-danger"></span>
+                <label asp-for="Menu.Menu_naam" class="control-label"></label>
+                <input asp-for="Menu.Menu_naam" class="form-control" />
+                <span asp-validation-for="Menu.Menu_naam" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Beschrijving" class="control-label"></label>
-                <input asp-for="Beschrijving" class="form-control" />
-                <span asp-validation-for="Beschrijving" class="text-danger"></span>
+                <label asp-for="Menu.Beschrijving" class="control-label"></label>
+                <input asp-for="Menu.Beschrijving" class="form-control" />
+                <span asp-validation-for="Menu.Beschrijving" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @*<label asp-for="Menu.ConsumptieMenu" class="control-label"></label>
+                <select asp-for="Menu.ConsumptieMenu" class="form-control" asp-items="ViewBag.ConsumptieId"></select>*@
+                @Html.ListBox("ConsumptieId", (MultiSelectList)ViewBag.ConsumptieId,  new { size = 8 })
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="button-save" />

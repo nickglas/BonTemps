@@ -53,14 +53,21 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
+           
+            //ERROR
+            //await KoppelAllergeen(context);
+
+            await UpdateConsumptieMenu(context);
+
             await UpdateAllergenen(context);
 
+            await KoppelMenu(context);
 
 
 
         }
 
-        public static async Task UpdateContactInfo(ApplicationDbContext _context) 
+        public static async Task UpdateContactInfo(ApplicationDbContext _context)
         {
             if (_context.ContactInfo.Count() == 0)
             {
@@ -91,7 +98,7 @@ namespace BonTemps.Models
                 await _context.SaveChangesAsync();
             }
         }
-        
+
         public static async Task UpdateSystemAccounts(ApplicationDbContext _context, UserManager<Klant> userManager)
         {
             if (await userManager.FindByNameAsync("manager@bontemps.nl") == null)
@@ -119,35 +126,6 @@ namespace BonTemps.Models
                 {
                     await userManager.AddPasswordAsync(user, password);
                     await userManager.AddToRoleAsync(user, ManagerRol);
-                }
-                await _context.SaveChangesAsync();
-            }
-
-            if (await userManager.FindByNameAsync("klant@bontemps.nl") == null)
-            {
-                var user = new Klant
-                {
-                    UserName = "klant@bontemps.nl",
-                    Email = "klant@bontemps.nl",
-                    PhoneNumber = "0645473290",
-                    Rolnaam = KlantRol,
-                    Klantgegevens = new Klantgegevens
-                    {
-                        Voornaam = "klant",
-                        Achternaam = "achternaam",
-                        GeboorteDatum = DateTime.Now,
-                        Geslacht = "Man",
-                        TelefoonNummer = "0645473290",
-
-                    },
-                };
-
-                var result = await userManager.CreateAsync(user);
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddPasswordAsync(user, password);
-                    await userManager.AddToRoleAsync(user, KlantRol);
                 }
                 await _context.SaveChangesAsync();
             }
@@ -247,14 +225,18 @@ namespace BonTemps.Models
                 Beschrijving = "Menu met Spaget",
             };
             check.Add(Spaget);
-
-            Menu Drinken = new Menu
+            Menu Ratatouille = new Menu
             {
-                Menu_naam = "Drinken",
-                Beschrijving = "Alles wat je kan drinken",
+                Menu_naam = "Ratatouille",
+                Beschrijving = "Menu met Ratatouille",
             };
-            check.Add(Drinken);
-
+            check.Add(Ratatouille);
+            Menu flamkuchen = new Menu
+            {
+                Menu_naam = "Elsässer Flammkuchen",
+                Beschrijving = "Menu met Elsässer Flammkuchen",
+            };
+            check.Add(flamkuchen);
             foreach (var item in check)
             {
                 int i = _context.Menus.Where(x => x.Menu_naam == item.Menu_naam).Count();
@@ -271,78 +253,231 @@ namespace BonTemps.Models
             Console.WriteLine("Updating category");
 
             List<Category> check = new List<Category>();
-            Category eten = new Category
+            Category voorgerecht = new Category
             {
-                Naam = "Eten",
+                Naam = "Voorgerecht",
                 Beschrijving = "Alles wat je kan eten"
             };
-            check.Add(eten);
+            check.Add(voorgerecht);
             Category drinken = new Category
             {
                 Naam = "Drinken",
                 Beschrijving = "Alles wat je kan drinken"
             };
             check.Add(drinken);
-            Category deserts = new Category
+            Category nagerecht = new Category
             {
-                Naam = "Deserts",
+                Naam = "Nagerecht",
                 Beschrijving = "Alle deserts"
             };
-            check.Add(deserts);
+            check.Add(nagerecht);
+            Category hoofdgerecht = new Category
+            {
+                Naam = "Hoofdgerecht",
+                Beschrijving = "Alle deserts"
+            };
+            check.Add(hoofdgerecht);
             foreach (var item in check)
             {
                 int i = _context.Categories.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                   await _context.AddAsync(item);
+                    await _context.AddAsync(item);
                 }
             }
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
         public static async Task UpdateItems(ApplicationDbContext _context)
         {
 
             Console.WriteLine("Updating Items");
             List<Consumptie> check = new List<Consumptie>();
-            Consumptie eten = new Consumptie
+            Consumptie hoofdgerecht = new Consumptie
             {
                 Naam = "Spaghetti",
                 Beschrijving = "Spaghetti Bolognesse",
                 Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Eten").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
             };
-            check.Add(eten);
+            check.Add(hoofdgerecht);
+            Consumptie voorgerecht = new Consumptie
+            {
+                Naam = "Tomatten soep",
+                Beschrijving = "soep gemaakt van tomatten",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
             Consumptie drinken = new Consumptie
             {
                 Naam = "Coca Cola",
                 Beschrijving = "Cola",
                 Prijs = 2.50,
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Drinken").First()
             };
             check.Add(drinken);
-            Consumptie deserts = new Consumptie
+            Consumptie nagerecht = new Consumptie
             {
                 Naam = "Dame blanche",
                 Beschrijving = "ijs",
                 Prijs = 3.25,
-                Category = _context.Categories.Where(x => x.Naam == "Deserts").First(),
-                Menu = _context.Menus.Where(x => x.Menu_naam == "Spaget").First()
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
             };
-            check.Add(deserts);
+            check.Add(nagerecht);
+            Consumptie franseuiensoep = new Consumptie
+            {
+                Naam = "franse uiensoep",
+                Beschrijving = "soep gemaakt van franse uien",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
+            check.Add(franseuiensoep);
+            Consumptie ratatouille = new Consumptie
+            {
+                Naam = "Ratatouille",
+                Beschrijving = "Menu met Ratatouille",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
+            };
+            check.Add(ratatouille);
+            Consumptie moelleux = new Consumptie
+            {
+                Naam = "Moelleux au chocolat",
+                Beschrijving = "soort van chocoladen taart brownie ding",
+                Prijs = 6.50,
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
+            };
+            check.Add(moelleux);
+            Consumptie icetea = new Consumptie
+            {
+                Naam = "Ice Tea",
+                Beschrijving = "Ice Tea",
+                Prijs = 3.50,
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
+            };
+            check.Add(icetea);
             foreach (var item in check)
             {
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
                 if (i == 0)
                 {
-                     _context.Consumpties.Add(item);
+                    _context.Consumpties.Add(item);
                 }
             }
             await _context.SaveChangesAsync();
         }
+        
+        public static async Task UpdateConsumptieMenu(ApplicationDbContext _context)
+        {
+            Console.WriteLine("Updating ConsumptieMenu");
+            List<ConsumptieMenu> consumptiemenu = _context.ConsumptieMenu.ToList();
+            List<ConsumptieMenu> check = new List<ConsumptieMenu>();
+
+            ConsumptieMenu consumptiemenu1 = new ConsumptieMenu
+            {
+                MenuId = 1,
+                ConsumptieId = 1
+            };
+            check.Add(consumptiemenu1);
+
+            //ConsumptieMenu consumptiemenu2 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 2
+            //};
+            //check.Add(consumptiemenu2);
+
+            ConsumptieMenu a = new ConsumptieMenu();
+            a.MenuId = 1;
+            a.ConsumptieId = 2;
+            check.Add(a);
+
+            //ConsumptieMenu consumptiemenu3 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 3
+            //};
+            //check.Add(consumptiemenu3);
+
+            ConsumptieMenu b = new ConsumptieMenu();
+            b.MenuId = 1;
+            b.ConsumptieId = 3;
+            check.Add(b);
+
+            //ConsumptieMenu consumptiemenu4 = new ConsumptieMenu
+            //{
+            //    MenuId = 1,
+            //    ConsumptieId = 4
+            //};
+            //check.Add(consumptiemenu4);
+
+            ConsumptieMenu c = new ConsumptieMenu();
+            c.MenuId = 1;
+            c.ConsumptieId = 4;
+            check.Add(c);
+
+
+            //ConsumptieMenu consumptiemenu5 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 5
+            //};
+            //check.Add(consumptiemenu5);
+
+            ConsumptieMenu d = new ConsumptieMenu();
+            d.MenuId = 2;
+            d.ConsumptieId = 5;
+            check.Add(d);
+
+            //ConsumptieMenu consumptiemenu6 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 6
+            //};
+            //check.Add(consumptiemenu6);
+
+            ConsumptieMenu e = new ConsumptieMenu();
+            e.MenuId = 2;
+            e.ConsumptieId = 6;
+            check.Add(e);
+
+            //ConsumptieMenu consumptiemenu7 = new ConsumptieMenu
+            //{
+            //    MenuId = 2,
+            //    ConsumptieId = 7
+            //};
+            //check.Add(consumptiemenu7);
+
+            ConsumptieMenu f = new ConsumptieMenu();
+            f.MenuId = 2;
+            f.ConsumptieId = 7;
+            check.Add(f);
+
+            ////ConsumptieMenu consumptiemenu8 = new ConsumptieMenu
+            ////{
+            ////    MenuId = 2,
+            ////    ConsumptieId = 8
+            ////};
+            ////check.Add(consumptiemenu8);
+
+            ConsumptieMenu g = new ConsumptieMenu();
+            g.MenuId = 2;
+            g.ConsumptieId = 7;
+            check.Add(g);
+
+            foreach (var item in check)
+            {
+                int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
+                if (i == 0)
+                {
+                    _context.ConsumptieMenu.Add(item);
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
+        
         public static async Task UpdateAllergenen(ApplicationDbContext _context)
         {
+            Console.WriteLine("Updating Allergenen");
             List<Allergenen> allergenen = _context.Allergenen.ToList();
             List<Allergenen> check = new List<Allergenen>();
 
@@ -377,6 +512,48 @@ namespace BonTemps.Models
             await _context.SaveChangesAsync();
 
 
+        }
+        public static async Task KoppelAllergeen(ApplicationDbContext _context)
+        {
+            List<ConsumptieAllergenen> test = new List<ConsumptieAllergenen>();
+            ConsumptieAllergenen aller = new ConsumptieAllergenen();
+            aller.AllergenenId = 1;
+            aller.ConsumptieId = 1;
+            //aller.Allergenen = _context.Allergenen.FirstOrDefault();
+            //aller.Consumptie = _context.Consumpties.FirstOrDefault();
+            test.Add(aller);
+
+            Consumptie cons = new Consumptie();
+            cons.Naam = "tes";
+            cons.ConsumptieAllergenen = test;
+            cons.Beschrijving = "tes";
+            cons.Prijs = 1.1;
+            cons.CategoryId = 1;
+
+            _context.AddRange(cons);
+            _context.SaveChanges();
+        }
+
+        public static async Task KoppelMenu(ApplicationDbContext _context)
+        {
+            List<ConsumptieMenu> test = new List<ConsumptieMenu>();
+            ConsumptieMenu menu = new ConsumptieMenu();
+            menu.ConsumptieId = 2;
+            menu.MenuId = 2;
+            //aller.Allergenen = _context.Allergenen.FirstOrDefault();
+            //aller.Consumptie = _context.Consumpties.FirstOrDefault();
+            test.Add(menu);
+
+            Consumptie consumptie = new Consumptie();
+            consumptie.ConsumptieMenu = test;
+            consumptie.CategoryId = 1;
+            consumptie.Beschrijving = "tset";
+            consumptie.Naam = "test";
+            consumptie.Prijs = 1.5;
+            
+
+            _context.Consumpties.Add(consumptie);
+            await _context.SaveChangesAsync();
         }
 
     }
