@@ -33,7 +33,7 @@ namespace BonTemps.Areas.Systeem.Controllers
                 return NotFound();
             }
 
-            foreach (var filter in _context.ConsumptieMenu)
+            foreach (var filter in _context.Consumpties)
             {
 
             }

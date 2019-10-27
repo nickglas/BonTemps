@@ -53,13 +53,13 @@ namespace BonTemps.Models
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
-           
-            //ERROR
-            //await KoppelAllergeen(context);
+            await UpdateAllergenen(context);
+
+
+            await KoppelAllergeen(context);
 
             await UpdateConsumptieMenu(context);
 
-            await UpdateAllergenen(context);
 
             await KoppelMenu(context);
 
@@ -207,7 +207,7 @@ namespace BonTemps.Models
                 if (result.Succeeded)
                 {
                     await userManager.AddPasswordAsync(personeel, password);
-                    await userManager.AddToRoleAsync(personeel, ChefRol);
+                    await userManager.AddToRoleAsync(personeel, KlantRol);
                 }
                 await _context.SaveChangesAsync();
             }
@@ -515,17 +515,17 @@ namespace BonTemps.Models
         }
         public static async Task KoppelAllergeen(ApplicationDbContext _context)
         {
-            List<ConsumptieAllergenen> test = new List<ConsumptieAllergenen>();
-            ConsumptieAllergenen aller = new ConsumptieAllergenen();
-            aller.AllergenenId = 1;
-            aller.ConsumptieId = 1;
+            List<ConsumptieAllergenen> lijst = new List<ConsumptieAllergenen>();
+            ConsumptieAllergenen Consaller = new ConsumptieAllergenen();
+            Consaller.AllergenenId = 1;
+            Consaller.ConsumptieId = 1;
             //aller.Allergenen = _context.Allergenen.FirstOrDefault();
             //aller.Consumptie = _context.Consumpties.FirstOrDefault();
-            test.Add(aller);
+            lijst.Add(Consaller);
 
             Consumptie cons = new Consumptie();
             cons.Naam = "tes";
-            cons.ConsumptieAllergenen = test;
+            cons.ConsumptieAllergenen = lijst;
             cons.Beschrijving = "tes";
             cons.Prijs = 1.1;
             cons.CategoryId = 1;
