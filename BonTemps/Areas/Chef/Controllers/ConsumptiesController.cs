@@ -119,42 +119,19 @@ namespace BonTemps.Areas.Chef.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(int[] Allergenen, [Bind("Id,Menu_naam,Beschrijving,ConsumptieMenu")] Consumptie consumptie)
+        public async Task<IActionResult> Create(int[] Allergenen, [Bind("Id,Naam,Beschrijving,Prijs,CategoryId")] Consumptie consumptie)
         {
-            List<ConsumptieAllergenen> UpdateList = new List<ConsumptieAllergenen>();
+            List<ConsumptieAllergenen> lijst = new List<ConsumptieAllergenen>();
             foreach (var item in Allergenen)
             {
-                ConsumptieAllergenen cons = new ConsumptieAllergenen();
-                cons.ConsumptieId = item;
-                cons.AllergenenId = consumptie.Id;
-                UpdateList.Add(cons);
+                ConsumptieAllergenen Consaller = new ConsumptieAllergenen();
+                Consaller.AllergenenId = item;
+                Consaller.ConsumptieId = consumptie.Id;
+                lijst.Add(Consaller);
             }
 
-            consumptie.ConsumptieAllergenen = UpdateList;
+            consumptie.ConsumptieAllergenen = lijst;
 
-            //List<ConsumptieMenu> list = new List<ConsumptieMenu>();
-
-            //ConsumptieMenu iets = new ConsumptieMenu();
-            //iets.ConsumptieId = 2;
-            //iets.MenuId = menu.Id;
-            //list.Add(iets);
-
-            //ConsumptieMenu test = new ConsumptieMenu();
-            //test.ConsumptieId = 1;
-            //test.MenuId = menu.Id;
-            //list.Add(test);
-
-            //ConsumptieMenu iets2 = new ConsumptieMenu();
-            //iets.ConsumptieId = 2;
-            //iets.MenuId = 1;
-            //list.Add(iets2);
-
-            //ConsumptieMenu iets3 = new ConsumptieMenu();
-            //iets.ConsumptieId = 3;
-            //iets.MenuId = 1;
-            //list.Add(iets3);
-
-            //menu.ConsumptieMenu = list;
             if (ModelState.IsValid)
             {
                 _context.Add(consumptie);

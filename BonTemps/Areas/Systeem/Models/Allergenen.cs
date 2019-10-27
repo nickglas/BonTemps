@@ -11,7 +11,6 @@ namespace BonTemps.Areas.Systeem.Models
         public string Beschrijving { get; set; }
         public string AllergenenIcoon { get; set; }
 
-        public virtual ICollection<Consumptie> Consumpties { get; set; }
         public ICollection<ConsumptieAllergenen> ConsumptieAllergenen { get; set; }
     }
 
