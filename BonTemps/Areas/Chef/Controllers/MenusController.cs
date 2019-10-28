@@ -25,6 +25,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu
         public async Task<IActionResult> Index()
         {
+
             return View(await _context.Menus.ToListAsync());
         }
 
