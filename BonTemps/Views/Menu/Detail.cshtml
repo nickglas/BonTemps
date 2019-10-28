@@ -6,46 +6,47 @@
     int Category_Nagerecht = 3;
     int Category_Drinken = 2;
 }
-<Image class="MenuIcon" src="../../Image/Icons/Burger.jpg" />
-<Image class="MenuIconRight" src="../../Image/Icons/Drink.jpg" />
-<h2>  Menu @Html.DisplayFor(model => model.Menu_naam)</h2>
+<div class="container-menu">
+    <Image class="MenuIcon" src="../../Image/Icons/Burger.jpg" />
+    <Image class="MenuIconRight" src="../../Image/Icons/Drink.jpg" />
+    <h2>  Menu @Html.DisplayFor(model => model.Menu_naam)</h2>
 
-<div class="container">
+    <div class="container-menu">
 
-    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Voorgerecht))
-    {
-        <h3>
-            <span>@item.Consumptie.Naam</span>
-            <span class="dots">€@item.Consumptie.Prijs</span>
-        </h3>
-        <p>@item.Consumptie.Beschrijving</p>
-    }
-    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
-    {
-        <h3>
-            <span>@item.Consumptie.Naam</span>
-            <span class="dots">€@item.Consumptie.Prijs</span>
-        </h3>
-        <p>@item.Consumptie.Beschrijving</p>
-    }
-    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Nagerecht))
-    {
-        <h3>
-            <span>@item.Consumptie.Naam</span>
-            <span class="dots">€@item.Consumptie.Prijs</span>
-        </h3>
-        <p>@item.Consumptie.Beschrijving</p>
-    }
-    @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
-    {
-        <h3>
-            <span>@item.Consumptie.Naam</span>
-            <span class="dots">€@item.Consumptie.Prijs</span>
-        </h3>
-        <p>@item.Consumptie.Beschrijving</p>
-    }
+        @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Voorgerecht))
+        {
+            <h3>
+                <span>@item.Consumptie.Naam</span>
+                <span class="dots">€@item.Consumptie.Prijs</span>
+            </h3>
+            <p>@item.Consumptie.Beschrijving</p>
+        }
+        @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
+        {
+            <h3>
+                <span>@item.Consumptie.Naam</span>
+                <span class="dots">€@item.Consumptie.Prijs</span>
+            </h3>
+            <p>@item.Consumptie.Beschrijving</p>
+        }
+        @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Nagerecht))
+        {
+            <h3>
+                <span>@item.Consumptie.Naam</span>
+                <span class="dots">€@item.Consumptie.Prijs</span>
+            </h3>
+            <p>@item.Consumptie.Beschrijving</p>
+        }
+        @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
+        {
+            <h3>
+                <span>@item.Consumptie.Naam</span>
+                <span class="dots">€@item.Consumptie.Prijs</span>
+            </h3>
+            <p>@item.Consumptie.Beschrijving</p>
+        }
 
-</div>
-<Image class="MenuIcon" src="../../Image/Icons/Eat.jpg" />
-<Image class="MenuIconRight" src="../../Image/Icons/Soup.jpg" />
-
+    </div>
+    <Image class="MenuIcon" src="../../Image/Icons/Eat.jpg" />
+    <Image class="MenuIconRight" src="../../Image/Icons/Soup.jpg" />
+    </div>
