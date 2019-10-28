@@ -5,14 +5,15 @@
     int Category_Hoofdgerecht = 4;
     int Category_Nagerecht = 3;
     int Category_Drinken = 2;
+    double prijs = 0.0;
 }
-<div class="container-menu">
+<div class="container-menu-scroll">
     <Image class="MenuIcon" src="../../Image/Icons/Burger.jpg" />
     <Image class="MenuIconRight" src="../../Image/Icons/Drink.jpg" />
     <h2>  Menu @Html.DisplayFor(model => model.Menu_naam)</h2>
 
     <div class="container-menu">
-
+        <h1>Voorgerecht</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Voorgerecht))
         {
             <h3>
@@ -24,34 +25,52 @@
                     }
                 </span>*@
                 <span class="dots">€@item.Consumptie.Prijs</span>
+                @{
+                    prijs += item.Consumptie.Prijs;
+                }
             </h3>
             <p>@item.Consumptie.Beschrijving</p>
         }
+        <h1>Hoofdgerecht</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
         {
             <h3>
                 <span>@item.Consumptie.Naam</span>
                 <span class="dots">€@item.Consumptie.Prijs</span>
+                @{ 
+                    prijs += item.Consumptie.Prijs;
+                }
             </h3>
+           
             <p>@item.Consumptie.Beschrijving</p>
         }
+        <h1>Nagerecht</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Nagerecht))
         {
-            <h3>
-                <span>@item.Consumptie.Naam</span>
-                <span class="dots">€@item.Consumptie.Prijs</span>
-            </h3>
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+            @{
+                prijs += item.Consumptie.Prijs;
+            }
+        </h3>
+            
             <p>@item.Consumptie.Beschrijving</p>
         }
+        <h1>Dranken</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
         {
             <h3>
                 <span>@item.Consumptie.Naam</span>
                 <span class="dots">€@item.Consumptie.Prijs</span>
+                @{ 
+                    prijs += item.Consumptie.Prijs;
+                }
             </h3>
+           
             <p>@item.Consumptie.Beschrijving</p>
         }
-
+        <h3>Totaal Prijs : @prijs</h3>
     </div>
     <Image class="MenuIcon" src="../../Image/Icons/Eat.jpg" />
     <Image class="MenuIconRight" src="../../Image/Icons/Soup.jpg" />

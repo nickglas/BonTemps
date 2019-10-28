@@ -89,6 +89,7 @@ namespace BonTemps.Areas.Systeem.Controllers
             Console.WriteLine("TAFEL ID : " + tafel.Id);
 
             return new ViewAsPdf(bestellingen);
+
         }
         public async Task<IActionResult> StatusAanpassen(int id)
         {

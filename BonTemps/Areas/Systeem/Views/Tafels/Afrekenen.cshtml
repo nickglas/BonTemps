@@ -6,7 +6,14 @@
 
 @{
     ViewData["Title"] = "Afrekenen";
-    int Tafel = 1 /*ViewBag.TafelId*/;
+    var Tafel = ViewBag.TafelId;
+    int i = 0;
+    double Price = 0.0;
+    foreach (var item in Model)
+    {
+        Price += item.Consumptie.Prijs * item.Aantal;
+        i = item.TafelsId;
+    }
 }
 
 <head>
@@ -26,7 +33,7 @@
     </h4>
 </div>
 
-<h1 class="tafel-nummer">Tafel nummer : #@Tafel</h1>
+<h1 class="tafel-nummer">Tafel nummer : # @i</h1>
 
 
 <table class="table">
@@ -41,23 +48,31 @@
             <th>
                 Aantal
             </th>
+            <th>Totaal</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Consumptie.Naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Aantal)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aantal)
+            </td>
+            <td>
+                @{ 
+                    double p = 0.0;
+                    p = item.Aantal * item.Consumptie.Prijs;
+                }
+                <span>&euro;@p</span>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
