@@ -12,6 +12,7 @@ using PdfSharp.Drawing;
 using System.Diagnostics;
 using System.IO;
 using Microsoft.Extensions.Hosting;
+using Rotativa.AspNetCore;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
@@ -87,7 +88,7 @@ namespace BonTemps.Areas.Systeem.Controllers
 
             Console.WriteLine("TAFEL ID : " + tafel.Id);
 
-            return View(bestellingen);
+            return new ViewAsPdf(bestellingen);
         }
         public async Task<IActionResult> Printbon(int Id)
         {

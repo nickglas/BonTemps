@@ -15,6 +15,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using BonTemps.Models;
 using System.IO;
+using Rotativa.AspNetCore;
 
 namespace BonTemps
 {
@@ -120,6 +121,9 @@ namespace BonTemps
                       template: "{area:exists}/{controller=ManagerBoard}/{action=Index}/{id?}"
                     );
                 });
+
+            RotativaConfiguration.Setup(env);    
+
                 Dummydata.Initialize(context, usermanager, rolemanager).Wait();
             
                 //DummyData.UserTest(context, usermanager, rolemanager).Wait();

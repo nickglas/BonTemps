@@ -1,0 +1,27 @@
+﻿body {
+    margin: 0;
+    padding: 0;
+}
+
+.title-bon{
+    font-size: 5rem;
+    margin: 0px;
+    padding: 0;
+}
+
+.bedrijfs-info {
+    font-size: 1.5rem;
+    margin: 0px;
+    padding: 0;
+}
+
+.title-bon, .bedrijfs-info {
+    width: 50%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tot-prijs, .tafel-prijs{
+    float: right;
+}

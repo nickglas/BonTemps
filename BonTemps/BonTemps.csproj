@@ -23,6 +23,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.4" />
     <PackageReference Include="PdfSharp" Version="1.51.5185-beta" />
+    <PackageReference Include="rotativa.AspNetCore" Version="1.0.6" />
   </ItemGroup>
 
 
