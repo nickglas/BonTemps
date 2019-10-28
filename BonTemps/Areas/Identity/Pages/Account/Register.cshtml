@@ -8,62 +8,58 @@
     <i class="fas fa-user-circle  iconregister"></i>
 </div>
 
-<div class="row registerdiv">
-    <div class="col-md-4 register-content">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Voornaam"></label>
-                <input asp-for="Input.Voornaam" class="form-control" />
-                <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
+    <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
+        <div class="row registerdiv">
+            <div class="col-md-4 register-content">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.Voornaam"></label>
+                    <input asp-for="Input.Voornaam" class="form-control" />
+                    <span asp-validation-for="Input.Voornaam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Achternaam"></label>
+                    <input asp-for="Input.Achternaam" class="form-control" />
+                    <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.GeboorteDatum"></label>
+                    <input asp-for="Input.GeboorteDatum" class="form-control" />
+                    <span asp-validation-for="Input.GeboorteDatum" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Geslacht"></label>
+                    <input asp-for="Input.Geslacht" class="form-control" />
+                    <span asp-validation-for="Input.Geslacht" class="text-danger"></span>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Achternaam"></label>
-                <input asp-for="Input.Achternaam" class="form-control" />
-                <span asp-validation-for="Input.Achternaam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.GeboorteDatum"></label>
-                <input asp-for="Input.GeboorteDatum" class="form-control" />
-                <span asp-validation-for="Input.GeboorteDatum" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Geslacht"></label>
-                <input asp-for="Input.Geslacht" class="form-control" />
-                <span asp-validation-for="Input.Geslacht" class="text-danger"></span>
-            </div>
-        </form>
-    </div>
 
-    <div class="col-md-4 register-content">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.TelefoonNummer"></label>
-                <input asp-for="Input.TelefoonNummer" class="form-control" />
-                <span asp-validation-for="Input.TelefoonNummer" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-            <button type="submit" class="btn btn-primary" style="float: right;">Registreren</button>
-        </form>
-    </div>
 
-</div>
-
+            <div class="col-md-4 register-content">
+                <div class="form-group">
+                    <label asp-for="Input.TelefoonNummer"></label>
+                    <input asp-for="Input.TelefoonNummer" class="form-control" />
+                    <span asp-validation-for="Input.TelefoonNummer" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Email"></label>
+                    <input asp-for="Input.Email" class="form-control" />
+                    <span asp-validation-for="Input.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.Password"></label>
+                    <input asp-for="Input.Password" class="form-control" />
+                    <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Input.ConfirmPassword"></label>
+                    <input asp-for="Input.ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary" style="float: right;">Registreren</button>
+            </div>
+        </div>
+</form>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

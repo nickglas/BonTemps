@@ -67,20 +67,27 @@ namespace BonTemps.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,Goedkeuring,Opmerking,ReserveringsDatum,ReserveringAangemaakt")] Reservering reservering)
+        public async Task<IActionResult> CreateWithEmail([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,Opmerking,ReserveringsDatum")] Reservering reservering)
         {
-            if (reservering.Email == null)
-            {
-                reservering.Email = User.Identity.Name;
-            }
-            if (reservering.NaamReserveerder == null)
-            {
-                reservering.NaamReserveerder = _context.Klanten.Where(x => x.UserName == User.Identity.Name).Include(x => x.Klantgegevens).FirstOrDefault().Klantgegevens.Achternaam;
-            }
-
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
            
+            _context.Reserveringen.Add(reservering);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index", "Reservering");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateWithUser([Bind("Id,NaamReserveerder,Email,HuisTelefoonNummer,MobielTelefoonNummer,AantalPersonen,Goedkeuring,Opmerking,ReserveringsDatum,ReserveringAangemaakt")] Reservering reservering)
+        {
+            
+            reservering.Email = User.Identity.Name;
+            Klant res = _context.Klanten.Where(x => x.Email == reservering.Email).Include(x=> x.Klantgegevens).FirstOrDefault();
+            reservering.NaamReserveerder = res.Klantgegevens.Achternaam;
+            reservering.Goedkeuring = false;
+            reservering.ReserveringAangemaakt = DateTime.Now;
+
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Reservering");
