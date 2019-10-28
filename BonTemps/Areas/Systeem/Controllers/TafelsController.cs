@@ -89,6 +89,23 @@ namespace BonTemps.Areas.Systeem.Controllers
             Console.WriteLine("TAFEL ID : " + tafel.Id);
 
             return new ViewAsPdf(bestellingen);
+
+        }
+        public async Task<IActionResult> StatusAanpassen(int id)
+        {
+            Tafels tafel = _context.Tafels.Where(x => x.Id == id).FirstOrDefault();
+            Console.WriteLine("Gekozen tafel = " + tafel);
+            Console.WriteLine("Tafel is bezet = " + tafel.Bezet);
+            if (tafel.Bezet == false)
+            {
+                tafel.Bezet = true;
+            } else 
+            {
+                tafel.Bezet = false;
+            }
+            _context.Tafels.Update(tafel);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
         public async Task<IActionResult> Printbon(int Id)
         {

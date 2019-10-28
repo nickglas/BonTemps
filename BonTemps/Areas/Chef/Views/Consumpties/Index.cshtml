@@ -36,12 +36,12 @@
                 @Html.DisplayFor(modelItem => item.Beschrijving)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Prijs)
+                &euro;@Html.DisplayFor(modelItem => item.Prijs)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Category.Naam)
             </td>
-            <td style="text-align:center;table-layout:fixed;display:table-cell;width:25%;min-width:25%;">
+            <td style="text-align:center;table-layout:fixed;display:table-cell;width:15%;min-width:15%;max-width:25%;">
                 @foreach (var ca in item.ConsumptieAllergenen)
                 {
                     <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
