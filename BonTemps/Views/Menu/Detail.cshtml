@@ -17,6 +17,12 @@
         {
             <h3>
                 <span>@item.Consumptie.Naam</span>
+                @*<span>
+                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
+                    {
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                    }
+                </span>*@
                 <span class="dots">€@item.Consumptie.Prijs</span>
             </h3>
             <p>@item.Consumptie.Beschrijving</p>

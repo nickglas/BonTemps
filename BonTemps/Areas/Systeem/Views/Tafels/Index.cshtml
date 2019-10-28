@@ -32,10 +32,14 @@
                     @Html.DisplayFor(modelItem => item.Zitplaatsen)
                 </td>
                 <td style="width:15%;text-align:center;">
-                    <label class="switch">
-                        @Html.DisplayFor(modelItem => item.Bezet)
-                        <span class="slider round"></span>
-                    </label>
+                    @if (item.Bezet == true)
+                    {
+                        <a asp-action="StatusAanpassen" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-check edit"></i></a>
+                    }
+                    else
+                    {
+                        <a asp-action="StatusAanpassen" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-times edit"></i></a>
+                    }
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>

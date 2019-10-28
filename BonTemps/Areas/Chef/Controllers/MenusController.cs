@@ -45,7 +45,14 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Create
         public IActionResult Create()
         {
+            ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x => x.Bezet == true), "Id", "Id");
             ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam");
+            ViewData["Voorgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 1), "Id", "Naam");
+            ViewData["Hoofdgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 4), "Id", "Naam");
+            ViewData["Nagerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 3), "Id", "Naam");
+            ViewData["Drinken"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 2), "Id", "Naam");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
+
             return View();
         }
 

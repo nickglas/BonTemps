@@ -208,7 +208,7 @@ hr {
     border-radius: 1%;
     padding: 2rem;
     padding-bottom: 4rem;
-    margin-top: 15%;
+    margin-top: 0%;
     margin-left: 25%;
     width: 40%;
     align-content: center;
@@ -230,6 +230,10 @@ hr {
     -moz-box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
     box-shadow: 10px 10px 37px -16px rgba(0,0,0,0.43);
 }
+
+#createform {
+    color: red!important;
+}
 #createform dt, dd {
     color: #9291a1;
 }
@@ -241,6 +245,10 @@ hr {
     color: #9291a1;
     border: none;
     border-radius: 0;
+    width: 100%;
+
+}
+.listbox select {
 }
 .CrudCancel { 
     float: left;
@@ -283,7 +291,7 @@ hr {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
+  background-color: #43464d;
   -webkit-transition: .4s;
   transition: .4s;
 }
@@ -301,11 +309,11 @@ hr {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #324160;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #324160;
 }
 
 input:checked + .slider:before {
