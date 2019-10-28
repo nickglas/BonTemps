@@ -325,8 +325,8 @@ namespace BonTemps.Models
             check.Add(nagerecht);
             Consumptie franseuiensoep = new Consumptie
             {
-                Naam = "franse uiensoep",
-                Beschrijving = "soep gemaakt van franse uien",
+                Naam = "Franse Uiensoep",
+                Beschrijving = "Heerlijke soep gemaakt van franse uien",
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
             };
@@ -342,7 +342,7 @@ namespace BonTemps.Models
             Consumptie moelleux = new Consumptie
             {
                 Naam = "Moelleux au chocolat",
-                Beschrijving = "soort van chocoladen taart brownie ding",
+                Beschrijving = "Heerlijke chocolade dessert",
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
             };
@@ -461,7 +461,7 @@ namespace BonTemps.Models
 
             ConsumptieMenu g = new ConsumptieMenu();
             g.MenuId = 2;
-            g.ConsumptieId = 7;
+            g.ConsumptieId = 8;
             check.Add(g);
 
             foreach (var item in check)
@@ -483,19 +483,19 @@ namespace BonTemps.Models
 
             Allergenen allergeen1 = new Allergenen
             {
-                AllergenenIcoon = "",
+                AllergenenIcoon = "pinda.png",
                 Beschrijving = "Bevat sporen van pinda's"
             };
             check.Add(allergeen1);
             Allergenen allergeen2 = new Allergenen
             {
-                AllergenenIcoon = "",
+                AllergenenIcoon = "lactose.png",
                 Beschrijving = "Bevat sporen van lactose"
             };
             check.Add(allergeen2);
             Allergenen allergeen3 = new Allergenen
             {
-                AllergenenIcoon = "",
+                AllergenenIcoon = "vis.png",
                 Beschrijving = "Bevat sporen van vis schaal en schelpdieren"
             };
             check.Add(allergeen3);
