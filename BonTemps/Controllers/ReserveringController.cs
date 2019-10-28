@@ -71,7 +71,8 @@ namespace BonTemps.Controllers
         {
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
-           
+            
+
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index", "Reservering");
@@ -85,6 +86,7 @@ namespace BonTemps.Controllers
             reservering.Email = User.Identity.Name;
             Klant res = _context.Klanten.Where(x => x.Email == reservering.Email).Include(x=> x.Klantgegevens).FirstOrDefault();
             reservering.NaamReserveerder = res.Klantgegevens.Achternaam;
+            Console.WriteLine("CREATED WITH ACHTERNAAM : " + res.Klantgegevens.Achternaam);
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
 

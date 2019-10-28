@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -20,17 +21,21 @@ namespace BonTemps.Areas.Identity.Pages.Account
         private readonly UserManager<Klant> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly ApplicationDbContext _context;
 
         public RegisterModel(
             UserManager<Klant> userManager,
             SignInManager<Klant> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            ApplicationDbContext context
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         [BindProperty]
@@ -81,9 +86,21 @@ namespace BonTemps.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = new Klant { UserName = Input.Email, Email = Input.Email };
+                var rol = "Klant";
+                user.Rolnaam = rol;
+                user.Klantgegevens = new Klantgegevens
+                {
+                    Voornaam = Input.Voornaam,
+                    Achternaam = Input.Achternaam,
+                    GeboorteDatum = Input.GeboorteDatum,
+                    Geslacht = Input.Geslacht,
+                    TelefoonNummer = Input.TelefoonNummer
+                };
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await _userManager.AddToRoleAsync(user,rol);
                 if (result.Succeeded)
                 {
+                   
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
