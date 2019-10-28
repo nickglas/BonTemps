@@ -41,26 +41,34 @@
             <th>
                 Aantal
             </th>
+            <th>Totaal</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Consumptie.Naam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Aantal)
-                </td>
-            </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aantal)
+            </td>
+            <td>
+                @{ 
+                    double p = 0.0;
+                    p = item.Aantal * item.Consumptie.Prijs;
+                }
+                <span>&euro;@p</span>
+            </td>
+        </tr>
         }
     </tbody>
 </table>
-<h1 class="tot-prijs">Totaal prijs : €@ViewBag.totaal</h1>
+<h1 class="tot-prijs">Totaal prijs : &euro;@ViewBag.totaal</h1>
 
 @*<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>*@
