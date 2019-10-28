@@ -6,7 +6,14 @@
 
 @{
     ViewData["Title"] = "Afrekenen";
-    int Tafel = 1 /*ViewBag.TafelId*/;
+    var Tafel = ViewBag.TafelId;
+    int i = 0;
+    double Price = 0.0;
+    foreach (var item in Model)
+    {
+        Price += item.Consumptie.Prijs * item.Aantal;
+        i = item.TafelsId;
+    }
 }
 
 <head>
@@ -26,7 +33,7 @@
     </h4>
 </div>
 
-<h1 class="tafel-nummer">Tafel nummer : #@Tafel</h1>
+<h1 class="tafel-nummer">Tafel nummer : # @i</h1>
 
 
 <table class="table">
@@ -61,6 +68,6 @@
         }
     </tbody>
 </table>
-<h1 class="tot-prijs">Totaal prijs : €@ViewBag.totaal</h1>
+<h1 class="tot-prijs">Totaal prijs : €@Price</h1>
 
 @*<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>*@
