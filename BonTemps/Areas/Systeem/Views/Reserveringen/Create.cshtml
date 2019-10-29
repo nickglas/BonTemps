@@ -1,56 +1,125 @@
 ﻿@model Reservering
 
-    <div id="createform">
-            <h3 class="titel createform">Reserveren</h3>
-            <hr />
-            <form asp-action="Create">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="NaamReserveerder" class="control-label">Naam</label>
-                    <input asp-for="NaamReserveerder" class="form-control" />
-                    <span asp-validation-for="NaamReserveerder" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label">E-Mail</label>
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="HuisTelefoonNummer" class="control-label">Huistelefoon</label>
-                    <input asp-for="HuisTelefoonNummer" class="form-control" />
-                    <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="MobielTelefoonNummer" class="control-label">Mobiele Telefoon</label>
-                    <input asp-for="MobielTelefoonNummer" class="form-control" />
-                    <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="AantalPersonen" class="control-label">Aantal Personen</label>
-                    <input asp-for="AantalPersonen" class="form-control" />
-                    <span asp-validation-for="AantalPersonen" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="ReserveringsDatum" class="control-label">Reserverings Datum</label>
-                    <input asp-for="ReserveringsDatum" class="form-control" />
-                    <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
-                </div>
-                @*<div class="form-group">
-                    <div class='input-group date' id='datetimepicker1'>
-                        <input type='text' class="form-control" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>
-                </div>*@
-                <div class="form-group">
-                    <button asp-action="Index" class="btn darkred CrudCancel">
-                        Annuleren  <i class="fas fa-times white"></i>
-                    </button>
-                    <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
-                        Reserveren  <i class="fas fa-plus white"></i>
-                    </button>
-                </div>
-            </form>
+
+
+@*<style>
+    .alert {
+        padding: 20px;
+        background-color: #f44336;
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .closebtn:hover {
+       color: black;
+     }
+</style>*@
+
+<div id="createform">
+    <h3 class="titel createform">Reserveren</h3>
+    <hr />
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="NaamReserveerder" class="control-label">Naam</label>
+            <input asp-for="NaamReserveerder" class="form-control" />
+            <span asp-validation-for="NaamReserveerder" class="text-danger"></span>
         </div>
+        <div class="form-group">
+            <label asp-for="Email" class="control-label">E-Mail</label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="HuisTelefoonNummer" class="control-label">Huistelefoon</label>
+            <input asp-for="HuisTelefoonNummer" id="HuisNummer" onchange="CheckThuis()" class="form-control" />
+            <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MobielTelefoonNummer" class="control-label">Mobiele Telefoon</label>
+            <input asp-for="MobielTelefoonNummer" id="MobielNummer" onchange="CheckMobiel()" class="form-control" />
+            <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="AantalPersonen" class="control-label">Aantal Personen</label>
+            <input asp-for="AantalPersonen" class="form-control" />
+            <span asp-validation-for="AantalPersonen" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="ReserveringsDatum" class="control-label">Reserverings Datum</label>
+            <input asp-for="ReserveringsDatum" class="form-control" />
+            <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="MobielTelefoonNummer" hidden class="control-label">Nummer</label>
+            <select asp-for="MobielTelefoonNummer" hidden class="form-control" asp-items="ViewBag.Nummer"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="HuisTelefoonNummer" class="control-label">Nummer</label>
+            <select asp-for="HuisTelefoonNummer" class="form-control" asp-items="ViewBag.HuisNummer"></select>
+        </div>
+
+        <script type="text/javascript">
+                    function CheckMobiel() {
+                        var content = '@ViewBag.Nummer';
+                        var nummer = document.getElementById("MobielNummer").value;
+                        var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.Nummer) as String)
+                        console.log(nummer);
+                        for (var k in json) {
+                            if (nummer == json[k].Text) {
+                                document.getElementById("MobielNummer").style.color = "red";    
+                                //alert("DEZE KLANT HEEFT EERDER BESTELD EN NIET KOMEN OPDAGEN");
+                                break;
+                            } else {
+                                document.getElementById("MobielNummer").style.color = "green";
+                            }
+                            console.log(json[k].Text)
+                        }
+
+                    }
+            function CheckThuis() {
+                var Content = '@ViewBag.HuisNummer';
+                var nummer = document.getElementById("HuisNummer").value;
+                var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.HuisNummer) as String)
+                for (var k in json) {
+                    if (nummer == json[k].Text) {
+                        document.getElementById("HuisNummer").style.color = "red";
+                        //alert("DEZE KLANT HEEFT EERDER BESTELD EN NIET KOMEN OPDAGEN");
+                        break;
+                    } else {
+                        document.getElementById("HuisNummer").style.color = "green";
+                    }
+                    console.log(json[k].Text)
+                }
+            }
+
+        </script>
+        @*<div class="form-group">
+            <div class='input-group date' id='datetimepicker1'>
+                <input type='text' class="form-control" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>*@
+        <div class="form-group">
+            <button asp-action="Index" class="btn darkred CrudCancel">
+                Annuleren  <i class="fas fa-times white"></i>
+            </button>
+            <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
+                Reserveren  <i class="fas fa-plus white"></i>
+            </button>
+        </div>
+    </form>
+</div>
 
