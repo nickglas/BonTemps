@@ -61,7 +61,7 @@ namespace BonTemps.Models
             await UpdateConsumptieMenu(context);
 
 
-            await KoppelMenu(context);
+            //await KoppelMenu(context);
 
 
 
@@ -459,10 +459,7 @@ namespace BonTemps.Models
             ////};
             ////check.Add(consumptiemenu8);
 
-            ConsumptieMenu g = new ConsumptieMenu();
-            g.MenuId = 2;
-            g.ConsumptieId = 8;
-            check.Add(g);
+            
 
             foreach (var item in check)
             {
