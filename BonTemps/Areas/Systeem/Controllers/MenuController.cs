@@ -38,8 +38,10 @@ namespace BonTemps.Areas.Systeem.Controllers
 
             }
             var Menu = await _context.Menus
-                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+              .Include(cm => cm.ConsumptieMenu)
+              .ThenInclude(c => c.Consumptie)
+              .ThenInclude(ca => ca.ConsumptieAllergenen)
+              .FirstOrDefaultAsync(m => m.Id == id);
             if (Menu == null)
             {
                 return NotFound();

@@ -20,6 +20,7 @@ namespace BonTemps.Models
         [Display(Name = "Mobiel telefoonnummer")]
         public string MobielTelefoonNummer { get; set; }
         [Required]
+        [Range(1, 60)]
         [Display(Name = "Aantal personen")]
         public int AantalPersonen { get; set; }
         [Required]

@@ -34,6 +34,8 @@ namespace BonTemps.Areas.Chef.Controllers
         {
             var menu = await _context.Menus
                 .Include(c => c.ConsumptieMenu)
+                .ThenInclude(cm => cm.Consumptie)
+                .ThenInclude(ca => ca.ConsumptieAllergenen)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
             {
