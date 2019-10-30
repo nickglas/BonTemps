@@ -39,5 +39,8 @@ namespace BonTemps.Models
         [ForeignKey("Gebruiker")]
         public virtual ICollection<Gebruiker> Gebruiker { get; set; }
 
+        public ICollection<ReserveringenMenu> ReserveringenMenus { get; set; }
+
+
     }
 }

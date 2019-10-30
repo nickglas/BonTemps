@@ -62,7 +62,7 @@ namespace BonTemps.Models
 
 
             await KoppelMenu(context);
-
+            await KoppelReserveringMenu(context);
 
 
         }
@@ -213,6 +213,31 @@ namespace BonTemps.Models
             }
         }
 
+        public static async Task KoppelReserveringMenu(ApplicationDbContext _context)
+        {
+            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
+            ReserveringenMenu menu = new ReserveringenMenu();
+            menu.MenuId = 1;
+            menu.ReserveringsId = 1;
+            menus.Add(menu);
+
+            Reservering res = new Reservering();
+            res.AantalPersonen = 1;
+            res.Email = "Nickglas@hotmail.nl";
+            res.Goedkeuring = true;
+            res.HuisTelefoonNummer = "324234";
+            res.MobielTelefoonNummer = "324234";
+            res.ReserveringsDatum = DateTime.Now;
+            res.Opmerking = "Opmerking";
+            res.NaamReserveerder = "Marco";
+
+
+            res.ReserveringenMenus = menus;
+
+            _context.Reserveringen.Add(res);
+            await _context.SaveChangesAsync();
+
+        }
 
 
         public static async Task UpdateMenu(ApplicationDbContext _context)
