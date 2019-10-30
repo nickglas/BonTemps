@@ -11,6 +11,33 @@
     background-color: antiquewhite;
     opacity: 0,9 !important;
 }
+.container-Home {
+    height: 1260px;
+    max-height: 30%;
+    width: 100%;
+    padding: .1em .2em;
+    text-align: center;
+    opacity: 0,9 !important;
+    text-decoration: none;
+    color: white;
+    padding-top: 20%;
+}
+.link {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+}
+.Menu-text {
+    background-color: #FEF9E7;
+}
+.HomeImage {
+    border: 5px solid #FEF9E7;
+    margin-left: 1%;
+    margin-top: 2em;
+    height: 400px;
+    width: 950px;
+    opacity: 0,9 !important;
+}
 .container-menu-scroll {
     width: 60%;
     margin: 2em auto;
