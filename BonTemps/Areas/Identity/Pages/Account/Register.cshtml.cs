@@ -40,26 +40,26 @@ namespace BonTemps.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Er zijn nog geen klantgegevens ingevuld.")]
             public int KlantGegevensId { get; set; }
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen voornaam ingevuld.")]
             public string Voornaam { get; set; }
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen achternaam ingevuld.")]
             public string Achternaam { get; set; }
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen geboortedatum ingevuld.")]
             public DateTime GeboorteDatum { get; set; }
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen geslacht ingevuld.")]
             public string Geslacht { get; set; }
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen telefoonnummer ingevuld.")]
             public string TelefoonNummer { get; set; }
-            
-            [Required]
+
+            [Required(ErrorMessage = "U heeft nog geen e-mail adres ingevuld.")]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "U heeft nog geen wachtwoord ingevuld.")]
+            [StringLength(100, ErrorMessage = "Het wachtwoord moet minimaal 6 tekens bevatten, en maximaal 100.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Password")]
             public string Password { get; set; }
