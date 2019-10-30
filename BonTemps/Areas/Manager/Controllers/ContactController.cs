@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Manager.Models;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles ="Manager")]
     public class ContactController : Controller
     {
         private readonly ApplicationDbContext _context;

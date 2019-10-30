@@ -13,10 +13,12 @@ using System.Diagnostics;
 using System.IO;
 using Microsoft.Extensions.Hosting;
 using Rotativa.AspNetCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
     [Area("Systeem")]
+    [Authorize(Roles ="Bediening,Manager")]
     public class TafelsController : Controller
     {
         private readonly ApplicationDbContext _context;
