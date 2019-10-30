@@ -2,9 +2,11 @@
 @{
     ViewData["Title"] = "Menu's";
     double prijs = 0.0;
-    var menuid = 0;
     List<int> consumptiemenu = new List<int>();
-
+    List<int> allergeenicoon = new List<int>();
+    var allergeenid = 0;
+    List<string> allergeenicoonS = new List<string>();
+    var allergeenstring = "";
 }
 
 <div class="container-menu">
@@ -13,6 +15,7 @@
 
         @foreach (var item in Model)
         {
+
             if (consumptiemenu.Contains<int>(item.MenuId))
             {
             }
@@ -24,47 +27,27 @@
                 </h3>
                 <p>@Html.DisplayFor(modelItem => item.Menu.Beschrijving)</p>
 
-                if (item.Consumptie.ConsumptieAllergenen == null)
-                {
-                    <p>LEEG !</p>
-                }
-                else
-                {
-                    @foreach (var c in item.Consumptie.ConsumptieAllergenen)
-                    {
-                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@c.Allergenen.AllergenenIcoon" />
-                    }
-                }
-
-
-
             }
+
+            //if (allergeenicoonS.Contains<string>(allergeenstring))
+            //{
+            //}
+            //else
+            //{
+                @foreach (var c in item.Consumptie.ConsumptieAllergenen)
+                {
+                    allergeenicoonS.Add(allergeenstring);
+                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@c.Allergenen.AllergenenIcoon"
+                     title="@c.Allergenen.Beschrijving"/>
+                    allergeenstring = c.Allergenen.AllergenenIcoon;
+                    allergeenid = c.Allergenen.Id;
+                    Console.WriteLine("allergeenid = " + allergeenstring);
+
+                }
+            @*}*@
         }
 
 
     </div>
 </div>
-
-@*@model IEnumerable<BonTemps.Areas.Systeem.Models.ConsumptieMenu>
-@{
-    ViewData["Title"] = "Menu's";
-    double prijs = 0.0;
-    List<int> consumptiemenu = new List<int>();
-
-}
-
-<div class="container-menu">
-    <h2>Menus</h2>
-    <div class="container-menu">
-
-        @if (consumptiemenu.Contains(i))
-            @foreach (var item in Model)
-            {
-              
-
-              
-
-            }
-    </div>
-</div>*@
 

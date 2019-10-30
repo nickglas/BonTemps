@@ -23,7 +23,8 @@
                     {
                         @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
                         {
-                            <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                            <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                             title="@ca.Allergenen.Beschrijving"/>
                         }
                     } 
                 </span>
@@ -44,7 +45,8 @@
                 {
                     @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
                     {
-                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
                     }
                 }
             </span>
@@ -66,7 +68,8 @@
                 {
                     @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
                     {
-                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
                     }
                 }
             </span>
@@ -83,7 +86,17 @@
         {
         <h3>
             <span>@item.Consumptie.Naam</span>
-            
+            <span>
+                @if (item.Consumptie.ConsumptieAllergenen != null)
+                {
+                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
+                    {
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
+                    }
+                }
+            </span>
+
             <span class="dots">€@item.Consumptie.Prijs</span>
             @{
                 prijs += item.Consumptie.Prijs;
@@ -91,15 +104,7 @@
         </h3>
            
             <p>@item.Consumptie.Beschrijving</p>
-            <span>
-                @if (item.Consumptie.ConsumptieAllergenen != null)
-                {
-                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
-                    {
-                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
-                    }
-                }
-            </span>
+           
         }
         <h3>Totaal Prijs : @prijs</h3>
     </div>
