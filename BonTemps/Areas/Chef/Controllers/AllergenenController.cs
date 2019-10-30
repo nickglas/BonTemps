@@ -10,10 +10,12 @@ using BonTemps.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
     [Area("Chef")]
+    [Authorize(Roles ="Chef,Manager")]
     public class AllergenenController : Controller
     {
         private static string ImgName;
