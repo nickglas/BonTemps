@@ -10,10 +10,12 @@ using BonTemps.Models;
 using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Systeem.Models
 {
     [Area("Systeem")]
+    [Authorize(Roles ="Bediening,Manager")]
     public class ReserveringenController : Controller
     {
         private readonly ApplicationDbContext _context;

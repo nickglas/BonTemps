@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 namespace BonTemps.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager")]
+
     public class ManagerBoardController : Controller
     {
         private readonly ApplicationDbContext _context;

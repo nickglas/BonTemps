@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
     [Area("Systeem")]
+    [Authorize(Roles = "Manager")]
     public class EmailController : Controller
     {
         private readonly ApplicationDbContext _context;

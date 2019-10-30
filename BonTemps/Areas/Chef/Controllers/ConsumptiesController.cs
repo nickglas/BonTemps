@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
     [Area("Chef")]
+    [Authorize(Roles = "Chef,Manager")]
     public class ConsumptiesController : Controller
     {
         private readonly ApplicationDbContext _context;
