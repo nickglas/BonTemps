@@ -15,7 +15,12 @@ for details on configuring this project to bundle and minify static web assets. 
     margin-left: 15%;
     text-align: center;
 }
-
+#allergeenicoon {
+    width: 5%;
+    height: auto;
+    margin-left: -1%;
+    margin-top: -10%;    
+}
 .homepage{
     margin-left: 17%;
 }
