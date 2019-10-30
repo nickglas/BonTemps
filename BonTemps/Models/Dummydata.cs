@@ -54,7 +54,7 @@ namespace BonTemps.Models
             await UpdateSystemAccounts(context, userManager);
             await UpdateContactInfo(context);
             await UpdateAllergenen(context);
-
+            await UpdateTafels(context);
 
             await KoppelAllergeen(context);
 
@@ -555,7 +555,92 @@ namespace BonTemps.Models
             _context.Consumpties.Add(consumptie);
             await _context.SaveChangesAsync();
         }
+        public static async Task UpdateTafels(ApplicationDbContext _context)
+        {
+            Console.WriteLine("Updating tafels");
+            List<Tafels> check = new List<Tafels>();
 
+            Tafels tafel1 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel1);
+
+            Tafels tafel2 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel2);
+
+            Tafels tafel3 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel3);
+
+            Tafels tafel4 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel4);
+
+            Tafels tafel5 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel5);
+
+            Tafels tafel6 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel6);
+
+            Tafels tafel7 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel7);
+
+
+            Tafels tafel8 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel8);
+
+            Tafels tafel9 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel9);
+
+            Tafels tafel10 = new Tafels
+            {
+                Zitplaatsen = 6,
+                Bezet = false
+            };
+            check.Add(tafel10);
+
+            foreach (var item in check)
+            {
+                int i = _context.Tafels.Where(x => x.Id == item.Id).Count();
+                if (i == 0)
+                {
+                    _context.Tafels.Add(item);
+                    await _context.SaveChangesAsync();
+                }
+            }
+        }
     }
 }
 

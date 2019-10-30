@@ -42,11 +42,11 @@ namespace BonTemps.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage ="U heeft nog geen e-mail adres ingevuld.")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "U heeft nog geen wachtwoord ingevuld.")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
