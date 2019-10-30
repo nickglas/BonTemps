@@ -50,8 +50,6 @@ namespace BonTemps.Controllers
         // GET: Reservering/Create
         public IActionResult Create()
         {
-            string ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
-            Console.WriteLine(ip);
             return View();
         }
 
@@ -60,6 +58,12 @@ namespace BonTemps.Controllers
         {
             List<Reservering> reserveringen = await _context.Reserveringen.Where(x => x.Email == User.Identity.Name).ToListAsync();
             return View(reserveringen);
+        }
+
+        public IActionResult Createstep2()
+        {
+            ViewData["MenuList"] = new SelectList(_context.Menus, "Id", "Naam");
+            return View();
         }
 
         // POST: Reservering/Create
@@ -92,7 +96,7 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Reservering");
+            return RedirectToAction("Createstep2");
         }
 
         // GET: Reservering/Edit/5

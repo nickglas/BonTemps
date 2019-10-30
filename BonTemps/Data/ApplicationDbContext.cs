@@ -41,6 +41,19 @@ namespace BonTemps.Data
                 .WithMany(c => c.ConsumptieAllergenen)
                 .HasForeignKey(ca => ca.AllergenenId);
 
+            //Reservering en Menu koppel
+            builder.Entity<ReserveringenMenu>()
+                .HasKey(ca => new { ca.MenuId, ca.ReserveringsId });
+            builder.Entity<ReserveringenMenu>()
+                .HasOne(ca => ca.Menu)
+                .WithMany(ca => ca.ReserveringenMenus)
+                .HasForeignKey(ca => ca.MenuId);
+            builder.Entity<ReserveringenMenu>()
+                .HasOne(ca => ca.Reservering)
+                .WithMany(ca => ca.ReserveringenMenus)
+                .HasForeignKey(ca => ca.ReserveringsId);
+
+                
 
 
 
