@@ -14,22 +14,6 @@
     <None Remove="Views\Reserveren\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Remove="wwwroot\Image\Migrations\20191027172410_initial.cs" />
-    <Content Remove="wwwroot\Image\Migrations\20191027172410_initial.Designer.cs" />
-    <Content Remove="wwwroot\Image\Migrations\20191027191855_init.cs" />
-    <Content Remove="wwwroot\Image\Migrations\20191027191855_init.Designer.cs" />
-    <Content Remove="wwwroot\Image\Migrations\ApplicationDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="wwwroot\Image\Migrations\20191027172410_initial.cs" />
-    <Compile Include="wwwroot\Image\Migrations\20191027172410_initial.Designer.cs" />
-    <Compile Include="wwwroot\Image\Migrations\20191027191855_init.cs" />
-    <Compile Include="wwwroot\Image\Migrations\20191027191855_init.Designer.cs" />
-    <Compile Include="wwwroot\Image\Migrations\ApplicationDbContextModelSnapshot.cs" />
-  </ItemGroup>
-
 
   <ItemGroup>
     <PackageReference Include="iTextSharp" Version="5.5.13.1" />
@@ -49,6 +33,7 @@
     <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Areas\Systeem\Models\consumptie\" />
     <Folder Include="Data\Migrations\" />
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\img\uploads\" />
   </ItemGroup>
 
