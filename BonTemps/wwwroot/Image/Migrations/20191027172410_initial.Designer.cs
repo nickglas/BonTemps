@@ -4,14 +4,16 @@ using BonTemps.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20191027172410_initial")]
+    partial class initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -156,6 +158,8 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AllergenenId");
+
                     b.Property<string>("Beschrijving");
 
                     b.Property<int>("CategoryId");
@@ -167,6 +171,8 @@ namespace BonTemps.Migrations
                     b.Property<double>("Prijs");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AllergenenId");
 
                     b.HasIndex("CategoryId");
 
@@ -563,6 +569,10 @@ namespace BonTemps.Migrations
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Consumptie", b =>
                 {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Allergenen")
+                        .WithMany("Consumpties")
+                        .HasForeignKey("AllergenenId");
+
                     b.HasOne("BonTemps.Areas.Systeem.Models.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
