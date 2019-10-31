@@ -23,13 +23,10 @@
                     {
                         @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
                         {
-                            <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                            <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                             title="@ca.Allergenen.Beschrijving"/>
                         }
-                    } else
-                    {
-
-                    }
-
+                    } 
                 </span>
                 <span class="dots">€@item.Consumptie.Prijs</span>
                 @{
@@ -41,13 +38,23 @@
         <h1>Hoofdgerecht</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
         {
-            <h3>
-                <span>@item.Consumptie.Naam</span>
-                <span class="dots">€@item.Consumptie.Prijs</span>
-                @{ 
-                    prijs += item.Consumptie.Prijs;
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span>
+                @if (item.Consumptie.ConsumptieAllergenen != null)
+                {
+                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
+                    {
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
+                    }
                 }
-            </h3>
+            </span>
+            <span class="dots">€@item.Consumptie.Prijs</span>
+            @{
+                prijs += item.Consumptie.Prijs;
+            }
+        </h3>
            
             <p>@item.Consumptie.Beschrijving</p>
         }
@@ -56,6 +63,16 @@
         {
         <h3>
             <span>@item.Consumptie.Naam</span>
+            <span>
+                @if (item.Consumptie.ConsumptieAllergenen != null)
+                {
+                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
+                    {
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
+                    }
+                }
+            </span>
             <span class="dots">€@item.Consumptie.Prijs</span>
             @{
                 prijs += item.Consumptie.Prijs;
@@ -67,15 +84,27 @@
         <h1>Dranken</h1>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
         {
-            <h3>
-                <span>@item.Consumptie.Naam</span>
-                <span class="dots">€@item.Consumptie.Prijs</span>
-                @{ 
-                    prijs += item.Consumptie.Prijs;
+        <h3>
+            <span>@item.Consumptie.Naam</span>
+            <span>
+                @if (item.Consumptie.ConsumptieAllergenen != null)
+                {
+                    @foreach (var ca in item.Consumptie.ConsumptieAllergenen)
+                    {
+                        <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                         title="@ca.Allergenen.Beschrijving"/>
+                    }
                 }
-            </h3>
+            </span>
+
+            <span class="dots">€@item.Consumptie.Prijs</span>
+            @{
+                prijs += item.Consumptie.Prijs;
+            }
+        </h3>
            
             <p>@item.Consumptie.Beschrijving</p>
+           
         }
         <h3>Totaal Prijs : @prijs</h3>
     </div>
