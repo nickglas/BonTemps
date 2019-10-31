@@ -281,25 +281,25 @@ namespace BonTemps.Models
             Category voorgerecht = new Category
             {
                 Naam = "Voorgerecht",
-                Beschrijving = "Alles wat je kan eten"
+                Beschrijving = "Het eerste gerecht dat je gereserveerd krijgt."
             };
             check.Add(voorgerecht);
             Category drinken = new Category
             {
                 Naam = "Drinken",
-                Beschrijving = "Alles wat je kan drinken"
+                Beschrijving = "Alle drankjes."
             };
             check.Add(drinken);
             Category nagerecht = new Category
             {
                 Naam = "Nagerecht",
-                Beschrijving = "Alle deserts"
+                Beschrijving = "Alle deserts."
             };
             check.Add(nagerecht);
             Category hoofdgerecht = new Category
             {
                 Naam = "Hoofdgerecht",
-                Beschrijving = "Alle deserts"
+                Beschrijving = "Het hoofdgerecht."
             };
             check.Add(hoofdgerecht);
             foreach (var item in check)
@@ -509,21 +509,33 @@ namespace BonTemps.Models
             Allergenen allergeen1 = new Allergenen
             {
                 AllergenenIcoon = "pinda.png",
-                Beschrijving = "Bevat sporen van pinda's"
+                Beschrijving = "Bevat sporen van pinda's."
             };
             check.Add(allergeen1);
             Allergenen allergeen2 = new Allergenen
             {
                 AllergenenIcoon = "lactose.png",
-                Beschrijving = "Bevat sporen van lactose"
+                Beschrijving = "Bevat sporen van lactose."
             };
             check.Add(allergeen2);
             Allergenen allergeen3 = new Allergenen
             {
                 AllergenenIcoon = "vis.png",
-                Beschrijving = "Bevat sporen van vis schaal en schelpdieren"
+                Beschrijving = "Bevat sporen van vis, schaal en schelpdieren."
             };
             check.Add(allergeen3);
+            Allergenen allergeen4 = new Allergenen
+            {
+                AllergenenIcoon = "gluten.png",
+                Beschrijving = "Bevat sporen van gluten."
+            };
+            check.Add(allergeen4);
+            Allergenen allergeen5 = new Allergenen
+            {
+                AllergenenIcoon = "soja.png",
+                Beschrijving = "Bevat sporen van sojabonen."
+            };
+            check.Add(allergeen5);
 
 
             foreach (var item in check)
