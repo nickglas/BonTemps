@@ -3,16 +3,34 @@
     padding: 0;
 }
 
-.title-bon{
+.pdf-bon{
+    border: 1px solid black;
+    height: 99%;
+}
+
+.pdf-content{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 5%;
+}
+
+.title-bon {
     font-size: 5rem;
     margin: 0px;
     padding: 0;
+}
+
+.table-bon{
+    margin-top: 30px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .bedrijfs-info {
     font-size: 1.5rem;
     margin: 0px;
     padding: 0;
+    margin-bottom: 50px;
 }
 
 .title-bon, .bedrijfs-info {
@@ -22,6 +40,16 @@
     margin-right: auto;
 }
 
-.tot-prijs, .tafel-prijs{
-    float: right;
+.th-bon{
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+tafel-nummer{
+    margin-left: 10%;
+}
+
+.tot-prijs, .tafel-prijs {
+    margin-left: 80%;
+    margin-top: 50px;
 }
