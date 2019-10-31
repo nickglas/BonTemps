@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -396,6 +396,30 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ReserveringenMenu",
+                columns: table => new
+                {
+                    ReserveringsId = table.Column<int>(nullable: false),
+                    MenuId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReserveringenMenu", x => new { x.MenuId, x.ReserveringsId });
+                    table.ForeignKey(
+                        name: "FK_ReserveringenMenu_Menus_MenuId",
+                        column: x => x.MenuId,
+                        principalTable: "Menus",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ReserveringenMenu_Reserveringen_ReserveringsId",
+                        column: x => x.ReserveringsId,
+                        principalTable: "Reserveringen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Bestellingen",
                 columns: table => new
                 {
@@ -578,6 +602,11 @@ namespace BonTemps.Migrations
                 name: "IX_Menus_Menu",
                 table: "Menus",
                 column: "Menu");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ReserveringenMenu_ReserveringsId",
+                table: "ReserveringenMenu",
+                column: "ReserveringsId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -617,6 +646,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "Gebruiker");
+
+            migrationBuilder.DropTable(
+                name: "ReserveringenMenu");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
