@@ -19,7 +19,8 @@ for details on configuring this project to bundle and minify static web assets. 
     width: 5%;
     height: auto;
     margin-left: -1%;
-    margin-top: -10%;    
+    margin-top: -10%;
+    transition: all .2s ease-in-out;
 }
 .homepage{
     margin-left: 17%;
