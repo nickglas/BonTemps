@@ -12,12 +12,6 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
-        //public static Thread CheckTableTimer;
-        
-        //public static void checktable()
-        //{
-        //    CheckTableTimer.Start();
-        //}
 
         private static string password = "P@$$w0rd";
 
@@ -72,10 +66,14 @@ namespace BonTemps.Models
 
 
             await KoppelMenu(context);
-            await KoppelReserveringMenu(context);
+            //await KoppelReserveringMenu(context);
+
+            
+
 
 
         }
+
 
         public static async Task UpdateContactInfo(ApplicationDbContext _context)
         {

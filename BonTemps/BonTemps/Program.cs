@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using BonTemps.Data;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,8 +14,10 @@ namespace BonTemps
 {
     public class Program
     {
+        ApplicationDbContext _context;
+        
         public static void Main(string[] args)
-        {
+        { 
             try
             {
                 FileStream fileStream = new FileStream("file.txt", FileMode.Open);
@@ -38,5 +42,6 @@ namespace BonTemps
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+
     }
 }

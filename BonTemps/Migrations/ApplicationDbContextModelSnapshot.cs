@@ -335,7 +335,11 @@ namespace BonTemps.Migrations
 
                     b.Property<DateTime>("ReserveringsDatum");
 
+                    b.Property<int>("TafelsId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TafelsId");
 
                     b.ToTable("Reserveringen");
                 });
@@ -641,6 +645,14 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Models.Reservering", "Reservering")
                         .WithMany("ReserveringenMenus")
                         .HasForeignKey("ReserveringsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Models.Reservering", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "Tafels")
+                        .WithMany()
+                        .HasForeignKey("TafelsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

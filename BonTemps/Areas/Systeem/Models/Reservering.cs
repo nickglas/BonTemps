@@ -27,6 +27,9 @@ namespace BonTemps.Models
         public bool Goedkeuring { get; set; }
         public string Opmerking { get; set; }
 
+        public Tafels Tafels { get; set; }
+        public int TafelsId { get; set; }
+
         [Required]
         public DateTime ReserveringsDatum { get; set; }
         [Required]
