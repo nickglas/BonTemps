@@ -22,18 +22,16 @@
                 <input asp-for="Beschrijving" class="form-control" />
                 <span asp-validation-for="Beschrijving" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="ConsumptieMenu" class="control-label"></label>
-                <select asp-for="ConsumptieMenu" class="form-control" asp-items="ViewBag.ConsumptieId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="button-save" />
-            </div>
-        </form>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="button-save" />
+                </div>
+</form>
     </div>
 </div>
 
 <div>
     <a class="create" asp-action="Index">Terug naar menu overzicht</a>
 </div>
-
+<div>
+    <a class="create" asp-controller="ConsumptieMenus" asp-action="Index">Consumptie's aanpassen</a>
+</div>

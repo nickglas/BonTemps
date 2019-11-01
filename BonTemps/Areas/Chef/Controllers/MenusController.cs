@@ -32,15 +32,24 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            var menu = await _context.Menus
-                .Include(c => c.ConsumptieMenu)
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (menu == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            return View(menu);
+            foreach (var filter in _context.Consumpties)
+            {
+
+            }
+            var Menu = await _context.Menus
+                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (Menu == null)
+            {
+                return NotFound();
+            }
+            ViewBag.Menu = Menu.Menu_naam;
+            return View(Menu);
         }
 
         // GET: Chef/Menu/Create
@@ -114,12 +123,22 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            ViewData["ConsumptieId"] = new SelectList(_context.ConsumptieMenu.Where(x => x.MenuId == id), "MenuId", "ConsumptieId"); ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x => x.Bezet == true), "Id", "Id");
+          //  ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Consumpties");
+            ViewData["Voorgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 1), "Id", "Naam");
+            ViewData["Hoofdgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 4), "Id", "Naam");
+            ViewData["Nagerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 3), "Id", "Naam");
+            ViewData["Drinken"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 2), "Id", "Naam");
+            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
+            ViewData["ConsumptieMenu"] = new SelectList(_context.ConsumptieMenu.Where(x => x.MenuId == id), "Id", "Naam");
+
             if (id == null)
             {
                 return NotFound();
             }
-
-            var menu = await _context.Menus.FindAsync(id);
+            var menu = await _context.Menus
+                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (menu == null)
             {
                 return NotFound();
@@ -132,31 +151,24 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
+        public async Task<IActionResult> Edit(int[] ConsumptieId, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
         {
-            if (id != menu.Id)
+            List<ConsumptieMenu> UpdateList = new List<ConsumptieMenu>();
+            foreach (var item in ConsumptieId)
             {
-                return NotFound();
+                ConsumptieMenu cons = new ConsumptieMenu();
+                cons.ConsumptieId = item;
+                cons.MenuId = menu.Id;
+                UpdateList.Add(cons);
             }
+
+            menu.ConsumptieMenu = UpdateList;
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(menu);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!MenuExists(menu.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                _context.Update(menu);
+
+                await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(menu);

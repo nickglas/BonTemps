@@ -5,7 +5,7 @@
 }
 
 <div id="createform">
-    <h3 class="titel createform">Tafel aanmaken</h3>
+    <h3 class="titel createform">Allergenen aanmaken</h3>
     <hr />
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -17,11 +17,11 @@
         <div class="form-group">
             <label asp-for="AllergenenIcoon" class="control-label"><i class="fa fa-file-image-o"></i> Foto</label>
             <br />
-            <input type="file" name="file" asp-for="AllergenenIcoon" required />
+            <input type="file" name="file" asp-for="AllergenenIcoon" />
             <span asp-validation-for="AllergenenIcoon" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <button asp-action="Index" class="btn darkred CrudCancel">
+            <button asp-controller="Allergenen" asp-action="Index" class="btn darkred CrudCancel">
                 Annuleren  <i class="fas fa-times white"></i>
             </button>
             <button type="submit" class="btn darkblue CrudCreate" style="float:right;">
