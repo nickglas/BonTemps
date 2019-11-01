@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191031154657_initial")]
+    [Migration("20191101191433_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -74,7 +74,8 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AllergenenIcoon");
+                    b.Property<string>("AllergenenIcoon")
+                        .IsRequired();
 
                     b.Property<string>("Beschrijving");
 
@@ -195,6 +196,8 @@ namespace BonTemps.Migrations
                     b.Property<int>("ConsumptieId");
 
                     b.Property<int>("MenuId");
+
+                    b.Property<int>("Id");
 
                     b.HasKey("ConsumptieId", "MenuId");
 
