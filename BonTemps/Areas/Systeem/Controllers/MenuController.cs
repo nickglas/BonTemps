@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
+    [Authorize]
     public class MenuController : Controller
     {
 
@@ -21,8 +23,8 @@ namespace BonTemps.Areas.Systeem.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var menus = _context.Menus
-            .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie);
+            var menus = _context.ConsumptieMenu
+            .Include(m => m.Menu).Include(c => c.Consumptie).ThenInclude(ca => ca.ConsumptieAllergenen).ThenInclude(a => a.Allergenen);
             return View(await menus.ToListAsync());
         }
 
@@ -38,8 +40,11 @@ namespace BonTemps.Areas.Systeem.Controllers
 
             }
             var Menu = await _context.Menus
-                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
-                .FirstOrDefaultAsync(m => m.Id == id);
+              .Include(cm => cm.ConsumptieMenu)
+              .ThenInclude(c => c.Consumptie)
+              .ThenInclude(ca => ca.ConsumptieAllergenen)
+              .ThenInclude(a => a.Allergenen)
+              .FirstOrDefaultAsync(m => m.Id == id);
             if (Menu == null)
             {
                 return NotFound();

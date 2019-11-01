@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
     [Area("Chef")]
+    [Authorize(Roles ="Chef,Manager")]
     public class MenusController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -32,24 +34,17 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            foreach (var filter in _context.Consumpties)
-            {
-
-            }
-            var Menu = await _context.Menus
-                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
+            var menu = await _context.Menus
+                .Include(c => c.ConsumptieMenu)
+                .ThenInclude(cm => cm.Consumptie)
+                .ThenInclude(ca => ca.ConsumptieAllergenen)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (Menu == null)
+            if (menu == null)
             {
                 return NotFound();
             }
-            ViewBag.Menu = Menu.Menu_naam;
-            return View(Menu);
+
+            return View(menu);
         }
 
         // GET: Chef/Menu/Create
@@ -123,26 +118,32 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/Menu/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            ViewData["ConsumptieId"] = new SelectList(_context.ConsumptieMenu.Where(x => x.MenuId == id), "MenuId", "ConsumptieId"); ViewData["TafelsId"] = new SelectList(_context.Tafels.Where(x => x.Bezet == true), "Id", "Id");
-          //  ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Consumpties");
-            ViewData["Voorgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 1), "Id", "Naam");
-            ViewData["Hoofdgerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 4), "Id", "Naam");
-            ViewData["Nagerecht"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 3), "Id", "Naam");
-            ViewData["Drinken"] = new SelectList(_context.Consumpties.Where(x => x.CategoryId == 2), "Id", "Naam");
-            ViewData["CategoryId"] = new SelectList(_context.Categories, "Id", "Naam");
-            ViewData["ConsumptieMenu"] = new SelectList(_context.ConsumptieMenu.Where(x => x.MenuId == id), "Id", "Naam");
-
             if (id == null)
             {
                 return NotFound();
             }
+
             var menu = await _context.Menus
                 .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
             if (menu == null)
             {
                 return NotFound();
             }
+
+            List<ConsumptieMenu> consmenu = _context.ConsumptieMenu.Where(x => x.MenuId == id).ToList();
+            List<Consumptie> cons = new List<Consumptie>();
+            foreach (var item in consmenu)
+            {
+                Consumptie consumptie = new Consumptie();
+                consumptie = _context.Consumpties.Where(x=>x.Id == item.ConsumptieId).FirstOrDefault();
+                cons.Add(consumptie);
+            }
+            ViewData["ConsumptieId"] = new SelectList(cons, "Id", "Naam");
+
+
+
             return View(menu);
         }
 
@@ -151,24 +152,31 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int[] ConsumptieId, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Menu_naam,Beschrijving")] Menu menu)
         {
-            List<ConsumptieMenu> UpdateList = new List<ConsumptieMenu>();
-            foreach (var item in ConsumptieId)
+            if (id != menu.Id)
             {
-                ConsumptieMenu cons = new ConsumptieMenu();
-                cons.ConsumptieId = item;
-                cons.MenuId = menu.Id;
-                UpdateList.Add(cons);
+                return NotFound();
             }
-
-            menu.ConsumptieMenu = UpdateList;
 
             if (ModelState.IsValid)
             {
-                _context.Update(menu);
-
-                await _context.SaveChangesAsync();
+                try
+                {
+                    _context.Update(menu);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!MenuExists(menu.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(menu);

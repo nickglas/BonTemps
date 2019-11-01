@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Chef.Controllers
 {
     [Area("Chef")]
+    [Authorize(Roles ="Chef,Manager")]
     public class ConsumptieMenusController : Controller
     {
         private readonly ApplicationDbContext _context;

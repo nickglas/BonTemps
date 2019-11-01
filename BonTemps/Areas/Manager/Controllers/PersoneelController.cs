@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace BonTemps.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager")]
 
     public class PersoneelController : Controller
     {

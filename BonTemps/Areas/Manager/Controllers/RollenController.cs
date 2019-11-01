@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Data;
 using BonTemps.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Manager.Controllers
 {
+    [Authorize(Roles = "Manager")]
     [Area("Manager")]
     public class RollenController : Controller
     {

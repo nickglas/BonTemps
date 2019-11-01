@@ -20,6 +20,7 @@ namespace BonTemps.Models
         [Display(Name = "Mobiel telefoonnummer")]
         public string MobielTelefoonNummer { get; set; }
         [Required]
+        [Range(1, 60)]
         [Display(Name = "Aantal personen")]
         public int AantalPersonen { get; set; }
         [Required]
@@ -38,6 +39,9 @@ namespace BonTemps.Models
         public virtual ICollection<Bestelling> Bestellingen { get; set; }
         [ForeignKey("Gebruiker")]
         public virtual ICollection<Gebruiker> Gebruiker { get; set; }
+
+        public ICollection<ReserveringenMenu> ReserveringenMenus { get; set; }
+
 
     }
 }

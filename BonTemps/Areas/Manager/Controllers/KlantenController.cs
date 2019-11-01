@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonTemps.Areas.Manager.Controllers
 {
     [Area("Manager")]
+    [Authorize(Roles = "Manager")]
+
     public class KlantenController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -44,7 +44,8 @@
             <td style="text-align:center;table-layout:fixed;display:table-cell;width:15%;min-width:15%;max-width:25%;">
                 @foreach (var ca in item.ConsumptieAllergenen)
                 {
-                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" />
+                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@ca.Allergenen.AllergenenIcoon" 
+                     title="@ca.Allergenen.Beschrijving"/>
                 }
             </td>
             <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">

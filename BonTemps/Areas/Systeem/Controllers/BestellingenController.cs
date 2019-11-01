@@ -7,10 +7,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BonTemps.Areas.Systeem.Controllers
 {
     [Area("Systeem")]
+    [Authorize(Roles = "Bediening,Manager,Chef")]
     public class BestellingenController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace BonTemps.Areas.Systeem.Controllers
             _context = context;
         }
         // GET: Systeem/Bestellingen
+        [Authorize(Roles ="Bediening,Manager,Chef")]
         public async Task<IActionResult> Index()
         {
             var applicationDbContext = _context.Bestellingen.Include(b => b.Consumptie)
@@ -28,7 +31,7 @@ namespace BonTemps.Areas.Systeem.Controllers
                                                             .Where(x => x.Afgerond == false);
             return View(await applicationDbContext.ToListAsync());
         }
-
+        
         // GET: Systeem/Bestellingen/Details/5
         public async Task<IActionResult> Details(int? id)
         {
