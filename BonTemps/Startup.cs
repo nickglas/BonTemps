@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using BonTemps.Models;
 using System.IO;
 using Rotativa.AspNetCore;
+using System.Threading;
 
 namespace BonTemps
 {
@@ -26,7 +27,7 @@ namespace BonTemps
             {
                 Configuration = configuration;
             }
-
+            
             public IConfiguration Configuration { get; }
 
             // This method gets called by the runtime. Use this method to add services to the container.
