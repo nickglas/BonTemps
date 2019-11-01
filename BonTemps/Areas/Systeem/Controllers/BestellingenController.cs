@@ -77,6 +77,8 @@ namespace BonTemps.Areas.Systeem.Controllers
             //bes.Consumptie = y.Naam;
             //bes.Archiveerdatum = DateTime.Now;
 
+
+
             await _context.BestellingArchief.AddAsync(archief);
             await _context.SaveChangesAsync();
             _context.Bestellingen.Remove(res);

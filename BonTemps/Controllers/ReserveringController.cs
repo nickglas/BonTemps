@@ -9,6 +9,7 @@ using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using BonTemps.Areas.Systeem.Models;
 
 namespace BonTemps.Controllers
 {
@@ -79,7 +80,10 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Reservering");
+
+
+            
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen , reserveringid = reservering.Id});
         }
 
         [HttpPost]
@@ -96,7 +100,61 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Createstep2");
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen, reserveringid = reservering.Id });
+        }
+
+
+        public IActionResult Step2(int personen, int reserveringid)
+        {
+            Console.WriteLine("PERSONEN : " + personen);
+            Console.WriteLine("ID : " + reserveringid);
+
+            ViewBag.Id = reserveringid;
+            ViewBag.Personen = personen;
+
+            ViewData["Menu"] = new SelectList(_context.Menus, "Id", "Menu_naam");
+
+            return View();
+        }
+
+        public async Task<IActionResult> Confirm(int[] Menu, int Id)
+        {
+            Console.WriteLine("\n\n ID : "+Id+"\n\n");
+            List<Menu> menus = new List<Menu>();
+            List<Bestelling> bestellingen = new List<Bestelling>();
+            foreach (var item in Menu)
+            {
+                Console.WriteLine(item);
+                menus.Add (_context.Menus.Where(x => x.Id == item).Include(b => b.ConsumptieMenu).ThenInclude(b => b.Consumptie).FirstOrDefault());
+                ReserveringenMenu menu = new ReserveringenMenu
+                {
+                    MenuId = item,
+                    ReserveringsId = Id
+                };
+                await _context.ReserveringenMenu.AddAsync(menu);
+
+
+                //Consumpties in menus toevoegen aan bestellingen
+                foreach (var x in menus)
+                {
+                    foreach (var y in x.ConsumptieMenu)
+                    {
+                        Bestelling bes = new Bestelling
+                        {
+                            Aantal = 1,
+                            Afgerond = false,
+                            Consumptie = y.Consumptie,
+                            ConsumptieId = y.ConsumptieId,
+                            Bestellingsdatum_Tijd = DateTime.Now,
+                            Tafels = _context.Tafels.Where(z => z.Id == 1).FirstOrDefault(),
+                            TafelsId = 1
+                        };
+                        await _context.Bestellingen.AddAsync(bes);
+                    }
+                }
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // GET: Reservering/Edit/5

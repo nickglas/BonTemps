@@ -41,34 +41,34 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td class="FirstTD">
-                        @Html.DisplayFor(modelItem => item.NaamReserveerder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Email)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HuisTelefoonNummer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.MobielTelefoonNummer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AantalPersonen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ReserveringAangemaakt)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ReserveringsDatum)
-                    </td>
-                    <td style="text-align:center;table-layout:fixed;display:table-cell;width:20%;min-width:20%;">
-                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
-                        <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
-                    </td>
-                </tr>
+            <tr>
+                <td class="FirstTD">
+                    @Html.DisplayFor(modelItem => item.NaamReserveerder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HuisTelefoonNummer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobielTelefoonNummer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AantalPersonen)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReserveringAangemaakt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReserveringsDatum)
+                </td>
+                <td style="text-align:center;table-layout:fixed;display:table-cell;width:20%;min-width:20%;">
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-edit edit"></i></a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn darkblue"><i class="fas fa-info-circle details"></i></a>
+                </td>
+            </tr>
             }
         </tbody>
     </table>
