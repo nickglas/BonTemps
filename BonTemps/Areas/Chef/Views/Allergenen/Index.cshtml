@@ -24,7 +24,8 @@
                     @Html.DisplayFor(modelItem => item.Beschrijving)
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:25%;min-width:25%;">
-                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@Html.DisplayFor(modelItem => item.AllergenenIcoon)" />
+                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@Html.DisplayFor(modelItem => item.AllergenenIcoon)"
+                     title="@Html.DisplayFor(modelItem => item.Beschrijving)"/>
                 </td>
                 <td style="text-align:center;table-layout:fixed;display:table-cell;width:40%;min-width:40%;">
                     <a asp-action="Delete" asp-route-id="@item.Id" class="btn deletebtn"><i class="fas fa-trash-alt delete"></i></a>

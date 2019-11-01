@@ -281,25 +281,25 @@ namespace BonTemps.Models
             Category voorgerecht = new Category
             {
                 Naam = "Voorgerecht",
-                Beschrijving = "Alles wat je kan eten"
+                Beschrijving = "Het eerste gerecht dat je gereserveerd krijgt."
             };
             check.Add(voorgerecht);
             Category drinken = new Category
             {
                 Naam = "Drinken",
-                Beschrijving = "Alles wat je kan drinken"
+                Beschrijving = "Alle drankjes."
             };
             check.Add(drinken);
             Category nagerecht = new Category
             {
                 Naam = "Nagerecht",
-                Beschrijving = "Alle deserts"
+                Beschrijving = "Alle deserts."
             };
             check.Add(nagerecht);
             Category hoofdgerecht = new Category
             {
                 Naam = "Hoofdgerecht",
-                Beschrijving = "Alle deserts"
+                Beschrijving = "Het hoofdgerecht."
             };
             check.Add(hoofdgerecht);
             foreach (var item in check)
@@ -317,14 +317,6 @@ namespace BonTemps.Models
 
             Console.WriteLine("Updating Items");
             List<Consumptie> check = new List<Consumptie>();
-            Consumptie hoofdgerecht = new Consumptie
-            {
-                Naam = "Spaghetti",
-                Beschrijving = "Spaghetti Bolognesse",
-                Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
-            };
-            check.Add(hoofdgerecht);
             Consumptie voorgerecht = new Consumptie
             {
                 Naam = "Tomatten soep",
@@ -380,6 +372,38 @@ namespace BonTemps.Models
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
             };
             check.Add(icetea);
+            Consumptie flam = new Consumptie
+            {
+                Naam = "Elsässer Flammkuchen",
+                Beschrijving = "Elsässer Flammkuchen",
+                Prijs = 7.50,
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
+            };
+            check.Add(flam);
+            Consumptie boeuf = new Consumptie
+            {
+                Naam = "Boeuf Bourguignon",
+                Beschrijving = "iets wat lijkt op champion soep met vlees erin",
+                Prijs = 5.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
+            Consumptie madeleines = new Consumptie
+            {
+                Naam = "Madeleines",
+                Beschrijving = "Franse koekies",
+                Prijs = 4.50,
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
+            };
+            check.Add(madeleines);
+            Consumptie chocolademelk = new Consumptie
+            {
+                Naam = "Chocolade Melk",
+                Beschrijving = "Warme chocolade melk met slageroom",
+                Prijs = 2.50,
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
+            };
+            check.Add(chocolademelk);
+            check.Add(boeuf);
             foreach (var item in check)
             {
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
@@ -489,10 +513,29 @@ namespace BonTemps.Models
             g.ConsumptieId = 8;
             check.Add(g);
 
+            ConsumptieMenu h = new ConsumptieMenu();
+            h.MenuId = 3;
+            h.ConsumptieId = 9;
+            check.Add(h);
+
+            ConsumptieMenu i = new ConsumptieMenu();
+            i.MenuId = 3;
+            i.ConsumptieId = 10;
+            check.Add(i);
+
+            ConsumptieMenu j = new ConsumptieMenu();
+            j.MenuId = 3;
+            j.ConsumptieId = 11;
+            check.Add(j);
+
+            ConsumptieMenu k = new ConsumptieMenu();
+            k.MenuId = 3;
+            k.ConsumptieId = 12;
+            check.Add(k);
             foreach (var item in check)
             {
-                int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
-                if (i == 0)
+                int q = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
+                if (q == 0)
                 {
                     _context.ConsumptieMenu.Add(item);
                     await _context.SaveChangesAsync();
@@ -509,21 +552,33 @@ namespace BonTemps.Models
             Allergenen allergeen1 = new Allergenen
             {
                 AllergenenIcoon = "pinda.png",
-                Beschrijving = "Bevat sporen van pinda's"
+                Beschrijving = "Bevat sporen van pinda's."
             };
             check.Add(allergeen1);
             Allergenen allergeen2 = new Allergenen
             {
                 AllergenenIcoon = "lactose.png",
-                Beschrijving = "Bevat sporen van lactose"
+                Beschrijving = "Bevat sporen van lactose."
             };
             check.Add(allergeen2);
             Allergenen allergeen3 = new Allergenen
             {
                 AllergenenIcoon = "vis.png",
-                Beschrijving = "Bevat sporen van vis schaal en schelpdieren"
+                Beschrijving = "Bevat sporen van vis, schaal en schelpdieren."
             };
             check.Add(allergeen3);
+            Allergenen allergeen4 = new Allergenen
+            {
+                AllergenenIcoon = "gluten.png",
+                Beschrijving = "Bevat sporen van gluten."
+            };
+            check.Add(allergeen4);
+            Allergenen allergeen5 = new Allergenen
+            {
+                AllergenenIcoon = "soja.png",
+                Beschrijving = "Bevat sporen van sojabonen."
+            };
+            check.Add(allergeen5);
 
 
             foreach (var item in check)
@@ -542,19 +597,18 @@ namespace BonTemps.Models
         {
             List<ConsumptieAllergenen> lijst = new List<ConsumptieAllergenen>();
             ConsumptieAllergenen Consaller = new ConsumptieAllergenen();
-            Consaller.AllergenenId = 1;
+            Consaller.AllergenenId = 4;
             Consaller.ConsumptieId = 1;
             //aller.Allergenen = _context.Allergenen.FirstOrDefault();
             //aller.Consumptie = _context.Consumpties.FirstOrDefault();
             lijst.Add(Consaller);
 
             Consumptie cons = new Consumptie();
-            cons.Naam = "tes";
+            cons.Naam = "Spaghetti";
             cons.ConsumptieAllergenen = lijst;
-            cons.Beschrijving = "tes";
-            cons.Prijs = 1.1;
-            cons.CategoryId = 1;
-
+            cons.Beschrijving = "Spaghetti Bolgnese";
+            cons.Prijs = 6.50;
+            cons.CategoryId = 4;
             _context.AddRange(cons);
             _context.SaveChanges();
         }

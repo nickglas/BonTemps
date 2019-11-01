@@ -13,7 +13,7 @@
     <h2>  Menu @Html.DisplayFor(model => model.Menu_naam)</h2>
 
     <div class="container-menu">
-        <h1>Voorgerecht</h1>
+        <h2>Voorgerecht</h2>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Voorgerecht))
         {
             <h3>
@@ -35,7 +35,7 @@
             </h3>
             <p>@item.Consumptie.Beschrijving</p>
         }
-        <h1>Hoofdgerecht</h1>
+        <h2>Hoofdgerecht</h2>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Hoofdgerecht))
         {
         <h3>
@@ -58,7 +58,7 @@
            
             <p>@item.Consumptie.Beschrijving</p>
         }
-        <h1>Nagerecht</h1>
+        <h2>Nagerecht</h2>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Nagerecht))
         {
         <h3>
@@ -81,7 +81,7 @@
             
             <p>@item.Consumptie.Beschrijving</p>
         }
-        <h1>Dranken</h1>
+        <h2>Dranken</h2>
         @foreach (var item in Model.ConsumptieMenu.Where(s => s.Consumptie.CategoryId == Category_Drinken))
         {
         <h3>
