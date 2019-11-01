@@ -79,7 +79,10 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Reservering");
+
+
+            
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen , reserveringid = reservering.Id});
         }
 
         [HttpPost]
@@ -96,8 +99,18 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Createstep2");
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen, reserveringid = reservering.Id });
         }
+
+
+        public IActionResult Step2(int personen, int reserveringid)
+        {
+            Console.WriteLine("PERSONEN : " + personen);
+            Console.WriteLine("ID : " + reserveringid);
+            return View();
+        }
+
+
 
         // GET: Reservering/Edit/5
         public async Task<IActionResult> Edit(int? id)
