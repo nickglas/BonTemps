@@ -59,7 +59,7 @@ namespace BonTemps.Areas.Systeem.Models
             _context.Reserveringen.Update(reservering);
             await _context.SaveChangesAsync();
 
-            Tafels tafels = await _context.Tafels.Where(x => x.Bezet != bezet).FirstOrDefaultAsync();
+            Tafels tafels = await _context.Tafels.Where(x => x.Bezet == bezet).FirstOrDefaultAsync();
             tafels.Bezet = true;
             _context.Tafels.Update(tafels);
             await _context.SaveChangesAsync();
