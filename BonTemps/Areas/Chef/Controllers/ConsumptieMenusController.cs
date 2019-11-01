@@ -52,8 +52,8 @@ namespace BonTemps.Areas.Chef.Controllers
         // GET: Chef/ConsumptieMenus/Create
         public IActionResult Create()
         {
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id");
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id");
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam");
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             return View();
         }
 
@@ -62,7 +62,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,MenuId,ConsumptieId")] ConsumptieMenu consumptieMenu)
+        public async Task<IActionResult> Create([Bind("MenuId,ConsumptieId")] ConsumptieMenu consumptieMenu)
         {
             if (ModelState.IsValid)
             {
@@ -70,8 +70,8 @@ namespace BonTemps.Areas.Chef.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam", consumptieMenu.ConsumptieId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Menu_naam", consumptieMenu.MenuId);
             return View(consumptieMenu);
         }
 
@@ -98,7 +98,7 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,MenuId,ConsumptieId")] ConsumptieMenu consumptieMenu)
+        public async Task<IActionResult> Edit(int id, [Bind("MenuId,ConsumptieId")] ConsumptieMenu consumptieMenu)
         {
             if (id != consumptieMenu.ConsumptieId)
             {
@@ -125,8 +125,8 @@ namespace BonTemps.Areas.Chef.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Id", consumptieMenu.ConsumptieId);
-            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Id", consumptieMenu.MenuId);
+            ViewData["ConsumptieId"] = new SelectList(_context.Consumpties, "Id", "Naam", consumptieMenu.ConsumptieId);
+            ViewData["MenuId"] = new SelectList(_context.Menus, "Id", "Menu_naam", consumptieMenu.MenuId);
             return View(consumptieMenu);
         }
 

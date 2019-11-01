@@ -372,6 +372,38 @@ namespace BonTemps.Models
                 Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
             };
             check.Add(icetea);
+            Consumptie flam = new Consumptie
+            {
+                Naam = "Elsässer Flammkuchen",
+                Beschrijving = "Elsässer Flammkuchen",
+                Prijs = 7.50,
+                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
+            };
+            check.Add(flam);
+            Consumptie boeuf = new Consumptie
+            {
+                Naam = "Boeuf Bourguignon",
+                Beschrijving = "iets wat lijkt op champion soep met vlees erin",
+                Prijs = 5.50,
+                Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
+            };
+            Consumptie madeleines = new Consumptie
+            {
+                Naam = "Madeleines",
+                Beschrijving = "Franse koekies",
+                Prijs = 4.50,
+                Category = _context.Categories.Where(x => x.Naam == "Nagerecht").First(),
+            };
+            check.Add(madeleines);
+            Consumptie chocolademelk = new Consumptie
+            {
+                Naam = "Chocolade Melk",
+                Beschrijving = "Warme chocolade melk met slageroom",
+                Prijs = 2.50,
+                Category = _context.Categories.Where(x => x.Naam == "Drinken").First(),
+            };
+            check.Add(chocolademelk);
+            check.Add(boeuf);
             foreach (var item in check)
             {
                 int i = _context.Consumpties.Where(x => x.Naam == item.Naam).Count();
@@ -481,10 +513,29 @@ namespace BonTemps.Models
             g.ConsumptieId = 8;
             check.Add(g);
 
+            ConsumptieMenu h = new ConsumptieMenu();
+            h.MenuId = 3;
+            h.ConsumptieId = 9;
+            check.Add(h);
+
+            ConsumptieMenu i = new ConsumptieMenu();
+            i.MenuId = 3;
+            i.ConsumptieId = 10;
+            check.Add(i);
+
+            ConsumptieMenu j = new ConsumptieMenu();
+            j.MenuId = 3;
+            j.ConsumptieId = 11;
+            check.Add(j);
+
+            ConsumptieMenu k = new ConsumptieMenu();
+            k.MenuId = 3;
+            k.ConsumptieId = 12;
+            check.Add(k);
             foreach (var item in check)
             {
-                int i = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
-                if (i == 0)
+                int q = _context.ConsumptieMenu.Where(x => x.ConsumptieId == item.ConsumptieId).Count();
+                if (q == 0)
                 {
                     _context.ConsumptieMenu.Add(item);
                     await _context.SaveChangesAsync();
