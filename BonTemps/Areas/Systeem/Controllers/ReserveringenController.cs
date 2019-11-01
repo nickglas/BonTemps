@@ -52,11 +52,16 @@ namespace BonTemps.Areas.Systeem.Models
             return View(await _context.Reserveringen.Where(x=>x.Goedkeuring==false).ToListAsync());
         }
 
-        public async Task <IActionResult>ReserveringGoedkeuren(int? id)
+        public async Task <IActionResult>ReserveringGoedkeuren(int? id, bool bezet)
         {
             Reservering reservering = await _context.Reserveringen.Where(x => x.Id == id).FirstOrDefaultAsync();
             reservering.Goedkeuring = true;
             _context.Reserveringen.Update(reservering);
+            await _context.SaveChangesAsync();
+
+            Tafels tafels = await _context.Tafels.Where(x => x.Bezet != bezet).FirstOrDefaultAsync();
+            tafels.Bezet = true;
+            _context.Tafels.Update(tafels);
             await _context.SaveChangesAsync();
 
             //Email verzenden
