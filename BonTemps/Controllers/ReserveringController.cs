@@ -77,7 +77,7 @@ namespace BonTemps.Controllers
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
 
-            reservering.TafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id;
+            reservering.tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id;
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
@@ -98,7 +98,7 @@ namespace BonTemps.Controllers
             Console.WriteLine("CREATED WITH ACHTERNAAM : " + res.Klantgegevens.Achternaam);
             reservering.Goedkeuring = false;
             reservering.ReserveringAangemaakt = DateTime.Now;
-            reservering.TafelsId = _context.Tafels.Where(x=>x.Bezet == false).FirstOrDefault().Id;
+            reservering.tafelsId = _context.Tafels.Where(x=>x.Bezet == false).FirstOrDefault().Id;
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
             return RedirectToAction("Step2", new { personen = reservering.AantalPersonen, reserveringid = reservering.Id });
