@@ -28,6 +28,9 @@ namespace BonTemps.Models
         public bool Goedkeuring { get; set; }
         public string Opmerking { get; set; }
 
+        public Tafels tafels { get; set; }
+        public int tafelsId { get; set; }
+
         [Required]
         public DateTime ReserveringsDatum { get; set; }
         public DateTime ReserveringAangemaakt { get; set; }
