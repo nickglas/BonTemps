@@ -78,6 +78,7 @@ namespace BonTemps.Data
         public DbSet<BonTemps.Areas.Systeem.Models.Allergenen> Allergenen { get; set; }
         public DbSet<BonTemps.Areas.Systeem.Models.ConsumptieAllergenen> ConsumptieAllergenen { get; set; }
         public DbSet<BonTemps.Areas.Systeem.Models.ConsumptieMenu> ConsumptieMenu { get; set; }
+        public DbSet<BonTemps.Areas.Systeem.Models.ReserveringenMenu> ReserveringenMenu { get; set; }
 
 
 

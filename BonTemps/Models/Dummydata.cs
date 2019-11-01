@@ -530,7 +530,7 @@ namespace BonTemps.Models
 
             ConsumptieMenu k = new ConsumptieMenu();
             k.MenuId = 3;
-            k.ConsumptieId = 12;
+            k.ConsumptieId = 11;
             check.Add(k);
             foreach (var item in check)
             {
