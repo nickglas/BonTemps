@@ -142,9 +142,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -157,13 +159,15 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int>("CategoryId");
 
                     b.Property<int?>("MenuId");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.Property<double>("Prijs");
 
@@ -210,9 +214,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Onderwerp");
+                    b.Property<string>("Onderwerp")
+                        .IsRequired();
 
-                    b.Property<string>("Ontvanger");
+                    b.Property<string>("Ontvanger")
+                        .IsRequired();
 
                     b.Property<string>("Text");
 
@@ -244,11 +250,13 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int?>("Menu");
 
-                    b.Property<string>("Menu_naam");
+                    b.Property<string>("Menu_naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -335,7 +343,11 @@ namespace BonTemps.Migrations
 
                     b.Property<DateTime>("ReserveringsDatum");
 
+                    b.Property<int>("TafelsId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("TafelsId");
 
                     b.ToTable("Reserveringen");
                 });
@@ -641,6 +653,14 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Models.Reservering", "Reservering")
                         .WithMany("ReserveringenMenus")
                         .HasForeignKey("ReserveringsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Models.Reservering", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "Tafels")
+                        .WithMany()
+                        .HasForeignKey("TafelsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -32,7 +32,7 @@
     <Folder Include="Areas\Chef\Models\" />
     <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Areas\Systeem\Models\consumptie\" />
-    <Folder Include="Data\Migrations\" />
+    <Folder Include="Data\" />
     <Folder Include="wwwroot\img\uploads\" />
   </ItemGroup>
 

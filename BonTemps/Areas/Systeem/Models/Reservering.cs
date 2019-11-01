@@ -11,26 +11,28 @@ namespace BonTemps.Models
     public class Reservering
     {
         public int Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "U dient een naam in te vullen")]
         public string NaamReserveerder { get; set; }
-        [Required]
+        [Required(ErrorMessage = "U dient een E-Mail adres in te vullen")]
+        [EmailAddress(ErrorMessage = "Dit is een ongeldig E-Mail adres")]
         public string Email { get; set; }
         public string HuisTelefoonNummer { get; set; }
-        [Required]
+        [Required(ErrorMessage = "U dient een telefoonnummer in te vullen")]
         [Display(Name = "Mobiel telefoonnummer")]
         public string MobielTelefoonNummer { get; set; }
-        [Required]
-        [Range(1, 60)]
+        [Required(ErrorMessage = "U dient een aantal in te vullen")]
+        [Range(1, 60, ErrorMessage = "Een reservering moet minimaal uit 1 persoon bestaan, en maximaal uit 60 personen")]
         [Display(Name = "Aantal personen")]
         public int AantalPersonen { get; set; }
         [Required]
         public bool Goedkeuring { get; set; }
         public string Opmerking { get; set; }
 
+        public Tafels tafels { get; set; }
+        public int tafelsId { get; set; }
+
         [Required]
         public DateTime ReserveringsDatum { get; set; }
-        [Required]
-        [Display(Name = "Selecteer reserverings datum")]
         public DateTime ReserveringAangemaakt { get; set; }
 
         [ForeignKey("Menu")]

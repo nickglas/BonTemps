@@ -92,9 +92,12 @@ hr {
     text-align: center;
 }
 .navbar-left {
-    -webkit-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    /*-webkit-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
     -moz-box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
-    box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);
+    box-shadow: 22px 0px 56px -16px rgba(0,0,0,0.75);*/
+    -webkit-box-shadow: 6px 3px 44px 7px rgba(0,0,0,0.52);
+    -moz-box-shadow: 6px 3px 44px 7px rgba(0,0,0,0.52);
+    box-shadow: 6px 3px 44px 7px rgba(0,0,0,0.52);
 }
 .row [class^="fa"] {
     font-size: 80px;
@@ -264,9 +267,6 @@ hr {
     border: none;
     border-radius: 0;
     width: 100%;
-
-}
-.listbox select {
 
 }
 .CrudCancel { 
