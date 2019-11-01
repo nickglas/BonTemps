@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191101145224_init")]
+    [Migration("20191101205418_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -74,7 +74,8 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AllergenenIcoon");
+                    b.Property<string>("AllergenenIcoon")
+                        .IsRequired();
 
                     b.Property<string>("Beschrijving");
 
@@ -196,6 +197,8 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("MenuId");
 
+                    b.Property<int>("Id");
+
                     b.HasKey("ConsumptieId", "MenuId");
 
                     b.HasIndex("MenuId");
@@ -254,6 +257,19 @@ namespace BonTemps.Migrations
                     b.HasIndex("Menu");
 
                     b.ToTable("Menus");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ReserveringenMenu", b =>
+                {
+                    b.Property<int>("MenuId");
+
+                    b.Property<int>("ReserveringsId");
+
+                    b.HasKey("MenuId", "ReserveringsId");
+
+                    b.HasIndex("ReserveringsId");
+
+                    b.ToTable("ReserveringenMenu");
                 });
 
             modelBuilder.Entity("BonTemps.Areas.Systeem.Models.Tafels", b =>
@@ -615,6 +631,19 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Models.Reservering")
                         .WithMany("Menu")
                         .HasForeignKey("Menu");
+                });
+
+            modelBuilder.Entity("BonTemps.Areas.Systeem.Models.ReserveringenMenu", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Menu", "Menu")
+                        .WithMany("ReserveringenMenus")
+                        .HasForeignKey("MenuId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("BonTemps.Models.Reservering", "Reservering")
+                        .WithMany("ReserveringenMenus")
+                        .HasForeignKey("ReserveringsId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

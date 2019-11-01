@@ -12,12 +12,12 @@ namespace BonTemps.Models
 {
     public class Dummydata
     {
-        public static Thread CheckTableTimer;
+        //public static Thread CheckTableTimer;
         
-        public static void checktable()
-        {
-            CheckTableTimer.Start();
-        }
+        //public static void checktable()
+        //{
+        //    CheckTableTimer.Start();
+        //}
 
         private static string password = "P@$$w0rd";
 
@@ -56,7 +56,7 @@ namespace BonTemps.Models
                 await roleManager.CreateAsync(new Rol(KlantRol, KlantRolBeschrijving, DateTime.Today));
             }
 
-            checktable();
+            //checktable();
 
             await UpdateMenu(context);
             await UpdateCategory(context);

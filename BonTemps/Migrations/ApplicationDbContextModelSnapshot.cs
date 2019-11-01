@@ -278,6 +278,8 @@ namespace BonTemps.Migrations
 
                     b.Property<bool>("Bezet");
 
+                    b.Property<string>("TafelNaam");
+
                     b.Property<int>("Zitplaatsen");
 
                     b.HasKey("Id");
