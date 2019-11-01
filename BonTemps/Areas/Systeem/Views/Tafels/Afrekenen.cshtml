@@ -20,62 +20,64 @@
     <link href="~/css/Menu.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing&display=swap" rel="stylesheet">
     <link href="~/css/Bon.css" rel="stylesheet" />
-
 </head>
 
-<div class="bon-content">
-    <h1 class="heading-primairy title-bon">Bon temps</h1>
-    <h4 class="bedrijfs-info">
-        Hoofdstraat 82 <br>
-        1931GL<br>
-        5063209<br>
-        Bontemps@gmail.com
-    </h4>
-</div>
+<div class="pdf-bon">
+    <div class="pdf-content">
+        <div class="bon-content">
+            <h1 class="heading-primairy title-bon">Bon temps</h1>
+            <h4 class="bedrijfs-info">
+                Hoofdstraat 82 <br>
+                1931GL<br>
+                5063209<br>
+                Bontemps@gmail.com
+            </h4>
+        </div>
 
-<h1 class="tafel-nummer">Tafel nummer : # @i</h1>
+        <h3 class="tafel-nummer">Tafel nummer : # @i</h3>
 
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Consumptie.Naam)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Consumptie.Prijs)
-            </th>
-            <th>
-                Aantal
-            </th>
-            <th>Totaal</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consumptie.Naam)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Aantal)
-            </td>
-            <td>
-                @{ 
-                    double p = 0.0;
-                    p = item.Aantal * item.Consumptie.Prijs;
+        <table class="table table-bon">
+            <thead>
+                <tr>
+                    <th class="th-bon">
+                        @Html.DisplayNameFor(model => model.Consumptie.Naam)
+                    </th>
+                    <th class="th-bon">
+                        @Html.DisplayNameFor(model => model.Consumptie.Prijs)
+                    </th>
+                    <th class="th-bon">
+                        Aantal
+                    </th>
+                    <th class="th-bon">
+                        Totaal
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td class="th-bon">
+                            @Html.DisplayFor(modelItem => item.Consumptie.Naam)
+                        </td>
+                        <td class="th-bon">
+                            @Html.DisplayFor(modelItem => item.Consumptie.Prijs)
+                        </td>
+                        <td class="th-bon">
+                            @Html.DisplayFor(modelItem => item.Aantal)
+                        </td>
+                        <td class="th-bon">
+                            @{
+                                double p = 0.0;
+                                p = item.Aantal * item.Consumptie.Prijs;
+                            }
+                            <span>&euro;@p</span>
+                        </td>
+                    </tr>
                 }
-                <span>&euro;@p</span>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-<h1 class="tot-prijs">Totaal prijs : €@ViewBag.totaal</h1>
-
-@*<a asp-route-id=@Tafel asp-action="Printbon"><small>Bon uitprinten</small></a>*@
+            </tbody>
+        </table>
+    </div>
+</div>

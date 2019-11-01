@@ -123,11 +123,27 @@ namespace BonTemps.Areas.Chef.Controllers
                 return NotFound();
             }
 
-            var menu = await _context.Menus.FindAsync(id);
+            var menu = await _context.Menus
+                .Include(cm => cm.ConsumptieMenu).ThenInclude(c => c.Consumptie)
+                .FirstOrDefaultAsync(m => m.Id == id);
+
             if (menu == null)
             {
                 return NotFound();
             }
+
+            List<ConsumptieMenu> consmenu = _context.ConsumptieMenu.Where(x => x.MenuId == id).ToList();
+            List<Consumptie> cons = new List<Consumptie>();
+            foreach (var item in consmenu)
+            {
+                Consumptie consumptie = new Consumptie();
+                consumptie = _context.Consumpties.Where(x=>x.Id == item.ConsumptieId).FirstOrDefault();
+                cons.Add(consumptie);
+            }
+            ViewData["ConsumptieId"] = new SelectList(cons, "Id", "Naam");
+
+
+
             return View(menu);
         }
 

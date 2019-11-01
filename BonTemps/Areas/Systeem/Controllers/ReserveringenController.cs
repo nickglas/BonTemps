@@ -86,6 +86,7 @@ namespace BonTemps.Areas.Systeem.Models
         // GET: Systeem/Reserveringen/Create
         public IActionResult Create()
         {
+            ViewData["Menu"] = new SelectList(_context.Menus, "Id", "Naam");
             ViewData["Nummer"] = new SelectList(_context.Reserveringen, "Id", "MobielTelefoonNummer");
             ViewData["HuisNummer"] = new SelectList(_context.Reserveringen, "Id", "HuisTelefoonNummer");
             return View();

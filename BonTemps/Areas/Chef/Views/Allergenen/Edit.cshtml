@@ -7,7 +7,7 @@
 <div id="createform">
     <h3 class="titel createform">Allergeen #<span>@Html.DisplayFor(model => model.Id)</span> bewerken </h3>
     <hr />
-    <form asp-action="Edit">
+    <form asp-action="Edit" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group">
             <label asp-for="Beschrijving" class="control-label"></label>
@@ -17,9 +17,18 @@
         <div class="form-group">
             <label asp-for="AllergenenIcoon" class="control-label"><i class="fa fa-file-image-o"></i> Foto</label>
             <br />
-            <input type="file" name="file" asp-for="AllergenenIcoon" required />
+            <input type="file" name="file" asp-for="AllergenenIcoon" />
             <span asp-validation-for="AllergenenIcoon" class="text-danger"></span>
         </div>
+        <span>
+            <dl class="row">
+                <dd class="col-sm-6">
+                    <span style="white-space:nowrap;">Huidig opgeslagen foto:</span>
+                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@Html.DisplayFor(model => model.AllergenenIcoon)"
+                         title="@Html.DisplayFor(model => model.Beschrijving)" />
+                </dd>
+            </dl>
+        </span>
         <div class="form-group">
             <button asp-action="Index" class="btn darkred CrudCancel">
                 Annuleren  <i class="fas fa-times white"></i>

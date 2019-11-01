@@ -50,8 +50,6 @@ namespace BonTemps.Controllers
         // GET: Reservering/Create
         public IActionResult Create()
         {
-            string ip = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
-            Console.WriteLine(ip);
             return View();
         }
 
@@ -60,6 +58,12 @@ namespace BonTemps.Controllers
         {
             List<Reservering> reserveringen = await _context.Reserveringen.Where(x => x.Email == User.Identity.Name).ToListAsync();
             return View(reserveringen);
+        }
+
+        public IActionResult Createstep2()
+        {
+            ViewData["MenuList"] = new SelectList(_context.Menus, "Id", "Naam");
+            return View();
         }
 
         // POST: Reservering/Create
@@ -75,7 +79,10 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Reservering");
+
+
+            
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen , reserveringid = reservering.Id});
         }
 
         [HttpPost]
@@ -92,8 +99,18 @@ namespace BonTemps.Controllers
 
             _context.Reserveringen.Add(reservering);
             await _context.SaveChangesAsync();
-            return RedirectToAction("Index", "Reservering");
+            return RedirectToAction("Step2", new { personen = reservering.AantalPersonen, reserveringid = reservering.Id });
         }
+
+
+        public IActionResult Step2(int personen, int reserveringid)
+        {
+            Console.WriteLine("PERSONEN : " + personen);
+            Console.WriteLine("ID : " + reserveringid);
+            return View();
+        }
+
+
 
         // GET: Reservering/Edit/5
         public async Task<IActionResult> Edit(int? id)

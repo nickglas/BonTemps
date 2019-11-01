@@ -26,9 +26,6 @@ namespace BonTemps.Areas.Chef.Controllers
         {
             _context = context;
             _env = env;
-            var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + "test");
-            Console.WriteLine("ORIGINEEL PATH = " + env.WebRootPath);
-            Console.WriteLine("NEW PATH = " + path);
         }
 
         // GET: Chef/Allergenen
@@ -59,7 +56,6 @@ namespace BonTemps.Areas.Chef.Controllers
         public IActionResult Create()
         {
             return View();
-
         }
 
         // POST: Chef/Allergenen/Create
@@ -67,12 +63,10 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen/*, IFormFile file*/)
+        public async Task<IActionResult> Create([Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen, IFormFile file)
         {
-            //ImgUpload(file, _env);
-            //allergenen.AllergenenIcoon = file.FileName;
-            //Console.WriteLine("file is: " + file);
-            //Console.WriteLine("file.FileName is: " + file.FileName);
+            UploadFile(file, _env);
+            allergenen.AllergenenIcoon = ImgName;
             if (ModelState.IsValid)
             {
                 _context.Add(allergenen);
@@ -82,34 +76,36 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(allergenen);
         }
 
-        //private void ImgUpload(IFormFile file, IHostingEnvironment env)
-        //{
-        //    var fileName = file.FileName;
-        //    var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
-        //    using (var fileStream = new FileStream(path, FileMode.Create))
-        //    {
-        //        file.CopyTo(fileStream);
-        //    }
-        //}
+        private void ImgUpload(IFormFile file, IHostingEnvironment env)
+        {
+            var fileName = file.FileName;
+            var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+        }
 
-        //private void UploadFile(IFormFile file, IHostingEnvironment env)
-        //{
+        private void UploadFile(IFormFile file, IHostingEnvironment env)
+        {
 
-        //    Random random = new Random();
-        //    string RandomString(int length)
-        //    {
-        //        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
-        //        return new string(Enumerable.Repeat(chars, length)
-        //          .Select(s => s[random.Next(s.Length)]).ToArray());
-        //    }
-        //    var fileName = RandomString(15) + ".png";
-        //    ImgName = fileName;
-        //    var path = Path.Combine(env.WebRootPath + "/img/Uploads/" + fileName);
-        //    using (var fileStream = new FileStream(path, FileMode.Create))
-        //    {
-        //        file.CopyTo(fileStream);
-        //    }
-        //}
+            Random random = new Random();
+            string RandomString(int length)
+            {
+                const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+                return new string(Enumerable.Repeat(chars, length)
+                  .Select(s => s[random.Next(s.Length)]).ToArray());
+            }
+            var fileName = RandomString(15) + ".png";
+            ImgName = fileName;
+            var path = Path.Combine(env.WebRootPath + "/Image/Icons/Allergenen/" + fileName);
+            Console.WriteLine("var path is:" + path);
+            Console.WriteLine("Path.Combine is " + env.WebRootPath);
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+        }
 
         // GET: Chef/Allergenen/Edit/5
         public async Task<IActionResult> Edit(int? id)
@@ -132,8 +128,10 @@ namespace BonTemps.Areas.Chef.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Beschrijving,AllergenenIcoon")] Allergenen allergenen, IFormFile file)
         {
+            UploadFile(file, _env);
+            allergenen.AllergenenIcoon = ImgName;
             if (id != allergenen.Id)
             {
                 return NotFound();
@@ -187,6 +185,7 @@ namespace BonTemps.Areas.Chef.Controllers
         {
             var allergenen = await _context.Allergenen.FindAsync(id);
             _context.Allergenen.Remove(allergenen);
+            //_context.Remove(ImgName);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

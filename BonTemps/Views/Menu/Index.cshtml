@@ -1,7 +1,8 @@
-﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.Menu>
+﻿@model IEnumerable<BonTemps.Areas.Systeem.Models.ConsumptieMenu>
 @{
     ViewData["Title"] = "Menu's";
-    double prijs = 0.0;   
+    double prijs = 0.0;
+    List<int> consumptiemenu = new List<int>();
 }
 
 <div class="container-menu">
@@ -10,23 +11,29 @@
 
         @foreach (var item in Model)
         {
-            <h3>
-                <span><a asp-controller="Menu" asp-action="Detail" asp-route-id="@item.Id"> @Html.DisplayFor(modelItem => item.Menu_naam)</a></span>
 
-            </h3>
-            <p>@Html.DisplayFor(modelItem => item.Beschrijving)</p>
-            @*@foreach (var c in item.ConsumptieMenu)
+            if (consumptiemenu.Contains<int>(item.MenuId))
             {
-                @foreach (var ca in item.Consumpties)
+            }
+            else
+            {
+                consumptiemenu.Add(item.MenuId);
+                <h3>
+                    <span><a asp-controller="Menu" asp-action="Detail" asp-route-id="@item.Menu.Id"> @Html.DisplayFor(modelItem => item.Menu.Menu_naam)</a></span>
+                </h3>
+                <p>@Html.DisplayFor(modelItem => item.Menu.Beschrijving)</p>
+
+            }
+
+                @foreach (var c in item.Consumptie.ConsumptieAllergenen)
                 {
-                    @foreach (var da in item.COn)
-                    {
+                    <img id="allergeenicoon" src="~/Image/Icons/Allergenen/@c.Allergenen.AllergenenIcoon"
+                     title="@c.Allergenen.Beschrijving"/>
 
-                    }
                 }
-            }*@
-
         }
+
+
     </div>
 </div>
 
