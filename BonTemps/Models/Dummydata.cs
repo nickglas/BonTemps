@@ -327,7 +327,7 @@ namespace BonTemps.Models
             List<Consumptie> check = new List<Consumptie>();
             Consumptie voorgerecht = new Consumptie
             {
-                Naam = "Tomatten soep",
+                Naam = "Tomaten soep",
                 Beschrijving = "soep gemaakt van tomatten",
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
