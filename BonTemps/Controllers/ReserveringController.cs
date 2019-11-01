@@ -9,6 +9,7 @@ using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
+using BonTemps.Areas.Systeem.Models;
 
 namespace BonTemps.Controllers
 {
@@ -107,10 +108,34 @@ namespace BonTemps.Controllers
         {
             Console.WriteLine("PERSONEN : " + personen);
             Console.WriteLine("ID : " + reserveringid);
+
+            ViewBag.Id = reserveringid;
+            ViewBag.Personen = personen;
+
+            ViewData["Menu"] = new SelectList(_context.Menus, "Id", "Menu_naam");
+
             return View();
         }
 
-
+        public async Task<IActionResult> Confirm(int[] Menu, int Id)
+        {
+            Console.WriteLine("\n\n ID : "+Id+"\n\n");
+            List<Menu> menus = new List<Menu>();
+            List<Bestelling> bestellingen = new List<Bestelling>();
+            foreach (var item in Menu)
+            {
+                Console.WriteLine(item);
+                menus.Add(_context.Menus.Where(x => x.Id == item).FirstOrDefault());
+                ReserveringenMenu menu = new ReserveringenMenu
+                {
+                    MenuId = item,
+                    ReserveringsId = Id
+                };
+                await _context.ReserveringenMenu.AddAsync(menu);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
         // GET: Reservering/Edit/5
         public async Task<IActionResult> Edit(int? id)

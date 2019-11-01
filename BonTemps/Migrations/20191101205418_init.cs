@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -161,6 +161,7 @@ namespace BonTemps.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TafelNaam = table.Column<string>(nullable: true),
                     Zitplaatsen = table.Column<int>(nullable: false),
                     Bezet = table.Column<bool>(nullable: false)
                 },
