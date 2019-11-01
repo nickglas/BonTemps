@@ -25,7 +25,6 @@
 
 <div id="createform" style="float:left;">
     <h3 class="titel createform">Reserveren</h3>
-    <h1 id="test">text</h1>
     <hr />
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -65,18 +64,18 @@
             <select asp-for="MobielTelefoonNummer" hidden class="form-control" asp-items="ViewBag.Nummer"></select>
         </div>
         <div class="form-group">
-            <label asp-for="HuisTelefoonNummer" class="control-label">Nummer</label>
-            <select onchange="checkAantalPersonen()" asp-for="HuisTelefoonNummer" class="form-control" asp-items="ViewBag.HuisNummer"></select>
+            <label asp-for="HuisTelefoonNummer" hidden class="control-label">Nummer</label>
+            <select onchange="checkAantalPersonen()" hidden asp-for="HuisTelefoonNummer" class="form-control" asp-items="ViewBag.HuisNummer"></select>
         </div>
        
 
-        <div id="createform" style="width:90%;margin-left:120%;margin-top:0%;">
+        @*<div id="createform" style="width:90%;margin-left:120%;margin-top:0%;">
             <h3 class="titel createform">Menu's</h3>
             <hr />
             <div id="rolonum">
 
             </div>
-        </div>
+        </div>*@
         @*<div class="form-group">
             <div class='input-group date' id='datetimepicker1'>
                 <input type='text' class="form-control" />
@@ -97,31 +96,28 @@
 </div>
 <br />
 <hr />
-
-
-
-
-
 <script type="text/javascript">
-    function checkAantalPersonen() {
-        var aantal = document.getElementById("aantal").value;
-        if (aantal == 1) {
-        document.getElementById("test").innerHTML = "s";
-        } else {
-            document.getElementById("test").innerHTML = aantal;
 
-              n = $('#aantal').val();
-            if (n < 1)
-                document.getElementById("alert").innerHTML = "U heeft een ongeldig getal gekozen: " + n;
-            else {
-                document.getElementById("alert").innerHTML = "" ;
-            $("#rolonum").html('');
-            for (var i = 1; i <= n; i++) {
-              $("#rolonum").append('<p><span>Item ' + i + ' </span><input id="rolo_add' + i + '" name="addposition"  type="text" value="" required/></p>');
-            }
-        }
-}
-    }
+//    function checkAantalPersonen() {
+//      var aantal = document.getElementById("aantal").value;
+//        if (aantal == 0) {
+//            $("#rolonum").append('<span>');
+//        } else {
+//            document.getElementById("test").innerHTML = aantal;
+
+//              n = $('#aantal').val();
+//            if (n < 1)
+//                document.getElementById("alert").innerHTML = "U heeft een ongeldig getal gekozen: " + n;
+//            else {
+//                document.getElementById("alert").innerHTML = "" ;
+//            $("#rolonum").html('');
+//            for (var i = 1; i <= n; i++) {
+//              $("#rolonum").append('<p><span>Item ' + i + ' </span><input id="rolo_add' + i + '" name="addposition"  type="text" value="" required/></p>');
+//            }
+//        }
+//}
+//    }
+
     function CheckMobiel() {
         var content = '@ViewBag.Nummer';
         var nummer = document.getElementById("MobielNummer").value;
@@ -139,20 +135,20 @@
         }
 
     }
-            function CheckThuis() {
-                var Content = '@ViewBag.HuisNummer';
-                var nummer = document.getElementById("HuisNummer").value;
-                var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.HuisNummer) as String)
-                for (var k in json) {
-                    if (nummer == json[k].Text) {
-                        document.getElementById("HuisNummer").style.color = "red";
-                        //alert("DEZE KLANT HEEFT EERDER BESTELD EN NIET KOMEN OPDAGEN");
-                        break;
-                    } else {
-                        document.getElementById("HuisNummer").style.color = "green";
-                    }
-                    console.log(json[k].Text)
-                }
-            }
+   function CheckThuis() {
+       var Content = '@ViewBag.HuisNummer';
+       var nummer = document.getElementById("HuisNummer").value;
+       var json = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(@ViewBag.HuisNummer) as String)
+       for (var k in json) {
+       if (nummer == json[k].Text) {
+             document.getElementById("HuisNummer").style.color = "red";
+             //alert("DEZE KLANT HEEFT EERDER BESTELD EN NIET KOMEN OPDAGEN");
+       break;
+       } else {
+             document.getElementById("HuisNummer").style.color = "green";
+       }
+             console.log(json[k].Text)
+       }
+   }
 
 </script>

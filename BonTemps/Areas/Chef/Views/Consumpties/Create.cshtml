@@ -34,7 +34,7 @@
             @Html.ListBox("Allergenen", (MultiSelectList)ViewBag.Allergenen, new { size = 8 })
         </div>
         <div class="form-group">
-            <button asp-action="Index" class="btn darkred CrudCancel">
+            <button asp-action="Index" asp-controller="Consumpties" class="btn darkred CrudCancel">
                 Annuleren  <i class="fas fa-times white"></i>
             </button>
             <button type="submit" class="btn darkblue CrudCreate" style="float:right;">

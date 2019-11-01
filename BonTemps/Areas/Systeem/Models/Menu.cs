@@ -11,7 +11,9 @@ namespace BonTemps.Areas.Systeem.Models
     {
         public int Id { get; set; }
         [Display(Name = "Menu naam")]
+        [Required(ErrorMessage = "U dient een menu naam in te vullen")]
         public string Menu_naam { get; set; }
+        [Required(ErrorMessage = "U dient een beschrijving in te vullen")]
         public string Beschrijving { get; set; }
 
         public virtual ICollection<Consumptie> Consumpties { get; set; }

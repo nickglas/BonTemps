@@ -14,18 +14,18 @@
                 <div class="col-md-4 create-res-2">
                     <div asp-validation-summary="ModelOnly" class="text-danger">Naam</div>
                     <div class="form-group">
-                        <label asp-for="NaamReserveerder" class="control-label"></label>
+                        <label asp-for="NaamReserveerder" class="control-label">Naam:</label>
                         <input asp-for="NaamReserveerder" class="form-control" />
                         <span asp-validation-for="NaamReserveerder" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="HuisTelefoonNummer" class="control-label">Huistelefoon</label>
+                        <label asp-for="HuisTelefoonNummer" class="control-label">Huistelefoon:</label>
                         <input asp-for="HuisTelefoonNummer" class="form-control" />
                         <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="MobielTelefoonNummer" class="control-label">Mobiele telefoon</label>
+                        <label asp-for="MobielTelefoonNummer" class="control-label">Mobiele telefoon:</label>
                         <input asp-for="MobielTelefoonNummer" class="form-control" />
                         <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
                     </div>
@@ -33,18 +33,18 @@
                 </div>
                 <div class="col-md-4 create-res-2">
                     <div class="form-group">
-                        <label asp-for="AantalPersonen" class="control-label"></label>
+                        <label asp-for="AantalPersonen" class="control-label">Aantal Personen:</label>
                         <input asp-for="AantalPersonen" class="form-control" />
                         <span asp-validation-for="AantalPersonen" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <label asp-for="Opmerking" class="control-label"></label>
+                        <label asp-for="Opmerking" class="control-label">Opermking:</label>
                         <input asp-for="Opmerking" class="form-control" />
                         <span asp-validation-for="Opmerking" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReserveringsDatum" class="control-label"></label>
+                        <label asp-for="ReserveringsDatum" class="control-label">Reserverings Datum:</label>
                         <input asp-for="ReserveringsDatum" class="form-control" />
                         <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
                     </div>
@@ -73,31 +73,37 @@ else
                 <form asp-action="CreateWithUser">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group">
-                        <label asp-for="AantalPersonen" class="control-label"></label>
-                        <input asp-for="AantalPersonen" class="form-control" />
+                        <label asp-for="AantalPersonen" class="control-label">Aantal personen:</label>
+                        <input type="number" id="aantal" onchange="checkPersonen()" asp-for="AantalPersonen" class="form-control" />
                         <span asp-validation-for="AantalPersonen" class="text-danger"></span>
+                        <span id="validation" class="text-success" style=""></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="HuisTelefoonNummer" class="control-label"></label>
+                        <label asp-for="HuisTelefoonNummer" class="control-label">Huistelefoon:</label>
                         <input asp-for="HuisTelefoonNummer" class="form-control" />
                         <span asp-validation-for="HuisTelefoonNummer" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="MobielTelefoonNummer" class="control-label"></label>
+                        <label asp-for="MobielTelefoonNummer" class="control-label">Mobiele telefoon:</label>
                         <input asp-for="MobielTelefoonNummer" class="form-control" />
                         <span asp-validation-for="MobielTelefoonNummer" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="ReserveringsDatum" class="control-label"></label>
+                        <label asp-for="ReserveringsDatum" class="control-label">Reserverings Datum:</label>
                         <input asp-for="ReserveringsDatum" class="form-control" />
                         <span asp-validation-for="ReserveringsDatum" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Opmerking" class="control-label"></label>
+                        <label asp-for="Opmerking" class="control-label">Opmerking:</label>
                         <input asp-for="Opmerking" class="form-control" />
                         <span asp-validation-for="Opmerking" class="text-danger"></span>
                     </div>
-                    <div class="form-group" style="float: right;">
+                    <div class="form-group" id="createbuttonplaceholder" style="visibility:hidden;display:none;float: right;">
+                        <a href="#" class="a-nav">
+                            <input type="submit" value="Reserveren niet mogelijk" class="btn btn-warning" />
+                        </a>
+                    </div>
+                    <div class="form-group" id="createstep2" style="float:right;">
                         <a asp-controller="Reservering" asp-action="Createstep2" class="a-nav">
                             <input type="submit" value="Reservering aanmaken" class="btn btn-primary" />
                         </a>
@@ -106,6 +112,39 @@ else
             </div>
         </div>
     </div>
+    <span id="span">test</span>
+    <span id="span2">test</span>
 
 }
 
+<script>
+    function checkPersonen() {
+        var value = 0;
+        value = document.getElementById('aantal').value;
+        document.getElementById('span').innerHTML = value;
+
+        if (value == 6) {
+            document.getElementById('createbuttonplaceholder').style.visibility = "hidden";
+            document.getElementById('createbuttonplaceholder').style.display = "none";
+            document.getElementById('createstep2').style.visibility = "visible";
+            document.getElementById('createstep2').style.display = "block";
+            document.getElementById("validation").setAttribute("class", "text-success");
+            document.getElementById('validation').innerHTML = "Dit is het maximale aantal personen dat u kunt kiezen bij het reserveren";
+        }
+        else if (value < 6) {
+            document.getElementById('createbuttonplaceholder').style.visibility = "hidden";
+            document.getElementById('createbuttonplaceholder').style.display = "none";
+            document.getElementById('createstep2').style.visibility = "visible";
+            document.getElementById('createstep2').style.display = "block";
+            document.getElementById('validation').innerHTML = "";
+        }
+        else if (value > 6) {
+            document.getElementById('createstep2').style.visibility = "hidden";
+            document.getElementById('createstep2').style.display = "none";
+            document.getElementById('createbuttonplaceholder').style.visibility = "visible";
+            document.getElementById('createbuttonplaceholder').style.display = "block";
+            document.getElementById('validation').innerHTML = "U kunt niet voor boven de 6 mensen reserveren via de site, bel hiervoor een medewerker. Onze excuses voor het ongemak";
+            document.getElementById("validation").setAttribute("class", "text-danger");
+        }
+    }
+</script>

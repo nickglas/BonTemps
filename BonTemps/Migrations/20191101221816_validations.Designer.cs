@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191031154657_initial")]
-    partial class initial
+    [Migration("20191101221816_validations")]
+    partial class validations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,9 +143,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -158,13 +160,15 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int>("CategoryId");
 
                     b.Property<int?>("MenuId");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.Property<double>("Prijs");
 
@@ -196,6 +200,8 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("MenuId");
 
+                    b.Property<int>("Id");
+
                     b.HasKey("ConsumptieId", "MenuId");
 
                     b.HasIndex("MenuId");
@@ -209,9 +215,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Onderwerp");
+                    b.Property<string>("Onderwerp")
+                        .IsRequired();
 
-                    b.Property<string>("Ontvanger");
+                    b.Property<string>("Ontvanger")
+                        .IsRequired();
 
                     b.Property<string>("Text");
 
@@ -243,11 +251,13 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int?>("Menu");
 
-                    b.Property<string>("Menu_naam");
+                    b.Property<string>("Menu_naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
