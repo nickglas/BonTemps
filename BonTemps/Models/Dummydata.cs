@@ -317,14 +317,6 @@ namespace BonTemps.Models
 
             Console.WriteLine("Updating Items");
             List<Consumptie> check = new List<Consumptie>();
-            Consumptie hoofdgerecht = new Consumptie
-            {
-                Naam = "Spaghetti",
-                Beschrijving = "Spaghetti Bolognesse",
-                Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
-            };
-            check.Add(hoofdgerecht);
             Consumptie voorgerecht = new Consumptie
             {
                 Naam = "Tomatten soep",
@@ -554,19 +546,18 @@ namespace BonTemps.Models
         {
             List<ConsumptieAllergenen> lijst = new List<ConsumptieAllergenen>();
             ConsumptieAllergenen Consaller = new ConsumptieAllergenen();
-            Consaller.AllergenenId = 1;
+            Consaller.AllergenenId = 4;
             Consaller.ConsumptieId = 1;
             //aller.Allergenen = _context.Allergenen.FirstOrDefault();
             //aller.Consumptie = _context.Consumpties.FirstOrDefault();
             lijst.Add(Consaller);
 
             Consumptie cons = new Consumptie();
-            cons.Naam = "tes";
+            cons.Naam = "Spaghetti";
             cons.ConsumptieAllergenen = lijst;
-            cons.Beschrijving = "tes";
-            cons.Prijs = 1.1;
-            cons.CategoryId = 1;
-
+            cons.Beschrijving = "Spaghetti Bolgnese";
+            cons.Prijs = 6.50;
+            cons.CategoryId = 4;
             _context.AddRange(cons);
             _context.SaveChanges();
         }
