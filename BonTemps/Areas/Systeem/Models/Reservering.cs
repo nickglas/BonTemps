@@ -29,7 +29,7 @@ namespace BonTemps.Models
         public string Opmerking { get; set; }
 
         public Tafels tafels { get; set; }
-        public int tafelsId { get; set; }
+        public int? tafelsId { get; set; }
 
         [Required]
         public DateTime ReserveringsDatum { get; set; }
