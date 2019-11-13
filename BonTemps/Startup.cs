@@ -95,6 +95,7 @@ namespace BonTemps
 
                 app.UseStaticFiles();
 
+                    
 
                 app.UseMvc(routes =>
                 {
