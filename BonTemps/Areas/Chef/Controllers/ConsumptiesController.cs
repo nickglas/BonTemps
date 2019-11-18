@@ -30,6 +30,12 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(await consumpties.ToListAsync());
         }
 
+        public async Task<IActionResult> TafelOverzicht()
+        {
+            var consumpties = _context.Consumpties.Include(c => c.Category).Include(a => a.ConsumptieAllergenen).ThenInclude(a => a.Allergenen);
+            return View(await consumpties.ToListAsync());
+        }
+
         // GET: Chef/Consumpties/Details/5
         public async Task<IActionResult> Details(int? id)
         {

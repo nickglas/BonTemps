@@ -431,6 +431,7 @@ namespace BonTemps.Models
 
             ConsumptieMenu consumptiemenu1 = new ConsumptieMenu
             {
+                Id = 1,
                 MenuId = 1,
                 ConsumptieId = 1
             };
@@ -444,6 +445,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu2);
 
             ConsumptieMenu a = new ConsumptieMenu();
+            a.Id = 2;
             a.MenuId = 1;
             a.ConsumptieId = 2;
             check.Add(a);
@@ -456,6 +458,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu3);
 
             ConsumptieMenu b = new ConsumptieMenu();
+            b.Id = 3;
             b.MenuId = 1;
             b.ConsumptieId = 3;
             check.Add(b);
@@ -468,6 +471,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu4);
 
             ConsumptieMenu c = new ConsumptieMenu();
+            c.Id = 4;
             c.MenuId = 1;
             c.ConsumptieId = 4;
             check.Add(c);
@@ -481,6 +485,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu5);
 
             ConsumptieMenu d = new ConsumptieMenu();
+            d.Id = 5;
             d.MenuId = 2;
             d.ConsumptieId = 5;
             check.Add(d);
@@ -493,6 +498,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu6);
 
             ConsumptieMenu e = new ConsumptieMenu();
+            e.Id = 6;
             e.MenuId = 2;
             e.ConsumptieId = 6;
             check.Add(e);
@@ -505,6 +511,7 @@ namespace BonTemps.Models
             //check.Add(consumptiemenu7);
 
             ConsumptieMenu f = new ConsumptieMenu();
+            f.Id = 7;
             f.MenuId = 2;
             f.ConsumptieId = 7;
             check.Add(f);
@@ -517,26 +524,31 @@ namespace BonTemps.Models
             ////check.Add(consumptiemenu8);
 
             ConsumptieMenu g = new ConsumptieMenu();
+            g.Id = 8;
             g.MenuId = 2;
             g.ConsumptieId = 8;
             check.Add(g);
 
             ConsumptieMenu h = new ConsumptieMenu();
+            h.Id = 9;
             h.MenuId = 3;
             h.ConsumptieId = 9;
             check.Add(h);
 
             ConsumptieMenu i = new ConsumptieMenu();
+            i.Id = 10;
             i.MenuId = 3;
             i.ConsumptieId = 10;
             check.Add(i);
 
             ConsumptieMenu j = new ConsumptieMenu();
+            j.Id = 11;
             j.MenuId = 3;
             j.ConsumptieId = 11;
             check.Add(j);
 
             ConsumptieMenu k = new ConsumptieMenu();
+            k.Id = 12;
             k.MenuId = 3;
             k.ConsumptieId = 12;
             check.Add(k);
