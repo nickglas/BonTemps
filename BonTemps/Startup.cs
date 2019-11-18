@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using BonTemps.Models;
 using System.IO;
 using Rotativa.AspNetCore;
+using System.Threading;
+using BonTemps.Areas.Systeem.Models;
 
 namespace BonTemps
 {
@@ -26,7 +28,7 @@ namespace BonTemps
             {
                 Configuration = configuration;
             }
-
+            
             public IConfiguration Configuration { get; }
 
             // This method gets called by the runtime. Use this method to add services to the container.
@@ -93,6 +95,7 @@ namespace BonTemps
 
                 app.UseStaticFiles();
 
+                    
 
                 app.UseMvc(routes =>
                 {
@@ -125,12 +128,31 @@ namespace BonTemps
             RotativaConfiguration.Setup(env);    
 
                 Dummydata.Initialize(context, usermanager, rolemanager).Wait();
-            
-                //DummyData.UserTest(context, usermanager, rolemanager).Wait();
-                //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
-                //DummyData.LoadCategory(context, env).Wait();
-            }
-       
+
+            //DummyData.UserTest(context, usermanager, rolemanager).Wait();
+            //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
+            //DummyData.LoadCategory(context, env).Wait();
+
+            //Thread thread = new Thread(SomeMethod);
+            //thread.Start();
+
+            //void SomeMethod()
+            //{
+            //    List<Reservering> res = context.Reserveringen.ToList();
+            //    foreach (var item in res)
+            //    {
+                    
+            //        DateTime date = item.ReserveringsDatum;
+            //        if (item.ReserveringsDatum == date.AddHours(2))
+            //        {
+
+            //        }
+            //    }
+            //}
+
+        }
+
+      
         
     }
 }

@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.2-servicing-10034")
+                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -72,8 +72,7 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AllergenenIcoon")
-                        .IsRequired();
+                    b.Property<string>("AllergenenIcoon");
 
                     b.Property<string>("Beschrijving");
 
@@ -142,9 +141,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -157,13 +158,15 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int>("CategoryId");
 
                     b.Property<int?>("MenuId");
 
-                    b.Property<string>("Naam");
+                    b.Property<string>("Naam")
+                        .IsRequired();
 
                     b.Property<double>("Prijs");
 
@@ -210,9 +213,11 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Onderwerp");
+                    b.Property<string>("Onderwerp")
+                        .IsRequired();
 
-                    b.Property<string>("Ontvanger");
+                    b.Property<string>("Ontvanger")
+                        .IsRequired();
 
                     b.Property<string>("Text");
 
@@ -244,11 +249,13 @@ namespace BonTemps.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Beschrijving");
+                    b.Property<string>("Beschrijving")
+                        .IsRequired();
 
                     b.Property<int?>("Menu");
 
-                    b.Property<string>("Menu_naam");
+                    b.Property<string>("Menu_naam")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -277,6 +284,8 @@ namespace BonTemps.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("Bezet");
+
+                    b.Property<string>("TafelNaam");
 
                     b.Property<int>("Zitplaatsen");
 
@@ -333,7 +342,11 @@ namespace BonTemps.Migrations
 
                     b.Property<DateTime>("ReserveringsDatum");
 
+                    b.Property<int>("tafelsId");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("tafelsId");
 
                     b.ToTable("Reserveringen");
                 });
@@ -639,6 +652,14 @@ namespace BonTemps.Migrations
                     b.HasOne("BonTemps.Models.Reservering", "Reservering")
                         .WithMany("ReserveringenMenus")
                         .HasForeignKey("ReserveringsId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("BonTemps.Models.Reservering", b =>
+                {
+                    b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "tafels")
+                        .WithMany()
+                        .HasForeignKey("tafelsId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

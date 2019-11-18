@@ -52,11 +52,16 @@ namespace BonTemps.Areas.Systeem.Models
             return View(await _context.Reserveringen.Where(x=>x.Goedkeuring==false).ToListAsync());
         }
 
-        public async Task <IActionResult>ReserveringGoedkeuren(int? id)
+        public async Task <IActionResult>ReserveringGoedkeuren(int? id, bool bezet)
         {
             Reservering reservering = await _context.Reserveringen.Where(x => x.Id == id).FirstOrDefaultAsync();
             reservering.Goedkeuring = true;
             _context.Reserveringen.Update(reservering);
+            await _context.SaveChangesAsync();
+
+            Tafels tafels = await _context.Tafels.Where(x => x.Bezet == bezet).FirstOrDefaultAsync();
+            tafels.Bezet = true;
+            _context.Tafels.Update(tafels);
             await _context.SaveChangesAsync();
 
             //Email verzenden
@@ -86,6 +91,7 @@ namespace BonTemps.Areas.Systeem.Models
         // GET: Systeem/Reserveringen/Create
         public IActionResult Create()
         {
+            ViewData["Menu"] = new SelectList(_context.Menus, "Id", "Menu_naam");
             ViewData["Nummer"] = new SelectList(_context.Reserveringen, "Id", "MobielTelefoonNummer");
             ViewData["HuisNummer"] = new SelectList(_context.Reserveringen, "Id", "HuisTelefoonNummer");
             return View();

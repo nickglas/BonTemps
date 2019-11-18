@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace BonTemps.Models
 {
     public class Dummydata
     {
+
         private static string password = "P@$$w0rd";
 
         public static string ManagerRol = "Manager";
@@ -48,6 +50,8 @@ namespace BonTemps.Models
                 await roleManager.CreateAsync(new Rol(KlantRol, KlantRolBeschrijving, DateTime.Today));
             }
 
+            //checktable();
+
             await UpdateMenu(context);
             await UpdateCategory(context);
             await UpdateItems(context);
@@ -62,10 +66,14 @@ namespace BonTemps.Models
 
 
             await KoppelMenu(context);
-            await KoppelReserveringMenu(context);
+            //await KoppelReserveringMenu(context);
+
+            
+
 
 
         }
+
 
         public static async Task UpdateContactInfo(ApplicationDbContext _context)
         {
@@ -317,17 +325,9 @@ namespace BonTemps.Models
 
             Console.WriteLine("Updating Items");
             List<Consumptie> check = new List<Consumptie>();
-            Consumptie hoofdgerecht = new Consumptie
-            {
-                Naam = "Spaghetti",
-                Beschrijving = "Spaghetti Bolognesse",
-                Prijs = 6.50,
-                Category = _context.Categories.Where(x => x.Naam == "Hoofdgerecht").First(),
-            };
-            check.Add(hoofdgerecht);
             Consumptie voorgerecht = new Consumptie
             {
-                Naam = "Tomatten soep",
+                Naam = "Tomaten soep",
                 Beschrijving = "soep gemaakt van tomatten",
                 Prijs = 6.50,
                 Category = _context.Categories.Where(x => x.Naam == "Voorgerecht").First(),
@@ -550,7 +550,7 @@ namespace BonTemps.Models
             ConsumptieMenu k = new ConsumptieMenu();
             k.Id = 12;
             k.MenuId = 3;
-            k.ConsumptieId = 12;
+            k.ConsumptieId = 11;
             check.Add(k);
             foreach (var item in check)
             {
@@ -617,19 +617,18 @@ namespace BonTemps.Models
         {
             List<ConsumptieAllergenen> lijst = new List<ConsumptieAllergenen>();
             ConsumptieAllergenen Consaller = new ConsumptieAllergenen();
-            Consaller.AllergenenId = 1;
+            Consaller.AllergenenId = 4;
             Consaller.ConsumptieId = 1;
             //aller.Allergenen = _context.Allergenen.FirstOrDefault();
             //aller.Consumptie = _context.Consumpties.FirstOrDefault();
             lijst.Add(Consaller);
 
             Consumptie cons = new Consumptie();
-            cons.Naam = "tes";
+            cons.Naam = "Spaghetti";
             cons.ConsumptieAllergenen = lijst;
-            cons.Beschrijving = "tes";
-            cons.Prijs = 1.1;
-            cons.CategoryId = 1;
-
+            cons.Beschrijving = "Spaghetti Bolgnese";
+            cons.Prijs = 6.50;
+            cons.CategoryId = 4;
             _context.AddRange(cons);
             _context.SaveChanges();
         }
@@ -662,6 +661,7 @@ namespace BonTemps.Models
 
             Tafels tafel1 = new Tafels
             {
+                TafelNaam = "Tafel 1",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -669,6 +669,7 @@ namespace BonTemps.Models
 
             Tafels tafel2 = new Tafels
             {
+                TafelNaam = "Tafel 2",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -676,6 +677,7 @@ namespace BonTemps.Models
 
             Tafels tafel3 = new Tafels
             {
+                TafelNaam = "Tafel 3",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -683,6 +685,7 @@ namespace BonTemps.Models
 
             Tafels tafel4 = new Tafels
             {
+                TafelNaam = "Tafel 4",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -690,6 +693,7 @@ namespace BonTemps.Models
 
             Tafels tafel5 = new Tafels
             {
+                TafelNaam = "Tafel 5",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -697,6 +701,7 @@ namespace BonTemps.Models
 
             Tafels tafel6 = new Tafels
             {
+                TafelNaam = "Tafel 6",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -704,6 +709,7 @@ namespace BonTemps.Models
 
             Tafels tafel7 = new Tafels
             {
+                TafelNaam = "Tafel 7",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -712,6 +718,7 @@ namespace BonTemps.Models
 
             Tafels tafel8 = new Tafels
             {
+                TafelNaam = "Tafel 8",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -719,6 +726,8 @@ namespace BonTemps.Models
 
             Tafels tafel9 = new Tafels
             {
+                TafelNaam = "Tafel 9",
+
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -726,6 +735,7 @@ namespace BonTemps.Models
 
             Tafels tafel10 = new Tafels
             {
+                TafelNaam = "Tafel 10",
                 Zitplaatsen = 6,
                 Bezet = false
             };
@@ -733,7 +743,7 @@ namespace BonTemps.Models
 
             foreach (var item in check)
             {
-                int i = _context.Tafels.Where(x => x.Id == item.Id).Count();
+                int i = _context.Tafels.Where(x => x.TafelNaam == item.TafelNaam).Count();
                 if (i == 0)
                 {
                     _context.Tafels.Add(item);

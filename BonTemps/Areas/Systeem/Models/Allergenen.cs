@@ -10,7 +10,6 @@ namespace BonTemps.Areas.Systeem.Models
     {
         public int Id { get; set; }
         public string Beschrijving { get; set; }
-        [Required]
         public string AllergenenIcoon { get; set; }
 
         public ICollection<ConsumptieAllergenen> ConsumptieAllergenen { get; set; }

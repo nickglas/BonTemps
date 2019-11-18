@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -63,8 +63,8 @@ namespace BonTemps.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Naam = table.Column<string>(nullable: true),
-                    Beschrijving = table.Column<string>(nullable: true)
+                    Naam = table.Column<string>(nullable: false),
+                    Beschrijving = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,8 +107,8 @@ namespace BonTemps.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Ontvanger = table.Column<string>(nullable: true),
-                    Onderwerp = table.Column<string>(nullable: true),
+                    Ontvanger = table.Column<string>(nullable: false),
+                    Onderwerp = table.Column<string>(nullable: false),
                     Text = table.Column<string>(nullable: true),
                     VerzendDatum = table.Column<DateTime>(nullable: false)
                 },
@@ -135,32 +135,12 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Reserveringen",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    NaamReserveerder = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    HuisTelefoonNummer = table.Column<string>(nullable: true),
-                    MobielTelefoonNummer = table.Column<string>(nullable: false),
-                    AantalPersonen = table.Column<int>(nullable: false),
-                    Goedkeuring = table.Column<bool>(nullable: false),
-                    Opmerking = table.Column<string>(nullable: true),
-                    ReserveringsDatum = table.Column<DateTime>(nullable: false),
-                    ReserveringAangemaakt = table.Column<DateTime>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reserveringen", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Tafels",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    TafelNaam = table.Column<string>(nullable: true),
                     Zitplaatsen = table.Column<int>(nullable: false),
                     Bezet = table.Column<bool>(nullable: false)
                 },
@@ -242,43 +222,31 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Gebruiker",
-                columns: table => new
-                {
-                    GebruikerId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Gebruiker = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Gebruiker", x => x.GebruikerId);
-                    table.ForeignKey(
-                        name: "FK_Gebruiker_Reserveringen_Gebruiker",
-                        column: x => x.Gebruiker,
-                        principalTable: "Reserveringen",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Menus",
+                name: "Reserveringen",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Menu_naam = table.Column<string>(nullable: true),
-                    Beschrijving = table.Column<string>(nullable: true),
-                    Menu = table.Column<int>(nullable: true)
+                    NaamReserveerder = table.Column<string>(nullable: false),
+                    Email = table.Column<string>(nullable: false),
+                    HuisTelefoonNummer = table.Column<string>(nullable: true),
+                    MobielTelefoonNummer = table.Column<string>(nullable: false),
+                    AantalPersonen = table.Column<int>(nullable: false),
+                    Goedkeuring = table.Column<bool>(nullable: false),
+                    Opmerking = table.Column<string>(nullable: true),
+                    tafelsId = table.Column<int>(nullable: false),
+                    ReserveringsDatum = table.Column<DateTime>(nullable: false),
+                    ReserveringAangemaakt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Menus", x => x.Id);
+                    table.PrimaryKey("PK_Reserveringen", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Menus_Reserveringen_Menu",
-                        column: x => x.Menu,
-                        principalTable: "Reserveringen",
+                        name: "FK_Reserveringen_Tafels_tafelsId",
+                        column: x => x.tafelsId,
+                        principalTable: "Tafels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -367,13 +335,53 @@ namespace BonTemps.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Gebruiker",
+                columns: table => new
+                {
+                    GebruikerId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Gebruiker = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Gebruiker", x => x.GebruikerId);
+                    table.ForeignKey(
+                        name: "FK_Gebruiker_Reserveringen_Gebruiker",
+                        column: x => x.Gebruiker,
+                        principalTable: "Reserveringen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Menus",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Menu_naam = table.Column<string>(nullable: false),
+                    Beschrijving = table.Column<string>(nullable: false),
+                    Menu = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Menus", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Menus_Reserveringen_Menu",
+                        column: x => x.Menu,
+                        principalTable: "Reserveringen",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Consumpties",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Naam = table.Column<string>(nullable: true),
-                    Beschrijving = table.Column<string>(nullable: true),
+                    Naam = table.Column<string>(nullable: false),
+                    Beschrijving = table.Column<string>(nullable: false),
                     Prijs = table.Column<double>(nullable: false),
                     CategoryId = table.Column<int>(nullable: false),
                     MenuId = table.Column<int>(nullable: true)
@@ -485,7 +493,8 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     MenuId = table.Column<int>(nullable: false),
-                    ConsumptieId = table.Column<int>(nullable: false)
+                    ConsumptieId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -604,6 +613,11 @@ namespace BonTemps.Migrations
                 column: "Menu");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Reserveringen_tafelsId",
+                table: "Reserveringen",
+                column: "tafelsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ReserveringenMenu_ReserveringsId",
                 table: "ReserveringenMenu",
                 column: "ReserveringsId");
@@ -654,9 +668,6 @@ namespace BonTemps.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Tafels");
-
-            migrationBuilder.DropTable(
                 name: "Allergenen");
 
             migrationBuilder.DropTable(
@@ -676,6 +687,9 @@ namespace BonTemps.Migrations
 
             migrationBuilder.DropTable(
                 name: "Reserveringen");
+
+            migrationBuilder.DropTable(
+                name: "Tafels");
         }
     }
 }
