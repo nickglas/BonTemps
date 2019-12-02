@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class init : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -234,7 +234,7 @@ namespace BonTemps.Migrations
                     AantalPersonen = table.Column<int>(nullable: false),
                     Goedkeuring = table.Column<bool>(nullable: false),
                     Opmerking = table.Column<string>(nullable: true),
-                    tafelsId = table.Column<int>(nullable: false),
+                    tafelsId = table.Column<int>(nullable: true),
                     ReserveringsDatum = table.Column<DateTime>(nullable: false),
                     ReserveringAangemaakt = table.Column<DateTime>(nullable: false)
                 },
@@ -246,7 +246,7 @@ namespace BonTemps.Migrations
                         column: x => x.tafelsId,
                         principalTable: "Tafels",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(

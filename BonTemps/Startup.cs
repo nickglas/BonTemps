@@ -127,7 +127,7 @@ namespace BonTemps
 
             RotativaConfiguration.Setup(env);    
 
-                Dummydata.Initialize(context, usermanager, rolemanager).Wait();
+              //  Dummydata.Initialize(context, usermanager, rolemanager).Wait();
 
             //DummyData.UserTest(context, usermanager, rolemanager).Wait();
             //DummyData.AddLevels(context, usermanager, rolemanager).Wait();
