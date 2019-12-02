@@ -56,9 +56,12 @@ namespace BonTemps
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-                // sessions 
-                services.AddSession(options =>
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
+            // sessions 
+            services.AddSession(options =>
                 {
                     options.IdleTimeout = TimeSpan.FromDays(1);
                     options.Cookie.HttpOnly = true;
