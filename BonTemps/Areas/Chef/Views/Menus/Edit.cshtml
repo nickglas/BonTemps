@@ -22,7 +22,6 @@
                 <input asp-for="Beschrijving" class="form-control" />
                 <span asp-validation-for="Beschrijving" class="text-danger"></span>
             </div>
-            @Html.ListBox("ConsumptieId", (MultiSelectList)ViewBag.ConsumptieId, new { size = 8 })
             <div class="form-group">
                 <input type="submit" value="Save" class="button-save" />
             </div>
@@ -31,6 +30,7 @@
 </div>
 
 <div>
-    <a class="create" asp-action="Index">Terug naar menu overzicht</a>
+    <a class="create" asp-action="Index">Terug naar menu overzicht</a><br />
+    <a class="create" asp-controller="ConsumptieMenus" asp-action="Index">Consumptie's toevoegen of verwijderen</a>
 </div>
 
