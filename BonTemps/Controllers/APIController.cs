@@ -7,6 +7,7 @@ using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace BonTemps.Controllers.API
@@ -18,16 +19,53 @@ namespace BonTemps.Controllers.API
         private ApplicationDbContext _context;
         public APIController(ApplicationDbContext context)
         {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                PreserveReferencesHandling = PreserveReferencesHandling.All,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize
+            };
             _context = context;
         }
 
 
-        [HttpGet]
-        public JsonResult GetConsumptie()
+    [HttpGet]
+        public async Task<JsonResult> GetConsumptie(int? id)
         {
-            List<Consumptie> Cons = _context.Consumpties.ToList();
-            var Content = JsonConvert.SerializeObject(Cons);
-            return new JsonResult(new { TestObject = Cons });
+            if (id == null)
+            {
+                var cons = await _context.Consumpties.Select(x => new Consumptie
+                {
+                    Id = x.Id,
+                    Naam = x.Naam,
+                    Beschrijving = x.Beschrijving,
+                    Prijs = x.Prijs,
+                    CategoryId = x.CategoryId,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ConsumptieAllergenen = x.ConsumptieAllergenen
+                }).ToListAsync();
+
+                return new JsonResult(cons);
+            }
+            else
+            {
+                var cons = await _context.Consumpties.Where(x=>x.Id == id).Select(x => new Consumptie
+                {
+                    Id = x.Id,
+                    Naam = x.Naam,
+                    Beschrijving = x.Beschrijving,
+                    Prijs = x.Prijs,
+                    CategoryId = x.CategoryId,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ConsumptieAllergenen = x.ConsumptieAllergenen
+                }).FirstAsync();
+                return new JsonResult(cons);
+            }
+        }
+
+
+        public IActionResult Getresinfo()
+        {
+            return new JsonResult(_context.ContactInfo);
         }
 
         [HttpGet]
