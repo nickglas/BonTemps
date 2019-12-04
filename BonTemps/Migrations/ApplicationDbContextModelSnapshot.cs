@@ -15,7 +15,7 @@ namespace BonTemps.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.1-servicing-10028")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -342,7 +342,7 @@ namespace BonTemps.Migrations
 
                     b.Property<DateTime>("ReserveringsDatum");
 
-                    b.Property<int>("tafelsId");
+                    b.Property<int?>("tafelsId");
 
                     b.HasKey("Id");
 
@@ -659,8 +659,7 @@ namespace BonTemps.Migrations
                 {
                     b.HasOne("BonTemps.Areas.Systeem.Models.Tafels", "tafels")
                         .WithMany()
-                        .HasForeignKey("tafelsId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("tafelsId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
