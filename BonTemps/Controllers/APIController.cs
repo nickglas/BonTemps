@@ -30,6 +30,14 @@ namespace BonTemps.Controllers.API
             return new JsonResult(new { TestObject = Cons });
         }
 
+        [HttpGet]
+        public JsonResult GetMenu()
+        {
+            List<Menu> menu = _context.Menus.ToList();
+            var Content = JsonConvert.SerializeObject(menu);
+            return new JsonResult(new { TestObject = menu });
+        }
+
         public async Task<IActionResult> MakeReservervation()
         {
             Reservering res = new Reservering()
