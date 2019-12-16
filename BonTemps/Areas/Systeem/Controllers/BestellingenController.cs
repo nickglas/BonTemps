@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace BonTemps.Areas.Systeem.Controllers
 {
     [Area("Systeem")]
-    [Authorize(Roles = "Bediening,Manager,Chef")]
+    //[Authorize(Roles = "Bediening,Manager,Chef")]
     public class BestellingenController : Controller
     {
         private readonly ApplicationDbContext _context;
