@@ -69,11 +69,35 @@ namespace BonTemps.Controllers.API
         }
 
         [HttpGet]
-        public JsonResult GetMenu()
+        public async Task<JsonResult> GetMenu(int? id)
         {
-            List<Menu> menu = _context.Menus.ToList();
-            var Content = JsonConvert.SerializeObject(menu);
-            return new JsonResult(new { TestObject = menu });
+            if (id == null)
+            {
+                var menu = await _context.Menus.Select(x => new Menu
+                {
+                    Id = x.Id,
+                    Menu_naam = x.Menu_naam,
+                    Beschrijving = x.Beschrijving,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ReserveringenMenus = x.ReserveringenMenus,
+                    Consumpties = x.Consumpties
+                }).ToListAsync();
+
+                return new JsonResult(menu);
+            }
+            else
+            {
+                var menu = await _context.Menus.Where(x => x.Id == id).Select(x => new Menu
+                {
+                    Id = x.Id,
+                    Menu_naam = x.Menu_naam,
+                    Beschrijving = x.Beschrijving,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ReserveringenMenus = x.ReserveringenMenus,
+                    Consumpties = x.Consumpties
+                }).FirstAsync();
+                return new JsonResult(menu);
+            }
         }
 
         public async Task<IActionResult> MakeReservervation()
