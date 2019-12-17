@@ -34,6 +34,9 @@ namespace BonTemps
             // This method gets called by the runtime. Use this method to add services to the container.
             public void ConfigureServices(IServiceCollection services)
             {
+            services.AddCors(options => options.AddPolicy("ApiCorsPolicy", builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); 
+            }));
+            
                 services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
                 services.Configure<CookiePolicyOptions>(options =>
@@ -77,6 +80,7 @@ namespace BonTemps
             // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
             public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context, RoleManager<Rol> rolemanager, UserManager<Klant>usermanager, IApplicationLifetime applicationLifetime)
             {
+                app.UseCors("ApiCorsPolicy");
                 app.UseSession();
                 if (env.IsDevelopment())
                 {
@@ -130,7 +134,7 @@ namespace BonTemps
 
             RotativaConfiguration.Setup(env);    
 
-              //  Dummydata.Initialize(context, usermanager, rolemanager).Wait();
+            Dummydata.Initialize(context, usermanager, rolemanager).Wait();
 
             //DummyData.UserTest(context, usermanager, rolemanager).Wait();
             //DummyData.AddLevels(context, usermanager, rolemanager).Wait();

@@ -109,6 +109,13 @@ section p {
     width: 18%;
 }
 
+.res-logo{
+    height: 50%;
+    width: 20%;
+    margin-left: 70px;
+    margin-right: auto;
+}
+
 .logo {
     padding-bottom: 30px;
     padding-left: 30px;
