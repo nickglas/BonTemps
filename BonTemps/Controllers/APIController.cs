@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BonTemps.Controllers.API
 {
@@ -27,8 +28,7 @@ namespace BonTemps.Controllers.API
             _context = context;
         }
 
-
-    [HttpGet]
+        [HttpGet]
         public async Task<JsonResult> GetConsumptie(int? id)
         {
             if (id == null)
@@ -62,6 +62,10 @@ namespace BonTemps.Controllers.API
             }
         }
 
+        public IActionResult GetAllergenen()
+        {
+            return new JsonResult(_context.Allergenen);
+        }
 
         public IActionResult Getresinfo()
         {
@@ -69,11 +73,35 @@ namespace BonTemps.Controllers.API
         }
 
         [HttpGet]
-        public JsonResult GetMenu()
+        public async Task<JsonResult> GetMenu(int? id)
         {
-            List<Menu> menu = _context.Menus.ToList();
-            var Content = JsonConvert.SerializeObject(menu);
-            return new JsonResult(new { TestObject = menu });
+            if (id == null)
+            {
+                var menu = await _context.Menus.Select(x => new Menu
+                {
+                    Id = x.Id,
+                    Menu_naam = x.Menu_naam,
+                    Beschrijving = x.Beschrijving,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ReserveringenMenus = x.ReserveringenMenus,
+                    Consumpties = x.Consumpties
+                }).ToListAsync();
+
+                return new JsonResult(menu);
+            }
+            else
+            {
+                var menu = await _context.Menus.Where(x => x.Id == id).Select(x => new Menu
+                {
+                    Id = x.Id,
+                    Menu_naam = x.Menu_naam,
+                    Beschrijving = x.Beschrijving,
+                    ConsumptieMenu = x.ConsumptieMenu,
+                    ReserveringenMenus = x.ReserveringenMenus,
+                    Consumpties = x.Consumpties
+                }).FirstAsync();
+                return new JsonResult(menu);
+            }
         }
 
         public async Task<IActionResult> MakeReservervation()
@@ -93,6 +121,14 @@ namespace BonTemps.Controllers.API
             await _context.Reserveringen.AddAsync(res);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+        
+
+        [HttpPost]
+        public JsonResult PassIntFromView(string Content)
+        {
+            Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
+            return new JsonResult(Content);
         }
     }
         

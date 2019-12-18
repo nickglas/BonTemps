@@ -11,5 +11,7 @@ namespace BonTemps.Areas.Systeem.Models
         public string TafelNaam { get; set; }
         public int Zitplaatsen { get; set; }
         public bool Bezet { get; set; }
+    //    public double y { get; set; }
+    //    public double x { get; set; }
     }
 }

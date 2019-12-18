@@ -1,0 +1,158 @@
+<html>
+    <h1 id="result">
+        JSON Tester
+    </h1>
+<p id="localhostviewer">https://localhost:xxxxx/</p>
+<input id="localhost" value="https://localhost:44545/"></input><button onclick="SetLocalhost()">Set Localhost</button><button onclick="ClearLocalhost()">Clear Localhost</button> <br><br>
+<button onclick="PrepareConsumpties()">Show Consumpties</button>
+<button onclick="HideElement('consumpties')">Hide Consumpties</button> <br> <br>
+<button onclick="GetConsumpties2();ShowElement('consumpties2')">Show Consumpties2</button>
+<button onclick="HideElement('consumpties2')">Hide Consumpties2</button> <br> <br>
+<button onclick="GetRestaurantInfo()">Show Restaurantinfo</button>
+<p id="consumpties" style="visibility:visible;"></p>
+<p id="consumpties2"></p>
+<p id="restaurantinfo"></p>
+<script>
+
+    var obj, dbParam, xmlhttp, myObj, x, txt, categorie, string, url, elementId = "";
+    var localhost = "https://localhost:44545/";
+    obj = { table: "consumpties", limit: 20 };
+    var counter = 0;
+    document.getElementById("localhostviewer").innerHTML = localhost;
+
+    function HideElement(elementId) {
+    document.getElementById(elementId).style.visibility = "hidden";
+    }
+    function ShowElement(elementId) {
+    document.getElementById(elementId).style.visibility = "visible";
+    }
+    function SetLocalhost() {
+    localhost = document.getElementById("localhost").value;
+    document.getElementById("localhostviewer").innerHTML = localhost;
+    }
+    function ClearLocalhost() {
+        localhost = "";
+        document.getElementById("localhostviewer").innerHTML = "Geen localhost gekozen, kies een localhost";
+    }
+  
+    function PrepareConsumpties() {
+        for (counter = 1; counter < 5; counter++) {
+            url = localhost + "Systeem/Bestellingen/GetConsumpties/" + counter.toString();
+            GetConsumpties(counter);
+        }
+    }
+    // alle consumpties in aparte tabellen
+    function GetConsumpties(counter) {
+    ShowElement("consumpties");
+    dbParam = JSON.stringify(obj);
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+        for (x in myObj) {
+            if(myObj[x].categoryId == 1 ) {
+                categorie = "Voorgerecht";
+            } else if(myObj[x].categoryId == 2 ) {
+                categorie = "Drankjes";
+            } else if(myObj[x].categoryId == 3 ) {
+                categorie = "Desserts";
+            } else if(myObj[x].categoryId == 4 ) {
+                categorie = "Hoofdgerecht";
+            } 
+        }
+        txt += "<h3>" + categorie + "</h3><table border='1'><tr></tr><th>ID</th><th>Naam</th><th>Beschrijving</th><th>Prijs</th>"
+        
+        for (x in myObj) {
+        txt += "<tr><td>" + myObj[x].id + "</td>";
+        txt += "<td>" + myObj[x].naam + "</td>";
+        txt += "<td>" + myObj[x].beschrijving + "</td>";
+        txt += "<td> &euro;" + myObj[x].prijs + "</td>";
+        }
+        txt += "</table>"    
+        document.getElementById("consumpties").innerHTML = txt;
+    }
+    };
+    xmlhttp.open("GET", url,  true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
+    }
+    
+     // alle consumpties in 1 tabel
+    function GetConsumpties2() {
+    url = localhost + "api/getconsumptie";
+    dbParam = JSON.stringify(obj);
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+
+        txt += "<h3>Alle Consumpties</h3><table border='1'><tr></tr><th>ID</th><th>Naam</th><th>Beschrijving</th><th>Prijs</th><th>Categorie</th>"
+        
+        for (x in myObj) {
+            if(myObj[x].categoryId == 1 ) {
+                categorie = "Voorgerecht";
+            } else if(myObj[x].categoryId == 2 ) {
+                categorie = "Drankjes";
+            } else if(myObj[x].categoryId == 3 ) {
+                categorie = "Desserts";
+            } else if(myObj[x].categoryId == 4 ) {
+                categorie = "Hoofdgerecht";
+            } 
+        txt += "<tr><td>" + myObj[x].id + "</td>";
+        txt += "<td>" + myObj[x].naam + "</td>";
+        txt += "<td>" + myObj[x].beschrijving + "</td>";
+        txt += "<td> &euro;" + myObj[x].prijs + "</td>";
+        txt += "<td> " + categorie + "</td>";
+
+        }
+        txt += "</table>"    
+        document.getElementById("consumpties2").innerHTML = txt;
+    }
+    };
+    xmlhttp.open("GET", url,  true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
+    }
+
+    function GetRestaurantInfo() {
+    url = localhost + "api/getresinfo";
+    dbParam = JSON.stringify(obj);
+    xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        myObj = JSON.parse(this.responseText);
+
+        txt += "<h3>Contactinformatie</h3><table border='1'><tr></tr><th>Adres</th><th>Postcode</th><th>Telefoonnummer</th><th>E-Mail</th>"
+        
+        for (x in myObj) { //contactinfo
+        txt += "<tr><td>" + myObj[x].adres + "</td>";
+        txt += "<td>" + myObj[x].postcode + "</td>";
+        txt += "<td>" + myObj[x].telefoonnummer + "</td>";
+        txt += "<td>" + myObj[x].email + "</td>";
+        }
+        txt += "</table>"    
+
+        txt += "<h3>Openingstijden</h3><table border='1'><tr></tr><th>Dag</th><th>Openingstijd</th><th>Sluit</th>"
+            for (x in myObj) {
+        txt += "<tr><td>Maandag</td><td>" + myObj[x].maandagOpen + "</td><td>" + myObj[x].maandagSluit + "</td>";
+        txt += "<tr><td>Dinsdag</td><td>" + myObj[x].dinsdagOpen + "</td><td>" + myObj[x].dinsdagSluit + "</td>";
+        txt += "<tr><td>Woensdag</td><td>" + myObj[x].woensdagOpen + "</td><td>" + myObj[x].woensdagSluit + "</td>";
+        txt += "<tr><td>Donderdag</td><td>" + myObj[x].donderdagOpen + "</td><td>" + myObj[x].donderdagSluit + "</td>";
+        txt += "<tr><td>Vrijdag</td><td>" + myObj[x].vrijdagOpen + "</td><td>" + myObj[x].vrijdagSluit + "</td>";
+        txt += "<tr><td>Zaterdag</td><td>" + myObj[x].zaterdagOpen + "</td><td>" + myObj[x].zaterdagSluit + "</td>";
+        txt += "<tr><td>Zondag</td><td>" + myObj[x].zondagOpen + "</td><td>" + myObj[x].zondagSluit + "</td>";
+        }
+        txt += "</table>"    
+        document.getElementById("consumpties2").innerHTML = txt;
+            
+    }
+    };
+    xmlhttp.open("GET", url,  true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
+    }
+</script> 
+</html>
+
+
+
