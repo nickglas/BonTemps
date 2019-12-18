@@ -1,0 +1,171 @@
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="img/fav.png">
+		<meta name="author" content="colorlib">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<meta charset="UTF-8">
+		<title>Macro</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet">
+	
+		<link rel="stylesheet" href="css/linearicons.css">
+		<link rel="stylesheet" href="css/font-awesome.min.css">
+		<a href="C:\Users\User\source\repos\bontemps2\BonTemps\Front-end\blog-single.html"></a>
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/magnific-popup.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<link rel="stylesheet" href="css/nice-select.css">
+		<link rel="stylesheet" href="css/animate.min.css">
+		<link rel="stylesheet" href="css/owl.carousel.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- JAVASCRIPT SPUL -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script type="text/javascript">
+            $(document).ready(function () {
+                console.log("restaurant informatie ophalen");
+				var url = "https://localhost:44545/api/Getresinfo";
+				var Httpreq = new XMLHttpRequest(); // a new request
+				Httpreq.open("GET",url,false);
+				Httpreq.send(null);
+				//document.write(Httpreq.responseText);
+
+	            var obj = JSON.parse(Httpreq.response);
+	            var info = JSON.stringify(obj);
+                //console.log(JsonObject);
+
+                document.getElementById("Straatnaam").innerHTML += obj[0].adres;
+                document.getElementById("Postcode").innerHTML += obj[0].postcode;
+                document.getElementById("Email").innerHTML += obj[0].email;
+                document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
+
+
+                document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
+				document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
+                document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
+                document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
+                document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
+                document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
+                document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+
+
+                console.log(info);
+            });
+		</script>
+	</head>
+		<body>	
+			<header id="header">
+				<div class="header-top">
+					<div class="container">
+				  		<div class="row justify-content-center">
+						      <div id="logo">
+						        <a href="index.html"><img src="img/logo.png" alt="" title="" /></a>
+						      </div>
+				  		</div>			  					
+					</div>
+				</div>
+				<div class="container main-menu">
+					<div class="row align-items-center justify-content-center d-flex">
+						<nav id="nav-menu-container">
+							<ul class="nav-menu">
+								<li><a href="index.html">Home</a></li>
+								<li><a href="menu.html">Menu's</a></li>
+								<li><a href="reserveren.html">Reserveren</a></li>
+								<li><a href="contact.html">Contact</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</header>
+			<section class="relative about-banner">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">				
+					<div class="row d-flex align-items-center justify-content-center">
+						<div class="about-content col-lg-12">
+							<h1 class="text-white">
+                                Reserveren
+							</h1>	
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="reserveren.html"> Reserveren </a></p>
+						</div>	
+					</div>
+				</div>
+			</section>
+
+			<section class="contact-page-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-4 d-flex flex-column address-wrap">
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-home"></span>
+								</div>
+								<div class="contact-details">
+									<h5>Binghamton, New York</h5>
+									<p>
+										4343 Hinkle Deegan Lake Road
+									</p>
+								</div>
+							</div>
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-phone-handset"></span>
+								</div>
+								<div class="contact-details">
+									<h5>00 (958) 9865 562</h5>
+									<p>Mon to Fri 9am to 6 pm</p>
+								</div>
+							</div>
+							<div class="single-contact-address d-flex flex-row">
+								<div class="icon">
+									<span class="lnr lnr-envelope"></span>
+								</div>
+								<div class="contact-details">
+									<h5>support@colorlib.com</h5>
+									<p>Send us your query anytime!</p>
+								</div>
+							</div>														
+						</div>
+						<div class="col-lg-8">
+							<form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
+								<div class="row">	
+									<div class="col-lg-6 form-group">
+										<input name="name" placeholder="Naam" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Naam'" class="common-input mb-20 form-control" required="" type="text">
+									
+										<input name="email" placeholder="E-mail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onfocus="this.placeholder = ''" onblur="this.placeholder = 'E-mail'" class="common-input mb-20 form-control" required="" type="email">
+
+										<input name="subject" placeholder="Telefoonnummer" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter subject'" class="common-input mb-20 form-control" required="" type="text">
+									</div>
+									<div class="col-lg-6 form-group">
+										<textarea class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>				
+									</div>
+									<div class="col-lg-12">
+										<div class="alert-msg" style="text-align: left;"></div>
+										<button class="genric-btn primary" style="float: right;">Send Message</button>											
+									</div>
+								</div>
+							</form>	
+						</div>
+					</div>
+				</div>	
+			</section>
+
+			<script src="js/vendor/jquery-2.2.4.min.js"></script>
+			<script src="js/popper.min.js"></script>
+			<script src="js/vendor/bootstrap.min.js"></script>			
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
+ 			<script src="js/jquery-ui.js"></script>					
+  			<script src="js/easing.min.js"></script>			
+			<script src="js/hoverIntent.js"></script>
+			<script src="js/superfish.min.js"></script>	
+			<script src="js/jquery.ajaxchimp.min.js"></script>
+			<script src="js/jquery.magnific-popup.min.js"></script>						
+			<script src="js/jquery.nice-select.min.js"></script>					
+			<script src="js/owl.carousel.min.js"></script>			
+            <script src="js/isotope.pkgd.min.js"></script>								
+			<script src="js/mail-script.js"></script>	
+			<script src="js/main.js"></script>	
+		</body>
+	</html>
