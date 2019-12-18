@@ -2,10 +2,16 @@
 <script>
     $(document).ready(function () {
         $("#RegisterSubmit").click(function () {
-            var email = $("#RegisterEmail").val();
-            var pass = $("#RegisterPassword").val();
+            var Voornaam = $("#Voornaam").val();
+            var Achternaam = $("#Achternaam").val();
+            var Geboortedatum = $("#Geboortedatum").val();
+            var Geslacht = $("#Geslacht").val();
+            var Email = $("#Email").val();
+            var Wachtwoord = $("#Wachtwoord").val();
+            var Telefoonnummer = $("#Telefoonnummer").val();
+
             //console.log("Email : " + email + " , " + "Password : " + pass);
-            var data = { Email : email , Password : pass};
+            var data = { Voornaam : Voornaam, Achternaam : Achternaam, Geboortedatum : Geboortedatum, Geslacht : Geslacht, Email : Email, Wachtwoord : Wachtwoord, Telefoonnummer : Telefoonnummer};
 					 $.ajax({
 						 url: 'https://localhost:44545/api/Register',
 						 type: "post",
@@ -29,38 +35,38 @@
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label>Voornaam</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Voornaam" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Achternaam</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Achternaam" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Geboortedatum</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Geboortedatum" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Geslacht</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Geslacht" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Telefoonnummer</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Telefoonnummer" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Email</label>
-                <input id="RegisterEmail" class="form-control" />
+                <input id="Email" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Wachtwoord</label>
-                <input id="RegisterPassword" class="form-control" />
+                <input id="Wachtwoord" class="form-control" />
             </div>
             <div class="form-group">
                 <label>Herhaal wachtwoord</label>
-                <input id="RegisterPassword" class="form-control" />
+                <input id="HWachtwoord" class="form-control" />
             </div>
             <div class="form-group">
-                <button id="RegisterSubmit" type="submit" class="btn btn-primary btn-login">Inloggen</button>
+                <button id="RegisterSubmit" type="submit" class="btn btn-primary btn-login">Registreren</button>
             </div>
         </section>
     </div>

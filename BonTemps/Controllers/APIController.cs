@@ -151,18 +151,28 @@ namespace BonTemps.Controllers.API
         }
 
         [HttpPost]
-        public async Task<JsonResult> Register(string Email, string Password)
+        public async Task<JsonResult> Register(string Voornaam, string Achternaam, string Geboortedatum , string Geslacht, string Email , string Wachtwoord, string Telefoonnummer)
         {
-            Console.WriteLine("Username : " + Email);
-            Console.WriteLine("Password : " + Password);
 
             Klant x = new Klant
             {
+                UserName = Email,
                 Email = Email,
-                UserName = Email
+                Aanmaakdatum = DateTime.Now,
+                Rol = await _context.Rol.Where(z => z.Name == "Klant").FirstAsync(),
+                Rolnaam = x.Rol.Name,
+                Klantgegevens = new Klantgegevens
+                {
+                    Voornaam = Voornaam,
+                    Achternaam = Achternaam,
+                    Geslacht = Geslacht,
+                    GeboorteDatum = DateTime.Parse(Geboortedatum),
+                    TelefoonNummer = Telefoonnummer
+                },
+                PhoneNumber = Telefoonnummer
             };
 
-            var post = await _Usermanager.CreateAsync(x, Password);
+            var post = await _Usermanager.CreateAsync(x, Wachtwoord);
 
             if (post.Succeeded)
             {
