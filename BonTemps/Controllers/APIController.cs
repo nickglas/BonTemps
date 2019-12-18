@@ -160,7 +160,7 @@ namespace BonTemps.Controllers.API
                 Email = Email,
                 Aanmaakdatum = DateTime.Now,
                 Rol = await _context.Rol.Where(z => z.Name == "Klant").FirstAsync(),
-                Rolnaam = x.Rol.Name,
+                
                 Klantgegevens = new Klantgegevens
                 {
                     Voornaam = Voornaam,

@@ -27,32 +27,66 @@
 		<script type="text/javascript">
             $(document).ready(function () {
                 console.log("restaurant informatie ophalen");
-				var url = "https://localhost:44545/api/Getresinfo";
-				var Httpreq = new XMLHttpRequest(); // a new request
-				Httpreq.open("GET",url,false);
-				Httpreq.send(null);
-				//document.write(Httpreq.responseText);
+                var url = "https://localhost:44545/api/Getresinfo";
+                var Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET", url, false);
+                Httpreq.send(null);
+                //document.write(Httpreq.responseText);
 
-	            var obj = JSON.parse(Httpreq.response);
-	            var info = JSON.stringify(obj);
+                var obj = JSON.parse(Httpreq.response);
+                var info = JSON.stringify(obj);
                 //console.log(JsonObject);
 
-                document.getElementById("Straatnaam").innerHTML += obj[0].adres;
-                document.getElementById("Postcode").innerHTML += obj[0].postcode;
-                document.getElementById("Email").innerHTML += obj[0].email;
-                document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
+                //document.getElementById("Straatnaam").innerHTML += obj[0].adres;
+                //document.getElementById("Postcode").innerHTML += obj[0].postcode;
+                //document.getElementById("Email").innerHTML += obj[0].email;
+                //document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
 
 
-                document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
-				document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
-                document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
-                document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
-                document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
-                document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
-                document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+                //document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
+                //document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
+                //document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
+                //document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
+                //document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
+                //document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
+                //document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+
 
 
                 console.log(info);
+
+
+                $("#MenuKeuze").hide();
+
+
+                //Reservering cookie aanmaken en doorsturen naar volgende view om menu keuze te maken
+                $("#InputButton").click(function () {
+                    $("#MenuKeuze").html("");
+                     console.log("testing");
+                     var naam = $("#naam").val();
+                     var email = $("#email").val();
+                     var huistelefoon =$("#huistelefoon").val();
+                     var mobieltelefoon =$("#mobieltelefoon").val();
+                     var aantalpersonen =$("#personen").val();
+                     var bericht = $("#bericht").val();
+
+                     console.log("Naam : " + naam);
+                     console.log("email : " + email);
+                     console.log("huistelefoon : " + huistelefoon);
+                     console.log("mobieltelefoon : " + mobieltelefoon);
+                     console.log("aantal personen : " + aantalpersonen);
+                     console.log("bericht : " + bericht);
+
+                     for (var i = 0; i < aantalpersonen; i++) {
+                         var content = $("#MenuKeuze").html();
+                         content += "<input id='huistelefoon' name='Huis telefoonnummer' placeholder='Menu keuzen voor persoon : '"+i.toString() +" onblur='this.placeholder = ''' class='common-input mb-20 form-control' required type='text'>"
+                         $("#MenuKeuze").html(content);
+                     }
+                     $("#MenuKeuze").show();
+
+				     });
+                   
+                
             });
 		</script>
 	</head>
@@ -98,27 +132,32 @@
 				<div class="container">
                     <div class="row">
                         <div class="col-lg-8">
-                            <form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
+                            <div class="form-area contact-form text-right" id="myForm">
                                 <div class="row">
                                     <div class="col-lg-6 form-group">
-                                        <input name="name" placeholder="Naam" onblur="this.placeholder = 'Naam'" class="common-input mb-20 form-control" required type="text">
-                                        <input name="email" placeholder="E-mail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'E-mail'" class="common-input mb-20 form-control" required type="email">
-                                        <input name="Huis telefoonnummer" placeholder="Huis telefoonnummer" onblur="this.placeholder = 'Huis telefoonnummer'" class="common-input mb-20 form-control" required type="text">
-                                        <input name="Mobiel telefoonnummer" placeholder="Mobiel telefoonnummer" onblur="this.placeholder = 'Mobiel telefoonnummer'" class="common-input mb-20 form-control" required type="text">
+                                        <input id="naam" name="name" placeholder="Naam" onblur="this.placeholder = 'Naam'" class="common-input mb-20 form-control" required type="text">
+                                        <input id="email" name="email" placeholder="E-mail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'E-mail'" class="common-input mb-20 form-control" required type="email">
+                                        <input id="huistelefoon" name="Huis telefoonnummer" placeholder="Huis telefoonnummer" onblur="this.placeholder = 'Huis telefoonnummer'" class="common-input mb-20 form-control" required type="text">
+                                        <input id="mobieltelefoon" name="Mobiel telefoonnummer" placeholder="Mobiel telefoonnummer" onblur="this.placeholder = 'Mobiel telefoonnummer'" class="common-input mb-20 form-control" required type="text">
 
 
                                     </div>
-                                    <div class="col-lg-6 form-group">
-                                        <input name="personen" placeholder="Aantal personen" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'Aantal personen'" asp-for="AantalPersonen" class="common-input mb-20 form-control" required type="text />
-                                        <textarea class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
+                                    <div class="col-lg-6 form-group">	
+                                        <input id="personen" name="personen" placeholder="Aantal personen" onblur="this.placeholder = 'Aantal personen'" asp-for="AantalPersonen" class="common-input mb-20 form-control" required type="text" />
+                                        <textarea id="bericht" class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="alert-msg" style="text-align: left;"></div>
-                                        <button class="genric-btn primary" style="float: right;">Reservering aanmaken</button>
+										<button id="InputButton" class="genric-btn primary" style="float: right;">Verder naar menu keuze</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
+                        
+                        <div id="MenuKeuze">
+                            Menu ophalen
+                        </div>
+
                         <div class="col-lg-4 d-flex flex-column address-wrap">
                             <div class="single-contact-address d-flex flex-row">
                                 <div class="icon">
