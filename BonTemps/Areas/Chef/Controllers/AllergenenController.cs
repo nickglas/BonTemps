@@ -52,7 +52,8 @@ namespace BonTemps.Areas.Chef.Controllers
             return View(allergenen);
         }
 
-          // GET: Chef/Allergenen/Create
+      
+        // GET: Chef/Allergenen/Create
         public IActionResult Create()
         {
             return View();

@@ -27,8 +27,7 @@ namespace BonTemps.Controllers.API
             _context = context;
         }
 
-
-    [HttpGet]
+        [HttpGet]
         public async Task<JsonResult> GetConsumptie(int? id)
         {
             if (id == null)
@@ -62,6 +61,10 @@ namespace BonTemps.Controllers.API
             }
         }
 
+        public IActionResult GetAllergenen()
+        {
+            return new JsonResult(_context.Allergenen);
+        }
 
         public IActionResult Getresinfo()
         {
