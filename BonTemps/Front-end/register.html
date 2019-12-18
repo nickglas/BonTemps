@@ -1,25 +1,43 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#RegisterSubmit").click(function () {
+            var email = $("#RegisterEmail").val();
+            var pass = $("#RegisterPassword").val();
+            //console.log("Email : " + email + " , " + "Password : " + pass);
+            var data = { Email : email , Password : pass};
+					 $.ajax({
+						 url: 'https://localhost:44545/api/Register',
+						 type: "post",
+						 contentType: 'application/x-www-form-urlencoded',
+						 data: data,
+						 success: function (result) {
+							 console.log(result);
+						 }
+					 });
+        });
+    });
+</script>
+
+
 <div class="row login-div">
     <div class="col-md-8 center">
         <section>
             <div class="row text-center">
                 <i class="fas fa-user-circle  iconlogin"></i>
             </div>
-            <form id="account" method="post">
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label> naam </label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label>achternaam</label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-login">Inloggen</button>
-                </div>
-            </form>
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label>Email</label>
+                <input id="RegisterEmail" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label>Wachtwoord</label>
+                <input id="RegisterPassword" class="form-control" />
+            </div>
+            <div class="form-group">
+                <button id="RegisterSubmit" type="submit" class="btn btn-primary btn-login">Inloggen</button>
+            </div>
         </section>
     </div>
 </div>

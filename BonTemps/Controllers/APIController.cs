@@ -6,6 +6,7 @@ using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -18,7 +19,9 @@ namespace BonTemps.Controllers.API
     public class APIController : ControllerBase
     {
         private ApplicationDbContext _context;
-        public APIController(ApplicationDbContext context)
+        private Microsoft.AspNetCore.Identity.UserManager<Klant> _Usermanager;
+        private SignInManager<Klant> _signinmanager;
+        public APIController(ApplicationDbContext context, UserManager<Klant> userManager , SignInManager<Klant>signInManager)
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -26,6 +29,8 @@ namespace BonTemps.Controllers.API
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
             _context = context;
+            _Usermanager = userManager;
+            _signinmanager = signInManager;
         }
 
         [HttpGet]
@@ -130,6 +135,44 @@ namespace BonTemps.Controllers.API
             Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
             return new JsonResult(Content);
         }
+
+        [HttpPost]
+        public async Task<JsonResult> Login(string username, string password)
+        {
+            Console.WriteLine("Username : " + username);
+            Console.WriteLine("Password : " + password);
+            var signin = await _signinmanager.PasswordSignInAsync(username, password, true , true);
+            if (signin.Succeeded)
+            {
+                Console.WriteLine("LOGGED IN !");
+            }
+            return new JsonResult (username);
+
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Register(string Email, string Password)
+        {
+            Console.WriteLine("Username : " + Email);
+            Console.WriteLine("Password : " + Password);
+
+            Klant x = new Klant
+            {
+                Email = Email,
+                UserName = Email
+            };
+
+            var post = await _Usermanager.CreateAsync(x, Password);
+
+            if (post.Succeeded)
+            {
+                Console.WriteLine("User registered");
+            }
+
+            return new JsonResult(Email);
+
+        }
+
     }
         
 }
