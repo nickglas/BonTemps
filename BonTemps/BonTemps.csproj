@@ -14,9 +14,21 @@
     <None Remove="Views\Reserveren\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Front-end\js\jquery.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Front-end\js\jquery.js">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="iTextSharp" Version="5.5.13.1" />
+    <PackageReference Include="jQuery" Version="2.0.2" />
     <PackageReference Include="MailKit" Version="2.3.1.6" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
