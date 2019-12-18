@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BonTemps.Controllers.API
 {
@@ -117,6 +118,14 @@ namespace BonTemps.Controllers.API
             await _context.Reserveringen.AddAsync(res);
             await _context.SaveChangesAsync();
             return Ok();
+        }
+        
+
+        [HttpPost]
+        public JsonResult PassIntFromView(string Content)
+        {
+            Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
+            return new JsonResult(Content);
         }
     }
         

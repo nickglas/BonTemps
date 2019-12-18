@@ -36,14 +36,14 @@
 		<script type="text/javascript">
             $(document).ready(function () {
                 console.log("restaurant informatie ophalen");
-				var url = "https://localhost:44545/api/Getresinfo";
-				var Httpreq = new XMLHttpRequest(); // a new request
-				Httpreq.open("GET",url,false);
-				Httpreq.send(null);
-				//document.write(Httpreq.responseText);
+                var url = "https://localhost:44545/api/Getresinfo";
+                var Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET", url, false);
+                Httpreq.send(null);
+                //document.write(Httpreq.responseText);
 
-	            var obj = JSON.parse(Httpreq.response);
-	            var info = JSON.stringify(obj);
+                var obj = JSON.parse(Httpreq.response);
+                var info = JSON.stringify(obj);
                 //console.log(JsonObject);
 
                 document.getElementById("Straatnaam").innerHTML += obj[0].adres;
@@ -53,7 +53,7 @@
 
 
                 document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
-				document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
+                document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
                 document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
                 document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
                 document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
@@ -62,13 +62,31 @@
 
 
                 console.log(info);
+
+                //Data verzenden
+                $("#InputButton").click(function () {
+                    console.log("Submitted some data");
+                    var submitdata = $("#InputTest").val();
+
+					//$.post('https://localhost:44545/api/Postinfo',   // url
+					//	 { myData: 'This is my data.' }, // data to be submit
+					//		function(data, status, jqXHR) {// success callback
+					//        $('p').append('status: ' + status + ', data: ' + data);
+					//		})
+					var data = { Content: submitdata };
+					 $.ajax({
+						 url: 'https://localhost:44545/api/PassIntFromView',
+						 type: "post",
+						 contentType: 'application/x-www-form-urlencoded',
+						 data: data,
+						 success: function (result) {
+							 console.log(result);
+						 }
+					 });
+				});
             });
 		</script>
-		<script type="text/javascript">
-			$("p").click(function(){
-				alert("The paragraph was clicked.");
-			});
-		</script>
+			
 	</head>
 		<body>	
 			<header id="header">
@@ -152,7 +170,16 @@
 					<p id="Zondag">Data aan het ophalen</p>
 				</div>
 			</div>
-			<p id="p">testing</p>
+			<br /><br />
+
+			<div>
+				<input id="InputTest" height="50" width="150" type="text" placeholder="Test data (Check console)"/>
+				<input type="submit" id="InputButton" value="Sumbit"/>
+			</div>
+
+
+
+
 			<!-- End contact-page Area -->
 
 			<!-- start footer Area -->		
