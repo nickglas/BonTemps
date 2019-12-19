@@ -109,20 +109,30 @@ namespace BonTemps.Controllers.API
             }
         }
 
-        public async Task<IActionResult> MakeReservervation()
+        public async Task<IActionResult> MakeReservervation(string naam , string email, string huistelefoon , string mobiel, int aantalpersonen,string bericht, string[] ids)
         {
             Reservering res = new Reservering()
             {
-                NaamReserveerder = "test",
-                Email = "Test",
-                HuisTelefoonNummer = "123",
-                MobielTelefoonNummer = "123",
-                AantalPersonen = 1,
+                NaamReserveerder = naam,
+                Email = email,
+                HuisTelefoonNummer = huistelefoon,
+                MobielTelefoonNummer = mobiel,
+                AantalPersonen = aantalpersonen,
                 ReserveringAangemaakt = DateTime.Now,
                 ReserveringsDatum = DateTime.Now,
                 Goedkeuring = false,
-                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id
+                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
+                ReserveringenMenus = new List<ReserveringenMenu>(),
+                Opmerking = bericht
             };
+            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
+            foreach (var item in ids)
+            {
+                menus.Add(new ReserveringenMenu { Reservering = res, Menu = _context.Menus.Where(x => x.Id == int.Parse(item)).First() });
+            }
+            
+            res.ReserveringenMenus = menus;
+
             await _context.Reserveringen.AddAsync(res);
             await _context.SaveChangesAsync();
             return Ok();

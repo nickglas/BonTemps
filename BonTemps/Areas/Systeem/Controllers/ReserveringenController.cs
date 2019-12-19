@@ -78,7 +78,7 @@ namespace BonTemps.Areas.Systeem.Models
                 return NotFound();
             }
 
-            var reservering = await _context.Reserveringen
+            var reservering = await _context.Reserveringen.Include(x=>x.ReserveringenMenus).ThenInclude(x=>x.Menu)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservering == null)
             {

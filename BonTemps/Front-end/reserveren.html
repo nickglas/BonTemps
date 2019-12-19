@@ -26,6 +26,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript">
             $(document).ready(function () {
+
                 console.log("restaurant informatie ophalen");
                 var url = "https://localhost:44545/api/Getresinfo";
                 var Httpreq = new XMLHttpRequest(); // a new request
@@ -53,13 +54,11 @@
 
 
 
-                console.log(info);
 
 
                 $("#MenuKeuze").hide();
 
 
-                //Reservering cookie aanmaken en doorsturen naar volgende view om menu keuze te maken
                 $("#InputButton").click(function () {
                     $("#MenuKeuze").html("");
                      console.log("testing");
@@ -70,21 +69,63 @@
                      var aantalpersonen =$("#personen").val();
                      var bericht = $("#bericht").val();
 
-                     console.log("Naam : " + naam);
-                     console.log("email : " + email);
-                     console.log("huistelefoon : " + huistelefoon);
-                     console.log("mobieltelefoon : " + mobieltelefoon);
-                     console.log("aantal personen : " + aantalpersonen);
-                     console.log("bericht : " + bericht);
 
                      for (var i = 0; i < aantalpersonen; i++) {
                          var content = $("#MenuKeuze").html();
-                         content += "<input id='huistelefoon' name='Huis telefoonnummer' placeholder='Menu keuzen voor persoon : '"+i.toString() +" onblur='this.placeholder = ''' class='common-input mb-20 form-control' required type='text'>"
+                         var persoon = i + 1;
+                         console.log(persoon);
+                         content += "<p>Keuze voor persoon : " + persoon + " </p>";
+                         content += "<select class='Menukeuzeperpersoon"+persoon+"' id='locality-dropdown' name='locality'></select>";
                          $("#MenuKeuze").html(content);
                      }
+
+                    for (var i = 1; i <= aantalpersonen; i++) {
+                        let dropdown = $('.Menukeuzeperpersoon'+i);
+                        dropdown.empty();
+                        dropdown.append('<option selected="true" disabled>Kies een menu</option>');
+                        dropdown.prop('selectedIndex', 0);
+
+                        const url = 'https://localhost:44545/api/GetMenu';
+                        $.getJSON(url, function (data) {
+                            console.log(data);
+                          $.each(data, function (key, entry) {
+                            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.menu_naam));
+                          })
+                        });
+                    }
+
+                    
+
+                    //Data uit alle fields halen
+                    $("#ReserveringAanmaken").click(function () {
+                        var ids = [];
+                        for (var i = 1; i <= aantalpersonen; i++) {
+                            ids.push($(".Menukeuzeperpersoon" + i).val());
+                        }
+                        console.log("Naam: " + naam);
+                        console.log("email: "+ email);
+                        console.log("huistelefoon: "+huistelefoon);
+                        console.log("mobiel: "+mobieltelefoon);
+                        console.log("aantalpersonen: "+aantalpersonen);
+                        //console.log("keuzes: "+ids.length());
+                        var jsonobject = JSON.stringify(ids);
+                        console.log(jsonobject);
+                        var data = { naam: naam , email : email, huistelefoon : huistelefoon, mobiel : mobieltelefoon, aantalpersonen : aantalpersonen, bericht : bericht, ids : ids};
+					     $.ajax({
+						     url: 'https://localhost:44545/api/MakeReservervation',
+						     type: "post",
+						     contentType: 'application/x-www-form-urlencoded',
+						     data: data,
+						     success: function (result) {
+							     console.log(result);
+						     }
+					     });
+                    });
+
+
                      $("#MenuKeuze").show();
 
-				     });
+				});
                    
                 
             });
@@ -148,7 +189,8 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="alert-msg" style="text-align: left;"></div>
-										<button id="InputButton" class="genric-btn primary" style="float: right;">Verder naar menu keuze</button>
+                                        <button id="InputButton" class="genric-btn primary" >Verder naar menu keuze</button>
+                                        <button id="ReserveringAanmaken" class="genric-btn primary" style="float: right;">Reservering aanmaken</button>
                                     </div>
                                 </div>
                             </div>

@@ -56,6 +56,18 @@
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.ReserveringsDatum)
             </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Opmerking)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Opmerking)
+            </dd>
+            <dd class="col-sm-10">
+                @foreach (var item in Model.ReserveringenMenus)
+                {
+                    <p>@item.Menu.Menu_naam</p>
+                }
+            </dd>
         </dl>
     </div>
     <div>
