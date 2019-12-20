@@ -122,22 +122,32 @@ namespace BonTemps.Controllers.API
                 ReserveringsDatum = DateTime.Now,
                 Goedkeuring = false,
                 tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
-                ReserveringenMenus = new List<ReserveringenMenu>(),
                 Opmerking = bericht
-            };
-            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
-            foreach (var item in ids)
-            {
-                menus.Add(new ReserveringenMenu { Reservering = res, Menu = _context.Menus.Where(x => x.Id == int.Parse(item)).First() });
-            }
-            
-            res.ReserveringenMenus = menus;
-
+            };    
             await _context.Reserveringen.AddAsync(res);
             await _context.SaveChangesAsync();
+            await Addmenu(res,ids);
             return Ok();
         }
         
+        public async Task<IActionResult> Addmenu(Reservering res, string[]ids)
+        {
+            Reservering g = await _context.Reserveringen.Where(h => h.NaamReserveerder == res.NaamReserveerder && h.ReserveringAangemaakt == res.ReserveringAangemaakt).FirstAsync();
+            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
+            foreach (var item in ids)
+            {
+                ReserveringenMenu p = new ReserveringenMenu
+                {
+                    ReserveringsId = g.Id,
+                    MenuId = int.Parse(item)
+                };
+                menus.Add(p);
+            }
+            g.ReserveringenMenus = menus;
+            _context.Update(g);
+            await _context.SaveChangesAsync();
+            return Ok();
+        }
 
         [HttpPost]
         public JsonResult PassIntFromView(string Content)
