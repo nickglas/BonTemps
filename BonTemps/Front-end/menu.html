@@ -1,6 +1,7 @@
 ﻿	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
+        <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<!-- Favicon-->
@@ -32,74 +33,8 @@
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		</head>
     <body>
-        <p id="Straatnaam"></p>
-        <script type="text/javascript">
-
-        </script>
-        <script>
-            GetConsumpties();
-
-            var obj, dbParam, xmlhttp, myObj, x, categorie, string, url, elementId = "";
-            var txt = "";
-            var prijs = 0;
-            var localhost = "https://localhost:44545/";
-            obj = { table: "consumpties", limit: 20 };
-
-
-            function GetConsumpties() {
-                localhost = "https://localhost:44545/";
-                url = localhost + "api/getconsumptie";
-                dbParam = JSON.stringify(obj);
-                xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        myObj = JSON.parse(this.responseText);
-                        for (x in myObj) {
-                            if (myObj[x].categoryId == 1) { //hoofdgerecht
-                                txt += "<div class='col-md-6 all hoofdgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
-                                txt += "<h4>" + myObj[x].naam + "</h4>";
-                                prijs = myObj[x].prijs.toFixed(2);
-                                prijs = prijs.replace(".", ",");
-                                // prijs = string variabele, myObj[x].prijs = rekenbare variabele
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
-
-                            } else if (myObj[x].categoryId == 2) { //drankjes
-                                txt += "<div class='col-md-6 all drankjes' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
-                                txt += "<h4>" + myObj[x].naam + "</h4>";
-                                prijs = myObj[x].prijs.toFixed(2);
-                                prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
-
-                            } else if (myObj[x].categoryId == 3) { //desserts
-                                txt += "<div class='col-md-6 all desserts' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
-                                txt += "<h4>" + myObj[x].naam + "</h4>";
-                                prijs = myObj[x].prijs.toFixed(2);
-                                prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
-
-                            } else if (myObj[x].categoryId == 4) { //voorgerechten
-                                txt += "<div class='col-md-6 all voorgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
-                                txt += "<h4>" + myObj[x].naam + "</h4>";
-                                prijs = myObj[x].prijs.toFixed(2);
-                                prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
-                            }
-                        }
-
-                        document.getElementById("grid").innerHTML = txt;
-                    }
-                };
-                xmlhttp.open("GET", url, true);
-                xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-                xmlhttp.send("x=" + dbParam);
-            }
-
-         
-        </script>
+        <p id="p"></p>
+       
         <header id="header">
             <div class="header-top">
                 <div class="container">
@@ -184,33 +119,110 @@
         </section>
         <!-- End reservation Area -->
         <script type="text/javascript">
-            $(document).ready(function () {
-                var url = "https://localhost:44545/api/Getresinfo";
-                var Httpreq = new XMLHttpRequest(); // a new request
+            // $(document).ready(function () {
+            //     var url = "https://localhost:44545/api/Getresinfo";
+            //     var Httpreq = new XMLHttpRequest(); // a new request
+            //     Httpreq.open("GET", url, false);
+            //     Httpreq.send(null);
+            //     //document.write(Httpreq.responseText);
+
+            //     var obj = JSON.parse(Httpreq.response);
+            //     var info = JSON.stringify(obj);
+            //     //console.log(JsonObject);
+
+
+            //     document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
+            //     document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
+            //     document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
+            //     document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
+            //     document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
+            //     document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
+            //     document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+
+            //     document.getElementById("Adres").innerHTML = obj[0].adres;
+            //     document.getElementById("Postcode").innerHTML = obj[0].postcode;
+            //     document.getElementById("Email").innerHTML = obj[0].email;
+            //     document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
+
+
+            // });
+
+            var obj, dbParam, xmlhttp, myObj, x, categorie, string, url, elementId = "";
+            var txt = "";
+            var prijs = 0;
+            var localhost = "https://localhost:44545";
+
+            GetMenu();
+            GetConsumptie();
+
+            function GetMenu() {
+                var url = localhost + "/api/GetMenu";
+                var Httpreq = new XMLHttpRequest();
                 Httpreq.open("GET", url, false);
                 Httpreq.send(null);
-                //document.write(Httpreq.responseText);
+            
+                var myObj = JSON.parse(Httpreq.response);
+                var info = JSON.stringify(myObj);
+                for (x in myObj) {
+                    txt += "<div class='col-md-6 all menu' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
+                    txt += "<h4>" + myObj[x].menu_naam + "</h4>";
+                    txt += "<p style='font-weight:bold;font-size:1rem;' class='price'>Bekijk Menu</p>";
+                    txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                }
+            }
 
-                var obj = JSON.parse(Httpreq.response);
-                var info = JSON.stringify(obj);
-                //console.log(JsonObject);
+            function GetConsumptie() {
+                var url =  localhost + "/api/GetConsumptie";
+                var Httpreq = new XMLHttpRequest();
+                Httpreq.open("GET", url, false);
+                Httpreq.send(null);
+            
+                var myObj = JSON.parse(Httpreq.response);
+                var info = JSON.stringify(myObj);
+                console.log(txt);
+                for (x in myObj) {
+                            if (myObj[x].categoryId == 1) { //hoofdgerecht
+                                txt += "<div class='col-md-6 all hoofdgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
+                                txt += "<h4>" + myObj[x].naam + "</h4>";
+                                prijs = myObj[x].prijs.toFixed(2);
+                                prijs = prijs.replace(".", ",");
+                                // prijs = string 
+                                // myObj[x].prijs = getal (in geval je wilt rekenen)
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
 
 
-                document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
-                document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
-                document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
-                document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
-                document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
-                document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
-                document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+                            } else if (myObj[x].categoryId == 2) { //drankjes
+                                txt += "<div class='col-md-6 all drankjes' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
+                                txt += "<h4>" + myObj[x].naam + "</h4>";
+                                prijs = myObj[x].prijs.toFixed(2);
+                                prijs = prijs.replace(".", ",");
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
 
-                document.getElementById("Adres").innerHTML = obj[0].adres;
-                document.getElementById("Postcode").innerHTML = obj[0].postcode;
-                document.getElementById("Email").innerHTML = obj[0].email;
-                document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
+                            } else if (myObj[x].categoryId == 3) { //desserts
+                                txt += "<div class='col-md-6 all desserts' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
+                                txt += "<h4>" + myObj[x].naam + "</h4>";
+                                prijs = myObj[x].prijs.toFixed(2);
+                                prijs = prijs.replace(".", ",");
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
 
+                            } else if (myObj[x].categoryId == 4) { //voorgerechten
+                                txt += "<div class='col-md-6 all voorgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
+                                txt += "<h4>" + myObj[x].naam + "</h4>";
+                                prijs = myObj[x].prijs.toFixed(2);
+                                prijs = prijs.replace(".", ",");
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                            }
+                        }
+                        console.log("txt variabele opnieuw: " + txt);
+                        var text = txt;
+                        console.log("text variabele : " + text);
+                        document.getElementById("grid").innerHTML = text;
+            }
 
-            });
         </script>
         <!-- start footer Area -->
         <footer class="footer-area">
