@@ -6,9 +6,11 @@ using BonTemps.Areas.Systeem.Models;
 using BonTemps.Data;
 using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BonTemps.Controllers.API
 {
@@ -17,7 +19,9 @@ namespace BonTemps.Controllers.API
     public class APIController : ControllerBase
     {
         private ApplicationDbContext _context;
-        public APIController(ApplicationDbContext context)
+        private Microsoft.AspNetCore.Identity.UserManager<Klant> _Usermanager;
+        private SignInManager<Klant> _signinmanager;
+        public APIController(ApplicationDbContext context, UserManager<Klant> userManager , SignInManager<Klant>signInManager)
         {
             JsonConvert.DefaultSettings = () => new JsonSerializerSettings
             {
@@ -25,10 +29,11 @@ namespace BonTemps.Controllers.API
                 ReferenceLoopHandling = ReferenceLoopHandling.Serialize
             };
             _context = context;
+            _Usermanager = userManager;
+            _signinmanager = signInManager;
         }
 
-
-    [HttpGet]
+        [HttpGet]
         public async Task<JsonResult> GetConsumptie(int? id)
         {
             if (id == null)
@@ -62,6 +67,10 @@ namespace BonTemps.Controllers.API
             }
         }
 
+        public IActionResult GetAllergenen()
+        {
+            return new JsonResult(_context.Allergenen);
+        }
 
         public IActionResult Getresinfo()
         {
@@ -100,24 +109,90 @@ namespace BonTemps.Controllers.API
             }
         }
 
-        public async Task<IActionResult> MakeReservervation()
+        public async Task<IActionResult> MakeReservervation(string naam , string email, string huistelefoon , string mobiel, int aantalpersonen,string bericht, string[] ids)
         {
             Reservering res = new Reservering()
             {
-                NaamReserveerder = "test",
-                Email = "Test",
-                HuisTelefoonNummer = "123",
-                MobielTelefoonNummer = "123",
-                AantalPersonen = 1,
+                NaamReserveerder = naam,
+                Email = email,
+                HuisTelefoonNummer = huistelefoon,
+                MobielTelefoonNummer = mobiel,
+                AantalPersonen = aantalpersonen,
                 ReserveringAangemaakt = DateTime.Now,
                 ReserveringsDatum = DateTime.Now,
                 Goedkeuring = false,
-                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id
+                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
+                ReserveringenMenus = new List<ReserveringenMenu>(),
+                Opmerking = bericht
             };
+            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
+            foreach (var item in ids)
+            {
+                menus.Add(new ReserveringenMenu { Reservering = res, Menu = _context.Menus.Where(x => x.Id == int.Parse(item)).First() });
+            }
+            
+            res.ReserveringenMenus = menus;
+
             await _context.Reserveringen.AddAsync(res);
             await _context.SaveChangesAsync();
             return Ok();
         }
+        
+
+        [HttpPost]
+        public JsonResult PassIntFromView(string Content)
+        {
+            Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
+            return new JsonResult(Content);
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Login(string username, string password)
+        {
+            Console.WriteLine("Username : " + username);
+            Console.WriteLine("Password : " + password);
+            var signin = await _signinmanager.PasswordSignInAsync(username, password, true , true);
+            if (signin.Succeeded)
+            {
+                Console.WriteLine("LOGGED IN !");
+            }
+            return new JsonResult (username);
+
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> Register(string Voornaam, string Achternaam, string Geboortedatum , string Geslacht, string Email , string Wachtwoord, string Telefoonnummer)
+        {
+
+            Klant x = new Klant
+            {
+                UserName = Email,
+                Email = Email,
+                Aanmaakdatum = DateTime.Now,
+                Rol = await _context.Rol.Where(z => z.Name == "Klant").FirstAsync(),
+                
+                Klantgegevens = new Klantgegevens
+                {
+                    Voornaam = Voornaam,
+                    Achternaam = Achternaam,
+                    Geslacht = Geslacht,
+                    GeboorteDatum = DateTime.Parse(Geboortedatum),
+                    TelefoonNummer = Telefoonnummer
+                },
+                PhoneNumber = Telefoonnummer
+            };
+
+            var post = await _Usermanager.CreateAsync(x, Wachtwoord);
+
+            if (post.Succeeded)
+            {
+                Console.WriteLine("User registered");
+            }
+
+            return new JsonResult(Email);
+
+        }
+
     }
         
 }

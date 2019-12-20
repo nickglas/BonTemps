@@ -2230,6 +2230,10 @@ body.mobile-nav-active {
     padding: 120px 0
 }
 
+.res-sec-gap{
+    padding: 30px;
+}
+
 .alert-msg {
     color: #fff
 }
