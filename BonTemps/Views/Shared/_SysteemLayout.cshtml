@@ -17,7 +17,7 @@
                   crossorigin="anonymous"
                   integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
         </environment>
-        <link rel="stylesheet" href="~/css/cms.css"/>
+        <link rel="stylesheet" href="~/css/cms.css" />
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
         <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
@@ -25,139 +25,152 @@
         </style>
     </head>
     <body>
-        <ul class="navbar-left">
-            <a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
-            @if (User.IsInRole("Chef") == true)
-            {
-                <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
 
-            }
-            @if (User.IsInRole("Bediening") == true)
-            {
-                <p class="text-white-50">Welkom, @User.Identity.Name (Bediening)</p>
-
-            }
-            @if (User.IsInRole("Manager") == true)
-            {
-                <p class="text-white-50">Welkom, @User.Identity.Name (Manager)</p>
-
-            }
-            <hr />
-            @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
-            {
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index"><i class="fas fa-hamburger"></i> Consumpties</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Allergenen" asp-action="Index"><i class="fas fa-allergies"></i> Allergenen</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Menus" asp-action="Index"><i class="fas fa-utensils"></i> Menu's</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Categories" asp-action="Index"><i class="fas fa-layer-group"></i> Categoriën</a>
-                <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="TafelOverzicht"><i class="fas fa-th"></i> Tafel Overzicht</a>
-
-            }
-
-            @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
-            {
-                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index"><i class="fas fa-chair"></i> Tafels</a>
-                <hr />
-                <button class="dropdown-btn">
-                    <i class="fa fa-caret-down"></i> Reserveringen
-                </button>
-                <div class="dropdown-container">
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen Bekijken</a>
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Create">Reservering Toevoegen</a>
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende Reserveringen</a>
-                </div>
-
-            }
-
-            @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
-            {
-
-                <button class="dropdown-btn">
-                    <i class="fa fa-caret-down"></i> Bestellingen
-                </button>
-                <div class="dropdown-container">
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen Bekijken</a>
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Create">Bestellingen Toevoegen</a>
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="AfgerondeBestellingen">Afgeronde Bestellingen</a>
-                    <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
-
-                </div>
-            }
-            @if (User.IsInRole("Manager") == true)
-            {
-
-                <button class="dropdown-btn">
-                    <i class="fa fa-caret-down"></i> Klanten en Personeel
-                </button>
-                <div class="dropdown-container">
-                    <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Klanten" asp-action="Index">Klantenoverzicht</a>
-                    <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Personeel" asp-action="Index">Personeeloverzicht</a>
-
-                </div>
-                <hr />
-                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-home"></i> Bedrijfsopties</a>
-                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-code"></i> API's</a>
-                @*<a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>*@
-            }
-            <hr />
-
-            <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Terug naar website</a>
-
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                <button type="submit" class="dropdown-btn" st
-                        yle="margin-top:5%;">
-                    <i class="fas fa-arrow-circle-left"></i>
-                    Uitloggen
-                </button>
-            </form>
-        </ul>
-        <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
-            <partial name="_CookieConsentPartial" />
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
+        @*Hier begint de code voor de loadingscreen*@
+        <div class="loader">
+            <img id="loadcircle" src="~/img/load4.gif" alt="Loading..."/>
         </div>
 
-
-        <environment include="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
-        </environment>
-        <environment exclude="Development">
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery"
-                    crossorigin="anonymous"
-                    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                    crossorigin="anonymous"
-                    integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
-            </script>
-        </environment>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-
-        @* Dropdown script, credits naar w3schools *@
-        <script>
-            var dropdown = document.getElementsByClassName("dropdown-btn");
-            var i;
-
-            for (i = 0; i < dropdown.length; i++) {
-                dropdown[i].addEventListener("click", function () {
-                    this.classList.toggle("active");
-                    var dropdownContent = this.nextElementSibling;
-                    if (dropdownContent.style.display === "block") {
-                        dropdownContent.style.display = "none";
-                    } else {
-                        dropdownContent.style.display = "block";
-                    }
-                });
-            }
+        <script type="text/javascript">
+            window.addEventListener("load", function () {
+                const loader = document.querySelector(".loader");
+                loader.className += " hidden";
+            });
         </script>
-        @RenderSection("Scripts", required: false)
+        @*Hier eindigt de code voor de loading screen*@
+    <ul class="navbar-left">
+        <a asp-area="Systeem" asp-controller="Dashboard" asp-action="Index"><img class="foto-bt" src="~/img/orangebontemps.png" /></a>
+        @if (User.IsInRole("Chef") == true)
+        {
+            <p class="text-white-50">Welkom, @User.Identity.Name (Chef)</p>
+
+        }
+        @if (User.IsInRole("Bediening") == true)
+        {
+            <p class="text-white-50">Welkom, @User.Identity.Name (Bediening)</p>
+
+        }
+        @if (User.IsInRole("Manager") == true)
+        {
+            <p class="text-white-50">Welkom, @User.Identity.Name (Manager)</p>
+
+        }
+        <hr />
+        @if (User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
+        {
+            <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="Index"><i class="fas fa-hamburger"></i> Consumpties</a>
+            <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Allergenen" asp-action="Index"><i class="fas fa-allergies"></i> Allergenen</a>
+            <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Menus" asp-action="Index"><i class="fas fa-utensils"></i> Menu's</a>
+            <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Categories" asp-action="Index"><i class="fas fa-layer-group"></i> Categoriën</a>
+            <a class="nav-link text-white-50" asp-area="Chef" asp-controller="Consumpties" asp-action="TafelOverzicht"><i class="fas fa-th"></i> Tafel Overzicht</a>
+
+        }
+
+        @if (User.IsInRole("Bediening") == true || User.IsInRole("Manager") == true)
+        {
+            <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Tafels" asp-action="Index"><i class="fas fa-chair"></i> Tafels</a>
+            <hr />
+            <button class="dropdown-btn">
+                <i class="fa fa-caret-down"></i> Reserveringen
+            </button>
+            <div class="dropdown-container">
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Index">Reserveringen Bekijken</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Create">Reservering Toevoegen</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Reserveringen" asp-action="Inkomendereserveringen">Inkomende Reserveringen</a>
+            </div>
+
+        }
+
+        @if (User.IsInRole("Bediening") == true || User.IsInRole("Chef") == true || User.IsInRole("Manager") == true)
+        {
+
+            <button class="dropdown-btn">
+                <i class="fa fa-caret-down"></i> Bestellingen
+            </button>
+            <div class="dropdown-container">
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Index">Bestellingen Bekijken</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Create">Bestellingen Toevoegen</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="AfgerondeBestellingen">Afgeronde Bestellingen</a>
+                <a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Bestellingen" asp-action="Archief">Archief</a>
+
+            </div>
+        }
+        @if (User.IsInRole("Manager") == true)
+        {
+
+            <button class="dropdown-btn">
+                <i class="fa fa-caret-down"></i> Klanten en Personeel
+            </button>
+            <div class="dropdown-container">
+                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Klanten" asp-action="Index">Klantenoverzicht</a>
+                <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Personeel" asp-action="Index">Personeeloverzicht</a>
+
+            </div>
+            <hr />
+            <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-home"></i> Bedrijfsopties</a>
+            <a class="nav-link text-white-50" asp-area="Manager" asp-controller="Contact" asp-action="Index"><i class="fas fa-code"></i> API's</a>
+            @*<a class="nav-link text-white-50" asp-area="Systeem" asp-controller="Email" asp-action="Index"><i class="fas fa-envelope"></i> E-Mail</a>*@
+        }
+        <hr />
+
+        <a class="nav-link text-white-50" style="margin-top:5%;" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-long-arrow-alt-left"></i> Terug naar website</a>
+
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="dropdown-btn" st
+                    yle="margin-top:5%;">
+                <i class="fas fa-arrow-circle-left"></i>
+                Uitloggen
+            </button>
+        </form>
+    </ul>
+    <div class="fluid-container" style="width:50%;margin-top:5%;margin-left:33.33%;">
+        <partial name="_CookieConsentPartial" />
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* Dropdown script, credits naar w3schools *@
+    <script>
+        var dropdown = document.getElementsByClassName("dropdown-btn");
+        var i;
+
+        for (i = 0; i < dropdown.length; i++) {
+            dropdown[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var dropdownContent = this.nextElementSibling;
+                if (dropdownContent.style.display === "block") {
+                    dropdownContent.style.display = "none";
+                } else {
+                    dropdownContent.style.display = "block";
+                }
+            });
+        }
+    </script>
+    @RenderSection("Scripts", required: false)
     </body>
-</html>
+    </html>
 
 }
 else

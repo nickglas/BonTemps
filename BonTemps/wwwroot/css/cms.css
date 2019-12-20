@@ -22,14 +22,16 @@ body {
     align-items: center;
 }
 
-    .loader > img {
-        width: 500px;
-    }
+.loader > img {
+    width: 125px;
+}
 
-    .loader.hidden {
-        animation: fadeOut 1s;
-        animation-fill-mode: forwards;
-    }
+
+.loader.hidden {
+    animation: fadeOut 0.8s;
+    animation-fill-mode: forwards;
+}
+
 
 @keyframes fadeOut {
     100% {
