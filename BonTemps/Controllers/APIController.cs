@@ -109,6 +109,7 @@ namespace BonTemps.Controllers.API
             }
         }
 
+
         public async Task<IActionResult> MakeReservervation(string naam , string email, string huistelefoon , string mobiel, int aantalpersonen,string bericht, string[] ids)
         {
             Reservering res = new Reservering()
@@ -123,44 +124,44 @@ namespace BonTemps.Controllers.API
                 Goedkeuring = false,
                 tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
                 Opmerking = bericht
-            };    
-            await _context.Reserveringen.AddAsync(res);
+            };
+            await _context.AddAsync(res);
             await _context.SaveChangesAsync();
-            await Addmenu(res,ids);
+            await AddMenu(ids,res.Id);
             return Ok();
         }
         
-        public async Task<IActionResult> Addmenu(Reservering res, string[]ids)
+        public async Task<IActionResult> AddMenu(string[]Menu, int Id)
         {
-            Reservering g = await _context.Reserveringen.Where(h => h.NaamReserveerder == res.NaamReserveerder && h.ReserveringAangemaakt == res.ReserveringAangemaakt).FirstAsync();
-            List<ReserveringenMenu> menus = new List<ReserveringenMenu>();
-            foreach (var item in ids)
+            foreach (var item in Menu)
             {
-                ReserveringenMenu p = new ReserveringenMenu
+                if (_context.ReserveringenMenu.Where(x=>x.MenuId == int.Parse(item)).Count()!=0)
                 {
-                    ReserveringsId = g.Id,
-                    MenuId = int.Parse(item)
-                };
-                menus.Add(p);
+                    ReserveringenMenu Updatemenu = _context.ReserveringenMenu.Where(x => x.MenuId == int.Parse(item)).First();
+                    Updatemenu.Aantal++;
+                    _context.ReserveringenMenu.Update(Updatemenu);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    ReserveringenMenu menu = new ReserveringenMenu
+                    {
+                        MenuId = int.Parse(item),
+                        ReserveringsId = Id,
+                        Aantal = 1
+                    };
+                    _context.ReserveringenMenu.Add(menu);
+                    _context.SaveChanges();
+                    _context.Entry(menu).State = EntityState.Detached;
+                }
+               
             }
-            g.ReserveringenMenus = menus;
-            _context.Update(g);
-            await _context.SaveChangesAsync();
             return Ok();
-        }
-
-        [HttpPost]
-        public JsonResult PassIntFromView(string Content)
-        {
-            Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
-            return new JsonResult(Content);
         }
 
         [HttpPost]
         public async Task<JsonResult> Login(string username, string password)
         {
-            Console.WriteLine("Username : " + username);
-            Console.WriteLine("Password : " + password);
             var signin = await _signinmanager.PasswordSignInAsync(username, password, true , true);
             if (signin.Succeeded)
             {

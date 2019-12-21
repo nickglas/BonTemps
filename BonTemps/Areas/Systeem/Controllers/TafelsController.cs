@@ -30,6 +30,11 @@ namespace BonTemps.Areas.Systeem.Controllers
             _env = environment;
         }
 
+        public IActionResult Tafels()
+        {
+            return View();
+        }
+
         // GET: Systeem/Tafels
         public async Task<IActionResult> Index()
         {

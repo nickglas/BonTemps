@@ -13,5 +13,7 @@ namespace BonTemps.Areas.Systeem.Models
 
         public Menu Menu { get; set; }
         public int MenuId { get; set; }
+
+        public int Aantal { get; set; }
     }
 }
