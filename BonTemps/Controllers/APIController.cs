@@ -160,19 +160,21 @@ namespace BonTemps.Controllers.API
         }
 
         [HttpPost]
-        public async Task<JsonResult> Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
             var signin = await _signinmanager.PasswordSignInAsync(username, password, true , true);
             if (signin.Succeeded)
             {
-                Console.WriteLine("LOGGED IN !");
+                return true;
             }
-            return new JsonResult (username);
-
+            else
+            {
+                return false;
+            }
         }
 
         [HttpPost]
-        public async Task<JsonResult> Register(string Voornaam, string Achternaam, string Geboortedatum , string Geslacht, string Email , string Wachtwoord, string Telefoonnummer)
+        public async Task<bool> Register(string Voornaam, string Achternaam, string Geboortedatum , string Geslacht, string Email , string Wachtwoord, string Telefoonnummer)
         {
 
             Klant x = new Klant
@@ -181,7 +183,7 @@ namespace BonTemps.Controllers.API
                 Email = Email,
                 Aanmaakdatum = DateTime.Now,
                 Rol = await _context.Rol.Where(z => z.Name == "Klant").FirstAsync(),
-                
+                Rolnaam = "Klant",
                 Klantgegevens = new Klantgegevens
                 {
                     Voornaam = Voornaam,
@@ -197,10 +199,14 @@ namespace BonTemps.Controllers.API
 
             if (post.Succeeded)
             {
-                Console.WriteLine("User registered");
+                return true;
+            }
+            else
+            {
+                return false;
             }
 
-            return new JsonResult(Email);
+          
 
         }
 
