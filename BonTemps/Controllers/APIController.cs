@@ -125,6 +125,13 @@ namespace BonTemps.Controllers.API
                 tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
                 Opmerking = bericht
             };
+            Random rand = new Random();
+            string Code = "";
+            for (int i = 0; i < 4; i++)
+            {
+                Code += rand.Next(0, 9).ToString();
+            }
+            res.OpzoekCode = int.Parse(Code);
             await _context.AddAsync(res);
             await _context.SaveChangesAsync();
             await AddMenu(ids,res.Id);
@@ -208,6 +215,17 @@ namespace BonTemps.Controllers.API
 
           
 
+        }
+
+        [HttpPost]
+        public async Task<JsonResult> ReserveringOpzoeken(string naam , int id)
+        {
+            var reservering = await _context.Reserveringen.Where(x => x.NaamReserveerder == naam && x.OpzoekCode == id).FirstOrDefaultAsync();
+            if (reservering != null)
+            {
+                return new JsonResult(reservering);
+            }
+            return new JsonResult(false);
         }
 
     }

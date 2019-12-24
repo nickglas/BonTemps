@@ -1,32 +1,38 @@
 ﻿<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script type="text/javascript">
+<script>
     $(document).ready(function () {
-        $("#SubmitLogin").click(function () {
-            var Username = $("#InlogEmail").val();
-            var Password = $("#InlogPassword").val();
-            console.log("Email : " + Username);
-            console.log("Pass  : " + Password);
-
-
-            var data = { username: Username, password: Password };
+        $("#ReserveringContent").hide();
+        $("#Reserveringophalen").click(function () {
+            var id = $("#Id").val();
+            var naam = $("#Achternaam").val();
+            var data = { naam : naam, id : id };
             $.ajax({
-                url: 'https://localhost:44545/api/Login',
+                url: 'https://localhost:44545/api/ReserveringOpzoeken',
                 type: "post",
                 contentType: 'application/x-www-form-urlencoded',
                 data: data,
                 success: function (result) {
-                    if (result == true) {
-                        alert("Succesvol ingelogd");
+                    console.log(result);
+                    if (result != false) {
+                        $("#ReserveringContent").show();
+                        document.getElementById("resNaam").innerHTML += result.naamReserveerder;
+                        document.getElementById("resPersonen").innerHTML += result.aantalPersonen;
+                        document.getElementById("resDatum").innerHTML += result.reserveringsDatum;
+                        if (result.Goedkeuring == true) {
+                            document.getElementById("resStatus").innerHTML += "Goedgekeurd";
+                        } else {
+                            document.getElementById("resStatus").innerHTML += "In afwachting";
+                        }
+
                     } else {
-                        alert("Inloggen mislukt");
+                        alert("Niks gevonden");
                     }
                 }
             });
-
-
         });
     });
 </script>
+
 <!DOCTYPE html>
 <html lang="zxx" class="no-js">
 <head>
@@ -73,25 +79,33 @@
         <div class="container">
             <div class="row fullscreen align-items-center justify-content-between">
                 <div class="col-lg-12 banner-content">
-                    <h1 class="text-white">
-                        <img src="../wwwroot/img/bontemps.png" width="15%" ; height="15%" ; />
-                    </h1>
-                    <div asp-validation-summary="All" class="text-danger"></div>
                     <div class="form-group">
-                        <label> E-mail </label>
-                        <input id="InlogEmail" type="text" class="form-control" />
+                        <label>Achternaam</label>
+                        <input id="Achternaam" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <label>Wachtwoord</label>
-                        <input id="InlogPassword" type="password" class="form-control" />
+                        <label>Opzoekcode</label>
+                        <input id="Id" class="form-control" />
                     </div>
                     <div class="form-group">
-                        <button id="SubmitLogin" class="primary-btn text-uppercase">Inloggen</button>
+                        <button id="Reserveringophalen" type="submit" class="btn btn-primary btn-login">Reservering opzoeken</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+<section class="about-content" id="ReserveringContent">
+        <div class="container">
+            <div>
+                Naam : <p id="resNaam"></p>
+                Aantal personen : <p id="resPersonen"></p>
+                Datum : <p id="resDatum"></p>
+                Status : <p id="resStatus"></p>
+            </div>
+        </div>
+</section>
+
     <script src="js/vendor/jquery-2.2.4.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/vendor/bootstrap.min.js"></script>
