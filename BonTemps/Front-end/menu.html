@@ -278,7 +278,31 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				</div>
 			</footer>
 			<!-- End footer Area -->	
+            <script>
+                var obj;
+                function PrepareConsumpties() {
+                 url = localhost + "Controllers/APIController/GetMenu/";
+                 dbParam = JSON.stringify(obj);
+                    xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function () {
+                        if (this.readyState == 4 && this.status == 200) {
+                            myObj = JSON.parse(this.responseText);
+                            for (x in myObj) {
+                                if (myObj[x].MenuId == 1) {
+                                    categorie = "Voorgerecht";
+                                } else if (myObj[x].Menu_naam == 2) {
+                                    categorie = "Drankjes";
+                                }
+                            }
+                            txt += "<h3>" + categorie + "</h3><table border='1'><tr></tr><th>ID</th><th>Naam</th><th>Beschrijving</th><th>Prijs</th>"
 
+                            for (x in myObj) {
+                                txt += "<tr><td>" + myObj[x].MenuId + "</td>";
+                                txt += "<td>" + myObj[x].Menu_naam + "</td>";
+                            }
+                }
+                PrepareConsumpties();
+            </script>
 			<script src="js/vendor/jquery-2.2.4.min.js"></script>
 			<script src="js/popper.min.js"></script>
 			<script src="js/vendor/bootstrap.min.js"></script>			
