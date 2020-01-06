@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191216121048_initial")]
-    partial class initial
+    [Migration("20191224233726_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -272,6 +272,8 @@ namespace BonTemps.Migrations
 
                     b.Property<int>("ReserveringsId");
 
+                    b.Property<int>("Aantal");
+
                     b.HasKey("MenuId", "ReserveringsId");
 
                     b.HasIndex("ReserveringsId");
@@ -339,6 +341,8 @@ namespace BonTemps.Migrations
                         .IsRequired();
 
                     b.Property<string>("Opmerking");
+
+                    b.Property<int>("OpzoekCode");
 
                     b.Property<DateTime>("ReserveringAangemaakt");
 

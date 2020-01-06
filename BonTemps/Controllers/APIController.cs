@@ -109,68 +109,123 @@ namespace BonTemps.Controllers.API
             }
         }
 
-        public async Task<IActionResult> MakeReservervation()
+
+        public async Task<IActionResult> MakeReservervation(string naam , string email, string huistelefoon , string mobiel, int aantalpersonen,string bericht, string[] ids)
         {
             Reservering res = new Reservering()
             {
-                NaamReserveerder = "test",
-                Email = "Test",
-                HuisTelefoonNummer = "123",
-                MobielTelefoonNummer = "123",
-                AantalPersonen = 1,
+                NaamReserveerder = naam,
+                Email = email,
+                HuisTelefoonNummer = huistelefoon,
+                MobielTelefoonNummer = mobiel,
+                AantalPersonen = aantalpersonen,
                 ReserveringAangemaakt = DateTime.Now,
                 ReserveringsDatum = DateTime.Now,
                 Goedkeuring = false,
-                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id
+                tafelsId = _context.Tafels.Where(x => x.Bezet == false).FirstOrDefault().Id,
+                Opmerking = bericht
             };
-            await _context.Reserveringen.AddAsync(res);
+            Random rand = new Random();
+            string Code = "";
+            for (int i = 0; i < 4; i++)
+            {
+                Code += rand.Next(0, 9).ToString();
+            }
+            res.OpzoekCode = int.Parse(Code);
+            await _context.AddAsync(res);
             await _context.SaveChangesAsync();
+            await AddMenu(ids,res.Id);
             return Ok();
         }
         
-
-        [HttpPost]
-        public JsonResult PassIntFromView(string Content)
+        public async Task<IActionResult> AddMenu(string[]Menu, int Id)
         {
-            Console.WriteLine("\n\nOBJECT ID : " + Content+"\n\n");
-            return new JsonResult(Content);
+            foreach (var item in Menu)
+            {
+                if (_context.ReserveringenMenu.Where(x=>x.MenuId == int.Parse(item)).Count()!=0)
+                {
+                    ReserveringenMenu Updatemenu = _context.ReserveringenMenu.Where(x => x.MenuId == int.Parse(item)).First();
+                    Updatemenu.Aantal++;
+                    _context.ReserveringenMenu.Update(Updatemenu);
+                    _context.SaveChanges();
+                }
+                else
+                {
+                    ReserveringenMenu menu = new ReserveringenMenu
+                    {
+                        MenuId = int.Parse(item),
+                        ReserveringsId = Id,
+                        Aantal = 1
+                    };
+                    _context.ReserveringenMenu.Add(menu);
+                    _context.SaveChanges();
+                    _context.Entry(menu).State = EntityState.Detached;
+                }
+               
+            }
+            return Ok();
         }
 
         [HttpPost]
-        public async Task<JsonResult> Login(string username, string password)
+        public async Task<bool> Login(string username, string password)
         {
-            Console.WriteLine("Username : " + username);
-            Console.WriteLine("Password : " + password);
             var signin = await _signinmanager.PasswordSignInAsync(username, password, true , true);
             if (signin.Succeeded)
             {
-                Console.WriteLine("LOGGED IN !");
+                return true;
             }
-            return new JsonResult (username);
+            else
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public async Task<bool> Register(string Voornaam, string Achternaam, string Geboortedatum , string Geslacht, string Email , string Wachtwoord, string Telefoonnummer)
+        {
+
+            Klant x = new Klant
+            {
+                UserName = Email,
+                Email = Email,
+                Aanmaakdatum = DateTime.Now,
+                Rol = await _context.Rol.Where(z => z.Name == "Klant").FirstAsync(),
+                Rolnaam = "Klant",
+                Klantgegevens = new Klantgegevens
+                {
+                    Voornaam = Voornaam,
+                    Achternaam = Achternaam,
+                    Geslacht = Geslacht,
+                    GeboorteDatum = DateTime.Parse(Geboortedatum),
+                    TelefoonNummer = Telefoonnummer
+                },
+                PhoneNumber = Telefoonnummer
+            };
+
+            var post = await _Usermanager.CreateAsync(x, Wachtwoord);
+
+            if (post.Succeeded)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+          
 
         }
 
         [HttpPost]
-        public async Task<JsonResult> Register(string Email, string Password)
+        public async Task<JsonResult> ReserveringOpzoeken(string naam , int id)
         {
-            Console.WriteLine("Username : " + Email);
-            Console.WriteLine("Password : " + Password);
-
-            Klant x = new Klant
+            var reservering = await _context.Reserveringen.Where(x => x.NaamReserveerder == naam && x.OpzoekCode == id).FirstOrDefaultAsync();
+            if (reservering != null)
             {
-                Email = Email,
-                UserName = Email
-            };
-
-            var post = await _Usermanager.CreateAsync(x, Password);
-
-            if (post.Succeeded)
-            {
-                Console.WriteLine("User registered");
+                return new JsonResult(reservering);
             }
-
-            return new JsonResult(Email);
-
+            return new JsonResult(false);
         }
 
     }

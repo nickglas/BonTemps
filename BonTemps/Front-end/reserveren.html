@@ -26,33 +26,108 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script type="text/javascript">
             $(document).ready(function () {
-                console.log("restaurant informatie ophalen");
-				var url = "https://localhost:44545/api/Getresinfo";
-				var Httpreq = new XMLHttpRequest(); // a new request
-				Httpreq.open("GET",url,false);
-				Httpreq.send(null);
-				//document.write(Httpreq.responseText);
 
-	            var obj = JSON.parse(Httpreq.response);
-	            var info = JSON.stringify(obj);
+                console.log("restaurant informatie ophalen");
+                var url = "https://localhost:44545/api/Getresinfo";
+                var Httpreq = new XMLHttpRequest(); // a new request
+                Httpreq.open("GET", url, false);
+                Httpreq.send(null);
+                //document.write(Httpreq.responseText);
+
+                var obj = JSON.parse(Httpreq.response);
+                var info = JSON.stringify(obj);
                 //console.log(JsonObject);
 
-                document.getElementById("Straatnaam").innerHTML += obj[0].adres;
-                document.getElementById("Postcode").innerHTML += obj[0].postcode;
-                document.getElementById("Email").innerHTML += obj[0].email;
-                document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
+                //document.getElementById("Straatnaam").innerHTML += obj[0].adres;
+                //document.getElementById("Postcode").innerHTML += obj[0].postcode;
+                //document.getElementById("Email").innerHTML += obj[0].email;
+                //document.getElementById("TelefoonNummer").innerHTML += obj[0].telefoonnummer;
 
 
-                document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
-				document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
-                document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
-                document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
-                document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
-                document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
-                document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
+                //document.getElementById("Maandag").innerHTML = obj[0].maandagOpen + " - " + obj[0].maandagSluit;
+                //document.getElementById("Dinsdag").innerHTML = obj[0].dinsdagOpen + " - " + obj[0].dinsdagSluit;
+                //document.getElementById("Woensdag").innerHTML = obj[0].woensdagOpen + " - " + obj[0].woensdagSluit;
+                //document.getElementById("Donderdag").innerHTML = obj[0].donderdagOpen + " - " + obj[0].donderdagSluit;
+                //document.getElementById("Vrijdag").innerHTML = obj[0].vrijdagOpen + " - " + obj[0].vrijdagSluit;
+                //document.getElementById("Zaterdag").innerHTML = obj[0].zaterdagOpen + " - " + obj[0].zaterdagSluit;
+                //document.getElementById("Zondag").innerHTML = obj[0].zondagOpen + " - " + obj[0].zondagSluit;
 
 
-                console.log(info);
+
+
+
+                $("#MenuKeuze").hide();
+
+
+                $("#InputButton").click(function () {
+                    $("#MenuKeuze").html("");
+                     console.log("testing");
+                     var naam = $("#naam").val();
+                     var email = $("#email").val();
+                     var huistelefoon =$("#huistelefoon").val();
+                     var mobieltelefoon =$("#mobieltelefoon").val();
+                     var aantalpersonen =$("#personen").val();
+                     var bericht = $("#bericht").val();
+
+
+                     for (var i = 0; i < aantalpersonen; i++) {
+                         var content = $("#MenuKeuze").html();
+                         var persoon = i + 1;
+                         console.log(persoon);
+                         content += "<p>Keuze voor persoon : " + persoon + " </p>";
+                         content += "<select class='Menukeuzeperpersoon"+persoon+"' id='locality-dropdown' name='locality'></select>";
+                         $("#MenuKeuze").html(content);
+                     }
+
+                    for (var i = 1; i <= aantalpersonen; i++) {
+                        let dropdown = $('.Menukeuzeperpersoon'+i);
+                        dropdown.empty();
+                        dropdown.append('<option selected="true" disabled>Kies een menu</option>');
+                        dropdown.prop('selectedIndex', 0);
+
+                        const url = 'https://localhost:44545/api/GetMenu';
+                        $.getJSON(url, function (data) {
+                            console.log(data);
+                          $.each(data, function (key, entry) {
+                            dropdown.append($('<option></option>').attr('value', entry.id).text(entry.menu_naam));
+                          })
+                        });
+                    }
+
+                    
+
+                    //Data uit alle fields halen
+                    $("#ReserveringAanmaken").click(function () {
+                        var ids = [];
+                        for (var i = 1; i <= aantalpersonen; i++) {
+                            ids.push($(".Menukeuzeperpersoon" + i).val());
+                        }
+                        console.log("Naam: " + naam);
+                        console.log("email: "+ email);
+                        console.log("huistelefoon: "+huistelefoon);
+                        console.log("mobiel: "+mobieltelefoon);
+                        console.log("aantalpersonen: "+aantalpersonen);
+                        //console.log("keuzes: "+ids.length());
+                        var jsonobject = JSON.stringify(ids);
+                        console.log(jsonobject);
+                        var data = { naam: naam , email : email, huistelefoon : huistelefoon, mobiel : mobieltelefoon, aantalpersonen : aantalpersonen, bericht : bericht, ids : ids};
+					     $.ajax({
+						     url: 'https://localhost:44545/api/MakeReservervation',
+						     type: "post",
+						     contentType: 'application/x-www-form-urlencoded',
+						     data: data,
+						     success: function (result) {
+							     console.log(result);
+						     }
+					     });
+                    });
+
+
+                     $("#MenuKeuze").show();
+
+				});
+                   
+                
             });
 		</script>
 	</head>
@@ -70,12 +145,15 @@
 				<div class="container main-menu">
 					<div class="row align-items-center justify-content-center d-flex">
 						<nav id="nav-menu-container">
-							<ul class="nav-menu">
-								<li><a href="index.html">Home</a></li>
-								<li><a href="menu.html">Menu's</a></li>
-								<li><a href="reserveren.html">Reserveren</a></li>
-								<li><a href="contact.html">Contact</a></li>
-							</ul>
+                            <ul class="nav-menu">
+                                <li><a href="index.html">Home</a></li>
+                                <li><a href="menu.html">Menu's</a></li>
+                                <li><a href="reserveren.html">Reserveren</a></li>
+                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="registreren.html">Registreren</a></li>
+                                <li><a href="inloggen.html">Inloggen</a></li>
+                                <li><a href="reserveringen.html">reserveringen opzoeken</a></li>
+                            </ul>
 						</nav>
 					</div>
 				</div>
@@ -95,23 +173,58 @@
 			</section>
 
 			<section class="contact-page-area res-sec-gap">
-                <div class="container">
+				<div class="container">
                     <div class="row">
-                        <div class="col-4 flex-column address-wrap">
-                            <div class="single-contact-address flex-row d-flex">
+                        <div class="col-lg-8">
+                            <div class="form-area contact-form text-right" id="myForm">
+                                <div class="row">
+                                    <div class="col-lg-6 form-group">
+                                        <input id="naam" name="name" placeholder="Naam" onblur="this.placeholder = 'Naam'" class="common-input mb-20 form-control" required type="text">
+                                        <input id="email" name="email" placeholder="E-mail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'E-mail'" class="common-input mb-20 form-control" required type="email">
+                                        <input id="huistelefoon" name="Huis telefoonnummer" placeholder="Huis telefoonnummer" onblur="this.placeholder = 'Huis telefoonnummer'" class="common-input mb-20 form-control" required type="text">
+                                        <input id="mobieltelefoon" name="Mobiel telefoonnummer" placeholder="Mobiel telefoonnummer" onblur="this.placeholder = 'Mobiel telefoonnummer'" class="common-input mb-20 form-control" required type="text">
+
+
+                                    </div>
+                                    <div class="col-lg-6 form-group">	
+                                        <input id="personen" name="personen" placeholder="Aantal personen" onblur="this.placeholder = 'Aantal personen'" asp-for="AantalPersonen" class="common-input mb-20 form-control" required type="text" />
+                                        <textarea id="bericht" class="common-textarea form-control" name="message" placeholder="Enter Messege" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Messege'" required=""></textarea>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="alert-msg" style="text-align: left;"></div>
+                                        <button id="InputButton" class="genric-btn primary" >Verder naar menu keuze</button>
+                                        <button id="ReserveringAanmaken" class="genric-btn primary" style="float: right;">Reservering aanmaken</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="MenuKeuze">
+                            Menu ophalen
+                        </div>
+
+                        <div class="col-lg-4 d-flex flex-column address-wrap">
+                            <div class="single-contact-address d-flex flex-row">
                                 <div class="icon">
                                     <span class="lnr lnr-home"></span>
                                 </div>
-                                <div class="contact-details ">
+                                <div class="contact-details">
                                     <h5>Binghamton, New York</h5>
                                     <p>
                                         4343 Hinkle Deegan Lake Road
                                     </p>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-4 flex-column address-wrap">
-                            <div class="single-contact-address flex-row d-flex">
+                            <div class="single-contact-address d-flex flex-row">
+                                <div class="icon">
+                                    <span class="lnr lnr-phone-handset"></span>
+                                </div>
+                                <div class="contact-details">
+                                    <h5>00 (958) 9865 562</h5>
+                                    <p>Mon to Fri 9am to 6 pm</p>
+                                </div>
+                            </div>
+                            <div class="single-contact-address d-flex flex-row">
                                 <div class="icon">
                                     <span class="lnr lnr-envelope"></span>
                                 </div>
@@ -121,43 +234,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-4 flex-column address-wrap">
-                            <div class="single-contact-address flex-row d-flex">
-                                <div class="icon">
-                                    <span class="lnr lnr-phone-handset"></span>
-                                </div>
-                                <div class="contact-details">
-                                    <h5>00 (958) 9865 562</h5>
-                                    <p>Mon to Fri 9am to 6 pm</p>
-                                </div>
-                            </div>
-                        </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <form class="form-area contact-form text-right" id="myForm" action="mail.php" method="post">
-                                <div class="row">
-                                    <div class="col-lg-6 form-group">
-                                        <input name="name" placeholder="Naam" onblur="this.placeholder = 'Naam'" class="common-input mb-20 form-control" required type="text">
-                                        <input name="email" placeholder="E-mail" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'E-mail'" class="common-input mb-20 form-control" required type="email">
-                                        <input name="Huis telefoonnummer" placeholder="Huis telefoonnummer" onblur="this.placeholder = 'Huis telefoonnummer'" class="common-input mb-20 form-control" required type="text">
-                                    </div>
-                                    <div class="col-lg-6 form-group">
-                                        <input name="Mobiel telefoonnummer" placeholder="Mobiel telefoonnummer" onblur="this.placeholder = 'Mobiel telefoonnummer'" class="common-input mb-20 form-control" required type="text">
-                                        <input name="personen" placeholder="Aantal personen" pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$" onblur="this.placeholder = 'Aantal personen'" asp-for="AantalPersonen" class="common-input mb-20 form-control" required type="text" />
-                                        <input type="text" class="form-control date-picker" name="date" placeholder="Select Date & time" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Select Date & time'">
-                                    </div>
-                                    <div class="col-lg-6 form-group">
-                                        <textarea class="common-textarea form-control" name="opmerking" placeholder="Opmerking" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Opmerking'" required=""></textarea>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <div class="alert-msg" style="text-align: left;"></div>
-                                        <button class="genric-btn primary" style="float: right;">Reservering aanmaken</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
                     </div>
-                </div>	
+				</div>	
 			</section>
 
 			<script src="js/vendor/jquery-2.2.4.min.js"></script>

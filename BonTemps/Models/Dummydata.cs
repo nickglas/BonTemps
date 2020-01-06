@@ -52,7 +52,7 @@ namespace BonTemps.Models
 
             //checktable();
 
-            await UpdateMenu(context);
+            //await UpdateMenu(context);
             await UpdateCategory(context);
             await UpdateItems(context);
             await UpdateSystemAccounts(context, userManager);

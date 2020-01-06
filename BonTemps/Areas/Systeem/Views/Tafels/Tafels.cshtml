@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Tafels";
+}
+
+    <head>
+        <style type="text/css">
+            canvas {
+                background: #f8f8f8;
+                padding: 0;
+                margin: 0 auto;
+                margin-bottom: 1rem;
+                display: block;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script type="text/javascript">
+            function InitializeCanvas() {
+                const canvas = document.getElementById('Tafelcanvas');
+                var ctx = canvas.getContext('2d');
+                ctx.beginPath();
+                ctx.rect(50,20,150,100);
+                ctx.stroke();
+                ctx.canvas.addEventListener('mousemove', function (event) {
+                    var mouseX = event.clientX - ctx.canvas.offsetLeft;
+                    var mouseY = event.clientY - ctx.canvas.offsetTop;
+                    var status = document.getElementById('status');
+                    status.innerHTML = mouseX + " | " + mouseY; 
+                });
+            }
+        </script>
+    </head>
+
+<h1>Tafels</h1>
+<canvas id="Tafelcanvas" onload="InitializeCanvas()" width="800" height="800"></canvas>
+<h2 id="status">0 | 0</h2>
