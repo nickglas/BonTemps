@@ -3876,6 +3876,15 @@ body.mobile-nav-active {
         margin-right: 30px
     }
 
+.icons-contact {
+    font-size: 30px;
+    font-weight: 500;
+    color: #f42f2c;
+    margin-right: 30px
+}
+
+
+
 .footer-area h4 {
     padding-bottom: 30px
 }
