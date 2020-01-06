@@ -4,7 +4,7 @@
     </h1>
 <p id="localhostviewer">https://localhost:xxxxx/</p>
 <input id="localhost" value="https://localhost:44545/"></input><button onclick="SetLocalhost()">Set Localhost</button><button onclick="ClearLocalhost()">Clear Localhost</button> <br><br>
-<button onclick="PrepareConsumpties()">Show Consumpties</button>
+<button onclick="ShowElement('consumpties')">Show Consumpties</button>
 <button onclick="HideElement('consumpties')">Hide Consumpties</button> <br> <br>
 <button onclick="GetConsumpties2();ShowElement('consumpties2')">Show Consumpties2</button>
 <button onclick="HideElement('consumpties2')">Hide Consumpties2</button> <br> <br>
@@ -19,6 +19,7 @@
     obj = { table: "consumpties", limit: 20 };
     var counter = 0;
     document.getElementById("localhostviewer").innerHTML = localhost;
+    PrepareConsumpties();
 
     function HideElement(elementId) {
     document.getElementById(elementId).style.visibility = "hidden";
