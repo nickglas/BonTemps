@@ -11,6 +11,7 @@ using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace BonTemps.Areas.Systeem.Models
 {
@@ -78,7 +79,7 @@ namespace BonTemps.Areas.Systeem.Models
                 return NotFound();
             }
 
-            var reservering = await _context.Reserveringen
+            var reservering = await _context.Reserveringen.Include(x=>x.ReserveringenMenus).ThenInclude(x=>x.Menu)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (reservering == null)
             {
@@ -108,12 +109,39 @@ namespace BonTemps.Areas.Systeem.Models
             if (ModelState.IsValid)
             {
                 _context.Add(reservering);
+                reservering.Goedkeuring = true;
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Id = reservering.Id;
+                ViewBag.Personen = reservering.AantalPersonen;
+                return RedirectToAction("MenuKeuze", new { id = reservering.Id, personen = reservering.AantalPersonen});
             }
             return View(reservering);
         }
 
+        public IActionResult MenuKeuze(int id , int personen)
+        {
+            ViewBag.id = id;
+            ViewBag.personen = personen;
+            ViewData["Menu"] = new SelectList(_context.Menus, "Id", "Menu_naam");
+            return View();
+        }
+        public async Task<IActionResult> Confirm(int[] Menu, int Id)
+        {
+            foreach (var item in Menu)
+            {
+                List<Menu> menus = new List<Menu>();
+                menus.Add(_context.Menus.Where(x => x.Id == item).Include(b => b.ConsumptieMenu).ThenInclude(b => b.Consumptie).FirstOrDefault());
+                ReserveringenMenu menu = new ReserveringenMenu
+                {
+                    MenuId = item,
+                    ReserveringsId = Id,
+                    Aantal = 1
+                };
+                await _context.ReserveringenMenu.AddAsync(menu);
+            }
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
         // GET: Systeem/Reserveringen/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -35,6 +35,9 @@ namespace BonTemps.Models
         public DateTime ReserveringsDatum { get; set; }
         public DateTime ReserveringAangemaakt { get; set; }
 
+        //Code om reservering op te zoeken
+        public int OpzoekCode { get; set; }
+
         [ForeignKey("Menu")]
         public virtual ICollection<Menu> Menu { get; set; }
         [ForeignKey("Bestelling")]

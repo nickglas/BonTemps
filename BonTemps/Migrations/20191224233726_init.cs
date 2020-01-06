@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace BonTemps.Migrations
 {
-    public partial class initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -236,7 +236,8 @@ namespace BonTemps.Migrations
                     Opmerking = table.Column<string>(nullable: true),
                     tafelsId = table.Column<int>(nullable: true),
                     ReserveringsDatum = table.Column<DateTime>(nullable: false),
-                    ReserveringAangemaakt = table.Column<DateTime>(nullable: false)
+                    ReserveringAangemaakt = table.Column<DateTime>(nullable: false),
+                    OpzoekCode = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -408,7 +409,8 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     ReserveringsId = table.Column<int>(nullable: false),
-                    MenuId = table.Column<int>(nullable: false)
+                    MenuId = table.Column<int>(nullable: false),
+                    Aantal = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {

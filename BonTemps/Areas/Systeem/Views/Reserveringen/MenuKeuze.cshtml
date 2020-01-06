@@ -1,0 +1,33 @@
+﻿@model BonTemps.Models.Reservering
+
+@{
+    ViewData["Title"] = "Aanmaken";
+    int personen = ViewBag.personen;
+    int id = ViewBag.id;
+}
+<div class="reserveren-1">
+    <h1 class="heading-primairy title-res-step2">Reservering</h1>
+    <div class="reserveren-step2">
+        <form asp-action="Confirm" asp-route-id="@id">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="scroll-res">
+                <div class="listbox">
+                    @for (int i = 0; i < personen; i++)
+                    {
+                        <p class="person-menu" style="width: 100px; margin: 0px;">Persoon: @i</p>
+                        @Html.ListBox("Menu", (MultiSelectList)ViewBag.Menu, new { size = 4 })
+                    }
+                </div>
+            </div>
+            <div class="form-group btn-step2">
+                <button asp-action="Index" class="btn red CrudCancel" style="color: white; width: 100%; margin-bottom: 5px; text-align: center;">
+                    Annuleren  <i class="fas fa-times black"></i>
+                </button>
+                <button type="submit" class="btn btn-primary" style=" width: 100%;">
+                    Aanmaken  <i class="fas fa-plus black"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
