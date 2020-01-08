@@ -8,6 +8,7 @@ using BonTemps.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -132,10 +133,12 @@ namespace BonTemps.Controllers.API
                 Code += rand.Next(0, 9).ToString();
             }
             res.OpzoekCode = int.Parse(Code);
+
             await _context.AddAsync(res);
-            await _context.SaveChangesAsync();
+            var change = await _context.SaveChangesAsync();
             await AddMenu(ids,res.Id);
             return Ok();
+            
         }
         
         public async Task<IActionResult> AddMenu(string[]Menu, int Id)
