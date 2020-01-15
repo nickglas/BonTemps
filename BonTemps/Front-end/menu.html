@@ -2,6 +2,10 @@
 	<html lang="zxx" class="no-js">
 	<head>
         <style>
+            #allergeenicoon {
+            height: 5%;
+            width: 5%;
+        }
         </style>
         <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
 		<!-- Mobile Specific Meta -->
@@ -207,6 +211,16 @@
                                 // prijs = string 
                                 // myObj[x].prijs = getal (in geval je wilt rekenen)
                                 txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+
+                                    }
+                                }
                                 txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
 
 
@@ -221,8 +235,8 @@
                                         ca = myObj[x].consumptieAllergenen[c];
                                         ca = JSON.stringify(ca.allergenenId);
                                         c = ca - 1;
-                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
-                                        txt += allergenen[c].allergenenIcoon;
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
 
                                     }
                                 }
@@ -234,6 +248,15 @@
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
                                 txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                    }
+                                }
                                 txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
 
                             } else if (myObj[x].categoryId == 4) { //voorgerechten
@@ -242,6 +265,15 @@
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
                                 txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                  if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                    }
+                                }
                                 txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
                             }
                         }
