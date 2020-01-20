@@ -3,8 +3,10 @@
 	<head>
         <style>
             #allergeenicoon {
-            height: 5%;
-            width: 5%;
+            float: right!important;
+            margin: 2px 0px 2px 0px;
+            height: 4%;
+            width: 4%;
         }
         </style>
         <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
@@ -208,20 +210,18 @@
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                // prijs = string 
-                                // myObj[x].prijs = getal (in geval je wilt rekenen)
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
                                 if (myObj[x].consumptieAllergenen != null) {
                                     for (c in myObj[x].consumptieAllergenen) {
                                         ca = myObj[x].consumptieAllergenen[c];
                                         ca = JSON.stringify(ca.allergenenId);
                                         c = ca - 1;
-                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
-                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
 
                                     }
                                 }
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
 
 
                             } else if (myObj[x].categoryId == 2) { //drankjes
@@ -229,52 +229,54 @@
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
                                 if (myObj[x].consumptieAllergenen != null) {
                                     for (c in myObj[x].consumptieAllergenen) {
                                         ca = myObj[x].consumptieAllergenen[c];
                                         ca = JSON.stringify(ca.allergenenId);
                                         c = ca - 1;
                                         // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
-                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
 
                                     }
                                 }
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
                              
                             } else if (myObj[x].categoryId == 3) { //desserts
                                 txt += "<div class='col-md-6 all desserts' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
                                 if (myObj[x].consumptieAllergenen != null) {
                                     for (c in myObj[x].consumptieAllergenen) {
                                         ca = myObj[x].consumptieAllergenen[c];
                                         ca = JSON.stringify(ca.allergenenId);
                                         c = ca - 1;
-                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
-                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
+
                                     }
                                 }
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
 
                             } else if (myObj[x].categoryId == 4) { //voorgerechten
                                 txt += "<div class='col-md-6 all voorgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                  if (myObj[x].consumptieAllergenen != null) {
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
+                                if (myObj[x].consumptieAllergenen != null) {
                                     for (c in myObj[x].consumptieAllergenen) {
                                         ca = myObj[x].consumptieAllergenen[c];
                                         ca = JSON.stringify(ca.allergenenId);
                                         c = ca - 1;
-                                        // txt += '<img src="../wwwroot/Image/Icons/Allergenen/' + allergenen[c].allergenenIcoon + '/>';
-                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' />";
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
+
                                     }
                                 }
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
                             }
                         }
                         var text = txt;
