@@ -471,7 +471,8 @@ namespace BonTemps.Migrations
                 columns: table => new
                 {
                     ConsumptieId = table.Column<int>(nullable: false),
-                    AllergenenId = table.Column<int>(nullable: false)
+                    AllergenenId = table.Column<int>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
