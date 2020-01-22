@@ -15,13 +15,13 @@
                     console.log(result);
                     if (result != false) {
                         $("#ReserveringContent").show();
-                        document.getElementById("resNaam").innerHTML += result.naamReserveerder;
-                        document.getElementById("resPersonen").innerHTML += result.aantalPersonen;
-                        document.getElementById("resDatum").innerHTML += result.reserveringsDatum;
+                        document.getElementById("resNaam").innerHTML = result.naamReserveerder;
+                        document.getElementById("resPersonen").innerHTML = result.aantalPersonen;
+                        document.getElementById("resDatum").innerHTML = result.reserveringsDatum;
                         if (result.Goedkeuring == true) {
-                            document.getElementById("resStatus").innerHTML += "Goedgekeurd";
+                            document.getElementById("resStatus").innerHTML = "Goedgekeurd";
                         } else {
-                            document.getElementById("resStatus").innerHTML += "In afwachting";
+                            document.getElementById("resStatus").innerHTML = "In afwachting";
                         }
 
                     } else {

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Folder Include="Areas\Chef\Data\" />
     <Folder Include="Areas\Chef\Models\" />
+    <Folder Include="Areas\Manager\Views\NewFolder\" />
     <Folder Include="Areas\Systeem\Data\" />
     <Folder Include="Areas\Systeem\Models\consumptie\" />
     <Folder Include="Data\" />

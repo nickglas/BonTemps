@@ -1,6 +1,14 @@
 ﻿	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	<head>
+        <style>
+            #allergeenicoon {
+            float: right!important;
+            margin: 2px 0px 2px 0px;
+            height: 4%;
+            width: 4%;
+        }
+        </style>
         <script src="https://kit.fontawesome.com/6a7316f6a9.js" crossorigin="anonymous"></script>
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -16,7 +24,7 @@
 		<meta charset="UTF-8">
 		<!-- Site Title -->
 		<title>Consumpties</title>
-
+        
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
 			CSS
@@ -151,6 +159,7 @@
             // });
 
             var obj, dbParam, xmlhttp, myObj, x, categorie, string, url, elementId = "";
+            var algObj = "";
             var txt = "";
             var prijs = 0;
             var localhost = "https://localhost:44545";
@@ -160,11 +169,11 @@
 
             function GetMenu() {
                 var url = localhost + "/api/GetMenu";
-                var Httpreq = new XMLHttpRequest();
-                Httpreq.open("GET", url, false);
-                Httpreq.send(null);
-                alert(Httpreq.response);
-                var myObj = JSON.parse(Httpreq.response);
+                var HttpReq = new XMLHttpRequest();
+                HttpReq.open("GET", url, false);
+                HttpReq.send(null);
+            
+                var myObj = JSON.parse(HttpReq.response);
                 var info = JSON.stringify(myObj);
                 for (x in myObj) {
                     txt += "<div class='col-md-6 all menu' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
@@ -174,25 +183,45 @@
                 }
             }
 
+            function GetAllergenen() {
+                var url = localhost + "/api/GetAllergenen";
+                var HttpReq = new XMLHttpRequest();
+                HttpReq.open("GET", url, false);
+                HttpReq.send(null);
+                var algObj = JSON.parse(HttpReq.response);
+                return algObj;
+            }
+
             function GetConsumptie() {
+                var allergenen = GetAllergenen();
                 var url =  localhost + "/api/GetConsumptie";
-                var Httpreq = new XMLHttpRequest();
-                Httpreq.open("GET", url, false);
-                Httpreq.send(null);
-            
-                var myObj = JSON.parse(Httpreq.response);
+                var HttpReq = new XMLHttpRequest();
+                HttpReq.open("GET", url, false);
+                HttpReq.send(null);
+
+                var myObj = JSON.parse(HttpReq.response);
                 var info = JSON.stringify(myObj);
-                console.log(txt);
+
+                console.log(allergenen);
+
                 for (x in myObj) {
                             if (myObj[x].categoryId == 1) { //hoofdgerecht
                                 txt += "<div class='col-md-6 all hoofdgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                // prijs = string 
-                                // myObj[x].prijs = getal (in geval je wilt rekenen)
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
+
+                                    }
+                                }
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
 
 
                             } else if (myObj[x].categoryId == 2) { //drankjes
@@ -200,29 +229,57 @@
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
 
+                                    }
+                                }
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
+                             
                             } else if (myObj[x].categoryId == 3) { //desserts
                                 txt += "<div class='col-md-6 all desserts' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
+
+                                    }
+                                }
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
 
                             } else if (myObj[x].categoryId == 4) { //voorgerechten
                                 txt += "<div class='col-md-6 all voorgerecht' ><div class='single-menu'><div class='title-wrap d-flex justify-content-between'>";
                                 txt += "<h4>" + myObj[x].naam + "</h4>";
                                 prijs = myObj[x].prijs.toFixed(2);
                                 prijs = prijs.replace(".", ",");
-                                txt += "<h4 class='price'> &euro;" + prijs + "</h4>";
-                                txt += "</div><p>" + myObj[x].beschrijving + "</p></div></div>";
+                                txt += "<h4 class='price'> &euro;" + prijs + "</h4></div><br>   ";
+                                if (myObj[x].consumptieAllergenen != null) {
+                                    for (c in myObj[x].consumptieAllergenen) {
+                                        ca = myObj[x].consumptieAllergenen[c];
+                                        ca = JSON.stringify(ca.allergenenId);
+                                        c = ca - 1;
+                                        // txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='" + allergenen[c].beschrijving  + "''' />";
+                                        txt += "<img id='allergeenicoon' src='../wwwroot/Image/Icons/Allergenen/" + allergenen[c].allergenenIcoon + "' alt='test ' />";
+
+                                    }
+                                }
+                                txt += "<p>" + myObj[x].beschrijving + "</p></div></div>";
                             }
                         }
-                        console.log("txt variabele opnieuw: " + txt);
                         var text = txt;
-                        console.log("text variabele : " + text);
                         document.getElementById("grid").innerHTML = text;
             }
 
