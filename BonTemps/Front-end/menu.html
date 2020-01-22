@@ -163,7 +163,7 @@
                 var Httpreq = new XMLHttpRequest();
                 Httpreq.open("GET", url, false);
                 Httpreq.send(null);
-            
+                alert(Httpreq.response);
                 var myObj = JSON.parse(Httpreq.response);
                 var info = JSON.stringify(myObj);
                 for (x in myObj) {

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonTemps.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191224233726_init")]
-    partial class init
+    [Migration("20200106103453_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

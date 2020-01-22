@@ -102,7 +102,7 @@ namespace BonTemps
 
                 app.UseStaticFiles();
 
-                    
+                
 
                 app.UseMvc(routes =>
                 {
@@ -133,7 +133,7 @@ namespace BonTemps
                 });
 
             RotativaConfiguration.Setup(env);    
-
+            
             Dummydata.Initialize(context, usermanager, rolemanager).Wait();
 
             //DummyData.UserTest(context, usermanager, rolemanager).Wait();
